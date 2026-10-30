@@ -6,7 +6,7 @@ globalThis.Sidebar=(function(){
  let selecting=false,selectionBusy=false,selected=new Set();
  function read(key,fallback){try{return JSON.parse(localStorage.getItem(prefix+key))??fallback;}catch{return fallback;}}
  function save(key,value){try{localStorage.setItem(prefix+key,JSON.stringify(value));}catch{}}
- function name(project){return project?.is_default?tr('默认项目'):project?.name||tr('默认项目');}
+ function name(project){return project?.is_default&&project.name==='默认项目'?tr('默认项目'):project?.name||tr('默认项目');}
  function projectName(id){return name(projects.find(p=>p.id===id));}
  function icon(type){
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('fill','none');svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','1.7');svg.setAttribute('aria-hidden','true');
@@ -51,6 +51,16 @@ globalThis.Sidebar=(function(){
    toast(tr('项目已创建，点击右侧加号新建对话。'));
   }catch(e){toast(e.message);}finally{creating=false;}
  }
+ async function renameProject(project){
+  if(creating||selectionBusy)return;
+  const value=await conversationDialog(tr('重命名项目'),tr('只修改项目名称，对话和研究内容保持原样。'),name(project),tr('项目名称'));
+  if(value===null||value.trim()===name(project))return;
+  const title=value.trim();
+  if(!title||title.length>120){toast(tr('项目名称须为 1–120 个字符'));return;}
+  creating=true;
+  try{await api('/api/projects/'+project.id,'PATCH',{name:title});await refreshHistory();toast(tr('项目已重命名'));}
+  finally{creating=false;}
+ }
  function render(projectList,conversationList){
   projects=projectList;conversations=conversationList;updateContext();
   const valid=new Set(conversations.map(c=>c.id));selected=new Set([...selected].filter(id=>valid.has(id)));historyTimings.clear();
@@ -64,8 +74,11 @@ globalThis.Sidebar=(function(){
    const folder=icon('folder'),title=el('span','project-name',name(project)),count=el('small','project-conversation-count',String(list.length));title.title=name(project);count.title=tr('{0} 个对话',list.length);
    const add=el('button','project-add');add.type='button';add.append(icon('plus'));add.title=tr('在“{0}”中新建对话',name(project));add.setAttribute('aria-label',add.title);
    add.onclick=event=>{event.preventDefault();event.stopPropagation();newConversation(project.id);};
+   summary.title=tr('（右键可重命名）');summary.setAttribute('aria-haspopup','menu');
+   const openMenu=event=>{if(selectionBusy||event.target.closest('button,input'))return;openContextMenu(event,summary,tr('项目操作'),[[tr('重命名项目'),()=>renameProject(project)]]);};
+   summary.oncontextmenu=openMenu;summary.onkeydown=event=>{if(event.key==='ContextMenu'||(event.shiftKey&&event.key==='F10'))openMenu(event);};
    summary.append(chevron);
-   if(selecting){const check=el('input','project-checkbox');check.type='checkbox';check.setAttribute('aria-label',tr('选择“{0}”中的全部对话',name(project)));check.onclick=e=>e.stopPropagation();check.onchange=()=>{if(selectionBusy)return;for(const c of list)if(check.checked)selected.add(c.id);else selected.delete(c.id);updateSelection();};summary.append(check);}
+   if(selecting){const check=el('input','project-checkbox');check.type='checkbox';check.title=tr('选择“{0}”中的全部对话',name(project));check.setAttribute('aria-label',check.title);check.onclick=e=>e.stopPropagation();check.onchange=()=>{if(selectionBusy)return;for(const c of list)if(check.checked)selected.add(c.id);else selected.delete(c.id);updateSelection();};summary.append(check);}
    summary.append(folder,title,count,add);group.append(summary);
    const children=el('div','project-conversations');
    if(list.length)for(const c of list)children.append(conversationRow(c));
@@ -116,7 +129,7 @@ globalThis.Sidebar=(function(){
     for(const p of projects){const option=el('option','',name(p));option.value=p.id;select.append(option);}label.append(select);form.append(label);
    }
    const actions=el('div','dialog-actions'),cancel=el('button','secondary-button',tr('取消')),submit=el('button',kind==='move'?'primary-button':'danger-button',kind==='move'?tr('确认移动'):tr('删除 {0} 个对话',chosen.length));
-   cancel.type='button';submit.type='submit';actions.append(cancel,submit);form.append(actions);dialog.append(heading,help,list,form);document.body.append(dialog);
+   cancel.type='button';submit.type='submit';actions.append(cancel,submit);form.append(actions);dialog.append(heading,help,el('p','',tr('操作仅针对所选对话，项目文件夹会保留。')),list,form);document.body.append(dialog);
    let done=false;const finish=value=>{if(done)return;done=true;dialog.close();dialog.remove();resolve(value);};
    cancel.onclick=()=>finish(null);dialog.oncancel=e=>{e.preventDefault();finish(null);};
    form.onsubmit=e=>{e.preventDefault();finish(kind==='move'?select.value:true);};dialog.showModal();(kind==='move'?select:cancel).focus();

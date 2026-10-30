@@ -95,6 +95,20 @@ def new_project(name):
     return ident
 
 
+def rename_project(ident, name):
+    name = redact(name.strip())
+    if not name or len(name) > 120:
+        raise ValueError('项目名称须为 1–120 个字符')
+    with connect() as db:
+        db.execute('BEGIN IMMEDIATE')
+        if db.execute('SELECT 1 FROM projects WHERE id=?', (ident,)).fetchone() is None:
+            raise ValueError('项目不存在，请重新选择')
+        if any(row['name'].casefold() == name.casefold()
+               for row in db.execute('SELECT name FROM projects WHERE id!=?', (ident,))):
+            raise ValueError('已存在同名项目')
+        db.execute('UPDATE projects SET name=?,updated=? WHERE id=?', (name, time.time(), ident))
+
+
 def new_conversation(project_id=DEFAULT_PROJECT_ID):
     cid = uuid.uuid4().hex
     with connect() as db:

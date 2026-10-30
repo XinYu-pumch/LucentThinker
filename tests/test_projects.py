@@ -83,6 +83,45 @@ def test_storage_maintenance_verifies_project_metadata(isolated):
         assert fingerprint(db)['projects']['sha256'] != before['projects']['sha256']
 
 
+@pytest.mark.parametrize('default', [False, True])
+def test_project_rename_preserves_membership_research_and_updates_search(isolated, default):
+    with TestClient(app) as client:
+        pid = 'default' if default else store.new_project('Original project')
+        cid = store.new_conversation(pid)
+        rid = store.new_run(cid, 'Research question')
+        before = store.get_conversation(cid)
+        original = next(p for p in store.projects() if p['id'] == pid)
+        assert client.patch('/api/projects/' + pid, json={'name': '  Renamed 项目  '}).status_code == 200
+        renamed = next(p for p in store.projects() if p['id'] == pid)
+        assert renamed['name'] == 'Renamed 项目'
+        assert renamed['created'] == original['created']
+        assert bool(renamed['is_default']) == default
+        assert store.get_conversation(cid) == before
+        assert store.get_run(rid)['status'] == 'running'
+        hit, = client.get('/api/conversations/search', params={'q': 'Research', 'scope': 'content'}).json()['results']
+        assert hit['project_name'] == 'Renamed 项目' and hit['project_id'] == pid
+        if default:
+            new_cid = client.post('/api/conversations').json()['id']
+            assert store.get_conversation(new_cid)['project_id'] == pid
+        store.update(rid, status='completed')
+        store.init()
+        assert next(p for p in store.projects() if p['id'] == pid)['name'] == 'Renamed 项目'
+
+
+def test_project_rename_rejects_invalid_duplicates_and_missing_ids(isolated):
+    with TestClient(app) as client:
+        pid = store.new_project('Topic')
+        other = store.new_project('Other')
+        before = store.projects()
+        for name in ('', '   ', 'x' * 121, ' other ', '默认项目'):
+            assert client.patch('/api/projects/' + pid, json={'name': name}).status_code == 422
+            assert store.projects() == before
+        assert client.patch('/api/projects/missing', json={'name': 'Missing'}).status_code == 422
+        assert store.projects() == before
+        assert client.patch('/api/projects/' + pid, json={'name': 'TOPIC'}).status_code == 200
+        assert next(p for p in store.projects() if p['id'] == other)['name'] == 'Other'
+
+
 def test_batch_move_preserves_research_and_is_atomic(isolated):
     with TestClient(app) as client:
         target = store.new_project('Destination')

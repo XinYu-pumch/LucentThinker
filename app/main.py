@@ -112,6 +112,11 @@ def list_projects(): return store.projects()
 def create_project(body: ProjectName):
     return {'id': store.new_project(body.name)}
 
+@app.patch('/api/projects/{pid}')
+def rename_project(pid: str, body: ProjectName):
+    store.rename_project(pid, body.name)
+    return {'ok': True}
+
 class ConversationProject(BaseModel):
     project_id: str = Field(default=store.DEFAULT_PROJECT_ID, min_length=1)
 

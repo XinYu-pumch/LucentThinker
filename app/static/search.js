@@ -24,7 +24,7 @@
     const heading=el('strong');highlight(heading,item.title,query);row.append(heading);
     if(item.snippet){const snippet=el('p','search-snippet');highlight(snippet,item.snippet,query);row.append(snippet);}
     const names={title:tr('标题'),question:tr('问题'),answer:tr('回答')};
-    row.append(el('small','search-result-meta',(item.project_is_default?tr('默认项目'):item.project_name||'')+' · '+(names[item.match_field]||'')+' · '+RunTiming.date(item.updated)));
+    row.append(el('small','search-result-meta',(item.project_is_default&&item.project_name==='默认项目'?tr('默认项目'):item.project_name||'')+' · '+(names[item.match_field]||'')+' · '+RunTiming.date(item.updated)));
     row.onclick=async()=>{dialog.close();try{await openConversation(item.id);if(item.run_id)state.runs.get(item.run_id)?.ui.article.scrollIntoView({block:'start',behavior:'smooth'});}catch(e){toast(e.message);}};
     results.append(row);
    }

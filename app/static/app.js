@@ -73,18 +73,24 @@ async function renameConversation(c){
  await refreshHistory();
 }
 function openHistoryMenu(event,c,anchor){
+ openContextMenu(event,anchor,tr('对话操作'),[
+  [tr('编辑对话名称'),()=>renameConversation(c)],
+  [tr('删除对话'),()=>deleteConversation(c),'danger']
+ ]);
+}
+function openContextMenu(event,anchor,label,actions){
  event.preventDefault();closeHistoryMenu();
- const menu=el('div','history-context-menu');menu.setAttribute('role','menu');menu.setAttribute('aria-label',tr("对话操作"));
- for(const [label,action] of [[tr("编辑对话名称"),renameConversation],[tr("删除对话"),deleteConversation]]){
-  const button=el('button','',label);button.setAttribute('role','menuitem');
-  button.onclick=()=>{closeHistoryMenu();action(c).catch(e=>toast(e.message));};menu.append(button);
+ const menu=el('div','history-context-menu');menu.setAttribute('role','menu');menu.setAttribute('aria-label',label);
+ for(const [title,action,kind] of actions){
+  const button=el('button',kind||'',title);button.type='button';button.setAttribute('role','menuitem');
+  button.onclick=()=>{closeHistoryMenu();Promise.resolve().then(action).catch(e=>toast(e.message));};menu.append(button);
  }
  document.body.append(menu);historyMenu=menu;
  const rect=anchor.getBoundingClientRect(),x=event.clientX||rect.right,y=event.clientY||rect.top;
  menu.style.left=Math.max(8,Math.min(x,window.innerWidth-menu.offsetWidth-8))+'px';
  menu.style.top=Math.max(8,Math.min(y,window.innerHeight-menu.offsetHeight-8))+'px';
  menu.firstElementChild.focus();
- menu.onkeydown=e=>{if(e.key==='Escape'){closeHistoryMenu();anchor.focus();}else if(['ArrowDown','ArrowUp'].includes(e.key)){e.preventDefault();const items=[...menu.children],i=items.indexOf(document.activeElement);items[(i+(e.key==='ArrowDown'?1:items.length-1))%items.length].focus();}};
+ menu.onkeydown=e=>{if(e.key==='Escape'){e.preventDefault();closeHistoryMenu();anchor.focus();}else if(e.key==='Tab'){closeHistoryMenu();anchor.focus();}else if(['ArrowDown','ArrowUp'].includes(e.key)){e.preventDefault();const items=[...menu.children],i=items.indexOf(document.activeElement);items[(i+(e.key==='ArrowDown'?1:items.length-1))%items.length].focus();}};
 }
 document.addEventListener('pointerdown',e=>{if(historyMenu&&!historyMenu.contains(e.target))closeHistoryMenu();});
 window.addEventListener('resize',closeHistoryMenu);
