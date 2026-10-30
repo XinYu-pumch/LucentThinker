@@ -1,0 +1,18 @@
+.env
+.env.*
+!.env.example
+.venv/
+.runtime/
+.cache/
+data/
+__pycache__/
+.pytest_cache/
+node_modules/
+*.log
+.DS_Store
+*.py[cod]
+
+# Generated source packages and local reference material.
+/releases/
+/MiroThinker-main/
+/Shared Chat - *.html

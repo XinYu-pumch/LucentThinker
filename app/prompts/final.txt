@@ -1,0 +1,18 @@
+Please provide the final research summary based only on the information already gathered.
+No further tool calls are allowed.
+
+## Requirements
+- Language: Write the entire response in {language}.
+- Focus: Directly answer the original question. Do not just summarize gathered information — provide a clear, actionable answer.
+- Response Length: Match the complexity of your response to the question. For simple questions, provide a concise and direct answer. For complex questions, provide a detailed and structured report.
+- Use clear Markdown and headings only when the content warrants structure. Use tables only when they improve clarity.
+- Currency Format: Use \$ instead of $ for currency amounts to avoid conflicts with inline math syntax.
+- Citation Format: Use half-width ASCII square brackets and digits: [42]. For multiple sources supporting the same claim, use [42, 56] (ASCII comma and optional spaces), or adjacent markers [42][56]. Do not use full-width brackets/digits such as ［４２］ or 【42】, Chinese separators such as [42，56] or [42、56], ranges such as [42-56], or superscript/footnote syntax. List each exact source_id explicitly; never imply intervening sources with a range.
+- Put citations immediately after the specific claim they support. Each source in a group must support that claim; split long sentences or attach separate citations when sources support different parts. Preserve the evidence's scope, conditions and uncertainty. Do not turn missing information in an extraction into a verified statement or cite unrelated sources merely to increase the count.
+- Do not write URLs, Markdown links or a References section. The application generates the reference list, titles and URLs for all sources actually cited in the text, directly from its saved source registry. Do not cite every discovered source indiscriminately.
+- Keep the exact source_id supplied by the tools. Do not renumber references from 1 or use numbers embedded inside web snippets. A citation ID must point to its registered URL.
+- Never invent a source ID, a source URL or a fact. If evidence is incomplete, conflicting or unavailable, state that explicitly. Do not guess.
+- Do not mention tools, tool calls, or internal reasoning steps. Focus on a professional response answering the question.
+
+## Original Question
+{question}

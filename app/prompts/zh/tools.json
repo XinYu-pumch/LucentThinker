@@ -1,0 +1,15 @@
+{
+  "search": {
+    "description": "使用 DeepSeek Search 搜索实时网页。query 和可选 search_intent 均须为 1–128 字符，不得静默截断。仅返回排序后的标题、URL、日期和片段，作为发现来源的线索，不代表原文已核验。服务商的 content/summary 保存在程序后台。可生成聚焦的自然语言 search_intent，原样作为 ori_question；未提供时，原问题在 128 字符内则使用原问题，否则使用已校验的 query，主历史仍保留完整问题。支持 site:、精确引号词组及日期/语言运算符。",
+    "search_intent": "本次搜索的聚焦问题，原样发送给 DeepSeek 的 ori_question。须为 1–128 字符，不是完整研究任务的副本。",
+    "progress": "用简体中文简短说明即将核查什么，不包含私有推理，不是强制证据总结。"
+  },
+  "scrape_and_extract_info": {
+    "description": "使用 DeepSeek Fetch 阅读一个 HTTP(S) 页面，再始终调用独立模型定向提取。主模型只收到提取结果，不接收完整正文。Fetch 失败或无可用正文时，使用当前尝试中与所选 source_id 直接绑定的 Search content，没有 content 时才使用 summary；均经独立提取并明确标记降级，不代表原文已核验。选择本次搜索返回的 source_id，程序解析 URL，不得自行复制或改写。未知编号或此前尝试的编号会被拒绝。须提供明确提取目标；提取模型没有主历史或其他页面。返回 success、url、extracted_info、error、scrape_stats、model_used 和 tokens_used。",
+    "source_id": "选择当前尝试搜索结果中的 source_id。程序读取该编号保存的准确 URL 和材料。",
+    "progress": "用简体中文简短说明即将核查什么，不包含私有推理，不是强制证据总结。"
+  },
+  "finish_research": {
+    "description": "明确结束研究，请求进入禁用工具的独立最终写作阶段。必须单独调用，不可与搜索或阅读混用。证据充分时使用 ready，继续研究无法消除缺口时使用 blocked。提供简短公开状态和未解决的问题，不提交回答草稿或私有推理。程序只校验结构，不验证事实完整性。"
+  }
+}

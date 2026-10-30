@@ -1,0 +1,504 @@
+{
+  "date": "2026-10-27",
+  "source": "ScholarNoteLM local source",
+  "presets": 12,
+  "go_registered_models": 39,
+  "live_completion_checks": [
+    {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "finish": "stop",
+      "answer_chars": 4,
+      "usage": {
+        "prompt_tokens": 63,
+        "completion_tokens": 49,
+        "total_tokens": 112,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 45
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 63
+      },
+      "thinking": {
+        "parameters": {
+          "thinking": {
+            "type": "enabled"
+          },
+          "reasoning_effort": "low"
+        },
+        "protocol": "chat",
+        "endpoint": "https://api.deepseek.com/chat/completions",
+        "output": {
+          "kind": "provider_defined"
+        },
+        "characters": 163,
+        "reasoning_tokens": 45,
+        "note": "只统计实际返回的可读文本；token 用量和 HTTP 成功不证明摘要返回或强度生效。"
+      },
+      "elapsed_seconds": 1.78
+    },
+    {
+      "provider": "mimo",
+      "model": "mimo-v2.6-flash",
+      "finish": "stop",
+      "answer_chars": 8,
+      "usage": {
+        "completion_tokens": 75,
+        "prompt_tokens": 42,
+        "total_tokens": 117,
+        "completion_tokens_details": {
+          "reasoning_tokens": 67
+        },
+        "prompt_tokens_details": null
+      },
+      "thinking": {
+        "parameters": {
+          "thinking": {
+            "type": "enabled"
+          }
+        },
+        "protocol": "chat",
+        "endpoint": "https://api.xiaomimimo.com/v1/chat/completions",
+        "output": {
+          "modes": [
+            "default"
+          ],
+          "defaultMode": "default",
+          "kind": "reasoning_text",
+          "note": "思考文本由服务端返回，应用分别接收思考与正文；没有独立摘要开关。"
+        },
+        "characters": 122,
+        "reasoning_tokens": 67,
+        "note": "只统计实际返回的可读文本；token 用量和 HTTP 成功不证明摘要返回或强度生效。"
+      },
+      "elapsed_seconds": 2.04
+    },
+    {
+      "provider": "moonshot",
+      "model": "kimi-k3.1-pro",
+      "finish": "stop",
+      "answer_chars": 4,
+      "usage": {
+        "prompt_tokens": 119,
+        "completion_tokens": 37,
+        "total_tokens": 156,
+        "completion_tokens_details": {
+          "reasoning_tokens": 19
+        },
+        "prompt_tokens_details": {
+          "cache_write_tokens": 0
+        }
+      },
+      "thinking": {
+        "parameters": {
+          "reasoning_effort": "low"
+        },
+        "protocol": "chat",
+        "endpoint": "https://api.moonshot.cn/v1/chat/completions",
+        "output": {
+          "modes": [
+            "default"
+          ],
+          "defaultMode": "default",
+          "kind": "reasoning_text",
+          "note": "思考文本由服务端返回，应用分别接收思考与正文；没有独立摘要开关。"
+        },
+        "characters": 40,
+        "reasoning_tokens": 19,
+        "note": "只统计实际返回的可读文本；token 用量和 HTTP 成功不证明摘要返回或强度生效。"
+      },
+      "elapsed_seconds": 3.07
+    },
+    {
+      "provider": "opencode_go",
+      "model": "claude-haiku-5-5",
+      "finish": "stop",
+      "answer_chars": 64,
+      "usage": {
+        "prompt_tokens": 55,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens": 45,
+        "total_tokens": 100
+      },
+      "thinking": {
+        "parameters": {
+          "thinking": {
+            "type": "adaptive",
+            "display": "summarized"
+          },
+          "output_config": {
+            "effort": "low"
+          }
+        },
+        "protocol": "messages",
+        "endpoint": "https://opencode.ai/inference/go/anthropic/v1/messages",
+        "output": {
+          "kind": "summary",
+          "request": {
+            "thinking": {
+              "display": "summarized"
+            }
+          },
+          "defaultThinkingType": "adaptive",
+          "note": "自动请求 Claude 思考摘要；disabled 时不发送 display 参数。"
+        },
+        "characters": 0,
+        "reasoning_tokens": null,
+        "note": "只统计实际返回的可读文本；token 用量和 HTTP 成功不证明摘要返回或强度生效。"
+      },
+      "elapsed_seconds": 1.95
+    },
+    {
+      "provider": "opencode_go",
+      "model": "deepseek-v4.1-flash",
+      "finish": "stop",
+      "answer_chars": 4,
+      "usage": {
+        "prompt_tokens": 63,
+        "completion_tokens": 55,
+        "total_tokens": 118,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 51
+        },
+        "cost": 0,
+        "opencode": {
+          "billing_source": "go",
+          "list_cost": 8.49e-05,
+          "allowance": 6.367e-05,
+          "tokens": {
+            "input": 63,
+            "output": 55,
+            "reasoning": 51,
+            "cache_read": 0,
+            "cache_write_5m": 0,
+            "cache_write_1h": 0
+          }
+        }
+      },
+      "thinking": {
+        "parameters": {
+          "thinking": {
+            "type": "enabled"
+          },
+          "reasoning_effort": "low"
+        },
+        "protocol": "chat",
+        "endpoint": "https://opencode.ai/inference/go/openai/v1/chat/completions",
+        "output": {
+          "kind": "provider_defined",
+          "request": {},
+          "note": "自动接收服务端公开的思考文本；该接口没有独立的思考输出开关。none / disabled 会关闭思考。"
+        },
+        "characters": 168,
+        "reasoning_tokens": 51,
+        "note": "只统计实际返回的可读文本；token 用量和 HTTP 成功不证明摘要返回或强度生效。"
+      },
+      "elapsed_seconds": 2.71
+    },
+    {
+      "provider": "opencode_go",
+      "model": "gemini-4-argon",
+      "finish": "stop",
+      "answer_chars": 4,
+      "usage": {
+        "completion_tokens": 279,
+        "prompt_tokens": 66,
+        "total_tokens": 345,
+        "completion_tokens_details": {
+          "reasoning_tokens": 271
+        }
+      },
+      "thinking": {
+        "parameters": {
+          "generationConfig.thinkingConfig": {
+            "thinkingLevel": "high",
+            "includeThoughts": true
+          }
+        },
+        "protocol": "google",
+        "endpoint": "https://opencode.ai/inference/go/google/v1beta/models/gemini-4-argon:streamGenerateContent?alt=sse",
+        "output": {
+          "kind": "summary",
+          "request": {
+            "generationConfig": {
+              "thinkingConfig": {
+                "includeThoughts": true
+              }
+            }
+          },
+          "note": "自动请求 Gemini 思考摘要。服务端可能不为每次请求返回摘要。"
+        },
+        "characters": 198,
+        "reasoning_tokens": 271,
+        "note": "只统计实际返回的可读文本；token 用量和 HTTP 成功不证明摘要返回或强度生效。"
+      },
+      "elapsed_seconds": 7.67
+    },
+    {
+      "provider": "opencode_go",
+      "model": "gpt-6-luna",
+      "finish": "stop",
+      "answer_chars": 4,
+      "usage": {
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_tokens": 39,
+        "completion_tokens": 44,
+        "total_tokens": 83,
+        "completion_tokens_details": {
+          "reasoning_tokens": 35
+        }
+      },
+      "thinking": {
+        "parameters": {
+          "reasoning": {
+            "effort": "low",
+            "summary": "auto"
+          }
+        },
+        "protocol": "responses",
+        "endpoint": "https://opencode.ai/inference/go/openai/v1/responses",
+        "output": {
+          "kind": "summary",
+          "request": {
+            "reasoning": {
+              "summary": "auto"
+            }
+          },
+          "note": "自动请求思考摘要；none 会关闭思考。"
+        },
+        "characters": 349,
+        "reasoning_tokens": 35,
+        "note": "只统计实际返回的可读文本；token 用量和 HTTP 成功不证明摘要返回或强度生效。"
+      },
+      "elapsed_seconds": 3.2
+    },
+    {
+      "provider": "qwen",
+      "model": "qwen3.8-flash",
+      "finish": "stop",
+      "answer_chars": 4,
+      "usage": {
+        "completion_tokens": 139,
+        "completion_tokens_details": {
+          "reasoning_tokens": 132,
+          "text_tokens": 139
+        },
+        "prompt_tokens": 84,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "text_tokens": 84
+        },
+        "total_tokens": 223
+      },
+      "thinking": {
+        "parameters": {
+          "reasoning_effort": "low",
+          "enable_thinking": true
+        },
+        "protocol": "chat",
+        "endpoint": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+        "output": {
+          "modes": [
+            "default"
+          ],
+          "note": "思考模式通常自动通过 reasoning_content 返回推理文本；不额外发送摘要参数。",
+          "kind": "reasoning_text",
+          "defaultMode": "default"
+        },
+        "characters": 319,
+        "reasoning_tokens": 132,
+        "note": "只统计实际返回的可读文本；token 用量和 HTTP 成功不证明摘要返回或强度生效。"
+      },
+      "elapsed_seconds": 4.01
+    },
+    {
+      "provider": "z_ai",
+      "model": "glm-5.3-flash",
+      "finish": "stop",
+      "answer_chars": 4,
+      "usage": {
+        "prompt_tokens": 45,
+        "completion_tokens": 17,
+        "total_tokens": 62,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 12
+        }
+      },
+      "thinking": {
+        "parameters": {
+          "thinking": {
+            "type": "enabled"
+          },
+          "reasoning_effort": "low"
+        },
+        "protocol": "chat",
+        "endpoint": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+        "output": {
+          "modes": [
+            "default"
+          ],
+          "note": "思考模式通常自动通过 reasoning_content 返回推理文本；不额外发送摘要参数。",
+          "kind": "reasoning_text",
+          "defaultMode": "default"
+        },
+        "characters": 22,
+        "reasoning_tokens": 12,
+        "note": "只统计实际返回的可读文本；token 用量和 HTTP 成功不证明摘要返回或强度生效。"
+      },
+      "elapsed_seconds": 1.94
+    }
+  ],
+  "tool_roundtrips": [
+    {
+      "model": "deepseek-v4.1-flash",
+      "first_finish": "tool_calls",
+      "valid_tools": true,
+      "first_reasoning_chars": 0,
+      "round_trip": true,
+      "final_reasoning_chars": 164,
+      "usage": {
+        "prompt_tokens": 99,
+        "completion_tokens": 53,
+        "total_tokens": 152,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 35
+        },
+        "cost": 0,
+        "opencode": {
+          "billing_source": "go",
+          "list_cost": 9.33e-05,
+          "allowance": 6.997e-05,
+          "tokens": {
+            "input": 99,
+            "output": 53,
+            "reasoning": 35,
+            "cache_read": 0,
+            "cache_write_5m": 0,
+            "cache_write_1h": 0
+          }
+        }
+      },
+      "elapsed_seconds": 3.73
+    },
+    {
+      "model": "gpt-6-luna",
+      "valid_tools": true,
+      "round_trip": true,
+      "usage": {
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_tokens": 60,
+        "completion_tokens": 6,
+        "total_tokens": 66,
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        }
+      },
+      "elapsed_seconds": 3.54,
+      "prompt_corrected": true
+    },
+    {
+      "model": "claude-haiku-5-5",
+      "first_finish": "tool_calls",
+      "valid_tools": true,
+      "first_reasoning_chars": 0,
+      "round_trip": true,
+      "final_reasoning_chars": 0,
+      "usage": {
+        "prompt_tokens": 89,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens": 17,
+        "total_tokens": 106
+      },
+      "elapsed_seconds": 3.71
+    },
+    {
+      "model": "gemini-4-argon",
+      "first_finish": "tool_calls",
+      "valid_tools": true,
+      "first_reasoning_chars": 0,
+      "round_trip": true,
+      "final_reasoning_chars": 0,
+      "usage": {
+        "completion_tokens": 77,
+        "prompt_tokens": 135,
+        "total_tokens": 212,
+        "completion_tokens_details": {
+          "reasoning_tokens": 66
+        }
+      },
+      "elapsed_seconds": 8.41
+    }
+  ],
+  "tool_probe_correction": "Original prompt prohibited prose after tool use. Corrected prompt explicitly asks for the tool result.",
+  "corrected_gpt_tool_roundtrip": {
+    "ok": true,
+    "model": "gpt-6-luna",
+    "tool_round_trip": true,
+    "usage": {
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "prompt_tokens": 67,
+      "completion_tokens": 19,
+      "total_tokens": 86,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "followup_usage": {
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "prompt_tokens": 60,
+      "completion_tokens": 6,
+      "total_tokens": 66,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "elapsed_seconds": 3.54,
+    "message": "工具调用兼容",
+    "reasoning_chars": 0
+  },
+  "credentials": "Read in memory only; no credentials or reasoning text included in report; no imported credentials saved to app settings.",
+  "ui_checks": [
+    "Qwen budget=0 saves and reaches actual request",
+    "Go default and summary policy dialog",
+    "Separate thinking trace and character counts",
+    "Independent output selection and budget validation"
+  ],
+  "known_limitations": [
+    "Claude low-effort simple prompt returned no readable summary; successful request does not guarantee a summary.",
+    "Live checks cover representative models, not every preset/model combination."
+  ],
+  "tests": {
+    "python_passed": 449,
+    "javascript_passed": 34
+  },
+  "runtime": {
+    "url": "http://127.0.0.1:8765",
+    "http_status": 200,
+    "thinking_schema": 1,
+    "existing_models_preserved": 2
+  }
+}

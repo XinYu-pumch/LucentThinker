@@ -1,0 +1,20 @@
+{
+  "LICENSE": "0cec06e0e55fbc3dc5cee4fca9b607f66cb8f4e4dbcf3b3c013594dd156732e9",
+  "apps/gradio-demo/main.py": "57d5d08fdd9a7dfaf350bbb4982e0da1e8a48183aa17f990a3d7ca4946598a02",
+  "apps/gradio-demo/prompt_patch.py": "61c4b18628a8674b323b55b5117bd68a91da38ce01c6dbac3acfd97b260fe50e",
+  "apps/miroflow-agent/benchmarks/common_benchmark.py": "c8d185aa8487b1ea88f2f79c0878de5877df8d5f8e33a54e021466e47020cbfc",
+  "apps/miroflow-agent/conf/agent/default.yaml": "8c9910b3f07c49ef7c5da335e73691e4dcb09261a9bce38ca8caea77c5aa062f",
+  "apps/miroflow-agent/conf/agent/demo.yaml": "339b86b4e7a757f4e187e212f768e9e551d32ba9add9bdcfda4168f2f5e978bd",
+  "apps/miroflow-agent/conf/agent/mirothinker_1.7_keep5_max200.yaml": "e28ad73cc77ae5d333fca53a5719e3f3117945b0faeb1cb9bef39f8f4733901b",
+  "apps/miroflow-agent/conf/llm/default.yaml": "f186fc2afa9cd4a455e34f5a979bb1758169a1c3f8705a1d13b89ee459bd5a11",
+  "apps/miroflow-agent/conf/llm/qwen-3.yaml": "a2ea8683a1830bef20aeb6f50e01abf91e6bbb885e98ee403da5e644f2c5e11e",
+  "apps/miroflow-agent/src/core/answer_generator.py": "0d08a76b2b1e661eaf10a7c712e8240c6f1356a68b676693567e653d51a2a435",
+  "apps/miroflow-agent/src/core/orchestrator.py": "2971d920be8c47379a5d1ce80ff5d187add68ea02aba11d904425ee77e04b228",
+  "apps/miroflow-agent/src/core/pipeline.py": "10d611f06b2d4a67773966cb02b20078f19b0147055aaea24d7e7d8c43182223",
+  "apps/miroflow-agent/src/core/tool_executor.py": "7d01b5e66cbb60084d97d18413c65a05ab30bab207dc834d3d7fba5f5704094e",
+  "apps/miroflow-agent/src/llm/base_client.py": "82b1fd8938f962f969318fe01c5f2b17486968b21138ea403df5706035c7e5db",
+  "apps/miroflow-agent/src/llm/providers/openai_client.py": "6e003b6ef3cca83a5abf61f7be468fc18f855a78ec6bf82fc6a35deeabcad802",
+  "apps/miroflow-agent/src/utils/parsing_utils.py": "76d85d6f01321ad587fbbd666e367af2185618dd6f09462cbc3027a9cc5f2078",
+  "apps/miroflow-agent/src/utils/prompt_utils.py": "f1adf12844b6cf098bf89b33eb75f572f684fc7b3a0de67b9f4f3d4b0ccd3fc5",
+  "libs/miroflow-tools/src/miroflow_tools/dev_mcp_servers/jina_scrape_llm_summary.py": "13437b78002288c6d3dfa2001d547554586974bf62405bd8abbaf5c4d8f45780"
+}

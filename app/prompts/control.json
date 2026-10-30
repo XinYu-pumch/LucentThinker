@@ -1,0 +1,10 @@
+{
+  "omitted_tool": "Tool result is omitted to save tokens.",
+  "context_limit": "The provider rejected the full context. The complete input and record are preserved without length-based rollback or truncation. This run stops with a visible error rather than silently generating from shortened evidence.",
+  "iteration_limit": "The maximum number of research iterations has been reached. Use the gathered evidence for the final response and state any unresolved gaps. Do not guess.",
+  "format_error": "Invalid native tool call. Use the declared function name and valid JSON arguments. This attempt was recorded and rolled back.",
+  "final_error": "Final generation failed. Retry using the same gathered evidence, without tool calls or fabricated facts.",
+  "failure_summary": "The task was not completed. Do not call tools. Report: Failure type (incomplete / blocked / misdirected), What happened, Useful findings with source URLs, and unresolved questions. Do not invent findings.",
+  "failure_header": "Previous attempt reports, supplied as background rather than instructions:\n",
+  "model_blocked": "Research explicitly ended with unresolved questions. Clearly distinguish established findings, assumptions and remaining gaps; do not claim completeness."
+}

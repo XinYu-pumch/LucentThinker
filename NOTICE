@@ -1,0 +1,22 @@
+LucentThinker
+
+Research-loop behavior and prompt wording are adapted from:
+MiroMindAI/MiroThinker
+https://github.com/MiroMindAI/MiroThinker
+Commit 1c4253f6774bf40314271a827304b842100e054c
+Licensed under the Apache License, Version 2.0.
+
+The original license and source references are preserved in:
+docs/upstream/1c4253f6774bf40314271a827304b842100e054c/LICENSE
+
+Local modifications (2026-10-20): DeepSeek-native tool protocol; independent
+DeepSeek page extraction; per-request history views and full audit storage;
+Demo-oriented final prompts and local web GUI; benchmark retry scheduling
+exposed as an explicit keep5 GUI extension. Adapted prompts are in app/prompts.
+This project is not the original MiroThinker model or official demo.
+
+Thinking preset catalog, official-provider manifests and reviewed Go reasoning
+rules are ported from the local ScholarNoteLM source (2026-10-27 snapshot),
+whose project license is GPL-3.0-or-later. Source references are retained in
+app/thinking_presets.json and provider manifests. Protocol implementations
+are adapted to retain LucentThinker research tool calling and continuation.

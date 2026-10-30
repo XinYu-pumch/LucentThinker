@@ -1,0 +1,1 @@
+{"name":"lucentthinker-ui","private":true,"version":"0.1.0","description":"Local browser libraries, no frontend build required","dependencies":{"dompurify":"3.4.17","marked":"15.0.12"}}

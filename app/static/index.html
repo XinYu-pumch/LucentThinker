@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8f8f6"><title data-i18n="LucentThinker · 个人研究空间">LucentThinker · 个人研究空间</title><link rel="icon" href="/static/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/static/style.css"><script defer src="/static/vendor/marked.js"></script><script defer src="/static/vendor/purify.js"></script><script defer src="/static/i18n-en.js"></script><script defer src="/static/i18n.js"></script><script defer src="/static/trace.js"></script><script defer src="/static/usage.js"></script><script defer src="/static/timing.js"></script><script defer src="/static/sidebar.js"></script><script defer src="/static/app.js"></script><script defer src="/static/settings.js"></script><script defer src="/static/search.js"></script></head>
+<body>
+<aside class="sidebar" id="sidebar" aria-label="侧边栏" data-i18n-aria-label="侧边栏">
+  <div class="sidebar-top">
+    <a href="/" class="brand" aria-label="LucentThinker"><span class="logo" aria-hidden="true">L</span><span class="brand-wordmark">LucentThinker<small data-i18n="个人研究空间">个人研究空间</small></span></a>
+    <div class="sidebar-top-actions">
+      <button id="sidebar-language-toggle" class="sidebar-language" data-language-toggle data-compact="true" aria-label="切换到英文界面和提示词" data-i18n-aria-label="切换到英文界面和提示词">EN</button>
+      <button id="sidebar-collapse" class="sidebar-icon-button" aria-label="收起侧边栏" title="收起侧边栏" aria-controls="sidebar" aria-expanded="true" data-i18n-aria-label="收起侧边栏" data-i18n-title="收起侧边栏"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16m7-12-4 4 4 4"/></svg></button>
+    </div>
+  </div>
+  <div class="sidebar-navigation">
+    <button class="new-chat sidebar-action" id="new-chat" title="新对话" aria-label="新对话" data-i18n-title="新对话" data-i18n-aria-label="新对话"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 5H6a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-6M14 4l6 6M10 14l2-6 6-6 4 4-6 6-6 2Z"/></svg><span class="sidebar-label" data-i18n="新对话">新对话</span><kbd>⌘K</kbd></button>
+    <button id="open-search" class="search-launch sidebar-action" aria-label="搜索历史" title="搜索历史" data-i18n-aria-label="搜索历史" data-i18n-title="搜索历史"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="sidebar-label" data-i18n="搜索历史">搜索历史</span><kbd>⇧⌘F</kbd></button>
+  </div>
+  <div class="sidebar-scroll">
+    <details id="projects-section" class="projects-section" open>
+      <summary id="projects-heading" title="项目" data-i18n-title="项目"><svg class="section-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m5 3 5 5-5 5"/></svg><svg class="projects-rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><span class="sidebar-label" data-i18n="项目">项目</span><span id="project-count" class="sidebar-count">1</span><button id="select-conversations" class="project-select-toggle sidebar-icon-button" type="button" aria-label="多选对话" title="多选对话" aria-pressed="false" data-i18n-aria-label="多选对话" data-i18n-title="多选对话"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 3 3 6-6"/></svg></button></summary>
+      <div id="projects-content">
+        <button id="new-project" class="sidebar-action new-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M12 11v7m-3.5-3.5h7"/></svg><span data-i18n="新建项目">新建项目</span></button>
+        <nav id="history" aria-label="项目与对话" data-i18n-aria-label="项目与对话"></nav>
+      </div>
+    </details>
+  </div>
+  <section id="conversation-selection" class="conversation-selection" aria-label="批量操作" data-i18n-aria-label="批量操作" hidden>
+    <div class="selection-heading"><strong id="selection-count" role="status"></strong><button id="selection-done" data-i18n="退出多选">退出多选</button></div>
+    <button id="selection-all" class="selection-all" data-i18n="全选全部对话">全选全部对话</button>
+    <div class="selection-actions"><button id="selection-move" class="secondary-button" data-i18n="移动到项目">移动到项目</button><button id="selection-delete" class="danger-button" data-i18n="删除">删除</button></div>
+  </section>
+  <div class="sidebar-bottom">
+    <button id="settings-button" class="settings-button sidebar-action" title="模型与上下文" aria-label="模型与上下文" data-i18n-title="模型与上下文" data-i18n-aria-label="模型与上下文"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="var(--paper)"/><circle cx="15" cy="17" r="3" fill="var(--paper)"/></svg><span class="sidebar-label" data-i18n="模型与上下文">模型与上下文</span></button>
+    <div class="sidebar-workspace-note"><span class="dot"></span><span data-i18n="本地工作空间">本地工作空间</span><span class="sidebar-version">v0.6</span></div>
+  </div>
+</aside>
+<button id="sidebar-backdrop" class="sidebar-backdrop" aria-label="关闭侧边栏" data-i18n-aria-label="关闭侧边栏" hidden tabindex="-1"></button>
+<div class="workspace">
+<header><div class="header-left"><button id="menu" class="icon-button" aria-controls="sidebar" aria-expanded="false" aria-label="展开侧栏" data-i18n-aria-label="展开侧栏">☰</button><span id="header-title"><span data-i18n="研究工作台">研究工作台</span></span><span class="header-slash">/</span><span id="active-project-name" class="muted project-context" data-i18n="默认项目">默认项目</span></div><div class="header-right"><button id="language-toggle" class="language-toggle" data-language-toggle aria-label="切换到英文界面和提示词" data-i18n-aria-label="切换到英文界面和提示词">English</button><span class="model-badge"><span class="dot"></span><span data-i18n="正在加载模型"> 正在加载模型</span></span><button class="icon-button" id="export" title="导出整个对话" aria-label="导出整个对话 Markdown" data-i18n-title="导出整个对话" data-i18n-aria-label="导出整个对话 Markdown">↥</button></div></header>
+<main id="main">
+<section id="welcome" class="welcome">
+  <div class="welcome-eyebrow"><span class="mini-spark">✳</span><span data-i18n="从一个好问题开始"> 从一个好问题开始</span></div>
+  <h1><span data-i18n="让好奇，">让好奇，</span><br><span><span data-i18n="抵达有据可循的答案。">抵达有据可循的答案。</span></span></h1>
+  <p class="welcome-description"><span data-i18n="拆解问题、搜索网页、阅读原文、交叉验证。">拆解问题、搜索网页、阅读原文、交叉验证。</span><br><span data-i18n="把零散的信息，变成清晰的洞察。">把零散的信息，变成清晰的洞察。</span></p>
+  <div class="features"><span><span data-i18n="⌕ 多轮搜索">⌕ 多轮搜索</span></span><span><span data-i18n="▤ 原文阅读">▤ 原文阅读</span></span><span><span data-i18n="↗ 来源可追溯">↗ 来源可追溯</span></span></div>
+  <div class="suggestions-label"><span data-i18n="试着探索">试着探索 </span><span><span data-i18n="从灵感到发现">从灵感到发现</span></span></div>
+  <div class="suggestions">
+    <button class="suggestion" data-prompt="对比 DeepSeek 与 OpenAI 最新 API 的模型能力、价格和适用场景，优先查阅官方资料。" data-i18n-data-prompt="对比 DeepSeek 与 OpenAI 最新 API 的模型能力、价格和适用场景，优先查阅官方资料。"><span class="suggestion-icon violet">◈</span><strong><span data-i18n="技术雷达">技术雷达</span></strong><p><span data-i18n="对比主流 AI 模型的能力与适用场景">对比主流 AI 模型的能力与适用场景</span></p><span class="card-arrow">↗</span></button>
+    <button class="suggestion" data-prompt="调研个人知识管理工具 Obsidian、Notion 和 Logseq，从本地存储、隐私、搜索和长期维护角度进行比较，列出来源。" data-i18n-data-prompt="调研个人知识管理工具 Obsidian、Notion 和 Logseq，从本地存储、隐私、搜索和长期维护角度进行比较，列出来源。"><span class="suggestion-icon green">▧</span><strong><span data-i18n="深度比较">深度比较</span></strong><p><span data-i18n="找到适合自己的个人知识管理工具">找到适合自己的个人知识管理工具</span></p><span class="card-arrow">↗</span></button>
+    <button class="suggestion" data-prompt="检索近期关于睡眠与记忆巩固的研究，优先使用原始论文，说明主要结论和证据局限。" data-i18n-data-prompt="检索近期关于睡眠与记忆巩固的研究，优先使用原始论文，说明主要结论和证据局限。"><span class="suggestion-icon orange">◌</span><strong><span data-i18n="循证探索">循证探索</span></strong><p><span data-i18n="从原始研究了解睡眠与记忆的关系">从原始研究了解睡眠与记忆的关系</span></p><span class="card-arrow">↗</span></button>
+  </div>
+</section>
+<section id="conversation" class="conversation hidden" aria-live="polite"></section>
+</main>
+<div class="composer-area">
+  <form id="composer" class="composer">
+    <label for="question" class="sr-only"><span data-i18n="研究问题">研究问题</span></label>
+    <textarea id="question" rows="2" placeholder="你想深入了解什么？输入问题，开启一次探索…" data-i18n-placeholder="你想深入了解什么？输入问题，开启一次探索…"></textarea>
+    <div class="composer-toolbar">
+      <div class="composer-options">
+        <div class="composer-field composer-iteration-field">
+          <label for="mode"><span data-i18n="迭代上限">迭代上限</span></label>
+          <div class="composer-iteration-controls">
+            <select id="mode" aria-label="主模型迭代档位" data-i18n-aria-label="主模型迭代档位">
+              <option value="quick" data-i18n="快速 · 10 次">快速 · 10 次</option>
+              <option value="standard" selected data-i18n="标准 · 50 次">标准 · 50 次</option>
+              <option value="deep" data-i18n="深入 · 200 次">深入 · 200 次</option>
+              <option value="custom" data-i18n="自定义">自定义</option>
+            </select>
+            <input id="composer-iterations" class="hidden" type="number" min="1" step="1" value="50" aria-label="自定义主模型迭代上限" title="自定义迭代上限（次）" data-i18n-aria-label="自定义主模型迭代上限" data-i18n-title="自定义迭代上限（次）">
+          </div>
+        </div>
+        <label class="composer-field composer-model-field"><span data-i18n="主模型">主模型
+          </span><select id="composer-main-profile" aria-label="研究主模型" data-i18n-aria-label="研究主模型"><option value="" data-i18n="加载中">加载中</option></select>
+        </label>
+        <label class="composer-field composer-model-field"><span data-i18n="摘要模型">摘要模型
+          </span><select id="composer-summary-profile" aria-label="网页摘要模型" data-i18n-aria-label="网页摘要模型"><option value="" data-i18n="加载中">加载中</option></select>
+        </label>
+      </div>
+      <div class="send-area">
+        <span id="input-hint"><span data-i18n="Enter 发送">Enter 发送</span></span>
+        <button type="submit" class="send-button" id="send" title="开始研究（Enter）" aria-label="开始研究" data-i18n-title="开始研究（Enter）" data-i18n-aria-label="开始研究">↑</button>
+        <button type="button" class="stop-button hidden" id="stop"><span data-i18n="■ 停止">■ 停止</span></button>
+      </div>
+    </div>
+  </form>
+  <div class="composer-foot"><span><span data-i18n="主模型自主研究 · DeepSeek 搜索与网页抓取">主模型自主研究 · DeepSeek 搜索与网页抓取</span></span><span><span data-i18n="重要结论，请核对原始来源。">重要结论，请核对原始来源。</span></span></div>
+</div>
+</div>
+<aside id="sources-panel" class="sources-panel hidden"><div class="sources-header"><div><span class="eyebrow">EVIDENCE</span><h2><span data-i18n="研究来源">研究来源 </span><span id="source-count">0</span></h2></div><button id="close-sources" class="icon-button" aria-label="关闭来源" data-i18n-aria-label="关闭来源">×</button></div><p class="sources-description"><span data-i18n="沿着来源，回到事实发生的地方。">沿着来源，回到事实发生的地方。</span></p><div id="sources-list"></div></aside>
+<dialog id="settings" class="settings-page">
+<div class="dialog-heading"><div><span class="eyebrow">WORKSPACE SETTINGS</span><h2><span data-i18n="研究设置">研究设置</span></h2></div><button id="close-settings" class="icon-button" aria-label="关闭设置" data-i18n-aria-label="关闭设置">×</button></div>
+<p class="settings-intro"><span data-i18n="按供应商管理地址、凭据和模型。每个模型独立设置参数；在对话输入区选择主模型与摘要模型。">按供应商管理地址、凭据和模型。每个模型独立设置参数；在对话输入区选择主模型与摘要模型。</span></p>
+<nav class="settings-tabs" aria-label="设置分类" data-i18n-aria-label="设置分类"><button data-tab="models" class="selected"><span data-i18n="模型供应商">模型供应商</span></button><button data-tab="web"><span data-i18n="搜索与抓取">搜索与抓取</span></button><button data-tab="research"><span data-i18n="研究执行">研究执行</span></button></nav>
+<section id="model-settings-pane">
+<div class="supplier-layout">
+<aside class="supplier-sidebar"><div class="supplier-sidebar-heading"><strong><span data-i18n="模型供应商">模型供应商</span></strong><button id="new-supplier" class="icon-button" aria-label="新增 OpenAI 兼容供应商" title="新增 OpenAI 兼容供应商" data-i18n-aria-label="新增 OpenAI 兼容供应商" data-i18n-title="新增 OpenAI 兼容供应商">＋</button></div><nav id="supplier-list" aria-label="模型供应商列表" data-i18n-aria-label="模型供应商列表"></nav><p><span data-i18n="内置模块使用专属协议。新增供应商使用 OpenAI 兼容协议。">内置模块使用专属协议。新增供应商使用 OpenAI 兼容协议。</span></p></aside>
+<div id="supplier-page" class="supplier-page">
+<div class="supplier-page-heading"><div><h3 id="supplier-title"></h3><p id="supplier-kind"></p></div><button id="delete-supplier" class="danger-button"><span data-i18n="删除供应商">删除供应商</span></button></div>
+<p id="supplier-note" class="settings-help hidden"></p>
+<label class="form-field"><span data-i18n="供应商名称">供应商名称</span><input id="supplier-name" autocomplete="off" placeholder="为供应商命名" data-i18n-placeholder="为供应商命名"></label>
+<label class="form-field"><span data-i18n="接口地址">接口地址</span><select id="supplier-base-options" class="hidden" aria-label="官方接口地址" data-i18n-aria-label="官方接口地址"></select><input id="supplier-base" type="url" autocomplete="off" placeholder="https://api.example.com/v1"></label>
+<label class="form-field">API Key<span class="key-row"><input id="supplier-key" type="password" autocomplete="off" placeholder="可留空" data-i18n-placeholder="可留空"><button id="reveal-supplier-key" class="secondary-button" type="button"><span data-i18n="显示">显示</span></button><button id="clear-supplier-key" class="secondary-button" type="button"><span data-i18n="清空 Key">清空 Key</span></button></span></label>
+<p class="supplier-key-help"><span data-i18n="已保存的 Key 默认显示为密码圆点，点击“显示”可查看明文；保存、切换供应商或关闭设置后恢复隐藏。点击输入框可替换 Key，点击“清空 Key”后保存可移除。空凭据不发送 Authorization。">已保存的 Key 默认显示为密码圆点，点击“显示”可查看明文；保存、切换供应商或关闭设置后恢复隐藏。点击输入框可替换 Key，点击“清空 Key”后保存可移除。空凭据不发送 Authorization。</span></p>
+<div class="settings-actions"><button id="save-supplier" class="primary-button"><span data-i18n="保存供应商">保存供应商</span></button><button id="manual-add-model" class="secondary-button"><span data-i18n="手动添加模型">手动添加模型</span></button><button id="refresh-supplier-models" class="secondary-button"><span data-i18n="刷新模型列表 / 添加模型">刷新模型列表 / 添加模型</span></button></div>
+<p id="supplier-result" role="status"></p>
+<div class="supplier-model-heading"><h3><span data-i18n="已加入的模型">已加入的模型</span></h3><span id="supplier-model-count"></span></div>
+<p class="supplier-key-help"><span data-i18n="每个“供应商 / 模型”独立设置并发额度；主模型和摘要模型在对话输入区选择。保存模型参数后用于新研究，并发数立即生效。">每个“供应商 / 模型”独立设置并发额度；主模型和摘要模型在对话输入区选择。保存模型参数后用于新研究，并发数立即生效。</span></p>
+<div id="supplier-models"></div>
+</div></div>
+</section>
+<section id="web-settings-pane" class="hidden">
+<h3>DeepSeek Search / Fetch</h3><p class="settings-help"><span data-i18n="使用官方网页服务。query 最多 128 字符，超长时要求主模型重新生成，绝不自动截断。其余参数和网页正文完整发送；服务拒绝时显示错误。搜索仅把 snippet 交给主模型；网页正文先经过独立摘要模型定向提取。Fetch 失败时优先取同 URL 的 Search content，其次 summary；均经独立提取并注明备用来源。">使用官方网页服务。query 最多 128 字符，超长时要求主模型重新生成，绝不自动截断。其余参数和网页正文完整发送；服务拒绝时显示错误。搜索仅把 snippet 交给主模型；网页正文先经过独立摘要模型定向提取。Fetch 失败时优先取同 URL 的 Search content，其次 summary；均经独立提取并注明备用来源。</span></p>
+<label class="form-field"><span data-i18n="凭据来源">凭据来源</span><select id="web-profile"><option value="" data-i18n="单独输入 DeepSeek API Key">单独输入 DeepSeek API Key</option></select></label>
+<label class="form-field" id="web-key-field">DeepSeek API Key<span class="key-row"><input id="web-key" type="password" autocomplete="off" placeholder="输入 DeepSeek API Key" data-i18n-placeholder="输入 DeepSeek API Key"><button id="reveal-web-key" class="secondary-button" aria-label="显示或隐藏 DeepSeek API Key" data-i18n-aria-label="显示或隐藏 DeepSeek API Key"><span data-i18n="显示">显示</span></button></span></label>
+<p class="settings-help"><span data-i18n="每次 Search 请求结果数在“研究执行”中配置。“测试 Search”使用当前已保存并选用的研究执行配置。">每次 Search 请求结果数在“研究执行”中配置。“测试 Search”使用当前已保存并选用的研究执行配置。</span></p>
+<p id="web-key-status" class="settings-help"></p><div class="settings-actions"><button id="save-web" class="primary-button"><span data-i18n="保存网页服务配置">保存网页服务配置</span></button><button id="test-search" class="secondary-button"><span data-i18n="测试 Search">测试 Search</span></button><button id="test-fetch" class="secondary-button"><span data-i18n="测试 Fetch">测试 Fetch</span></button></div><pre id="web-result" class="test-result" role="status"></pre>
+</section>
+<section id="research-settings-pane" class="hidden">
+<label class="form-field"><span data-i18n="研究执行配置">研究执行配置</span><select id="research-profile-select"></select></label>
+<div class="settings-actions"><button id="new-research-profile" class="secondary-button"><span data-i18n="＋ 新增配置">＋ 新增配置</span></button><button id="rename-research-profile" class="secondary-button"><span data-i18n="重命名">重命名</span></button><button id="delete-research-profile" class="danger-button"><span data-i18n="删除配置">删除配置</span></button></div>
+<p id="research-profile-help" class="settings-help"><span data-i18n="选择配置后用于新研究，修改参数后请保存。默认配置固定保留，可新增一份配置进行调整。">选择配置后用于新研究，修改参数后请保存。默认配置固定保留，可新增一份配置进行调整。</span></p>
+<div class="settings-grid"><label><span data-i18n="主模型迭代档位">主模型迭代档位</span><select id="setting-tier"><option value="quick" data-i18n="快速 · 10 次">快速 · 10 次</option><option value="standard" data-i18n="标准 · 50 次">标准 · 50 次</option><option value="deep" data-i18n="深入 · 200 次">深入 · 200 次</option><option value="custom" data-i18n="自定义">自定义</option></select></label><label><span data-i18n="主模型迭代上限">主模型迭代上限</span><input id="setting-iterations" type="number" min="1" step="1" value="50"></label></div>
+<p class="settings-help"><span data-i18n="这是最大迭代次数，不是搜索次数；模型可以提前结束。没有最低搜索次数，自定义值不受 200 限制。">这是最大迭代次数，不是搜索次数；模型可以提前结束。没有最低搜索次数，自定义值不受 200 限制。</span></p>
+<label class="form-field"><span data-i18n="工具结果上下文">工具结果上下文</span><select id="setting-context"><option value="-1" data-i18n="全部保留（默认，无自动裁剪）">全部保留（默认，无自动裁剪）</option><option value="5" data-i18n="keep5：仅最近 5 条工具结果完整发送">keep5：仅最近 5 条工具结果完整发送</option></select></label>
+<label class="form-field"><span data-i18n="完整任务重试">完整任务重试</span><select id="setting-retries"><option value="0" data-i18n="单次研究">单次研究</option><option value="5" data-i18n="benchmark 扩展：最多 6 次完整尝试">benchmark 扩展：最多 6 次完整尝试</option></select></label>
+<p class="settings-help"><span data-i18n="迭代档位、工具结果保留和完整任务重试相互独立。服务端上下文超限直接记录失败，不自动删历史重试。keep5 只有主动选择才生效。">迭代档位、工具结果保留和完整任务重试相互独立。服务端上下文超限直接记录失败，不自动删历史重试。keep5 只有主动选择才生效。</span></p>
+<label class="form-field"><span data-i18n="用户提问模式">用户提问模式</span><select id="memory-mode"><option value="strict" data-i18n="独立研究（默认）">独立研究（默认）</option><option value="followup" data-i18n="扩展追问：当前会话全部已完成问答及全部来源">扩展追问：当前会话全部已完成问答及全部来源</option></select></label>
+<label class="form-field"><span data-i18n="每次 Search 请求结果数">每次 Search 请求结果数</span><input id="research-search-count" type="number" min="1" step="1" value="20" required></label>
+<p class="settings-help"><span data-i18n="默认配置为 20 条，可在自定义配置中填写正整数。实际返回条数由服务决定；此项随研究执行配置一起保存，运行中的研究保持原快照。">默认配置为 20 条，可在自定义配置中填写正整数。实际返回条数由服务决定；此项随研究执行配置一起保存，运行中的研究保持原快照。</span></p>
+<p class="capability-note"><span data-i18n="主模型、摘要模型、网页正文、问题输入和追问背景均无应用层长度限制。保留全部服务返回内容；到达供应商输出上限时标记未完成。">主模型、摘要模型、网页正文、问题输入和追问背景均无应用层长度限制。保留全部服务返回内容；到达供应商输出上限时标记未完成。</span></p>
+<button id="save-research" class="primary-button"><span data-i18n="保存配置">保存配置</span></button><p id="research-result" role="status"></p>
+</section>
+</dialog>
+<dialog id="model-picker" aria-labelledby="model-picker-title"><div class="dialog-heading"><h2 id="model-picker-title"><span data-i18n="选择要加入的模型">选择要加入的模型</span></h2><button id="close-model-picker" class="icon-button" aria-label="关闭模型列表" data-i18n-aria-label="关闭模型列表">×</button></div><p id="model-picker-description"></p><input id="model-picker-filter" type="search" placeholder="搜索模型 ID" aria-label="搜索模型 ID" data-i18n-placeholder="搜索模型 ID" data-i18n-aria-label="搜索模型 ID"><div class="settings-actions"><button id="model-picker-all" class="secondary-button"><span data-i18n="全选">全选</span></button><button id="model-picker-none" class="secondary-button"><span data-i18n="清除选择">清除选择</span></button></div><div id="model-picker-list"></div><div class="settings-actions"><button id="add-picked-models" class="primary-button"><span data-i18n="加入所选模型">加入所选模型</span></button><span id="model-picker-result" role="status"></span></div></dialog>
+<dialog id="debug"><div class="dialog-heading"><h2><span data-i18n="研究详情 / 开发调试">研究详情 / 开发调试</span></h2><button id="close-debug" class="icon-button" aria-label="关闭详情" data-i18n-aria-label="关闭详情">×</button></div><p><span data-i18n="完整研究记录、实际主模型请求、独立网页提取请求分别保存。回退记录不删除。下列内容仅在本机查看。">完整研究记录、实际主模型请求、独立网页提取请求分别保存。回退记录不删除。下列内容仅在本机查看。</span></p><label><input type="checkbox" id="protocol-reasoning"><span data-i18n="显示服务返回的 reasoning_content 协议字段"> 显示服务返回的 reasoning_content 协议字段</span></label><div id="debug-content"></div></dialog>
+<div id="toast" class="toast hidden" role="status"></div>
+<dialog id="thinking-dialog" class="settings-dialog thinking-dialog"><div class="dialog-heading"><h2 id="thinking-title"><span data-i18n="思考设置">思考设置</span></h2><button id="close-thinking" class="secondary-button"><span data-i18n="关闭">关闭</span></button></div><div id="thinking-fields" class="settings-grid"></div><p id="thinking-note" class="capability-note"></p><p id="thinking-error" role="alert"></p><div class="settings-actions"><button id="apply-thinking" class="primary-button"><span data-i18n="应用到当前草稿">应用到当前草稿</span></button></div></dialog>
+<dialog id="conversation-search" class="conversation-search" aria-label="搜索对话" data-i18n-aria-label="搜索对话">
+  <div class="search-input-row"><span aria-hidden="true">⌕</span><input id="conversation-search-input" type="search" maxlength="200" autocomplete="off" placeholder="搜索对话记录…" aria-label="搜索对话记录" data-i18n-placeholder="搜索对话记录…" data-i18n-aria-label="搜索对话记录"><button id="close-conversation-search" class="icon-button" aria-label="关闭搜索" data-i18n-aria-label="关闭搜索">×</button></div>
+  <div class="search-tabs" role="tablist" aria-label="搜索范围" data-i18n-aria-label="搜索范围">
+    <button role="tab" data-search-scope="all" aria-selected="true" data-i18n="全部">全部</button>
+    <button role="tab" data-search-scope="title" aria-selected="false" tabindex="-1" data-i18n="标题">标题</button>
+    <button role="tab" data-search-scope="content" aria-selected="false" tabindex="-1" data-i18n="内容">内容</button>
+  </div>
+  <p id="conversation-search-status" class="search-status" role="status" aria-live="polite"></p>
+  <div id="conversation-search-results" class="conversation-search-results" aria-busy="false"></div>
+  <button id="conversation-search-more" class="secondary-button search-more" data-i18n="加载更多" hidden>加载更多</button>
+  <footer class="search-footer"><span data-i18n="内容包含用户问题和回答">内容包含用户问题和回答</span><span><kbd>↑↓</kbd> <span data-i18n="选择">选择</span> · <kbd>Enter</kbd> <span data-i18n="打开">打开</span> · <kbd>Esc</kbd> <span data-i18n="关闭">关闭</span></span></footer>
+</dialog>
+</body></html>
