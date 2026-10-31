@@ -2,6 +2,7 @@ from settings_fixtures import legacy_document
 import copy
 import json
 import stat
+import os
 
 import pytest
 from fastapi.testclient import TestClient
@@ -46,7 +47,8 @@ def test_builtin_and_full_profile_lifecycle(client):
     assert client.post(path + '/activate').json()['research']['search_count'] == 31
     assert client.delete(path).json()['active_research_profile'] == 'default'
     assert pid not in settings.load()['research_profiles']
-    assert stat.S_IMODE(settings.SETTINGS_FILE.stat().st_mode) == 0o600
+    if os.name != 'nt':
+        assert stat.S_IMODE(settings.SETTINGS_FILE.stat().st_mode) == 0o600
 
 
 def test_protected_default_names_invalid_and_missing_profiles(client):

@@ -1,7 +1,7 @@
 """Keep every test's settings writes inside its temporary directory."""
 from pathlib import Path
 import pytest
-from app import settings_store
+from app import config, settings_store
 
 
 def pytest_configure(config):
@@ -11,4 +11,5 @@ def pytest_configure(config):
 
 @pytest.fixture(autouse=True)
 def isolate_settings_file(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, 'DATA', tmp_path)
     monkeypatch.setattr(settings_store, 'SETTINGS_FILE', tmp_path / 'settings.json')

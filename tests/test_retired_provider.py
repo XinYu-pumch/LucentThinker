@@ -2,6 +2,7 @@
 import copy
 import json
 import stat
+import os
 
 import pytest
 from fastapi.testclient import TestClient
@@ -45,7 +46,8 @@ def test_retired_provider_upgrade_backs_up_and_clears_only_its_bindings(tmp_path
         assert store.get_run(rid)['config_snapshot']['summary_model']['provider'] == 'fourrouter_argon'
     backups = list((tmp_path / 'backups').glob('settings-*.json'))
     assert len(backups) == 1 and backups[0].read_bytes() == original
-    assert stat.S_IMODE(backups[0].stat().st_mode) == 0o600
+    if os.name != 'nt':
+        assert stat.S_IMODE(backups[0].stat().st_mode) == 0o600
     assert 'retired-fixture-key' not in json.dumps(settings.public())
     assert 'fourrouter_argon' not in settings.SETTINGS_FILE.read_text()
     settings.ensure()

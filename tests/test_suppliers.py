@@ -4,6 +4,7 @@ import asyncio
 import copy
 import json
 import stat
+import os
 
 import httpx
 import pytest
@@ -43,8 +44,10 @@ def test_migration_preserves_ids_credentials_and_duplicate_model_limits(tmp_path
     settings.ensure()
     backups = list((tmp_path / 'backups').glob('settings-v3-*.json'))
     assert len(backups) == 1 and backups[0].read_bytes() == original
-    assert stat.S_IMODE(backups[0].stat().st_mode) == 0o600
-    assert stat.S_IMODE(settings.SETTINGS_FILE.stat().st_mode) == 0o600
+    if os.name != 'nt':
+        assert stat.S_IMODE(backups[0].stat().st_mode) == 0o600
+    if os.name != 'nt':
+        assert stat.S_IMODE(settings.SETTINGS_FILE.stat().st_mode) == 0o600
     new = settings.load()
     assert new['version'] == 4 and new['active'] == old['active']
     assert new['profiles'].keys() == old['profiles'].keys()

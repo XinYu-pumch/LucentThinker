@@ -2,6 +2,7 @@ from settings_fixtures import legacy_document
 import asyncio
 import copy
 import json
+import os
 from dataclasses import replace
 from pathlib import Path
 import httpx
@@ -413,6 +414,7 @@ def test_api_default_strict_and_explicit_followup(monkeypatch):
 async def test_length_keeps_partial_output_and_does_not_retry_or_increase_local_limit(monkeypatch):
     # Explicit provider metadata keeps this test independent of local data/ files.
     monkeypatch.setattr(config, 'verified_metadata', lambda base, model: {'id': model, 'max_output_tokens': 393216})
+    settings_store.write(legacy_document())
     script=Script([response(msg('PARTIAL_OUTPUT'),finish_reason='length')])
     rid=newrun()
     await research(rid,main=script.model('main'),summary=Script([]).model('summary'),web=Web())
@@ -460,7 +462,7 @@ def test_profile_crud_activation_reveal_and_no_secret_in_public_api():
         revealed=client.post(f'/api/settings/profiles/{ident}/reveal')
         assert revealed.json()['api_key']=='PROFILE_SECRET'
         assert revealed.headers['cache-control']=='no-store'
-        if __import__('os').name != 'nt':
+        if os.name != 'nt':
             assert settings_store.SETTINGS_FILE.stat().st_mode & 0o777 == 0o600
         assert client.post(f'/api/settings/active/main/{ident}').status_code==200
         assert client.delete(f'/api/settings/profiles/{ident}').status_code==422
@@ -505,6 +507,7 @@ def test_model_discovery_test_hello_and_generic_payload(monkeypatch):
 def test_research_settings_independent_tiers_and_large_user_question(monkeypatch):
     import app.main as api_module
     monkeypatch.setattr(config, 'verified_metadata', lambda base, model: {'id': model, 'max_output_tokens': 393216})
+    settings_store.write(legacy_document())
     captured=[]
     async def no_network(rid,**kwargs):
         captured.append(kwargs)
