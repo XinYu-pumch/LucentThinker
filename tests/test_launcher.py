@@ -38,7 +38,9 @@ def test_source_launcher_start_stop_and_restart(tmp_path):
                     return response.status == 200
             wait_until(ready)
             assert running(state)
-            assert stop_existing(state) == child.pid
+            # Windows venv python.exe redirects to a child interpreter PID.
+            owner = json.loads((state / 'launcher.json').read_text(encoding='utf-8'))['pid']
+            assert stop_existing(state) == owner
             child.wait(timeout=15)
             assert child.returncode == 0, child.stdout.read()
             assert not running(state)
