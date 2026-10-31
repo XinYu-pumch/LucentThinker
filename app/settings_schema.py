@@ -23,8 +23,29 @@ def unique_name(suppliers, name, exclude=None):
     return candidate
 
 
+def retire_fourrouter(doc):
+    """Remove the retired built-in configuration from current settings only."""
+    suppliers = doc.get('suppliers', {})
+    supplier_ids = {sid for sid, supplier in suppliers.items()
+                    if supplier.get('provider') == 'fourrouter_argon'}
+    profile_ids = {pid for pid, profile in doc['profiles'].items()
+                   if profile.get('provider') == 'fourrouter_argon'
+                   or profile.get('supplier_id') in supplier_ids}
+    for role, pid in doc['active'].items():
+        if pid in profile_ids:
+            doc['active'][role] = ''
+    if doc['web'].get('credential_profile') in profile_ids:
+        doc['web']['credential_profile'] = None
+    for pid in profile_ids:
+        del doc['profiles'][pid]
+    for sid in supplier_ids:
+        del suppliers[sid]
+    return bool(supplier_ids or profile_ids)
+
+
 def expand(document):
     doc = copy.deepcopy(document)
+    retire_fourrouter(doc)
     templates = builtins()
     if 'suppliers' not in doc:
         doc['suppliers'] = {}

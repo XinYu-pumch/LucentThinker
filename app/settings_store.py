@@ -67,7 +67,8 @@ def write(doc):
 def ensure():
     with LOCK:
         raw = json.loads(SETTINGS_FILE.read_text()) if SETTINGS_FILE.exists() else None
-        if raw is not None and (raw.get('version', 3) < 4 or 'research_profiles' not in raw or raw.get('thinking_schema', 0) < 1):
+        retired = raw is not None and settings_schema.retire_fourrouter(copy.deepcopy(raw))
+        if raw is not None and (retired or raw.get('version', 3) < 4 or 'research_profiles' not in raw or raw.get('thinking_schema', 0) < 1):
             backup = SETTINGS_FILE.parent / 'backups' / ('settings-v' + str(raw.get('version', 3)) + '-' + str(time.time_ns()) + '.json')
             backup.parent.mkdir(parents=True, exist_ok=True)
             fd = os.open(backup, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)

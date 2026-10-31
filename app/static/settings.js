@@ -237,11 +237,13 @@ function openThinking(p,s,onApply){
   const sync=()=>{budget.parentNode.hidden=choice.value!=='budget';};choice.onchange=sync;sync();
   note.textContent=(tr(spec.output?.note)||tr("接收服务端返回的独立思考文本。"))+(legacy?tr(" 已有设置：")+(p.thinking||'')+' '+(p.reasoning_effort||tr("服务端默认"))+tr("。选择“保留已有设置”保持原请求行为。"):'')+tr(" 输出策略由 Go 模型协议决定；服务端默认不额外设置强度。");
   read=()=>{if(choice.value==='budget'&&(!String(budget.value).trim()||!Number.isSafeInteger(Number(budget.value))||Number(budget.value)<(spec.budget?.min??1)||(spec.budget?.max!==undefined&&Number(budget.value)>spec.budget.max)))throw Error(tr("请输入此模型支持的整数预算"));return {thinking_config:null,go_reasoning:choice.value==='__legacy__'?null:choice.value,reasoning_budget:choice.value==='budget'?Number(budget.value):null};};
- }else if(s.provider==='deepseek'||s.provider==='fourrouter_argon'){
-  const deep=s.provider==='deepseek',mode=select(['enabled','disabled'],p.thinking||'enabled',levelNames),level=select(deep?['','low','high','max']:['low','medium','high'],p.reasoning_effort??(deep?'high':'high'),{'':tr("服务端默认")});
-  if(deep)fields.append(labeledControl(tr("思考模式"),mode));fields.append(labeledControl(tr("强度"),level));mode.onchange=()=>{level.disabled=mode.value==='disabled';};if(deep)mode.onchange();
-  note.textContent=deep?tr("独立接收 reasoning_content；思考模式不发送 Temperature。服务端默认不发送强度参数。"):tr("Gemini 原生接口请求思考摘要；是否返回由服务端决定。");
-  read=()=>({thinking_config:null,go_reasoning:null,reasoning_budget:null,thinking:deep?mode.value:null,reasoning_effort:level.value});
+ }else if(s.provider==='deepseek'){
+  const mode=select(['enabled','disabled'],p.thinking||'enabled',levelNames);
+  const level=select(['','low','high','max'],p.reasoning_effort??'high',{'':tr("服务端默认")});
+  fields.append(labeledControl(tr("思考模式"),mode),labeledControl(tr("强度"),level));
+  mode.onchange=()=>{level.disabled=mode.value==='disabled';};mode.onchange();
+  note.textContent=tr("独立接收 reasoning_content；思考模式不发送 Temperature。服务端默认不发送强度参数。");
+  read=()=>({thinking_config:null,go_reasoning:null,reasoning_budget:null,thinking:mode.value,reasoning_effort:level.value});
  }else{
   const catalog=settingsDoc.thinking_presets||[],current=p.thinking_config;
   const preset=select(['',...catalog.map(v=>v.id)],current?.preset||'',Object.fromEntries([['',tr("服务端默认")],...catalog.map(v=>[v.id,tr(v.name)])]));

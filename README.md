@@ -49,10 +49,10 @@ cd /Users/yuxin/AI_developing/LucentThinker
 
 首次安装时模型列表为空，主模型和摘要模型均待选择。用户添加模型后，分别指定两个角色。
 
-左下角“模型与上下文 → 模型供应商”采用供应商侧栏与详情页。侧栏内置 **DeepSeek、OpenCode Go、4router · Gemini 4 Argon**，点击“＋”可新增普通 OpenAI 兼容供应商；可修改名称、保存或删除自建供应商。
+左下角“模型与上下文 → 模型供应商”采用供应商侧栏与详情页。侧栏内置 **DeepSeek、OpenCode Go、z.ai、moonshot、mimo、qwen、grok**，点击“＋”可新增普通 OpenAI 兼容供应商；可修改名称、保存或删除自建供应商。
 
 1. 选择供应商，填写地址与 API Key（可为空）。内置模块地址固定；普通供应商支持根地址、`/v1` 或完整 `/chat/completions` 地址。已有 Key 留空保留，点击“清空 Key”并保存才会删除。
-2. 点击“刷新模型列表 / 添加模型”，从在线拉取的全部可用模型中勾选一个或多个加入。已加入模型不会重复创建。可拆卸模块只列出已登记协议且在线可用的模型；4router 模块固定为 `gemini-4-argon`。
+2. 点击“刷新模型列表 / 添加模型”，从在线拉取的全部可用模型中勾选一个或多个加入。已加入模型不会重复创建。可拆卸模块只列出已登记协议且在线可用的模型。
 3. 每行模型单独保存并发数、适用的思考档位和可选采样参数；“测试连接”发送 `hellow`，“测试工具”验证工具调用。普通 OpenAI 供应商默认不发送思考扩展；显式选择思考预设后按预设协议发送。测试使用当前表单参数，参数持久化请点击“保存参数”。
 4. 关闭设置，在对话输入区的迭代档位旁选择**主模型与摘要模型**，选项显示“供应商 / 模型”。选择作为下次打开时的默认值自动保存；每次研究也明确提交两个稳定模型 ID，以免并发研究互相改变选择。两个角色可使用同一个模型，共享并发额度，但上下文独立。
 
@@ -138,16 +138,6 @@ Search / Fetch 始终是 DeepSeek 网页服务，必须保留独立 DeepSeek Key
 5. 恢复模块目录并把 `opencode_go` 加回注册数组后重启，即可重新使用已有配置。
 
 Go 的模型目录和端点集中在 `app/llm_providers/opencode_go/manifest.json`，协议与头部集中在同目录 `adapter.py`。接入设计参考 ScholarNoteLM，协议事实重新核对官方资料；没有复制其配置、凭据或研究数据。本次不引入额外 Python/npm 依赖，也不启用此前讨论的完成检查功能。
-
-## 可选 4router Argon 模块
-
-在“设置 → 模型供应商”侧栏选择 **4router · Gemini 4 Argon**，填写 4router Key，刷新并加入固定模型，保存并发数与思考档位后，在对话输入区选择角色。地址固定为 `https://4router.net/v1`，模型固定为 `gemini-4-argon`；实际生成请求使用 `https://4router.net/v1beta/models/gemini-4-argon:streamGenerateContent?alt=sse`。旧普通“4router”保留为单独供应商，不自动改用原生模块。
-
-思考档位为 `low / medium / high`，默认 `high`，发送 Gemini 原生 `generationConfig.thinkingConfig.thinkingLevel`，不发送 DeepSeek `thinking` 或 OpenAI `reasoning_effort`。档位来自 Google 官方文档登记；4router 的 `/v1/models` 仅用于确认固定模型可用，不会自动发现档位。并发数为用户输入的正整数，沿用每份模型配置共享的排队调度。两种模型角色的选择与每次研究配置快照保持原机制。
-
-原生流式消息、函数调用及函数结果、思考签名均按 Gemini 协议转换；公开界面展示正文，原始请求及响应保存在研究开发视图。输出 token 合计包含正文与 API 报告的思考 token；缓存 token 缺失时保持未知，不估算为零。不设置输出额度或截断输入。API Key 只通过现有服务器端 Bearer 鉴权发送，不使用 `x-opencode-session`。Search / Fetch 继续使用单独的 DeepSeek 配置。
-
-模块完全独立于 OpenCode Go，无新依赖。停用前先完成或停止使用它的研究并退出应用；从 `app/llm_providers/registry.json` 的 `providers` 数组移除 `fourrouter_argon`，或删除 `app/llm_providers/fourrouter_argon/` 后重启。普通配置和 Go 仍可用，旧 Argon 配置标记为不可用，不静默切换接口。恢复目录并重新注册即可恢复。
 
 ## 搜索发现 → 网页阅读 → 独立提取（v0.6）
 

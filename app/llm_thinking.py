@@ -87,4 +87,4 @@ def output_info(settings):
     if settings.provider == 'opencode_go':
         from .llm_providers import registry
         return copy.deepcopy(registry.get(settings.provider).route(settings.model).get('reasoning', {}).get('output', {}))
-    return {'kind': 'summary' if settings.provider == 'fourrouter_argon' else 'provider_defined'}
+    return {'kind': 'provider_defined'}

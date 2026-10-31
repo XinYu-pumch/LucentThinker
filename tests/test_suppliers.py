@@ -136,18 +136,6 @@ def test_builtin_fixed_address_and_model_specific_thinking():
     pid, = settings.add_supplier_models('builtin_deepseek', ['deepseek-flash'], manual=True)
     settings.update_supplier_model('builtin_deepseek', pid, {'reasoning_effort': 'max'})
     assert settings.to_model(settings.load()['profiles'][pid]).generation()['reasoning_effort'] == 'max'
-    from app.llm_providers import registry
-    if 'fourrouter_argon' in registry.catalog():
-        sid = 'builtin_fourrouter_argon'
-        pid, = settings.add_supplier_models(sid, ['gemini-4-argon'])
-        settings.update_supplier_model(sid, pid, {'reasoning_effort': 'low', 'concurrency': 7})
-        model = settings.to_model(settings.load()['profiles'][pid])
-        assert model.reasoning_effort == 'low' and model.concurrency == 7
-        assert 'thinking' not in model.generation()
-        with pytest.raises(ValueError):
-            settings.update_supplier_model(sid, pid, {'reasoning_effort': 'max'})
-        with pytest.raises(ValueError):
-            settings.add_supplier_models(sid, ['other'])
 
 
 async def test_empty_key_and_ordinary_provider_actual_wire_request():

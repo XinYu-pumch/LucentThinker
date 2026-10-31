@@ -439,7 +439,7 @@ globalThis.LUCENT_EN = {
   "支持 low / medium / high，默认 medium；不提供关闭思考或 max 档位。实际思考量由模型按任务决定。": "Supports low / medium / high, defaulting to medium. No disabled or max option. The model determines actual thinking usage for the task.",
   "显式发送 reasoning_split=true，通过 reasoning_content 接收推理文本，正文独立；M3.1 Flash 不支持关闭此分离开关。": "Sends reasoning_split=true to receive reasoning_content separately. M3.1 Flash does not support disabling this split.",
   "显式请求摘要使用 thinking.display=summarized；不请求摘要使用 omitted，不会关闭思考。服务端默认不发送 display。": "Request summaries with thinking.display=summarized, or use omitted to hide summaries without disabling thinking. Server default omits display.",
-  "此预设使用 Gemini 原生接口，默认请求思考摘要。摘要是否返回仍由服务端决定；4router 可尝试 high 档位。不请求摘要不等于关闭思考。": "This preset uses native Gemini and requests thinking summaries by default. The provider controls availability; high may help with 4router. Hiding summaries does not disable thinking.",
+  "此预设使用 Gemini 原生接口，默认请求思考摘要。摘要是否返回仍由服务端决定。不请求摘要不等于关闭思考。": "This preset uses native Gemini and requests thinking summaries by default. The provider controls availability. Hiding summaries does not disable thinking.",
   "自动接收服务端公开的思考文本；该接口没有独立的思考输出开关。none / disabled 会关闭思考。": "Receives thinking text exposed by the provider automatically. No separate output switch. none / disabled turns thinking off.",
   "自动接收服务端返回的思考摘要，不添加原厂未要求的摘要参数。": "Receives provider thinking summaries automatically, without undocumented summary parameters.",
   "自动请求 Claude 思考摘要；disabled 时不发送 display 参数。": "Requests Claude thinking summaries automatically; disabled omits display.",
