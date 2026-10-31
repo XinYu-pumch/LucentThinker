@@ -17,7 +17,8 @@ with open(sys.argv[1], 'a+b') as lock:
     print('locked', flush=True)
     sys.stdin.read()
 '''
-    child = subprocess.Popen([sys.executable, '-c', code, str(path), str(exclusive)],
+    # Bypass Windows venv's redirector so kill() targets the lock-owning process.
+    child = subprocess.Popen([sys._base_executable, '-c', code, str(path), str(exclusive)],
                              stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
     try:
         assert child.stdout.readline().strip() == 'locked'

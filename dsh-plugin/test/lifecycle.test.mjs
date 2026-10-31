@@ -14,8 +14,9 @@ const {Engine}=await import(moduleURL);
 async function setup(t){
  const dataDir=await mkdtemp(join(tmpdir(),'Lucent 测试 space-'));
  const engine=new Engine({packageRoot,dataDir});
- t.after(async()=>{await engine.dispose();await rm(dataDir,{recursive:true,force:true});});
- return {engine,dataDir};
+ const engines=[engine];
+ t.after(async()=>{for(const owned of engines)await owned.dispose();await rm(dataDir,{recursive:true,force:true});});
+ return {engine,dataDir,engines};
 }
 async function json(url,method='GET',body){
  const response=await fetch(url,{method,headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});
@@ -28,7 +29,7 @@ async function gone(pid,timeout=8000){
 }
 
 test('concurrent views share one capability-protected engine; unload releases port and keeps records',async t=>{
- const {engine,dataDir}=await setup(t);
+ const {engine,dataDir,engines}=await setup(t);
  const views=await Promise.all([engine.session(),engine.session(),engine.session()]);
  assert.equal(new Set(views.map(v=>v.pid)).size,1);
  const {url,pid}=views[0],origin=new URL(url).origin;
@@ -46,7 +47,7 @@ test('concurrent views share one capability-protected engine; unload releases po
  await assert.rejects(access(join(dataDir,'engine-state.json')));
  await access(join(dataDir,'research.sqlite3'));
  await assert.rejects(engine.session(),/停用/);
- const next=new Engine({packageRoot,dataDir});t.after(()=>next.dispose());
+ const next=new Engine({packageRoot,dataDir});engines.push(next);
  const reopened=await next.session();assert.notEqual(reopened.url,url);
  assert.equal((await json(reopened.url+'api/conversations/'+c.id)).project_id,p.id);
 });
@@ -58,15 +59,15 @@ test('unloading during startup cannot leave a late child alive',async t=>{
 });
 
 test('another activation cannot take over or remove the first engine state',async t=>{
- const {engine,dataDir}=await setup(t);const first=await engine.session();
- const second=new Engine({packageRoot,dataDir});t.after(()=>second.dispose());
+ const {engine,dataDir,engines}=await setup(t);const first=await engine.session();
+ const second=new Engine({packageRoot,dataDir});engines.push(second);
  await assert.rejects(second.start());
  assert.equal(JSON.parse(await readFile(join(dataDir,'engine-state.json'),'utf8')).enginePid,first.pid);
  assert.equal((await fetch(first.url+'api/projects')).status,200);
 });
 
 test('stopping active research cancels the request and preserves saved records',async t=>{
- const {engine,dataDir}=await setup(t);const {url,pid}=await engine.session();
+ const {engine,dataDir,engines}=await setup(t);const {url,pid}=await engine.session();
  let called;const started=new Promise(r=>called=r);
  const mock=createServer((req,res)=>{req.resume();called();});
  mock.listen(0,'127.0.0.1');await once(mock,'listening');
@@ -78,7 +79,7 @@ test('stopping active research cancels the request and preserves saved records',
  await Promise.race([started,new Promise((_,reject)=>setTimeout(()=>reject(new Error('Mock was not called')),5000).unref())]);
  const stream=await fetch(url+`api/runs/${r.id}/events`);const reader=stream.body.getReader();await reader.read();
  await engine.dispose();await gone(pid);await reader.cancel().catch(()=>{});
- const next=new Engine({packageRoot,dataDir});t.after(()=>next.dispose());const reopened=await next.session();
+ const next=new Engine({packageRoot,dataDir});engines.push(next);const reopened=await next.session();
  const saved=await json(reopened.url+'api/conversations/'+c.id);
  assert.equal(saved.runs[0].status,'cancelled');assert.equal(saved.runs[0].question,'Local lifecycle fixture');
 });
@@ -96,7 +97,7 @@ test('owner killed without cleanup: pipe watchdog exits engine and clears state'
 });
 
 test('installed runtime completes research and reloads its Unicode report', async t => {
- const {engine, dataDir} = await setup(t);
+ const {engine, dataDir, engines} = await setup(t);
  const {url} = await engine.session();
  const answer = 'Windows verification report — 中文内容完整保存。';
  let calls = 0;
@@ -130,7 +131,7 @@ test('installed runtime completes research and reloads its Unicode report', asyn
  assert.ok(saved.runs[0].answer.includes(answer));
  assert.equal(calls, 2);
  await engine.dispose();
- const next = new Engine({packageRoot, dataDir}); t.after(() => next.dispose());
+ const next = new Engine({packageRoot, dataDir}); engines.push(next);
  const reopened = await next.session();
  const restored = await json(reopened.url+'api/conversations/'+conversation.id);
  assert.equal(restored.runs[0].id, run.id);

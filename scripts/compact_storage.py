@@ -184,7 +184,7 @@ def migrate(path, progress=print):
             guard.close()
             for suffix in ('-wal', '-shm'):
                 Path(str(path)+suffix).unlink(missing_ok=True)
-            with work.open('rb') as f:
+            with work.open('r+b') as f:
                 os.fsync(f.fileno())
             os.replace(work, path)
             if os.name != 'nt':
