@@ -4,9 +4,9 @@
 
 ## 启动
 
-### DSH 本地插件预览版
+### DSH 插件 0.1.0
 
-`dsh-plugin/` 提供可本地链接或通过 npm `.tgz` 安装的插件，包含 DSH 侧栏入口、独立设置分区和插件专属 Python 引擎。目标宿主为 DSH `0.2.1-rc.5`，打包平台为 macOS Apple Silicon 和 Windows x64。桌面界面已在 macOS 验收，Windows 自动化范围见集成记录。普通用户无需安装 Python。插件数据与本独立版分开保存。启停、开发和打包方法见 [插件说明](dsh-plugin/README.md)，验证范围见 [DSH 集成记录](docs/dsh-plugin.md)。
+在 DSH 的“插件 → 添加插件”中填写 `dsh-plugin-lucentthinker@0.1.0` 并启用。`dsh-plugin/` 包含插件源码和 npm 打包脚本，也支持本地目录或 `.tgz` 安装，包含 DSH 侧栏入口、独立设置分区和插件专属 Python 引擎。目标宿主为 DSH `0.2.1-rc.5`，打包平台为 macOS Apple Silicon 和 Windows x64。桌面界面已在 macOS 验收，Windows 自动化范围见集成记录。普通用户无需安装 Python。插件数据与本独立版分开保存。启停、开发和打包方法见 [插件说明](dsh-plugin/README.md)，验证范围见 [DSH 集成记录](docs/dsh-plugin.md)。
 
 ### 独立版
 

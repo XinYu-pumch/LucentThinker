@@ -1,9 +1,11 @@
 import {spawn} from 'node:child_process';
 import {randomBytes} from 'node:crypto';
 import {mkdir, readFile, writeFile, unlink} from 'node:fs/promises';
-import {createWriteStream} from 'node:fs';
+import {createWriteStream, readFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {createInterface} from 'node:readline';
+
+const VERSION = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version;
 
 // No module-level process or timer: every instance belongs to one Cordis activation.
 export class Engine {
@@ -14,7 +16,7 @@ export class Engine {
   }
   status() {
     return {state: this.phase, error: this.error, dataDir: this.dataDir,
-      pid: this.child?.pid ?? null, version: '0.1.0-local.1'};
+      pid: this.child?.pid ?? null, version: VERSION};
   }
   async session() {
     await this.start();

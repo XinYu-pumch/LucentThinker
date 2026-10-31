@@ -13,6 +13,10 @@ await mkdir(releases, {recursive: true});
 const npm = process.env.npm_execpath;
 if (!npm) throw new Error('Run this script through npm run test:install');
 let tarball = process.env.LUCENT_TEST_TARBALL;
+if (process.argv.includes('--release')) {
+  const {name, version} = JSON.parse(await readFile(join(pkg, 'package.json'), 'utf8'));
+  tarball = join(releases, `${name}-${version}.tgz`);
+}
 if (tarball) {
   tarball = resolve(root, tarball);
 } else {

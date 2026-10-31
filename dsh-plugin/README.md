@@ -1,12 +1,12 @@
 # LucentThinker for DeepSeek Harness
 
-本地预览版，兼容 DSH **0.2.1-rc.5**。尚未发布 npm。
+版本 **0.1.0**，兼容 DSH **0.2.1-rc.5**。
 
 启用后，DSH 左侧显示 LucentThinker，设置中显示同名分区。研究工作台保留多模型、项目、研究过程、来源、导出和历史搜索。入口由 DSH 插件注册，研究内容在隔离页面中运行，避免污染 DSH 页面样式和全局变量。
 
 ## 安装与使用
 
-在 DSH 的“插件 → 添加插件”中填写本地插件目录的绝对路径，或 `npm pack` 生成的 `.tgz` 绝对路径，安装后启用。开发者可使用 `link:/absolute/path/to/dsh-plugin` 安装本地链接；修改后执行 `npm run build`，然后停用并重新启用插件；宿主仍使用旧模块时重启 DSH。
+在 DSH 的“插件 → 添加插件”中填写 `dsh-plugin-lucentthinker`，安装后启用。指定首发版本可填写 `dsh-plugin-lucentthinker@0.1.0`。本地调试可填写插件目录的绝对路径或 `.tgz` 安装包路径。开发者可使用 `link:/absolute/path/to/dsh-plugin` 安装本地链接；修改后执行 `npm run build`，然后停用并重新启用插件；宿主仍使用旧模块时重启 DSH。
 
 普通使用不需要终端、npm、Python 或 uv。目标平台为 macOS Apple Silicon（arm64）和 Windows x64，安装包内置对应 Python 和依赖。首次打开不下载运行环境。开发构建包含当前构建平台；双平台发行包需合并两个经过验证的运行环境。Intel Mac 和 Windows ARM64 暂未提供原生包。
 
@@ -36,7 +36,7 @@ npm run pack:local
 
 `build` 从当前应用源码生成 `engine/` 和 `lib/`，并复制可移植 Python；不包含 `.env`、个人设置、数据库或缓存。`LUCENT_RUNTIME_SOURCE` 可指定已安装锁定依赖的可移植 Python 目录。`npm pack` 在本地生成安装包，不联系 npm 发布服务。
 
-本包设置 `private: true`，并禁止 `prepublishOnly`。整体许可证为 GPL-3.0-or-later。发布前需完成目标平台构建及版本兼容测试，再移除本地发布限制。第三方声明保留在 `NOTICE`、`licenses/` 和对应运行环境文件中。
+整体许可证为 GPL-3.0-or-later。第三方声明保留在 `NOTICE`、`licenses/` 和对应运行环境文件中。维护者使用通过全部平台验证的 `plugin-universal` 制品发布到 npm 官方仓库，命令为 `npm publish releases/dsh-plugin-lucentthinker-0.1.0.tgz --access public --registry=https://registry.npmjs.org/`。镜像同步进度由镜像服务决定。
 
 ## 界面语言
 

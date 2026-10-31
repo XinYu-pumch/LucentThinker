@@ -46,7 +46,7 @@ npm test
 npm run pack:local
 ```
 
-产物位于 `releases/dsh-plugin-lucentthinker-0.1.0-local.1.tgz`。跨平台包包含 Apple Silicon 与 Windows x64 原生 Python 3.12.9 及 `uv.lock` 锁定的运行依赖，包括 Windows 所需的 IANA 时区数据。首次启动使用内置运行环境。npm `files` 白名单排除个人数据和开发缓存。私有预览包不发布 npm。
+产物位于 `releases/dsh-plugin-lucentthinker-0.1.0.tgz`。跨平台包包含 Apple Silicon 与 Windows x64 原生 Python 3.12.9 及 `uv.lock` 锁定的运行依赖，包括 Windows 所需的 IANA 时区数据。首次启动使用内置运行环境。npm `files` 白名单排除个人数据和开发缓存。正式版本号为 `0.1.0`，npm 包名为 `dsh-plugin-lucentthinker`。
 
 ## 验证记录
 

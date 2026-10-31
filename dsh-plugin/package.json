@@ -1,7 +1,6 @@
 {
   "name": "dsh-plugin-lucentthinker",
-  "version": "0.1.0-local.1",
-  "private": true,
+  "version": "0.1.0",
   "description": "LucentThinker 深度研究工作台：多轮搜索、独立网页提取与可追溯报告。",
   "type": "module",
   "main": "./lib/host.js",
@@ -69,7 +68,6 @@
     "dev:install": "node scripts/install-local.mjs",
     "test": "node --test test/*.test.mjs",
     "pack:local": "npm run build && npm pack --ignore-scripts --pack-destination ../releases",
-    "prepublishOnly": "node -e \"throw new Error('Local-only build: publishing is intentionally disabled')\"",
     "runtime:prepare": "node scripts/prepare-runtime.mjs",
     "test:install": "node scripts/test-install.mjs",
     "assemble": "node scripts/assemble.mjs"
@@ -78,5 +76,13 @@
     "type": "git",
     "url": "git+https://github.com/XinYu-pumch/LucentThinker.git",
     "directory": "dsh-plugin"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "homepage": "https://github.com/XinYu-pumch/LucentThinker",
+  "bugs": {
+    "url": "https://github.com/XinYu-pumch/LucentThinker/issues"
   }
 }

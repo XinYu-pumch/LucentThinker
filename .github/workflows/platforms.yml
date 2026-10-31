@@ -75,6 +75,4 @@ jobs:
           name: plugin-universal
           path: releases
       - name: Install and test the final dual-platform package
-        run: npm --prefix dsh-plugin run test:install
-        env:
-          LUCENT_TEST_TARBALL: releases/dsh-plugin-lucentthinker-0.1.0-local.1.tgz
+        run: npm --prefix dsh-plugin run test:install -- --release
