@@ -36,7 +36,7 @@
 - Fetch 失败/空正文后，按当前 run、attempt、精确 URL 先选最近可用 Search content，再选 summary；两条路径均进入独立摘要模型。成功 Fetch 不走备用路径，摘要模型失败不自动换材料。来源元信息、统计与 GUI 区分 search_content/search_summary。
 - 新增 `finish_research(status, summary, unresolved_questions)`，须独占一次响应；普通文本不触发最终写作。无效 JSON、重复键、非有限数、别名、多余参数、未知工具和无效结束状态明确拒绝。可配对调用返回 tool 错误供模型修正；无效调用 ID 回退并追加纠正提示。最终写作仍禁用工具。结束确认也属于一条 tool 结果，keep5 按消息数包含它。
 - 引用以登记编号的 URL 为准，不再按模型参考文献重编号。仅已知跟踪参数差异不判冲突；文档 ID 等语义参数仍比较。未知编号显示“引用无法匹配”；真实 URL 冲突保留登记链接并提示核对，不冒充事实校验。
-- 每轮与公开进展默认展开，详细搜索结果默认折叠。双击 `启动 LucentThinker.command` 等待服务就绪后用默认浏览器打开，已运行时也打开；普通 start.sh 可加 --open。
+- 每轮与公开进展默认展开，详细搜索结果默认折叠。双击 `Launch LucentThinker.command` 等待服务就绪后用默认浏览器打开，已运行时也打开；普通 start.sh 可加 --open。
 
 ## 确定性验证
 

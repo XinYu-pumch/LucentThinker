@@ -17,7 +17,7 @@ cd /Users/yuxin/AI_developing/LucentThinker
 ./start.sh
 ```
 
-双击 `启动 LucentThinker.command` 会在服务就绪后自动打开默认浏览器；已运行时也会打开网页。命令行 `./start.sh --open` 同样可用，`./start.sh` 则仅启动服务。
+双击 `Launch LucentThinker.command` 会在服务就绪后自动打开默认浏览器；已运行时也会打开网页。命令行 `./start.sh --open` 同样可用，`./start.sh` 则仅启动服务。
 
 打开 <http://127.0.0.1:8765>。**退出：关闭启动它的终端窗口，或在该窗口按 Ctrl+C**；也可执行 `./stop.sh`。关闭网页本身不会退出服务。重复启动会连接同一个服务，关闭任一启动窗口也会退出整个应用。退出会取消进行中的研究并保存已有记录。服务仅监听本机。既有凭据已迁移，无需重新填写。
 
