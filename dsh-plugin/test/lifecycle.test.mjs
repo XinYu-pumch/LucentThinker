@@ -92,7 +92,8 @@ test('owner killed without cleanup: pipe watchdog exits engine and clears state'
  t.after(()=>{if(owner.exitCode===null&&owner.signalCode===null)owner.kill('SIGKILL');});
  const state=await new Promise((resolve,reject)=>{let s='';owner.stdout.on('data',c=>{s+=c;if(s.includes('\n'))resolve(JSON.parse(s.split('\n')[0]));});owner.once('error',reject);owner.once('exit',()=>reject(new Error('Test owner exited before ready')));});
  owner.kill('SIGKILL');await once(owner,'close');await gone(state.pid);
- await assert.rejects(access(join(dataDir,'engine-state.json')));
+ const diagnostics=await readFile(join(dataDir,'engine.log'),'utf8');
+ await assert.rejects(access(join(dataDir,'engine-state.json')), diagnostics || 'No engine stderr output');
  await access(join(dataDir,'research.sqlite3'));
 });
 
