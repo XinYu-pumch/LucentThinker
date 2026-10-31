@@ -73,6 +73,9 @@ def index():
         return match[1] + match[2] + '?v=' + digest + match[3]
     # New HTML must never execute a cached script from a previous release.
     html = re.sub(r'((?:src|href)="/static/)([^"?]+)(")', versioned, html)
+    html = html.replace('<head>', '<head><meta name="lucent-base" content="' + config.URL_PREFIX + '">')
+    if config.URL_PREFIX:
+        html = html.replace('="/static/', '="' + config.URL_PREFIX + '/static/').replace('href="/"', 'href="' + config.URL_PREFIX + '/"')
     return HTMLResponse(html)
 
 @app.get('/api/config')

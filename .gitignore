@@ -16,3 +16,10 @@ node_modules/
 /releases/
 /MiroThinker-main/
 /Shared Chat - *.html
+/dsh-plugin/lib/
+/dsh-plugin/engine/
+/dsh-plugin/runtime/
+/dsh-plugin/licenses/
+/dsh-plugin/icon.svg
+/dsh-plugin/NOTICE
+*.tgz

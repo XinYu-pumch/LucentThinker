@@ -13,7 +13,8 @@ const modes={demo:'Demo',keep5_max200:'keep5_max200',quick:tr("旧版快速"),ba
 let appConfig, debugData;
 let toastTimer;
 function toast(text){$('#toast').textContent=text;$('#toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.add('hidden'),4000);}
-async function api(url, method='GET', body){const r=await fetch(url,{method,headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});if(!r.ok){let d;try{d=await r.json();}catch{}throw Error(typeof d?.detail==='string'?tr(d.detail):tr("请求失败 ({0})", r.status));}return r.json();}
+function appPath(url){return (document.querySelector('meta[name="lucent-base"]')?.content||'')+url;}
+async function api(url, method='GET', body){const r=await fetch(appPath(url),{method,headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});if(!r.ok){let d;try{d=await r.json();}catch{}throw Error(typeof d?.detail==='string'?tr(d.detail):tr("请求失败 ({0})", r.status));}return r.json();}
 function safeUrl(value){try{const u=new URL(value);return ['http:','https:'].includes(u.protocol)&&!u.username&&!u.password?u.href:null;}catch{return null;}}
 function linkCitationText(node,sources){
  if(node.parentElement.closest('a,code,pre'))return;
@@ -121,7 +122,7 @@ function addRun(run){
  const head=el('div','assistant-heading');head.append(el('span','mini-spark','✳'),el('span','','LucentThinker'),el('span','run-mode',tr(run.config_snapshot?.label||modes[run.mode]||run.mode)));
  const trace=el('details','trace');trace.open=true;const summary=el('summary','',tr("研究过程"));const traceContent=el('div','trace-content');trace.append(summary,traceContent);
  const body=el('div','answer');const pending=el('div','pending',tr("正在连接研究引擎…"));const err=el('div','run-error hidden');const footer=el('div','run-footer');
- const source=el('button','source-button',tr("{0} 个来源 ↗", run.sources.length));source.onclick=()=>showSources(run.sources);const copy=el('button','copy-button',tr("复制回答"));copy.onclick=async()=>{try{await navigator.clipboard.writeText(run.answer||'');toast(tr("回答已复制"));}catch{toast(tr("浏览器未允许访问剪贴板"));}};const detail=el('button','copy-button',tr("研究详情"));detail.onclick=()=>openDebug(run.id).catch(e=>toast(e.message));const download=el('button','copy-button',tr("导出本次回答"));download.onclick=()=>{const a=el('a');a.href=`/api/runs/${run.id}/export`;a.download=`LucentThinker-${run.id}${run.status==='completed'?'':'-partial'}.md`;a.click();};footer.append(source,copy,download,detail,el('div','run-usage'));const badge=el('div','snapshot-badge',snapshotLabel(run.config_snapshot));head.append(badge);
+ const source=el('button','source-button',tr("{0} 个来源 ↗", run.sources.length));source.onclick=()=>showSources(run.sources);const copy=el('button','copy-button',tr("复制回答"));copy.onclick=async()=>{try{await navigator.clipboard.writeText(run.answer||'');toast(tr("回答已复制"));}catch{toast(tr("浏览器未允许访问剪贴板"));}};const detail=el('button','copy-button',tr("研究详情"));detail.onclick=()=>openDebug(run.id).catch(e=>toast(e.message));const download=el('button','copy-button',tr("导出本次回答"));download.onclick=()=>{const a=el('a');a.href=appPath(`/api/runs/${run.id}/export`);a.download=`LucentThinker-${run.id}${run.status==='completed'?'':'-partial'}.md`;a.click();};footer.append(source,copy,download,detail,el('div','run-usage'));const badge=el('div','snapshot-badge',snapshotLabel(run.config_snapshot));head.append(badge);
  const timing=el('div','run-timing');timing.title=tr("本地时间 · 从提交研究到结束，含排队、搜索、提取和写作");article.append(q,head,timing,trace,body,pending,err,footer);$('#conversation').append(article);run.ui={article,trace,summary,traceContent,body,pending,err,source,copy,download,footer,timing};initTrace(run);renderRun(run);return run;
 }
 function renderRun(run){renderTiming(run);updateTraceOverview(run);const u=run.ui;markdown(u.body,run.answer,run.sources);u.pending.classList.toggle('hidden',run.status!=='running');u.err.classList.toggle('hidden',!run.error);u.err.textContent=LucentI18n.serverText(run.error||'');u.source.textContent=tr("{0} 个来源 ↗", run.sources.length);u.copy.classList.toggle('hidden',!run.answer);u.download.classList.toggle('hidden',!run.answer||run.status==='running');u.download.textContent=run.status==='completed'?tr("导出本次回答"):tr("导出已生成部分");u.download.title=tr("仅导出本次保存的回答正文及引文（Markdown）");renderUsage(run);u.summary.textContent=run.status==='running'?tr("研究进行中…"):run.status==='completed'?tr("研究已完成"):tr("研究过程");}
@@ -151,7 +152,7 @@ async function openDebug(id){debugData=await api(`/api/runs/${id}/details?includ
 $('#close-debug').onclick=()=>$('#debug').close();$('#protocol-reasoning').onchange=renderDebug;
 function watch(run){
  disconnect();const cid=state.cid;state.active=run.status==='running'?run.id:null;busy(!!state.active);
- const stream=new EventSource('/api/runs/'+run.id+'/events');state.stream=stream;
+ const stream=new EventSource(appPath('/api/runs/'+run.id+'/events'));state.stream=stream;
  const selected=()=>state.cid===cid&&state.stream===stream&&state.runs.get(run.id)===run;
  stream.onmessage=e=>{if(selected())handleEvent(run,JSON.parse(e.data));};
  stream.addEventListener('closed',async()=>{
@@ -162,7 +163,7 @@ function watch(run){
  });
  stream.onerror=()=>{if(!selected())return;if(run.status==='running')run.ui.pending.textContent=tr("正在重新连接…研究会在后台继续");else stream.close();};
 }
-async function loadEvents(run){const r=await fetch('/api/runs/'+run.id+'/events');const text=await r.text();for(const block of text.split('\n\n')){const data=block.split('\n').find(l=>l.startsWith('data: '));if(data&&!block.includes('event: closed'))handleEvent(run,JSON.parse(data.slice(6)),true);}}
+async function loadEvents(run){const r=await fetch(appPath('/api/runs/'+run.id+'/events'));const text=await r.text();for(const block of text.split('\n\n')){const data=block.split('\n').find(l=>l.startsWith('data: '));if(data&&!block.includes('event: closed'))handleEvent(run,JSON.parse(data.slice(6)),true);}}
 let opening=0;
 async function openConversation(cid,{reveal=true}={}){
  const n=++opening,c=await api('/api/conversations/'+cid);if(n!==opening)return;
@@ -194,7 +195,7 @@ $('#new-chat').onclick=()=>Sidebar.newConversation();
 $('#stop').onclick=async()=>{if(state.active){try{await api(`/api/runs/${state.active}/cancel`,'POST');}catch(e){toast(e.message);}}};
 $('#menu').onclick=()=>Sidebar.toggle();
 $('#close-sources').onclick=()=>$('#sources-panel').classList.add('hidden');
-$('#export').onclick=()=>{if(!state.cid){toast(tr("开始研究后即可导出会话"));return;}const a=el('a');a.href=`/api/conversations/${state.cid}/export`;a.download='LucentThinker.md';a.click();};
+$('#export').onclick=()=>{if(!state.cid){toast(tr("开始研究后即可导出会话"));return;}const a=el('a');a.href=appPath(`/api/conversations/${state.cid}/export`);a.download='LucentThinker.md';a.click();};
 for(const b of document.querySelectorAll('.suggestion'))b.onclick=()=>{$('#question').value=b.dataset.prompt;$('#question').focus();};
 document.onkeydown=e=>{if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();$('#new-chat').click();}if(e.key==='Escape'){Sidebar.closeMobile();$('#sources-panel').classList.add('hidden');}};
 Sidebar.init();

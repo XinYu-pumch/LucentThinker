@@ -16,7 +16,7 @@
   const start=append?offset:0;if(!append)results.replaceChildren();
   status.textContent=tr('正在搜索…');controller=new AbortController();results.setAttribute('aria-busy','true');
   try{
-   const response=await fetch('/api/conversations/search?'+new URLSearchParams({q:query,scope,offset:start}),{signal:controller.signal});
+   const response=await fetch(appPath('/api/conversations/search?'+new URLSearchParams({q:query,scope,offset:start})),{signal:controller.signal});
    if(!response.ok)throw Error(tr('搜索失败，请重试'));
    const data=await response.json();if(current!==revision||!dialog.open)return;
    for(const item of data.results){

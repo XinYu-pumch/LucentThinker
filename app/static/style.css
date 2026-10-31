@@ -538,3 +538,10 @@ html[lang=en] .features { flex-wrap:wrap; }
 .batch-destination { display:flex; flex-direction:column; gap:8px; font-size:13px; }
 .batch-destination select { width:100%; }
 @media(min-width:761px) { .sidebar-collapsed .project-select-toggle,.sidebar-collapsed .conversation-selection { display:none; } .sidebar-collapsed.selecting-conversations .projects-rail-icon { color:var(--accent); } }
+
+/* DSH keeps its own navigation and owns the lifetime of this embedded surface. */
+.dsh-embedded .sidebar-workspace-note { display:none; }
+.dsh-settings body > :not(dialog):not(#toast) { display:none!important; }
+.dsh-settings #settings { width:100%; max-width:none; height:100%; max-height:none; margin:0; border:0; border-radius:0; box-shadow:none; padding:18px; }
+.dsh-settings #close-settings { display:none; }
+.dsh-settings #settings::backdrop { background:var(--paper); }

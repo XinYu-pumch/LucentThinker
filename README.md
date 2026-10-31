@@ -4,6 +4,12 @@
 
 ## 启动
 
+### DSH 本地插件预览版
+
+`dsh-plugin/` 提供可本地链接或通过 npm `.tgz` 安装的插件，包含 DSH 侧栏入口、独立设置分区和插件专属 Python 引擎。当前验证环境为 DSH `0.2.1-rc.5`、macOS Apple Silicon；不需要发布 npm，也不需要普通用户安装 Python。插件数据与本独立版分开保存。启停、开发和打包方法见 [插件说明](dsh-plugin/README.md)，验证范围见 [DSH 集成记录](docs/dsh-plugin.md)。
+
+### 独立版
+
 源码包首次使用：解压后在项目目录运行 `./start.sh --open`，需先安装 [uv](https://docs.astral.sh/uv/getting-started/installation/) 和 zsh（macOS 默认提供）。脚本自动安装项目内 Python 与锁定依赖；随后在界面设置模型供应商和 DeepSeek 网页服务凭据。源码包不包含个人设置、研究记录、运行环境或缓存。
 
 ```sh

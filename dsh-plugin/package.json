@@ -1,0 +1,33 @@
+{
+  "name": "dsh-plugin-lucentthinker",
+  "version": "0.1.0-local.1",
+  "private": true,
+  "description": "LucentThinker 深度研究工作台：多轮搜索、独立网页提取与可追溯报告。",
+  "type": "module",
+  "main": "./lib/host.js",
+  "icon": "./icon.svg",
+  "exports": {".": "./lib/host.js", "./client": "./lib/client.js", "./cordis.patch.yml": "./cordis.patch.yml", "./package.json": "./package.json", "./locale/*.json": "./locale/*.json"},
+  "engines": {"dsh": "0.2.1-rc.5"},
+  "os": ["darwin"],
+  "cpu": ["arm64"],
+  "files": ["lib", "engine", "runtime", "locale", "icon.svg", "cordis.patch.yml", "README.md", "NOTICE", "licenses"],
+  "license": "UNLICENSED",
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {"patch": "./cordis.patch.yml"},
+    "client": {
+      "platform": "web",
+      "inject": ["@deepseek-ai/dsh-client-ui-sidebar", "@deepseek-ai/dsh-client-ui-settings", "@deepseek-ai/dsh-api-remotes"]
+    }
+  },
+  "peerDependencies": {"@deepseek-ai/cordis": "~4.0.5", "@deepseek-ai/dsh-home-paths": "0.2.1-rc.5"},
+  "peerDependenciesMeta": {"@deepseek-ai/cordis": {"optional": true}, "@deepseek-ai/dsh-home-paths": {"optional": true}},
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:code": "node scripts/build.mjs --code-only",
+    "dev:install": "node scripts/install-local.mjs",
+    "test": "node --test test/*.test.mjs",
+    "pack:local": "npm run build && npm pack --ignore-scripts --pack-destination ../releases",
+    "prepublishOnly": "node -e \"throw new Error('Local-only build: publishing is intentionally disabled')\""
+  }
+}

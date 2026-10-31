@@ -8,10 +8,12 @@ import os
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parent.parent
-load_dotenv(ROOT / '.env')
-DATA = ROOT / 'data'
-DATA.mkdir(exist_ok=True)
-os.environ.setdefault('TIKTOKEN_CACHE_DIR', str(ROOT / '.cache/tiktoken'))
+if not os.getenv('LUCENT_DATA_DIR'):
+    load_dotenv(ROOT / '.env')
+DATA = Path(os.environ['LUCENT_DATA_DIR']).resolve() if os.getenv('LUCENT_DATA_DIR') else ROOT / 'data'
+DATA.mkdir(parents=True, exist_ok=True)
+URL_PREFIX = ''
+os.environ.setdefault('TIKTOKEN_CACHE_DIR', str(DATA / 'cache/tiktoken' if os.getenv('LUCENT_DATA_DIR') else ROOT / '.cache/tiktoken'))
 UPSTREAM_COMMIT = '1c4253f6774bf40314271a827304b842100e054c'
 API_KEY = os.getenv('DEEPSEEK_API_KEY', '')
 MODEL = os.getenv('DEEPSEEK_MODEL', 'deepseek-flash')
