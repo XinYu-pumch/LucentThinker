@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-14]
+        os: [windows-latest, macos-15]
     runs-on: ${{ matrix.os }}
     env:
       PYTHONUTF8: '1'
@@ -24,7 +24,7 @@ jobs:
       - name: Install locked source dependencies
         run: uv sync --frozen --python 3.12.9
       - name: Python regression tests
-        run: uv run --frozen pytest -q
+        run: uv run --frozen pytest -q --maxfail=5 --tb=short
       - name: UI regression tests
         run: node --test tests/*.cjs
       - name: Build portable runtime and plugin
