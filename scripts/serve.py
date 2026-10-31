@@ -12,9 +12,14 @@ async def run(port):
     loop = asyncio.get_running_loop()
 
     def watch_owner():
-        for _ in sys.stdin:
+        try:
+            for _ in sys.stdin:
+                pass
+        except OSError:
+            # A broken Windows pipe also means the owner has exited.
             pass
-        loop.call_soon_threadsafe(setattr, server, 'should_exit', True)
+        finally:
+            loop.call_soon_threadsafe(setattr, server, 'should_exit', True)
 
     threading.Thread(target=watch_owner, daemon=True).start()
     await server.serve()

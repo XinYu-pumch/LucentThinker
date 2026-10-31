@@ -51,7 +51,9 @@ export class Engine {
       TIKTOKEN_CACHE_DIR: join(this.dataDir, 'cache/tiktoken')});
     const child = spawn(python, ['-s', '-m', 'app.dsh'], {
       cwd: join(this.packageRoot, 'engine'), env,
-      stdio: ['pipe','pipe','pipe'], detached: process.platform !== 'win32', windowsHide: true,
+      // On Windows, libuv otherwise kills the child immediately when its host dies,
+      // before Python can cancel research and clear state. The stdin pipe owns lifetime.
+      stdio: ['pipe','pipe','pipe'], detached: true, windowsHide: true,
     });
     this.child = child;
     const log = createWriteStream(join(this.dataDir, 'engine.log'), {flags: 'a', mode: 0o600});

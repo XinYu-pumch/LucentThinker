@@ -80,9 +80,14 @@ async def run():
     loop = asyncio.get_running_loop()
     def owner_watchdog():
         # Includes a normal unload, a crashed Host and SIGKILL of the Host.
-        for _ in sys.stdin:
+        try:
+            for _ in sys.stdin:
+                pass
+        except OSError:
+            # A broken Windows pipe also means the owner has exited.
             pass
-        loop.call_soon_threadsafe(setattr, server, 'should_exit', True)
+        finally:
+            loop.call_soon_threadsafe(setattr, server, 'should_exit', True)
     threading.Thread(target=owner_watchdog, daemon=True).start()
     task = asyncio.create_task(server.serve(sockets=[sock]))
     try:
