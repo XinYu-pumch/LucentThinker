@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-lucentthinker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "LucentThinker 深度研究工作台：多轮搜索、独立网页提取与可追溯报告。",
   "type": "module",
   "main": "./lib/host.js",
