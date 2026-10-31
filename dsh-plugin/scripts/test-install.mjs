@@ -22,12 +22,15 @@ if (tarball) {
 }
 const destination = await mkdtemp(join(tmpdir(), 'Lucent 安装 test-'));
 try {
-  execFileSync(process.execPath, [npm, 'install', '--ignore-scripts', '--omit=optional', '--no-audit', '--no-fund', '--prefix', destination, tarball], {stdio: 'inherit'});
+  execFileSync(process.execPath, [npm, 'install', '--ignore-scripts', '--omit=optional', '--no-audit', '--no-fund', '--prefix', destination, tarball, '@deepseek-ai/cordis@4.0.5', '@deepseek-ai/dsh-home-paths@0.2.1-rc.5'], {stdio: 'inherit'});
   const installed = join(destination, 'node_modules/dsh-plugin-lucentthinker');
   const manifest = JSON.parse(await readFile(join(installed, 'runtime/manifest.json'), 'utf8'));
   if (!manifest.targets[`${process.platform}-${process.arch}`]) throw new Error('Native runtime missing');
   execFileSync(process.execPath, ['--test', 'test/client.test.mjs', 'test/lifecycle.test.mjs'], {
     cwd: pkg, stdio: 'inherit', env: {...process.env, LUCENT_TEST_PACKAGE: installed},
+  });
+  execFileSync(process.execPath, [join(pkg, 'scripts/verify-host.mjs')], {
+    stdio:'inherit', env:{...process.env, LUCENT_TEST_PACKAGE:installed},
   });
 } finally {
   await rm(destination, {recursive: true, force: true});

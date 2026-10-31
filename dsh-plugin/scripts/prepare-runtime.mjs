@@ -19,7 +19,8 @@ const source = join(env.UV_PYTHON_INSTALL_DIR, distribution);
 const python = join(source, process.platform === 'win32' ? 'python.exe' : 'bin/python3.12');
 const requirements = join(root, '.cache/dsh-runtime-requirements.txt');
 run(['export', '--frozen', '--no-dev', '--no-emit-project', '--format', 'requirements-txt', '--output-file', requirements]);
-run(['pip', 'sync', '--python', python, '--require-hashes', requirements]);
+// This override applies only to the disposable runtime under this repository's .cache.
+run(['pip', 'sync', '--python', python, '--break-system-packages', '--require-hashes', requirements]);
 execFileSync(process.execPath, [join(root, 'dsh-plugin/scripts/build.mjs')], {
   cwd: root, stdio: 'inherit', env: {...env, LUCENT_RUNTIME_SOURCE: source},
 });
