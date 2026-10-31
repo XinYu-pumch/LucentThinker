@@ -1,3 +1,4 @@
+from settings_fixtures import legacy_document
 import copy
 import json
 import stat
@@ -13,6 +14,7 @@ def client(tmp_path, monkeypatch):
     monkeypatch.setattr(store, 'DB', tmp_path / 'research.sqlite3')
     monkeypatch.setattr(config, 'API_KEY', '')
     monkeypatch.setattr(config, 'SECRETS', set())
+    settings.write(legacy_document())
     async def fake_research(rid, **kwargs):
         store.update(rid, status='completed', answer='fixture')
     monkeypatch.setattr(main, 'research', fake_research)
@@ -66,7 +68,7 @@ def test_protected_default_names_invalid_and_missing_profiles(client):
 
 def test_migration_keeps_old_parameters_and_credentials(tmp_path, monkeypatch):
     monkeypatch.setattr(settings, 'SETTINGS_FILE', tmp_path / 'settings.json')
-    old = settings.default_document()
+    old = legacy_document()
     old['research'] = {'iteration_tier': 'custom', 'max_iterations': 357, 'keep_tool_result': 5,
                        'context_compress_limit': 0, 'memory_mode': 'followup', 'preset': 'keep5_max200'}
     old['web']['search_count'] = 17

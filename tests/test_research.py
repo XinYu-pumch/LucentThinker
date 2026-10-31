@@ -1,3 +1,4 @@
+from settings_fixtures import legacy_document
 import asyncio
 import copy
 import json
@@ -22,6 +23,7 @@ def database(tmp_path, monkeypatch):
     monkeypatch.setattr(settings_store, 'DISCOVERED', {})
     monkeypatch.setattr(config, 'SECRETS', set())
     store.init()
+    settings_store.write(legacy_document())
 
 
 def call(name, args, ident='tool1'):
@@ -1063,7 +1065,7 @@ def test_shared_model_selection_is_atomic_and_preserves_provider_profiles():
 
 def test_search_count_settings_migration_validation_and_run_snapshot(monkeypatch):
     from app import main as api_module
-    doc = settings_store.default_document()
+    doc = legacy_document()
     del doc['web']['search_count']
     doc['research'] = {'iteration_tier':'standard','max_iterations':50,'keep_tool_result':-1,
                        'context_compress_limit':0,'memory_mode':'strict','preset':'demo'}

@@ -89,9 +89,12 @@ def settings():
 
 @app.post('/api/check')
 async def check():
+    doc = settings_store.load()
+    if any(doc['active'][role] not in doc['profiles'] for role in ('main', 'summary')):
+        raise HTTPException(422, '请在输入区选择有效的主模型和摘要模型')
     results = {}
     for role in ('main', 'summary'):
-        provider = ChatModel(config.model_settings(role), role)
+        provider = ChatModel(config.model_settings(role, doc), role)
         try:
             data = await provider.models()
             models = [m['id'] for m in data.get('data', [])]

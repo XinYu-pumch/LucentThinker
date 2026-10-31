@@ -1,3 +1,4 @@
+from settings_fixtures import legacy_document
 import sqlite3
 
 import pytest
@@ -14,6 +15,7 @@ def isolated(tmp_path, monkeypatch):
     monkeypatch.setattr(settings_store, 'SETTINGS_FILE', tmp_path / 'settings.json')
     monkeypatch.setattr(config, 'API_KEY', '')
     monkeypatch.setattr(config, 'SECRETS', set())
+    settings_store.write(legacy_document())
     return store.DB
 
 

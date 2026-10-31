@@ -1,3 +1,4 @@
+from settings_fixtures import legacy_document
 import copy
 import hashlib
 import json
@@ -16,6 +17,7 @@ def client(tmp_path, monkeypatch):
     monkeypatch.setattr(settings_store, 'SETTINGS_FILE', tmp_path / 'settings.json')
     monkeypatch.setattr(config, 'API_KEY', '')
     monkeypatch.setattr(config, 'SECRETS', set())
+    settings_store.write(legacy_document())
     with TestClient(app) as c:
         yield c
 

@@ -1,4 +1,5 @@
 """Supplier migration and the actual model request/selection boundaries."""
+from settings_fixtures import legacy_document
 import asyncio
 import copy
 import json
@@ -34,7 +35,7 @@ def added_supplier(name='Custom', key='fixture-custom', models=('model-a', 'mode
 
 
 def test_migration_preserves_ids_credentials_and_duplicate_model_limits(tmp_path):
-    old = settings.default_document()
+    old = legacy_document()
     old['profiles']['other-key'] = {**old['profiles']['main'], 'id': 'other-key', 'api_key': 'separate-secret'}
     old['profiles']['third-party'] = {**old['profiles']['main'], 'id': 'third-party', 'base_url': 'https://proxy.invalid', 'reasoning_effort': 'max'}
     original = json.dumps(old).encode()
@@ -132,8 +133,9 @@ def test_builtin_fixed_address_and_model_specific_thinking():
         settings.save_supplier({'name': 'DeepSeek', 'base_url': 'https://other.invalid'}, 'builtin_deepseek')
     with pytest.raises(ValueError, match='内置'):
         settings.delete_supplier('builtin_deepseek')
-    settings.update_supplier_model('builtin_deepseek', 'main', {'reasoning_effort': 'max'})
-    assert settings.to_model(settings.load()['profiles']['main']).generation()['reasoning_effort'] == 'max'
+    pid, = settings.add_supplier_models('builtin_deepseek', ['deepseek-flash'], manual=True)
+    settings.update_supplier_model('builtin_deepseek', pid, {'reasoning_effort': 'max'})
+    assert settings.to_model(settings.load()['profiles'][pid]).generation()['reasoning_effort'] == 'max'
     from app.llm_providers import registry
     if 'fourrouter_argon' in registry.catalog():
         sid = 'builtin_fourrouter_argon'
@@ -230,3 +232,39 @@ def test_per_run_selection_snapshot_is_explicit_and_immutable(monkeypatch):
             assert captured[rid]['main'].api_key == 'fixture-custom'
             assert store.get_run(rid)['config_snapshot'] == result['config_snapshot']
             client.post('/api/runs/' + rid + '/cancel')
+
+
+def test_fresh_install_requires_explicit_model_configuration(monkeypatch):
+    from app import main
+
+    def unexpected_environment_model(role):
+        pytest.fail('Fresh settings must not import environment model profiles')
+
+    async def fake_research(rid, **kwargs):
+        store.update(rid, status='completed', answer='fixture')
+
+    monkeypatch.setattr(config, 'env_model_settings', unexpected_environment_model)
+    monkeypatch.setattr(main, 'research', fake_research)
+    with TestClient(main.app) as client:
+        doc = client.get('/api/config').json()['settings']
+        assert doc['profiles'] == {}
+        assert doc['active'] == {'main': '', 'summary': ''}
+        assert 'supplier_summary' not in doc['suppliers']
+        assert client.post('/api/check').status_code == 422
+        cid = client.post('/api/conversations').json()['id']
+        assert client.post(f'/api/conversations/{cid}/runs', json={'question': 'test'}).status_code == 422
+        result = client.post('/api/settings/suppliers/builtin_deepseek/models',
+                             json={'models': ['deepseek-flash'], 'manual': True})
+        assert result.status_code == 200
+        pid, = result.json()['added']
+        settings.ensure()
+        assert settings.load()['active'] == {'main': '', 'summary': ''}
+        assert client.post(f'/api/conversations/{cid}/runs', json={'question': 'test'}).status_code == 422
+        assert client.put('/api/settings/active', json={'main': pid, 'summary': pid}).status_code == 200
+        assert client.post(f'/api/conversations/{cid}/runs', json={'question': 'test'}).status_code == 200
+    with TestClient(main.app):
+        assert settings.load()['active'] == {'main': pid, 'summary': pid}
+        settings.delete_supplier_model('builtin_deepseek', pid)
+        settings.ensure()
+        assert settings.load()['profiles'] == {}
+        assert settings.load()['active'] == {'main': '', 'summary': ''}

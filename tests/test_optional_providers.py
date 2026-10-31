@@ -1,3 +1,4 @@
+from settings_fixtures import legacy_document
 import asyncio
 import copy
 import json
@@ -28,6 +29,7 @@ def isolated(tmp_path, monkeypatch):
     monkeypatch.setattr(store, 'DB', tmp_path / 'research.sqlite3')
     monkeypatch.setattr(settings_store, 'SETTINGS_FILE', tmp_path / 'settings.json')
     monkeypatch.setattr(settings_store, 'DISCOVERED', {})
+    settings_store.write(legacy_document())
     store.init()
 
 
