@@ -45,7 +45,7 @@ def remember(doc):
 
 def load():
     with LOCK:
-        return remember(settings_schema.expand(json.loads(SETTINGS_FILE.read_text()) if SETTINGS_FILE.exists() else default_document()))
+        return remember(settings_schema.expand(json.loads(SETTINGS_FILE.read_text(encoding='utf-8')) if SETTINGS_FILE.exists() else default_document()))
 
 
 def write(doc):
@@ -53,7 +53,7 @@ def write(doc):
     tmp = SETTINGS_FILE.with_name(SETTINGS_FILE.name + '.' + uuid.uuid4().hex + '.tmp')
     try:
         fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
-        with os.fdopen(fd, 'w') as f:
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
             json.dump(settings_schema.compact(doc), f, ensure_ascii=False, indent=2)
             f.flush()
             os.fsync(f.fileno())
@@ -66,7 +66,7 @@ def write(doc):
 
 def ensure():
     with LOCK:
-        raw = json.loads(SETTINGS_FILE.read_text()) if SETTINGS_FILE.exists() else None
+        raw = json.loads(SETTINGS_FILE.read_text(encoding='utf-8')) if SETTINGS_FILE.exists() else None
         retired = raw is not None and settings_schema.retire_fourrouter(copy.deepcopy(raw))
         if raw is not None and (retired or raw.get('version', 3) < 4 or 'research_profiles' not in raw or raw.get('thinking_schema', 0) < 1):
             backup = SETTINGS_FILE.parent / 'backups' / ('settings-v' + str(raw.get('version', 3)) + '-' + str(time.time_ns()) + '.json')

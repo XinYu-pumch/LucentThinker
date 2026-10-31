@@ -67,7 +67,7 @@ async def local_only(request: Request, call_next):
 @app.get('/')
 def index():
     static = config.ROOT / 'app/static'
-    html = (static / 'index.html').read_text()
+    html = (static / 'index.html').read_text(encoding='utf-8')
     def versioned(match):
         digest = hashlib.sha256((static / match[2]).read_bytes()).hexdigest()[:16]
         return match[1] + match[2] + '?v=' + digest + match[3]

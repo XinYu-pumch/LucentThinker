@@ -60,12 +60,12 @@ async def run():
     line = await asyncio.to_thread(sys.stdin.readline)
     options = json.loads(line)
     token = options['token']
-    import fcntl
+    from .file_lock import acquire
     from pathlib import Path
     data = Path(os.environ['LUCENT_DATA_DIR'])
     data.mkdir(parents=True, exist_ok=True)
     lock = (data / '.engine.lock').open('a+')
-    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    acquire(lock, exclusive=True, blocking=False)
     from . import config
     from .main import app
     boundary = PluginBoundary(app, token, options.get('parentOrigin', 'dsh-app://app'))
@@ -97,7 +97,7 @@ async def run():
         sock.close()
         state_file = data / 'engine-state.json'
         try:
-            if json.loads(state_file.read_text()).get('enginePid') == os.getpid():
+            if json.loads(state_file.read_text(encoding='utf-8')).get('enginePid') == os.getpid():
                 state_file.unlink()
         except (OSError, ValueError):
             pass

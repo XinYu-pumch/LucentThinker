@@ -1,0 +1,38 @@
+name: Platform verification
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-14]
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.6.6'
+      - name: Install locked source dependencies
+        run: uv sync --frozen --python 3.12.9
+      - name: Python regression tests
+        run: uv run --frozen pytest -q
+      - name: UI regression tests
+        run: node --test tests/*.cjs
+      - name: Build portable runtime and plugin
+        run: node dsh-plugin/scripts/prepare-runtime.mjs
+      - name: Package and install in an isolated directory
+        run: npm --prefix dsh-plugin run test:install
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: plugin-${{ matrix.os }}
+          path: releases/*.tgz

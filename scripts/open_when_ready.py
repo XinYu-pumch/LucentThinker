@@ -3,6 +3,7 @@ import os
 import subprocess
 import sys
 import time
+import webbrowser
 from urllib.error import URLError
 from urllib.request import ProxyHandler, build_opener
 
@@ -12,6 +13,22 @@ def open_when_ready(port, pid, *, timeout=180, launch=None, alive=None, ready=No
     opener = build_opener(ProxyHandler({}))
 
     def process_alive():
+        if os.name == 'nt':
+            import ctypes
+            from ctypes import wintypes
+            kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+            kernel.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+            kernel.OpenProcess.restype = wintypes.HANDLE
+            kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+            kernel.GetExitCodeProcess.argtypes = [wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD)]
+            handle = kernel.OpenProcess(0x1000, False, int(pid))
+            if not handle:
+                return False
+            try:
+                status = wintypes.DWORD()
+                return bool(kernel.GetExitCodeProcess(handle, ctypes.byref(status))) and status.value == 259
+            finally:
+                kernel.CloseHandle(handle)
         try:
             os.kill(int(pid), 0)
             return True
@@ -25,7 +42,7 @@ def open_when_ready(port, pid, *, timeout=180, launch=None, alive=None, ready=No
         except (OSError, URLError):
             return False
 
-    launch = launch or (lambda target: subprocess.run(['/usr/bin/open', target], check=True))
+    launch = launch or webbrowser.open
     alive, ready = alive or process_alive, ready or application_ready
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:

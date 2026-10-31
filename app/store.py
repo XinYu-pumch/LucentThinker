@@ -1,5 +1,5 @@
 import json
-import fcntl
+from .file_lock import acquire
 import logging
 import sqlite3
 import time
@@ -20,7 +20,7 @@ def connect(*, exclusive=False):
     # Every connection participates in the offline migration lock. Open SQLite
     # only after acquiring it, so an atomic replacement cannot leave stale writers.
     with open(str(DB) + '.storage.lock', 'a+b') as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX if exclusive else fcntl.LOCK_SH)
+        acquire(lock, exclusive=exclusive)
         db = sqlite3.connect(DB, timeout=30)
         db.row_factory = sqlite3.Row
         try:

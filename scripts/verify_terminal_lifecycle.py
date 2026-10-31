@@ -44,7 +44,7 @@ def main():
             if mode=='attached_window_hangup':
                 with (state/'attached.log').open('w') as log:
                     attached=subprocess.Popen([str(ROOT/'start.sh'),'--port',str(port),'--state-dir',str(state)],stdout=log,stderr=log)
-                wait_until(lambda:'已连接' in (state/'attached.log').read_text())
+                wait_until(lambda:'Attached to LucentThinker' in (state/'attached.log').read_text())
                 assert int((state/'server.pid').read_text())==server_pid
                 attached.send_signal(signal.SIGHUP)
                 assert attached.wait(timeout=15)==0

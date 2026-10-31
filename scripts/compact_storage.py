@@ -4,7 +4,6 @@ Usage: .venv/bin/python scripts/compact_storage.py [--database PATH]
 The application must be stopped. A verified gzip SQLite backup is retained.
 """
 import argparse
-import fcntl
 import gzip
 import hashlib
 import json
@@ -20,6 +19,7 @@ import uuid
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from app import storage_codec as codec
+from app.file_lock import acquire
 
 TABLES = ('projects', 'conversations', 'runs', 'events', 'research_messages', 'model_requests',
           'model_chunks', 'search_responses', 'sqlite_sequence')
@@ -102,6 +102,10 @@ def compressed_backup(source, destination):
 def assert_offline(path):
     # Old app versions do not know about the maintenance lock. Refuse their open
     # SQLite handles as well. Absence of lsof is an error, not permission to race.
+    if os.name == 'nt':
+        # All Windows app versions participate in the exclusive maintenance lock.
+        # Windows also refuses replacement while another SQLite handle is open.
+        return
     executable = shutil.which('lsof')
     if not executable:
         raise RuntimeError('需要 lsof 确认数据库未被其他进程打开')
@@ -125,11 +129,11 @@ def migrate(path, progress=print):
     work = path.with_name(path.name + '.migrating-' + stamp)
     report_path = backups / (stamp + '.json')
     with open(str(path)+'.storage.lock', 'a+b') as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        acquire(lock, exclusive=True, blocking=False)
         assert_offline(path)
         # Guard against writers that do not yet participate in our advisory lock.
         guard = sqlite3.connect(path, timeout=1)
-        original = sqlite3.connect(f'file:{path}?mode=ro', uri=True)
+        original = sqlite3.connect(path.as_uri() + '?mode=ro', uri=True)
         try:
             guard.execute('BEGIN IMMEDIATE')
             with plain.open('xb'):
@@ -146,7 +150,7 @@ def migrate(path, progress=print):
             before_bytes = plain.stat().st_size
             shutil.copyfile(plain, work)
             os.chmod(work, 0o600)
-            before = sqlite3.connect(f'file:{plain}?mode=ro', uri=True)
+            before = sqlite3.connect(plain.as_uri() + '?mode=ro', uri=True)
             target = sqlite3.connect(work)
             try:
                 expected = fingerprint(before, progress)
@@ -183,12 +187,13 @@ def migrate(path, progress=print):
             with work.open('rb') as f:
                 os.fsync(f.fileno())
             os.replace(work, path)
-            fd = os.open(path.parent, os.O_RDONLY)
-            try:
-                os.fsync(fd)
-            finally:
-                os.close(fd)
-            report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
+            if os.name != 'nt':
+                fd = os.open(path.parent, os.O_RDONLY)
+                try:
+                    os.fsync(fd)
+                finally:
+                    os.close(fd)
+            report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
             os.chmod(report_path, 0o600)
             # The gzip backup was verified byte-for-byte before this temporary
             # uncompressed copy is removed. The original data remains recoverable.

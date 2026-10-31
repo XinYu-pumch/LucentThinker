@@ -5,7 +5,7 @@ from pathlib import Path
 from urllib.parse import quote, urlsplit, urlunsplit
 from . import config, llm_protocols
 
-PRESETS = {p['id']: p for p in json.loads(Path(__file__).with_name('thinking_presets.json').read_text())}
+PRESETS = {p['id']: p for p in json.loads(Path(__file__).with_name('thinking_presets.json').read_text(encoding='utf-8'))}
 Decoder = llm_protocols.Decoder
 PRESET_PROVIDERS = {"openai", "z_ai", "moonshot", "mimo", "qwen", "grok"}
 

@@ -8,7 +8,7 @@
 
 在 DSH 的“插件 → 添加插件”中填写本地插件目录的绝对路径，或 `npm pack` 生成的 `.tgz` 绝对路径，安装后启用。开发者可使用 `link:/absolute/path/to/dsh-plugin` 安装本地链接；修改后执行 `npm run build`，然后停用并重新启用插件；宿主仍使用旧模块时重启 DSH。
 
-普通使用不需要终端、npm、Python 或 uv。已打包 Apple Silicon 原生 Python 和依赖，首次打开不下载运行环境，也不需要 Rosetta。当前安装包仅支持 macOS Apple Silicon（arm64）；Windows 和 Intel Mac 需要另行构建验证，不包含在本次预览包中。
+普通使用不需要终端、npm、Python 或 uv。目标平台为 macOS Apple Silicon（arm64）和 Windows x64，安装包内置对应 Python 和依赖。首次打开不下载运行环境。开发构建包含当前构建平台；双平台发行包需合并两个经过验证的运行环境。Intel Mac 和 Windows ARM64 暂未提供原生包。
 
 在“设置 → LucentThinker”配置模型供应商及 DeepSeek 网页服务。插件数据保存在 `$DSH_HOME/plugin-data/lucentthinker/`（默认 `~/.dsh/plugin-data/lucentthinker/`），独立于浏览器版和插件安装目录。首次安装是空白研究空间，不自动读取独立版的 API Key 或研究记录。
 
@@ -28,14 +28,15 @@
 
 ```sh
 cd dsh-plugin
-npm run build
+npm run runtime:prepare
 npm test
+npm run test:install
 npm run pack:local
 ```
 
 `build` 从当前应用源码生成 `engine/` 和 `lib/`，并复制可移植 Python；不包含 `.env`、个人设置、数据库或缓存。`LUCENT_RUNTIME_SOURCE` 可指定已安装锁定依赖的可移植 Python 目录。`npm pack` 在本地生成安装包，不联系 npm 发布服务。
 
-本包设置 `private: true`，并禁止 `prepublishOnly`。发布前需要明确决定插件的整体授权方式（包含 GPL-3.0-or-later 来源材料）、完成目标平台构建及版本兼容测试，再移除本地发布限制。第三方声明保留在 `NOTICE`、`licenses/` 和对应运行环境文件中。
+本包设置 `private: true`，并禁止 `prepublishOnly`。整体许可证为 GPL-3.0-or-later。发布前需完成目标平台构建及版本兼容测试，再移除本地发布限制。第三方声明保留在 `NOTICE`、`licenses/` 和对应运行环境文件中。
 
 ## 界面语言
 

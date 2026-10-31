@@ -7,7 +7,7 @@ DIR = Path(__file__).parent
 
 def templates(locale=None):
     directory = DIR / 'zh' if locale == 'zh' else DIR
-    bundle = {name: (directory / filename).read_text() for name, filename in (
+    bundle = {name: (directory / filename).read_text(encoding='utf-8') for name, filename in (
         ('main', 'main.txt'), ('extraction', 'extraction.txt'), ('final', 'final.txt'), ('control', 'control.json'))}
     if locale in ('zh', 'en'):
         bundle['response_language'] = '简体中文' if locale == 'zh' else 'English'
@@ -27,7 +27,7 @@ def apply_language(snapshot, locale):
     snapshot['prompt_sha256'] = {k: hashlib.sha256(v.encode()).hexdigest()
                                for k, v in snapshot['prompt_templates'].items()}
     if locale == 'zh':
-        descriptions = json.loads((DIR / 'zh' / 'tools.json').read_text())
+        descriptions = json.loads((DIR / 'zh' / 'tools.json').read_text(encoding='utf-8'))
         for tool in snapshot['tools']:
             function = tool['function']
             translated = descriptions[function['name']]

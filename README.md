@@ -315,3 +315,12 @@ node --check app/static/settings.js
 每次回答下方的“导出本次回答”按钮只下载该次已保存的 Markdown 回答正文及其引文，文件名包含研究 ID。不会附加用户问题、其他问答、研究过程、统计或未引用的发现来源。生成过程中暂不提供该按钮；停止或失败后若保存了部分正文，显示“导出已生成部分”，文件名带 `-partial`。页面顶部的导出按钮继续导出整个对话。
 
 供应商与模型管理、旧配置迁移和输入区角色选择见上文“设置主模型和摘要模型”。
+
+
+## Windows 与许可
+
+Windows x64 源码版安装 uv 后，可双击 `start.cmd` 启动并打开浏览器，使用 `stop.cmd` 停止。首次启动会安装项目内 Python 与锁定依赖。DSH 插件包内置运行环境，用户无需另装 Python 或 uv。
+
+Windows 与 macOS 的自动化验证见 GitHub Actions 的 **Platform verification** 工作流，涵盖源码测试、npm 安装、研究完成与保存、停用及宿主异常退出。桌面 DSH 界面验收另行记录。
+
+LucentThinker 整体按 **GPL-3.0-or-later** 发布，详见 `LICENSE`。第三方来源及声明见 `NOTICE` 和 `docs/licenses/`。

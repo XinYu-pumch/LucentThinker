@@ -23,3 +23,5 @@ node_modules/
 /dsh-plugin/icon.svg
 /dsh-plugin/NOTICE
 *.tgz
+
+/dsh-plugin/LICENSE

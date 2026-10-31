@@ -3,15 +3,16 @@ import assert from 'node:assert/strict';
 import {mkdtemp, rm, readFile, access} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 import {spawn} from 'node:child_process';
 import {createServer} from 'node:http';
 import {once} from 'node:events';
-import {Engine} from '../src/engine.js';
 
-const packageRoot=fileURLToPath(new URL('..',import.meta.url));
+const packageRoot=process.env.LUCENT_TEST_PACKAGE || fileURLToPath(new URL('..',import.meta.url));
+const moduleURL=pathToFileURL(join(packageRoot,'lib/engine.js')).href;
+const {Engine}=await import(moduleURL);
 async function setup(t){
- const dataDir=await mkdtemp(join(tmpdir(),'lucent-dsh-test-'));
+ const dataDir=await mkdtemp(join(tmpdir(),'Lucent 测试 space-'));
  const engine=new Engine({packageRoot,dataDir});
  t.after(async()=>{await engine.dispose();await rm(dataDir,{recursive:true,force:true});});
  return {engine,dataDir};
@@ -85,7 +86,6 @@ test('stopping active research cancels the request and preserves saved records',
 test('owner killed without cleanup: pipe watchdog exits engine and clears state',async t=>{
  const dataDir=await mkdtemp(join(tmpdir(),'lucent-dsh-owner-'));
  t.after(()=>rm(dataDir,{recursive:true,force:true}));
- const moduleURL=new URL('../src/engine.js',import.meta.url).href;
  const code=`import {Engine} from ${JSON.stringify(moduleURL)};const e=new Engine(${JSON.stringify({packageRoot,dataDir})});await e.start();console.log(JSON.stringify(e.status()));setInterval(()=>{},1000);`;
  const owner=spawn(process.execPath,['--input-type=module','-e',code],{stdio:['ignore','pipe','pipe']});
  t.after(()=>{if(owner.exitCode===null&&owner.signalCode===null)owner.kill('SIGKILL');});
@@ -93,4 +93,46 @@ test('owner killed without cleanup: pipe watchdog exits engine and clears state'
  owner.kill('SIGKILL');await once(owner,'close');await gone(state.pid);
  await assert.rejects(access(join(dataDir,'engine-state.json')));
  await access(join(dataDir,'research.sqlite3'));
+});
+
+test('installed runtime completes research and reloads its Unicode report', async t => {
+ const {engine, dataDir} = await setup(t);
+ const {url} = await engine.session();
+ const answer = 'Windows verification report — 中文内容完整保存。';
+ let calls = 0;
+ const mock = createServer((req, res) => {
+  let raw = '';
+  req.on('data', chunk => raw += chunk);
+  req.on('end', () => {
+   calls++;
+   const request = JSON.parse(raw);
+   const message = request.tools?.length
+    ? {role:'assistant', content:null, tool_calls:[{id:'finish-1', type:'function', function:{name:'finish_research', arguments:JSON.stringify({status:'ready', summary:'Local fixture complete', unresolved_questions:[]})}}]}
+    : {role:'assistant', content:answer};
+   res.writeHead(200, {'Content-Type':'application/json'});
+   res.end(JSON.stringify({choices:[{index:0, message, finish_reason:message.tool_calls ? 'tool_calls' : 'stop'}], usage:{prompt_tokens:10, completion_tokens:10, total_tokens:20}}));
+  });
+ });
+ mock.listen(0, '127.0.0.1'); await once(mock, 'listening');
+ t.after(() => {mock.closeAllConnections(); mock.close();});
+ const profile = await json(url+'api/settings/profiles', 'POST', {name:'测试 model', base_url:`http://127.0.0.1:${mock.address().port}/v1`, api_key:'fixture-only', model:'fixture-model', provider:'openai'});
+ await json(url+'api/settings/web', 'PUT', {api_key:'fixture-web'});
+ const conversation = await json(url+'api/conversations', 'POST', {});
+ const run = await json(url+`api/conversations/${conversation.id}/runs`, 'POST', {question:'保存中文研究报告', main_profile:profile.id, summary_profile:profile.id});
+ const deadline = Date.now()+15000;
+ let saved;
+ do {
+  saved = await json(url+'api/conversations/'+conversation.id);
+  if (saved.runs[0].status !== 'running') break;
+  await new Promise(resolve => setTimeout(resolve, 50));
+ } while (Date.now() < deadline);
+ assert.equal(saved.runs[0].status, 'completed', JSON.stringify(saved.runs[0]));
+ assert.ok(saved.runs[0].answer.includes(answer));
+ assert.equal(calls, 2);
+ await engine.dispose();
+ const next = new Engine({packageRoot, dataDir}); t.after(() => next.dispose());
+ const reopened = await next.session();
+ const restored = await json(reopened.url+'api/conversations/'+conversation.id);
+ assert.equal(restored.runs[0].id, run.id);
+ assert.equal(restored.runs[0].answer, saved.runs[0].answer);
 });

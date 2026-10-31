@@ -460,7 +460,8 @@ def test_profile_crud_activation_reveal_and_no_secret_in_public_api():
         revealed=client.post(f'/api/settings/profiles/{ident}/reveal')
         assert revealed.json()['api_key']=='PROFILE_SECRET'
         assert revealed.headers['cache-control']=='no-store'
-        assert settings_store.SETTINGS_FILE.stat().st_mode & 0o777 == 0o600
+        if __import__('os').name != 'nt':
+            assert settings_store.SETTINGS_FILE.stat().st_mode & 0o777 == 0o600
         assert client.post(f'/api/settings/active/main/{ident}').status_code==200
         assert client.delete(f'/api/settings/profiles/{ident}').status_code==422
         frozen=config.model_settings('main')

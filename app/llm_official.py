@@ -4,7 +4,7 @@ import json
 
 class OfficialProvider:
     def __init__(self, path):
-        self.meta = json.loads(path.read_text())
+        self.meta = json.loads(path.read_text(encoding='utf-8'))
         self.BASE = self.meta['baseUrl']
         self.BASE_URLS = self.meta.get('baseUrls', [self.BASE])
 

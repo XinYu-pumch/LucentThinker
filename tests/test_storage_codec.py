@@ -278,9 +278,9 @@ def test_migration_failure_never_replaces_original(database, monkeypatch):
 
 
 def test_migration_refuses_shared_app_lock(database, monkeypatch):
-    import fcntl
+    from app.file_lock import acquire
     with open(str(database)+'.storage.lock', 'a+b') as lock:
-        fcntl.flock(lock, fcntl.LOCK_SH)
+        acquire(lock)
         with pytest.raises(BlockingIOError):
             compact_storage.migrate(database, progress=lambda _: None)
 

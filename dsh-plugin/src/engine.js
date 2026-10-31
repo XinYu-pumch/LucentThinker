@@ -36,14 +36,17 @@ export class Engine {
     this.phase = 'starting'; this.error = null;
     await mkdir(this.dataDir, {recursive: true, mode: 0o700});
     const runtime = this.python ? null : JSON.parse(await readFile(join(this.packageRoot, 'runtime/manifest.json'), 'utf8'));
-    const python = this.python ?? join(this.packageRoot, 'runtime', runtime.executable);
+    const target = `${process.platform}-${process.arch}`;
+    const executable = runtime?.targets?.[target]?.executable;
+    if (!this.python && !executable) throw new Error(`No bundled runtime for ${target}. Supported platforms: macOS Apple Silicon and Windows x64.`);
+    const python = this.python ?? join(this.packageRoot, 'runtime', executable);
     if (this.closed) throw new Error('LucentThinker 已停用');
     this.token = randomBytes(32).toString('hex');
     // Do not inherit model API keys, PYTHONPATH or another project's .env; respect existing proxy settings.
     const env = Object.fromEntries(['PATH','HOME','USERPROFILE','TMPDIR','TEMP','SYSTEMROOT','LANG','LC_ALL',
       'HTTP_PROXY','HTTPS_PROXY','ALL_PROXY','NO_PROXY','http_proxy','https_proxy','all_proxy','no_proxy']
       .filter(k => process.env[k] !== undefined).map(k => [k, process.env[k]]));
-    Object.assign(env, {LUCENT_DATA_DIR: this.dataDir, PYTHONUNBUFFERED: '1',
+    Object.assign(env, {LUCENT_DATA_DIR: this.dataDir, PYTHONUNBUFFERED: '1', PYTHONUTF8: '1',
       PYTHONDONTWRITEBYTECODE: '1', PYTHONNOUSERSITE: '1',
       TIKTOKEN_CACHE_DIR: join(this.dataDir, 'cache/tiktoken')});
     const child = spawn(python, ['-s', '-m', 'app.dsh'], {

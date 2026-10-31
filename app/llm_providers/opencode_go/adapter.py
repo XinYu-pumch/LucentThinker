@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from app.llm_protocols import Decoder, normalize_usage, prepare_body
 
-MANIFEST = json.loads(Path(__file__).with_name('manifest.json').read_text())
+MANIFEST = json.loads(Path(__file__).with_name('manifest.json').read_text(encoding='utf-8'))
 BASE = MANIFEST['base_url']
 USER_AGENT = 'LucentThinker/0.1.0'
 

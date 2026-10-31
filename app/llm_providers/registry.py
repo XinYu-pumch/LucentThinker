@@ -10,7 +10,7 @@ _loaded = {}
 
 def enabled():
     path = ROOT / 'registry.json'
-    return json.loads(path.read_text()).get('providers', []) if path.exists() else []
+    return json.loads(path.read_text(encoding='utf-8')).get('providers', []) if path.exists() else []
 
 
 def get(ident):

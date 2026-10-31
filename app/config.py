@@ -105,7 +105,7 @@ def verified_metadata(base, model):
     path = DATA / 'model-verification.json'
     if path.exists():
         import json
-        for value in json.loads(path.read_text()).values():
+        for value in json.loads(path.read_text(encoding='utf-8')).values():
             if value.get('base_url') == base and value.get('configured_id') == model and value.get('verified'):
                 return value.get('model_metadata') or {}
     return {}
