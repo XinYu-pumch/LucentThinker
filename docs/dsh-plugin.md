@@ -1,6 +1,6 @@
 # DSH 本地插件集成
 
-验证日期：2026-10-31。目标宿主：本机 DeepSeek Harness 0.2.1-rc.5。
+桌面验证日期为 2026-10-31，跨平台适配日期为 2026-11-01。目标宿主为 DeepSeek Harness 0.2.1-rc.5。
 
 ## 交付结构
 
@@ -18,7 +18,7 @@
 
 启用后仅注册入口及接口，首次打开工作台或设置时启动一个引擎。并发打开复用同一个启动 Promise。切换页面释放 React 定时器、iframe、SSE 与浏览器上下文，但不取消服务器上的研究。
 
-停用由 Cordis context 归属撤回三个入口和 Remote 命名空间；宿主关闭自己创建的 stdin 管道，Python 观察 EOF 后执行 uvicorn/FastAPI 关闭流程。研究任务取消并保留已保存记录。超过 6 秒仅终止本插件创建的进程组。停用发生在启动中时同样等待退出，不允许晚到的进程重新变成就绪。
+停用由 Cordis context 归属撤回三个入口和 Remote 命名空间；宿主关闭自己创建的 stdin 管道，Python 观察 EOF 后执行 uvicorn/FastAPI 关闭流程。研究任务取消并保留已保存记录。超过 6 秒会终止本插件拥有的引擎，POSIX 使用进程组，Windows 使用子进程句柄。停用发生在启动中时同样等待退出，不允许晚到的进程重新变成就绪。
 
 DSH 宿主被强制终止时，管道 EOF 仍会通知 Python。引擎正常结束后删除属于自身 PID 的运行状态文件，保留数据库、配置和日志；数据锁随进程释放。另一个实例无法抢占相同数据库，也不能删除第一个实例的运行状态。
 
@@ -46,7 +46,7 @@ npm test
 npm run pack:local
 ```
 
-产物位于 `releases/dsh-plugin-lucentthinker-0.1.0-local.1.tgz`。包包含 Apple Silicon 原生 Python 3.12.9 及 `uv.lock` 锁定的 24 个运行依赖，首次启动不需要下载 Python 或 pip 安装。npm `files` 白名单排除个人数据和开发缓存。私有预览包不发布 npm。
+产物位于 `releases/dsh-plugin-lucentthinker-0.1.0-local.1.tgz`。跨平台包包含 Apple Silicon 与 Windows x64 原生 Python 3.12.9 及 `uv.lock` 锁定的运行依赖，包括 Windows 所需的 IANA 时区数据。首次启动使用内置运行环境。npm `files` 白名单排除个人数据和开发缓存。私有预览包不发布 npm。
 
 ## 验证记录
 
@@ -58,4 +58,6 @@ npm run pack:local
 - 安全边界测试：缺失／错误令牌拒绝、跨来源 API 拒绝、正确资源前缀、嵌入来源严格校验。
 - 原应用相关回归：113 项 Python 测试及 39 项 JavaScript 测试通过。另有 6 项嵌入边界测试、7 项插件测试。
 
-未在 Windows 或 Intel Mac 上验收，不宣称全平台可用。实际模型调用未用于本次插件验证；活动研究退出测试使用本地模拟服务。DSH 账号／模型复用、历史数据导入向导与自动更新属于后续功能。
+Windows x64 的自动化验证由 `.github/workflows/platforms.yml` 执行，包含源码回归、原生运行环境、实际 npm 安装、模拟研究完成与持久化、插件引擎启停与崩溃回收。安装路径含中文与空格，真实 Cordis 框架负责宿主服务的激活及撤回。双平台安装包合并后会在 Windows 和 macOS 再各执行一次安装与生命周期验证。具体成功状态以 GitHub Actions 运行结果为准。
+
+Windows 桌面 DSH 的实际界面操作尚未验收，Intel Mac 与 Windows ARM64 暂无原生运行包。研究测试使用本地模拟模型服务。DSH 账号／模型复用、历史数据导入向导与自动更新属于后续功能。

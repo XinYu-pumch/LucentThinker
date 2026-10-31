@@ -6,7 +6,7 @@
 
 ### DSH 本地插件预览版
 
-`dsh-plugin/` 提供可本地链接或通过 npm `.tgz` 安装的插件，包含 DSH 侧栏入口、独立设置分区和插件专属 Python 引擎。当前验证环境为 DSH `0.2.1-rc.5`、macOS Apple Silicon；不需要发布 npm，也不需要普通用户安装 Python。插件数据与本独立版分开保存。启停、开发和打包方法见 [插件说明](dsh-plugin/README.md)，验证范围见 [DSH 集成记录](docs/dsh-plugin.md)。
+`dsh-plugin/` 提供可本地链接或通过 npm `.tgz` 安装的插件，包含 DSH 侧栏入口、独立设置分区和插件专属 Python 引擎。目标宿主为 DSH `0.2.1-rc.5`，打包平台为 macOS Apple Silicon 和 Windows x64。桌面界面已在 macOS 验收，Windows 自动化范围见集成记录。普通用户无需安装 Python。插件数据与本独立版分开保存。启停、开发和打包方法见 [插件说明](dsh-plugin/README.md)，验证范围见 [DSH 集成记录](docs/dsh-plugin.md)。
 
 ### 独立版
 
