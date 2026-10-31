@@ -36,7 +36,7 @@ npm run pack:local
 
 `build` 从当前应用源码生成 `engine/` 和 `lib/`，并复制可移植 Python；不包含 `.env`、个人设置、数据库或缓存。`LUCENT_RUNTIME_SOURCE` 可指定已安装锁定依赖的可移植 Python 目录。`npm pack` 在本地生成安装包，不联系 npm 发布服务。
 
-整体许可证为 GPL-3.0-or-later。第三方声明保留在 `NOTICE`、`licenses/` 和对应运行环境文件中。维护者使用通过全部平台验证的 `plugin-universal` 制品发布到 npm 官方仓库，命令为 `npm publish releases/dsh-plugin-lucentthinker-0.1.0.tgz --access public --registry=https://registry.npmjs.org/`。镜像同步进度由镜像服务决定。
+整体许可证为 GPL-3.0-or-later。第三方声明保留在 `NOTICE`、`licenses/` 和对应运行环境文件中。维护者使用通过全部平台验证的 `plugin-universal` 制品发布到 npm 官方仓库，命令为 `npm publish ./releases/dsh-plugin-lucentthinker-0.1.0.tgz --access public --registry=https://registry.npmjs.org/`。镜像同步进度由镜像服务决定。
 
 ## 界面语言
 
