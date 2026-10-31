@@ -71,7 +71,8 @@
     "pack:local": "npm run build && npm pack --ignore-scripts --pack-destination ../releases",
     "prepublishOnly": "node -e \"throw new Error('Local-only build: publishing is intentionally disabled')\"",
     "runtime:prepare": "node scripts/prepare-runtime.mjs",
-    "test:install": "node scripts/test-install.mjs"
+    "test:install": "node scripts/test-install.mjs",
+    "assemble": "node scripts/assemble.mjs"
   },
   "repository": {
     "type": "git",

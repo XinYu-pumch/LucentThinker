@@ -29,8 +29,11 @@ def test_source_launcher_start_stop_and_restart(tmp_path):
         port = sock.getsockname()[1]
     opener = build_opener(ProxyHandler({}))
     for _ in range(2):
-        child = subprocess.Popen([sys.executable, str(ROOT / 'scripts/launch.py'), '--port', str(port),
-                                  '--state-dir', str(state)], stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        command = [sys.executable, str(ROOT / 'scripts/launch.py')]
+        if os.name == 'nt':
+            command = ['cmd.exe', '/d', '/c', 'start.cmd', '--no-open']
+        child = subprocess.Popen([*command, '--port', str(port), '--state-dir', str(state)],
+                                  cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                   env={**os.environ, 'PYTHONUTF8': '1'}, text=True, encoding='utf-8')
         try:
             def ready():

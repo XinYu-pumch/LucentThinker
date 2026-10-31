@@ -1,3 +1,4 @@
+from contextlib import closing
 import gzip
 import hashlib
 import json
@@ -231,7 +232,7 @@ def legacy_fixture():
 
 def test_offline_migration_backup_and_all_store_apis(database, monkeypatch, tmp_path):
     cid, rid, req, mid, chunks = legacy_fixture()
-    with sqlite3.connect(database) as db:
+    with closing(sqlite3.connect(database)) as db, db:
         before = compact_storage.fingerprint(db)
     # OS occupancy protection is independently exercised below; avoid requiring
     # an lsof binary on test runners for this data migration test.
@@ -244,7 +245,7 @@ def test_offline_migration_backup_and_all_store_apis(database, monkeypatch, tmp_
         raw = f.read()
     assert hashlib.sha256(raw).hexdigest() == report['backup_uncompressed_sha256']
     backup.write_bytes(raw)
-    with sqlite3.connect(backup) as db:
+    with closing(sqlite3.connect(backup)) as db, db:
         assert compact_storage.fingerprint(db) == before
     assert store.messages(rid)[0]['message'] == sample()
     assert store.requests(rid, req)[0]['request']['messages'][0] == sample()
@@ -255,7 +256,7 @@ def test_offline_migration_backup_and_all_store_apis(database, monkeypatch, tmp_
     assert store.bound_search_items(rid, 1, [{'search_response_id': search['id'], 'result_index': 0}])[0][0] == source
     assert store.search_fallback(rid, 1, [{'search_response_id': search['id'], 'result_index': 0}])['text'] == source['content']
     # A second conversion preserves identifiers, order and sqlite_sequence.
-    with sqlite3.connect(database) as db:
+    with closing(sqlite3.connect(database)) as db, db:
         compact_storage.convert(db)
         assert compact_storage.fingerprint(db) == before
     store.record_message(rid, 2, 'research', {'role': 'user', 'content': '新写入'})

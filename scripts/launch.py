@@ -138,7 +138,7 @@ def run(port, state_dir, open_browser=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, required=True)
-    parser.add_argument('--open', action='store_true')
+    parser.add_argument('--open', action=argparse.BooleanOptionalAction, default=False)
     parser.add_argument('--state-dir', type=Path, default=ROOT / 'data')
     args = parser.parse_args()
     sys.exit(run(args.port, args.state_dir, args.open))

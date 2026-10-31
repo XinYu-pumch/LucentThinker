@@ -36,3 +36,45 @@ jobs:
         with:
           name: plugin-${{ matrix.os }}
           path: releases/*.tgz
+  assemble:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          name: plugin-windows-latest
+          path: .cache/artifacts/windows
+      - uses: actions/download-artifact@v4
+        with:
+          name: plugin-macos-15
+          path: .cache/artifacts/macos
+      - name: Assemble both validated runtimes
+        run: npm --prefix dsh-plugin run assemble
+      - uses: actions/upload-artifact@v4
+        with:
+          name: plugin-universal
+          path: releases/*.tgz
+  verify-universal:
+    needs: assemble
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-15]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          name: plugin-universal
+          path: releases
+      - name: Install and test the final dual-platform package
+        run: npm --prefix dsh-plugin run test:install
+        env:
+          LUCENT_TEST_TARBALL: releases/dsh-plugin-lucentthinker-0.1.0-local.1.tgz
