@@ -2,13 +2,15 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
-function setup(){
+function setup(language='zh'){
  const nodes=new Map(),calls=[];
  function node(){return {value:'',textContent:'',type:'password',dataset:{},disabled:false,open:true,children:[],classList:{toggle(){}},replaceChildren(...ns){this.children=[];this.append(...ns);},append(...ns){for(const n of ns){if(n&&typeof n==='object')n.parentNode=this;this.children.push(n);}},showModal(){this.open=true;},close(){this.open=false;},addEventListener(){},setAttribute(){}};}
  const $=id=>{if(!nodes.has(id))nodes.set(id,node());return nodes.get(id);};
  const context=vm.createContext({$,el:(tag,cls,text)=>({...node(),textContent:text}),document:{querySelectorAll:()=>[]},toast(){},conversationDialog:async()=>null,api:async(...args)=>{calls.push(args);return {api_key:'fixture-real-key'};}});
  const source=fs.readFileSync(require.resolve('../app/static/settings.js'),'utf8').replace('loadSettings().catch(e=>toast(e.message));','');
- vm.runInContext(source,context);
+ const doc=context.document;delete context.document;context.localStorage={getItem:()=>language};
+ for(const name of ['i18n-en','i18n'])vm.runInContext(fs.readFileSync(require.resolve('../app/static/'+name+'.js'),'utf8'),context);
+ context.document=doc;vm.runInContext(source,context);
  return {context,$,calls};
 }
 test('Go exposes model-specific thinking controls and preserves effort while disabled',()=>{
@@ -91,4 +93,20 @@ test('Go dialog preserves legacy choices until explicitly changed and rejects ze
 test('diagnostics distinguish no readable output and missing reasoning usage',()=>{
  const {context:c}=setup();const text=c.formatThinkingTest({ok:true,model:'x',reply:'answer',thinking:{protocol:'messages',parameters:{thinking:{display:'summarized'}},output:{kind:'summary'},characters:0,reasoning_tokens:null,note:'reported only'}});
  assert.match(text,/可读思考：0 字符/);assert.match(text,/思考 token：未报告/);assert.match(text,/summarized/);
+});
+
+test('English provider names display locally but unchanged saves preserve the stored name',()=>{
+ const {context:c,$}=setup('en');
+ vm.runInContext("settingsDoc={suppliers:{supplier_summary:{id:'supplier_summary',name:'DeepSeek 独立提取'}},profiles:{}};currentSupplier='supplier_summary';",c);
+ $('#supplier-name').value='DeepSeek extraction';
+ assert.equal(c.supplierDraft().name,'DeepSeek 独立提取');
+ assert.equal(c.modelLabel({supplier_id:'supplier_summary',model:'deepseek-flash'}),'DeepSeek extraction / deepseek-flash');
+ $('#supplier-name').value='My extraction provider';
+ assert.equal(c.supplierDraft().name,'My extraction provider');
+});
+
+test('web connection diagnostics translate application errors and preserve response content',()=>{
+ const {context:c}=setup('en');
+ const result=JSON.parse(c.formatWebTest({ok:false,message:'服务 HTTP 401：API Key 无效',sample:'原始来源'}));
+ assert.equal(result.message,'Service HTTP 401: Invalid API key.');assert.equal(result.sample,'原始来源');
 });

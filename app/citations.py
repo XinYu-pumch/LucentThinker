@@ -64,7 +64,7 @@ def canonical(url):
         return None
 
 
-def reconcile(answer, sources):
+def reconcile(answer, sources, language=None):
     answer = normalize_citations(answer)
     known = {s['id']: s for s in sources}
     cited, unresolved, conflicts = set(), set(), set()
@@ -79,7 +79,7 @@ def reconcile(answer, sources):
         return True
 
     def marker(sid):
-        return '[引用无法匹配 ' + str(sid) + ']'
+        return ('[Unmatched citation ' if language == 'en' else '[引用无法匹配 ') + str(sid) + ']'
 
     def process(text):
         # Preserve prose; only reference URLs are replaced by registered URLs.
@@ -92,7 +92,7 @@ def reconcile(answer, sources):
                 if check(sid, urls):
                     line = re.sub(r'https?://[^\s<>\])]+', lambda _: known[sid]['url'], line)
                 else:
-                    line = re.sub(r'https?://[^\s<>\])]+', '(引用无法匹配)', line)
+                    line = re.sub(r'https?://[^\s<>\])]+', '(Unmatched citation)' if language == 'en' else '(引用无法匹配)', line)
             lines.append(line)
         text = ''.join(lines)
 
@@ -117,7 +117,11 @@ def reconcile(answer, sources):
     chunks = CODE.split(answer)
     normalized = ''.join(chunk if i % 2 else process(chunk) for i, chunk in enumerate(chunks))
     if conflicts:
-        normalized += '\n\n> 引用冲突：来源 ' + '、'.join(map(str, sorted(conflicts))) + ' 的模型生成 URL 与登记来源不同，链接已按登记编号显示；相关陈述仍需核对。'
+        ids = ', '.join(map(str, sorted(conflicts)))
+        if language == 'en':
+            normalized += '\n\n> Citation conflict: model-generated URLs for sources ' + ids + ' differ from registered sources. Links use the registered URLs; the claims still need verification.'
+        else:
+            normalized += '\n\n> 引用冲突：来源 ' + '、'.join(map(str, sorted(conflicts))) + ' 的模型生成 URL 与登记来源不同，链接已按登记编号显示；相关陈述仍需核对。'
     return normalized, {'unmatched_ids': sorted(unresolved), 'conflicting_ids': sorted(conflicts),
                         'missing_citations': bool(sources) and not cited}
 
@@ -155,5 +159,5 @@ def refresh_registered_references(answer, sources, heading='参考来源'):
             return answer
         heading = section[1]
         answer = answer[:section.start()]
-    answer, _ = reconcile(answer, sources)
+    answer, _ = reconcile(answer, sources, language='en' if heading == 'References' else 'zh')
     return append_registered_references(answer, sources, heading)

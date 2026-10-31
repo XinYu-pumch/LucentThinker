@@ -14,7 +14,7 @@ let appConfig, debugData;
 let toastTimer;
 function toast(text){$('#toast').textContent=text;$('#toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.add('hidden'),4000);}
 function appPath(url){return (document.querySelector('meta[name="lucent-base"]')?.content||'')+url;}
-async function api(url, method='GET', body){const r=await fetch(appPath(url),{method,headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});if(!r.ok){let d;try{d=await r.json();}catch{}throw Error(typeof d?.detail==='string'?tr(d.detail):tr("请求失败 ({0})", r.status));}return r.json();}
+async function api(url, method='GET', body){const r=await fetch(appPath(url),{method,headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});if(!r.ok){let d;try{d=await r.json();}catch{}throw Error(typeof d?.detail==='string'?LucentI18n.serverText(d.detail):tr("请求失败 ({0})", r.status));}return r.json();}
 function safeUrl(value){try{const u=new URL(value);return ['http:','https:'].includes(u.protocol)&&!u.username&&!u.password?u.href:null;}catch{return null;}}
 function linkCitationText(node,sources){
  if(node.parentElement.closest('a,code,pre'))return;

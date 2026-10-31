@@ -9,7 +9,8 @@ class Element{
 }
 function setup(){
  const context=vm.createContext({el:(...args)=>new Element(...args),markdown:(el,text)=>{el.textContent=text;},safeUrl:u=>u,URL});
- vm.runInContext(fs.readFileSync(require.resolve('../app/static/trace.js'),'utf8'),context);
+ context.localStorage={getItem:()=>'zh'};
+ for(const name of ['i18n-en','i18n','trace'])vm.runInContext(fs.readFileSync(require.resolve('../app/static/'+name+'.js'),'utf8'),context);
  const run={status:'running',usage:{},sources:[],ui:{traceContent:new Element('div')}};
  context.initTrace(run);return {context,run};
 }

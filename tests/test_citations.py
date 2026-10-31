@@ -92,3 +92,14 @@ def test_history_and_exports_repair_without_database_rewrite(tmp_path, monkeypat
         assert expected in client.get(f'/api/conversations/{cid}/export').text
         with store.connect() as db:
             assert db.execute('select answer from runs where id=?', (rid,)).fetchone()[0] == old
+
+
+def test_english_citation_warnings_preserve_source_content():
+    answer, checks = reconcile('Claim [999] and [42](https://wrong.org).', SOURCES, language='en')
+    assert '[Unmatched citation 999]' in answer
+    assert 'Citation conflict:' in answer
+    assert not re.search('[\u4e00-\u9fff]', answer)
+    assert checks['conflicting_ids'] == [42]
+    fixed = refresh_registered_references('Claim [999] and [42](https://wrong.org).', SOURCES, 'References')
+    assert 'Citation conflict:' in fixed
+    assert '[Unmatched citation 999]' in fixed

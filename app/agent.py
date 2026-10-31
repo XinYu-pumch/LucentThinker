@@ -247,7 +247,7 @@ class Engine:
                     raise OutputLimitError('最终输出达到服务端上限；已保存全部已收到内容，回答未完成。', answer)
                 if response.message.get('tool_calls') or not answer.strip():
                     raise ProviderError('最终答案为空、截断或包含工具请求。')
-                answer, citation_check = reconcile(answer, self.sources)
+                answer, citation_check = reconcile(answer, self.sources, language=self.cfg.get('language'))
                 if self.cfg.get('version', 0) >= 6:
                     answer = append_registered_references(answer, self.sources,
                         reference_heading(self.cfg, self.run['question']))

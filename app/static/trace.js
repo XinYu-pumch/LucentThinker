@@ -75,7 +75,7 @@ function renderTraceEvent(run,event){
  }else if(kind==='model_characters'){
   const counts=t.characters.get(d.call_id);if(counts)counts.textContent=tr("已接收正文 {0} 字符 · 思考 {1} 字符", d.content_chars, d.reasoning_chars);
  }else if(kind==='model_end'){
-  const row=t.requests.get(d.call_id);if(row){row.textContent=tr("{0} · 请求 #{1} · {2}{3}", d.role==='main'?tr("主模型"):tr("独立摘要模型"), d.call_id, d.status==='completed'?tr("已完成"):d.status==='incomplete'?tr("输出未完成"):d.status==='cancelled'?tr("已取消"):tr("失败"), d.usage?.total_tokens?' · '+d.usage.total_tokens.toLocaleString()+' tokens':'');if(d.error)row.append(el('span','trace-warning',d.error));}
+  const row=t.requests.get(d.call_id);if(row){row.textContent=tr("{0} · 请求 #{1} · {2}{3}", d.role==='main'?tr("主模型"):tr("独立摘要模型"), d.call_id, d.status==='completed'?tr("已完成"):d.status==='incomplete'?tr("输出未完成"):d.status==='cancelled'?tr("已取消"):tr("失败"), d.usage?.total_tokens?' · '+d.usage.total_tokens.toLocaleString()+' tokens':'');if(d.error)row.append(el('span','trace-warning',LucentI18n.serverText(d.error)));}
  }else if(kind==='tool_start'){newToolCard(run,d);
  }else if(kind==='tool_done'){
   const card=t.activeTool||newToolCard(run,d),r=d.result||{};card.status.className='tool-status';
@@ -86,9 +86,9 @@ function renderTraceEvent(run,event){
    card.body.append(el('p','result-help',tr("搜索结果用于发现来源，尚未核验原文。")));
   }else{
    card.status.textContent=r.success?(r.degraded?tr("搜索备用提取完成"):tr("原文定向提取完成")):tr("读取未完成");
-   if(r.degraded){card.box.classList.add('degraded');card.body.append(el('p','trace-warning',tr("Fetch 失败：")+r.fetch_error+tr("。以下为 ")+(r.content_source==='search_content'?'Search content':'Search summary')+tr(" 经独立摘要模型提取的结果，并非 Fetch 成功。")));}
+   if(r.degraded){card.box.classList.add('degraded');card.body.append(el('p','trace-warning',tr("Fetch 失败：")+LucentI18n.serverText(r.fetch_error)+tr("。以下为 ")+(r.content_source==='search_content'?'Search content':'Search summary')+tr(" 经独立摘要模型提取的结果，并非 Fetch 成功。")));}
    if(r.extracted_info){const details=el('details','extraction-result');details.open=true;details.append(el('summary','',tr("返回主模型的提取结果")));const content=el('div','extracted-markdown');markdown(content,r.extracted_info,d.sources||run.sources);details.append(content);card.body.append(details);}
-   if(!r.success)card.body.append(el('p','trace-warning',r.error||tr("没有可用提取结果")));
+   if(!r.success)card.body.append(el('p','trace-warning',LucentI18n.serverText(r.error)||tr("没有可用提取结果")));
    if(r.tokens_used!==undefined)card.body.append(el('small','result-meta',tr("提取模型：{0} · {1}", r.model_used||tr("未调用/未返回"), r.tokens_used===null?tr("用量未知"):r.tokens_used+' tokens')));
   }
   t.activeTool=null;updateTraceOverview(run);
@@ -104,11 +104,11 @@ function renderTraceEvent(run,event){
   note.text=kind==='note'?d.text:note.text+d.text;
   if(kind==='note')markdown(note.body,note.text,run.sources);else note.body.textContent=note.text;
  }else if(['fetch_start','fetch_done','fetch_error','fetch_fallback','extraction_start','extraction_done','extraction_error'].includes(kind)){
-  const card=t.activeTool;const labels={fetch_start:tr("正在获取网页正文"),fetch_done:tr("已获取正文 · {0} 字符", d.scrape_stats?.char_count?.toLocaleString()||0),fetch_error:tr("抓取失败：")+d.text,fetch_fallback:tr("转用当前 URL 的 ")+(d.content_source==='search_content'?'Search content':'Search summary')+tr("，继续独立提取"),extraction_start:tr("独立摘要模型按目标提取中"),extraction_done:tr("定向提取完成"),extraction_error:tr("独立提取失败")};
+  const card=t.activeTool;const labels={fetch_start:tr("正在获取网页正文"),fetch_done:tr("已获取正文 · {0} 字符", d.scrape_stats?.char_count?.toLocaleString()||0),fetch_error:tr("抓取失败：")+LucentI18n.serverText(d.text),fetch_fallback:tr("转用当前 URL 的 ")+(d.content_source==='search_content'?'Search content':'Search summary')+tr("，继续独立提取"),extraction_start:tr("独立摘要模型按目标提取中"),extraction_done:tr("定向提取完成"),extraction_error:tr("独立提取失败")};
   (card?card.body:traceBody(run)).append(el('p',kind==='fetch_error'||kind==='fetch_fallback'||kind==='extraction_error'?'trace-warning':'read-stage',labels[kind]));
  }else if(kind==='tool_error'){
   if(t.activeTool){t.activeTool.status.textContent=tr("工具报错");t.activeTool.status.className='tool-status failed';}
-  traceNotice(run,d.text,true);
+  traceNotice(run,LucentI18n.serverText(d.text),true);
  }else if(kind==='rollback'){
   if(t.activeTool){t.activeTool.status.textContent=tr("已回退（记录保留）");t.activeTool.box.classList.add('rolled-back');t.activeTool=null;}
   traceNotice(run,tr("本次交互已回退，记录保留：")+d.reason,true);
@@ -118,10 +118,10 @@ function renderTraceEvent(run,event){
   traceNotice(run,(d.status==='blocked'?tr("研究结束，仍有缺口："):tr("已请求生成报告："))+d.summary);
   if(d.unresolved_questions?.length)traceNotice(run,tr("待核实：")+d.unresolved_questions.join('；'),true);
  }else if(['action_validation','research_retry','model_retry','final_retry','citation_warning','research_end'].includes(kind)){
-  const text=d.text||(kind==='research_end'?tr("研究阶段结束 · {0}", d.reason==='model_finished'?tr("模型自主结束"):d.reason==='iteration_limit'?tr("达到迭代上限"):d.reason):tr("正在重试"));traceNotice(run,text,kind!=='research_end');
+  const text=d.text||(kind==='research_end'?tr("研究阶段结束 · {0}", d.reason==='model_finished'?tr("模型自主结束"):d.reason==='iteration_limit'?tr("达到迭代上限"):d.reason):tr("正在重试"));traceNotice(run,LucentI18n.serverText(text),kind!=='research_end');
  }else if(['error','cancelled','incomplete'].includes(kind)){
   if(t.activeTool){t.activeTool.status.textContent=tr("已停止");t.activeTool.status.className='tool-status failed';}
-  traceNotice(run,d.text,true);
+  traceNotice(run,LucentI18n.serverText(d.text),true);
  }
  return true;
 }
