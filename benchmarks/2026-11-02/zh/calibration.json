@@ -1,0 +1,380 @@
+{
+  "phase": "新增G跨组校准",
+  "review_date": "2026-11-02",
+  "overall_verdict": "未发现需要强制改分的跨组尺度问题，建议保留本轮与前轮分数。G第5/6题低分有独立的算术、政策适用和交付缺失支撑，缺引用没有被当作所有维度统一降分的理由。G第2题的可识别作者年份获得evidence2，显示评分确实区分了零URL与零可追溯信息。第4题应呈现M/G各有长短且总体都需重大补核，5.5分差中的4分来自证据维度。",
+  "score_changes": [],
+  "inputs": [
+    "评审准则.txt",
+    "gpt_english.json",
+    "gpt_chinese.json",
+    "gpt_paired.json",
+    "english.json",
+    "chinese.json",
+    "paired.json"
+  ],
+  "method": "完整读取G1–8评分理由及证据，结合已独立完成的G9/10评审。定点抽读G5的工资奖金及敏感性、G6的版本/政策/TCO、G2的试验段，并补读G4现金流与一次性费用段作重点尺度比较。按统一权重重算全部三方得分及剔除evidence后的80分重归一结果。未改原报告或评审文件。",
+  "user_confirmation": "用户确认网页版原回答也没有引用，已消除仅由Markdown导出遗失引用的待定解释。该确认仍不允许推断检索次数、内部运行方式或是否完全未检索。",
+  "scale_review": [
+    {
+      "question": 5,
+      "scores": {
+        "G": 27.5,
+        "M": 34.0,
+        "L": 81.5
+      },
+      "decision": "保留",
+      "finding": "G比M多给金额表，但错误分布到三城净奖金、杭州月年勾稽、公积金累计及险种基数，不能以表格形式自动判覆盖更高。M也有3920覆盖7500的严重错误，原分34已经低于基本可用水平。G factual1与M1.5的半档差可由错误的广泛程度支持，不应将6.5分差描述为M可可靠择城。",
+      "dimension_boundary": "coverage2因租房扣除、年度租后现金和翻转阈值未交付，factual1因独立算错，evidence0.5因政策与房源缺具体识别。reasoning1.5因未统一现金模型和未推导敏感性，不能再因为缺URL降该项。"
+    },
+    {
+      "question": 6,
+      "scores": {
+        "G": 18.0,
+        "M": 37.5,
+        "L": 68.0
+      },
+      "decision": "保留",
+      "finding": "G的极低分对应多个核心约束同时失效。明确公布的2026–2027购置税被改成免税/未知，2018旧车资格未应用，海豹版本是假定，TCO不勾稽，摘要XX/YY未完成，2027对照账缺失。M额度方案有严重错误，但已经具体处理更多版本、成本和补能量级。G factual0.5属于对核心政策与成本广泛不可用的较严边界评分，可以保留，不能设置额外总分上限。",
+      "dimension_boundary": "factual0.5针对税制、资格和金额。coverage1.5针对假定车型与缺2027账。reasoning1针对家充/补贴二元状态未解释等待为何改善。clarity1.5由占位符和表格完成状态支撑。evidence0.5只因来源不可定位。"
+    },
+    {
+      "question": 4,
+      "scores": {
+        "G": 34.5,
+        "M": 40.0,
+        "L": 70.5
+      },
+      "decision": "保留并谨慎描述小差距",
+      "finding": "G能解释Walmart FY2024利润上升的法律和重组费用基数效应，此点优于M的主要归因经营。但G仍没有完整三年现金流和同口径ROIC，净销售/总收入、营业利润增长、FIFO和FCF率方向多处失准。两者factual同为1.5、reasoning同为2，已体现不同长处与缺陷。G较M低的5.5分由coverage半档−2、evidence一档−4、clarity半档+0.5构成。",
+      "sensitivity": "去掉evidence后G38.125、M40.0，差1.875。正文宜写接近且各有重要错误，不能写M在财务推理方面全面胜出。L旧有回购和53周错误仍维持factual2.5，不因其整体领先免扣。"
+    },
+    {
+      "question": 2,
+      "scores": {
+        "G": 46.5,
+        "M": 53.5,
+        "L": 78.0
+      },
+      "decision": "保留",
+      "finding": "G提供Rae、Sandkühler、Benton作者年份及123人试验p值，evidence2高于其他大多数G报告，处理合理。G不是没有RCT细节，真正缺的是大试验素食亚组无优势、具体荟萃的身份和效应/偏倚，以及睡眠试验统计量准确呈现。G的Benton5g对20g及宣称p值未公开构成独立事实错误。",
+      "dimension_boundary": "M仍有试验链接错配、高剂量14g外推，因此G actionability2.5高于M2也合理。总体7分差由覆盖和主要研究处理等组合产生，不能只归于无URL。应保留G常规试用建议较M急性高剂量处方克制这一优点。"
+    },
+    {
+      "question": "9/10与跨组最低锚点",
+      "scores": {
+        "G9": 28.5,
+        "G10": 29.5
+      },
+      "decision": "保留",
+      "finding": "G9/10 factual1与G5、G7、G8同档，均有多项独立错误。G9/10 coverage2反映未提供最新BEV/Model3实际影响，低于G2的具体试验覆盖3。G6再低来自核心政策、版本、资格、TCO与占位符同时失效，属于内容差异。"
+    }
+  ],
+  "raw_text_checks": [
+    {
+      "file": "gpt6pro_deepresearch/深圳、杭州与成都工作机会比较 - gpt6pro_deepresearch.md",
+      "line": 62,
+      "quote": "≈318,076",
+      "finding": "表内月到手22822×12+税后奖金56520=330384，相差12308。年终奖60000正确税额应6000−210=5790，净54210而非56520。公式将速算扣除重复12次，不能用未知房源解释此错误。"
+    },
+    {
+      "file": "gpt6pro_deepresearch/上海换购纯电轿车决策 - gpt6pro_deepresearch.md",
+      "line": 34,
+      "quote": "≈210,250元",
+      "finding": "自身折旧117750、保险40000、交强险等5000、充电7000、保养5000合计174750，并非210250。保险本身又标含交强险，需进一步去重。该错误独立于引用是否存在。"
+    },
+    {
+      "file": "gpt6pro_deepresearch/上海换购纯电轿车决策 - gpt6pro_deepresearch.md",
+      "line": 44,
+      "quote": "2027年若政策延续，则继续免税，否则可能恢复10%",
+      "finding": "原题要求2027只用正式公布政策。G将已公布的2026–2027减半征税忽略，再以不确定免税设定比较买车时点，直接违反核心决策前提。"
+    },
+    {
+      "file": "gpt6pro_deepresearch/Creatine and Cognitive Performance - gpt6pro_deepresearch.md",
+      "line": 12,
+      "quote": "Sandkühler等（2023）",
+      "finding": "确有研究作者年份、123人、剂量和具体p值，不能概括成没有RCT细节。其独立弱点是没有利用该研究的素食亚组反证，且荟萃部分没有具体研究识别。"
+    },
+    {
+      "file": "gpt6pro_deepresearch/Creatine and Cognitive Performance - gpt6pro_deepresearch.md",
+      "line": 21,
+      "quote": "5天肌酸（5 g/天）",
+      "finding": "原评核查的Benton原始摘要为20g/日，校准确认报告确实写5g。作者年份的可定位性不能消除剂量转述错误。"
+    },
+    {
+      "file": "gpt6pro_deepresearch/Costco and Walmart Business Comparison - gpt6pro_deepresearch.md",
+      "line": 29,
+      "quote": "isn’t tabulated here but would exceed $35B",
+      "finding": "明确把用户指定的FY2025现金流提取留为推测，支撑coverage2。它与37行正确说明一次性费用可以同时成立，后者不足以补齐指定财务比较。"
+    }
+  ],
+  "double_penalty_audit": [
+    {
+      "pattern": "无引用跨维机械扣分",
+      "result": "未发现必须回退分数的情形",
+      "details": "G2有识别性作者年份获evidence2，G8有书目获1，G5/6/7仅泛来源获0.5，G1/3/4/9/10的法规/型号等有限线索获1。coverage/factual/reasoning通常都另有明确文本问题。用户确认原网页也无引用后，不应再以导出猜测减轻已交付证据缺口。"
+    },
+    {
+      "pattern": "同一算错蔓延到行动建议",
+      "result": "需保持理由表述的边界",
+      "details": "G5奖金算错只作为事实扣分。actionability2应依据没有有效阈值和需重建预算，而非再按每项算错逐次扣分。G6错误税制可解释结论不可执行，但reasoning1的独立锚点是等待2027何以改变家充或补贴条件没有推导。"
+    },
+    {
+      "pattern": "缺失公开资料与事实错误",
+      "result": "原分大体分开",
+      "details": "G7“未见公开组件效率”已有2024原始资料反驳，属于事实错误。未能读取纤纳页面全文仍标unverified，未把搜索摘要当确证。G9示例历史表已披露假设，未把所有值直接标为伪造。"
+    },
+    {
+      "pattern": "前轮L确定错误是否同等受罚",
+      "result": "维持原有扣分",
+      "details": "L4回购/周历错误和L7十倍capex均factual2.5，L6残值排序反转factual3。它们仍有大量正确、完整且可复算主体账目。G各题较低事实分不是因品牌标签，而是错误密度与核心任务覆盖不同。"
+    }
+  ],
+  "group_statistics": {
+    "英文原四题": {
+      "question_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "mean_scores": {
+        "L": 77.0,
+        "M": 49.0,
+        "G": 40.625
+      },
+      "mean_gaps": {
+        "L_minus_G": 36.375,
+        "M_minus_G": 8.375,
+        "L_minus_M": 28.0
+      },
+      "without_evidence_normalized_to_100": {
+        "L": 78.125,
+        "M": 51.875,
+        "G": 44.53125
+      }
+    },
+    "中文原四题": {
+      "question_ids": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "mean_scores": {
+        "L": 76.125,
+        "M": 45.5,
+        "G": 28.625
+      },
+      "mean_gaps": {
+        "L_minus_G": 47.5,
+        "M_minus_G": 16.875,
+        "L_minus_M": 30.625
+      },
+      "without_evidence_normalized_to_100": {
+        "L": 76.40625,
+        "M": 51.25,
+        "G": 32.65625
+      }
+    },
+    "英文含同题": {
+      "question_ids": [
+        1,
+        2,
+        3,
+        4,
+        10
+      ],
+      "mean_scores": {
+        "L": 76.7,
+        "M": 49.1,
+        "G": 38.4
+      },
+      "mean_gaps": {
+        "L_minus_G": 38.300000000000004,
+        "M_minus_G": 10.700000000000003,
+        "L_minus_M": 27.6
+      },
+      "without_evidence_normalized_to_100": {
+        "L": 77.875,
+        "M": 52.375,
+        "G": 42.0
+      }
+    },
+    "中文含同题": {
+      "question_ids": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "mean_scores": {
+        "L": 75.0,
+        "M": 45.2,
+        "G": 28.6
+      },
+      "mean_gaps": {
+        "L_minus_G": 46.4,
+        "M_minus_G": 16.6,
+        "L_minus_M": 29.799999999999997
+      },
+      "without_evidence_normalized_to_100": {
+        "L": 75.25,
+        "M": 50.5,
+        "G": 32.25
+      }
+    },
+    "全部十题": {
+      "question_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "mean_scores": {
+        "L": 75.85,
+        "M": 47.15,
+        "G": 33.5
+      },
+      "mean_gaps": {
+        "L_minus_G": 42.349999999999994,
+        "M_minus_G": 13.649999999999999,
+        "L_minus_M": 28.699999999999996
+      },
+      "without_evidence_normalized_to_100": {
+        "L": 76.5625,
+        "M": 51.4375,
+        "G": 37.125
+      }
+    }
+  },
+  "per_question_scores": [
+    {
+      "id": 1,
+      "L": 76.0,
+      "L_no_evidence": 80.0,
+      "M": 49.0,
+      "M_no_evidence": 51.25,
+      "G": 39.0,
+      "G_no_evidence": 43.75
+    },
+    {
+      "id": 2,
+      "L": 78.0,
+      "L_no_evidence": 77.5,
+      "M": 53.5,
+      "M_no_evidence": 56.875,
+      "G": 46.5,
+      "G_no_evidence": 48.125
+    },
+    {
+      "id": 3,
+      "L": 83.5,
+      "L_no_evidence": 84.375,
+      "M": 53.5,
+      "M_no_evidence": 59.375,
+      "G": 42.5,
+      "G_no_evidence": 48.125
+    },
+    {
+      "id": 4,
+      "L": 70.5,
+      "L_no_evidence": 70.625,
+      "M": 40.0,
+      "M_no_evidence": 40.0,
+      "G": 34.5,
+      "G_no_evidence": 38.125
+    },
+    {
+      "id": 5,
+      "L": 81.5,
+      "L_no_evidence": 84.375,
+      "M": 34.0,
+      "M_no_evidence": 37.5,
+      "G": 27.5,
+      "G_no_evidence": 31.875
+    },
+    {
+      "id": 6,
+      "L": 68.0,
+      "L_no_evidence": 67.5,
+      "M": 37.5,
+      "M_no_evidence": 41.875,
+      "G": 18.0,
+      "G_no_evidence": 20.0
+    },
+    {
+      "id": 7,
+      "L": 72.5,
+      "L_no_evidence": 70.625,
+      "M": 55.0,
+      "M_no_evidence": 63.75,
+      "G": 33.0,
+      "G_no_evidence": 38.75
+    },
+    {
+      "id": 8,
+      "L": 82.5,
+      "L_no_evidence": 83.125,
+      "M": 55.5,
+      "M_no_evidence": 61.875,
+      "G": 36.0,
+      "G_no_evidence": 40.0
+    },
+    {
+      "id": 9,
+      "L": 70.5,
+      "L_no_evidence": 70.625,
+      "M": 44.0,
+      "M_no_evidence": 47.5,
+      "G": 28.5,
+      "G_no_evidence": 30.625
+    },
+    {
+      "id": 10,
+      "L": 75.5,
+      "L_no_evidence": 76.875,
+      "M": 49.5,
+      "M_no_evidence": 54.375,
+      "G": 29.5,
+      "G_no_evidence": 31.875
+    }
+  ],
+  "language_comparison": {
+    "original_different_topic_groups": {
+      "G_english_Q1_to_Q4": 40.625,
+      "G_chinese_Q5_to_Q8": 28.625,
+      "difference_english_minus_chinese": 12.0,
+      "interpretation": "两组主题完全混杂。中文G6极低分影响均值，但即便去掉G6，中文G5/7/8均值约32.17，仍低于英文40.625。只能描述样本构成与任务差异，不能归因为语言能力。"
+    },
+    "paired_same_topic": {
+      "G_chinese": 28.5,
+      "G_english": 29.5,
+      "G_change": 1.0,
+      "L_minus_G_chinese": 42.0,
+      "L_minus_G_english": 46.0,
+      "L_minus_G_gap_change": 4.0,
+      "M_minus_G_chinese": 15.5,
+      "M_minus_G_english": 20.0,
+      "M_minus_G_gap_change": 4.5,
+      "interpretation": "G英文比中文仅增1分，L增5、M增5.5，因此英文相对差距扩大4/4.5分。不能从这一次同题输出认定英文导致G退步，G绝对分数实际略升。六维半档变动可使总分变化0.5–2.5分，1分改善低于常见评审粒度。"
+    },
+    "no_evidence_result": "剔除evidence并把其余80分归一为100后，全部十题仍为L76.5625、M51.4375、G37.125。该结果说明当前排名并非只由无引用推动，但不代表证据可忽略。Q4的G/M差距明显收窄，需保留局部比较的审慎。"
+  },
+  "presentation_recommendations": [
+    "Q2将缺RCT细节改为缺关键亚组反证与具体荟萃比较，承认已有作者年份和p值。",
+    "Q4明确G的一次性费用分析优于M，整体小差距主要来自覆盖和证据，剔除evidence后两者接近。",
+    "Q5/M与G均需重做现金账，M领先6.5分不应被解读为推荐可直接执行。",
+    "Q6低分对应多个独立核心失效，应展示至少税制、版本/时间对照缺失和TCO不勾稽三项证据，避免看起来仅因无引用判极低。",
+    "同题语言结果同时呈现G自身+1和L-G/M-G相对差距扩大，避免把相对落后误说成绝对分数下降。"
+  ],
+  "baseline_change_proposals": [],
+  "modified_existing_reviews": false,
+  "limits": "本次为尺度与扣分归属校准，没有重新全量审阅其他16份报告，也未重新验证前轮全部网络来源。分数是统一锚点下的主观评审，不构成统计估计。"
+}

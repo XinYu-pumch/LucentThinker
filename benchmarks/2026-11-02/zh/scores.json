@@ -1,0 +1,5166 @@
+{
+  "date": "2026-11-02",
+  "edition": "zh",
+  "question_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "scope": "全部十题，含同题中英提问",
+  "rubric": {
+    "coverage": {
+      "label": "需求覆盖",
+      "weight": 20
+    },
+    "factual": {
+      "label": "事实与数值",
+      "weight": 25
+    },
+    "evidence": {
+      "label": "证据与追溯",
+      "weight": 20
+    },
+    "reasoning": {
+      "label": "推理与边界",
+      "weight": 20
+    },
+    "actionability": {
+      "label": "决策可用性",
+      "weight": 10
+    },
+    "clarity": {
+      "label": "组织表达",
+      "weight": 5
+    }
+  },
+  "methodology": "methodology.md",
+  "mean_scores": {
+    "L": 75.85,
+    "M": 47.15,
+    "G": 33.5
+  },
+  "weight_sensitivity": {
+    "Original weights": {
+      "L": 75.85,
+      "M": 47.15,
+      "G": 33.5
+    },
+    "Evidence excluded, others normalized": {
+      "L": 76.5625,
+      "M": 51.4375,
+      "G": 37.125
+    },
+    "Equal weights": {
+      "L": 77.66666666666667,
+      "M": 49.333333333333336,
+      "G": 37.333333333333336
+    },
+    "More weight on facts and evidence": {
+      "L": 74.55,
+      "M": 43.95,
+      "G": 30.5
+    },
+    "More weight on decision usefulness": {
+      "L": 76.8,
+      "M": 48.7,
+      "G": 35.3
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "title": "Bristol Home Battery Decision",
+      "verdict": "两者在27p进口/15p出口下都正确建议维持现状；L的能源账、收益上限、具体产品与规则明显更可复核。M的离峰乐观情景有计算和引证问题。两者都没有用实际半小时数据给出可审计的全年调度，不能把任一收益区间当家庭报价。",
+      "L": {
+        "scores": {
+          "coverage": 4.5,
+          "factual": 3.5,
+          "evidence": 3,
+          "reasoning": 4,
+          "actionability": 4,
+          "clarity": 4.5
+        },
+        "rationales": {
+          "coverage": "覆盖5/10kWh、现状、损耗、出口机会成本、具体产品、保修吞吐、VAT和并网；也照顾无EV限制。",
+          "factual": "基线£523.80、9.3p/充入kWh与£217.62太阳能收益上限可复算；将保修70%下限直接说成平均85%输出的必然含义不准确，部分收益区间并无明细模型。",
+          "evidence": "并网/VAT/设备规格有官方或厂家来源，但成本、保修和2026市场报价大量依赖经销商指南，月度模拟结果无输入表或计算附件。",
+          "reasoning": "以全年剩余电量建立上限，稳健地区分太阳能与套利；但把增量£50列为年度数据可推出的稳健结论，实际仍依赖时序。套利未完整比较同一ToU下无电池基线与剩余日间电量成本。",
+          "actionability": "能直接指导查电价、半小时数据、询价、吞吐保修与DNO；具体5kWh备电建议仍需负载功率/备电接线和停电时长验证。",
+          "clarity": "先给结论与表格，再展开假设与验证缺口，较易追踪。"
+        },
+        "strengths": [
+          "正确扣除出口损失，给出不依赖负载曲线的太阳能收益上限。",
+          "给出多款5/10kWh产品、吞吐限制、无EV费率准入与实际询价步骤。"
+        ],
+        "weaknesses": [
+          "月度Bristol模拟只给输出，无法复算1190/1740kWh捕获量。",
+          "保修容量下限不等于预期衰减轨迹；对模型依赖结论的“稳健”标签偏强。"
+        ],
+        "confidence": "中",
+        "weighted_score": 76.0
+      },
+      "M": {
+        "scores": {
+          "coverage": 3,
+          "factual": 2,
+          "evidence": 2,
+          "reasoning": 2.5,
+          "actionability": 3,
+          "clarity": 3
+        },
+        "rationales": {
+          "coverage": "覆盖主要经济维度和数据需求，但缺少可选择的具体5/10kWh产品/吞吐条款，DNO、安装与并网规则覆盖不足。",
+          "factual": "把充入和放出kWh的价值混用，离峰算式没有实际计入1/效率；线性100%到70%被称为1.5–2%/年也不一致。这些不改变平价太阳能不划算方向，却削弱精细比较。",
+          "evidence": "有VAT等官方链接，但改变购买结论的Bristol Flux +£1100 NPV并未得到所引Reonic网页支持。多数收益依据泛用营销计算器，欠同家庭参数的可追溯测算。",
+          "reasoning": "理解出口机会成本、季节性、折现和复杂费率风险；但未给数学上限，模糊地叠加太阳能与每日套利价值，且“接近盈亏平衡”措辞与22–50年回收期张力大。",
+          "actionability": "建议12月数据和个性化模拟有用；无EV费率只提示检查资格，未落实当前可用方案，18–36个月行动却写赶2027年3月截止也有时间错位。",
+          "clarity": "分层清楚但重复场景与推荐较多，区间口径摇摆且HTML标记使阅读负担上升。"
+        },
+        "strengths": [
+          "明确介绍NPV与3–5%折现，提醒长期费差和自动调度风险。",
+          "没有承诺固定正收益，要求个人曲线模拟与确认费率资格。"
+        ],
+        "weaknesses": [
+          "9.3p分母和离峰损耗算错；年节省和回收期区间不能一致复核。",
+          "引用的唯一明确正NPV情景缺乏对应原文依据。"
+        ],
+        "confidence": "中",
+        "weighted_score": 49.0
+      },
+      "evidence": [
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/lucentthinker/q01.md",
+          "line": 98,
+          "quote": "2,340 × 9.3p = £218/year",
+          "analysis": "复算为£217.62；即使捕获全部年出口也难覆盖数千英镑资本支出，提供稳健方向。"
+        },
+        {
+          "system": "L",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q01.md",
+          "line": 104,
+          "quote": "Using a monthly Bristol solar profile",
+          "analysis": "正文未展示月度生成/负载数据、调度约束或计算附件；110/160英镑是情景估计而非可重现模拟。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q01.md",
+          "line": 78,
+          "quote": "A warranty that guarantees 70% at year 10 implies an average of about 85% output",
+          "analysis": "85%可作为线性保守假设，不能由保修下限推出预期实际衰减；两者都使用了这个简化。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q01.md",
+          "line": 90,
+          "quote": "9.3p per kWh of <em>discharged</em> energy",
+          "analysis": "9.3p对应充入1kWh；放出1kWh应为27−15/0.9=10.333p。错误约10%，不推翻“不买”的基础结论。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q01.md",
+          "line": 211,
+          "quote": "30–34p − 14p",
+          "analysis": "报告已承认1kWh放电需1.11kWh充电，却仍只减14p；应减15.56p，得到14.44–18.44p。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q01.md",
+          "line": 235,
+          "quote": "positive</em> NPV of around £1,100 over 10 years",
+          "analysis": "已打开所引Reonic全文，未见Bristol个案、5/10kWh现金流或£1100 NPV，是能改变购买决策的错配引证。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q01.md",
+          "line": 169,
+          "quote": "3–5%",
+          "analysis": "明确折现的价值：即便简单回收期看似接近寿命，晚期收益现值仍较低。L仅给未折现10年净额。"
+        },
+        {
+          "system": "M",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/mirothinker/q01.md",
+          "line": 443,
+          "quote": "half‑hourly or hourly data",
+          "analysis": "要求用个人数据与实际费率模拟，方向可执行。"
+        }
+      ],
+      "checks": [
+        {
+          "claim": "平价太阳能收益上限",
+          "system": "both",
+          "status": "supported",
+          "finding": "2340×(0.9×0.27−0.15)=£217.62/年；无负载数据也可建立上限。M区间上沿£250超过该假设下全捕获上限。",
+          "url": "local-arithmetic",
+          "source_title": "按用户输入和90%效率复算",
+          "access_note": "本地算术核查；非在线来源"
+        },
+        {
+          "claim": "Reonic支持10kWh Flux 10年NPV +£1100",
+          "system": "M",
+          "status": "unsupported_or_mismatched",
+          "finding": "读取全文：页面讨论电价类型和安装商选择，没有该Bristol模型、£1100或NPV计算。",
+          "url": "https://reonic.com/en-gb/blog/solar-battery-tariffs/",
+          "source_title": "Solar Battery Tariffs UK 2026: The Installer's Comparison Guide",
+          "access_note": "全文读取；页面可能更新，不能由此推断故意捏造"
+        },
+        {
+          "claim": "独立住宅电池安装可享节能材料税率优惠",
+          "system": "both",
+          "status": "supported",
+          "finding": "HMRC说明2024年2月起合条件电池安装纳入优惠，含独立储能；支持报告把合条件安装税收列入考虑。",
+          "url": "https://www.gov.uk/hmrc-internal-manuals/vat-energy-saving-materials-and-grant-funded-heating-supplies/vensav3061",
+          "source_title": "HMRC VENSAV3061 — Electrical storage batteries",
+          "access_note": "已读取网页原文相关段落；未核验全部链接"
+        },
+        {
+          "claim": "2026具体安装价格、GivEnergy支持状态、Flux区域价格",
+          "system": "both",
+          "status": "unverified",
+          "finding": "未逐项核验这些实时事实，不据记忆否定2026陈述；它们仍需报价、厂家和费率原件补核。",
+          "url": "https://octopus.energy/smart/flux/",
+          "source_title": "Octopus Flux（需补核具体费率）",
+          "access_note": "本轮未阅读全文核验区域价格"
+        }
+      ],
+      "decisive_differences": [
+        "L把全年电量上限转化成可复核财务否决条件；M依赖宽泛行业区间。",
+        "L产品/保修/规则更具体；M的NPV意识较好，但明确正NPV引文缺失。"
+      ],
+      "caveats": [
+        "比较采用用户假定15p，不把实时出口价不同当题设错误。",
+        "无真实半小时数据，年节省精度有限；太阳能、离峰与峰时出口不能无约束相加。",
+        "线性衰减、报价与生命周期只是情景假设，保修结束也不等于设备立即报废。"
+      ],
+      "G": {
+        "scores": {
+          "coverage": 3,
+          "factual": 1.5,
+          "evidence": 1,
+          "reasoning": 2,
+          "actionability": 2,
+          "clarity": 3.5
+        },
+        "rationales": {
+          "coverage": "回答两种容量、维持现状、产品、损耗、出口成本和离峰，但UK规则只笼统说VAT为零，缺截止日期、并网与安装条件，也未落实无EV费率准入及产品保修吞吐。",
+          "factual": "基线进口3240kWh、出口2340kWh和9.3p/充入kWh正确。5kWh回收期及10kWh离峰乘法严重错误，后者把理论收益高估约2.7倍。5kWh节省和净账单也与自己列式不一致。",
+          "evidence": "所交付文件仅列来源类别，没有报价出处、厂家文件、费率链接或脚注映射。型号名可继续检索，因此保留少量分数。用户已确认网页版原回答也没有引用，因此该缺口同时存在于原回答与保存文件。",
+          "reasoning": "理解出口机会成本及夜充占用日间容量，但按340次太阳能循环估算缺季节性依据，把10kWh捕获全部余电和所有结论稳健说得过满。未建立同费率无电池基线或区分进口节省与出口套利。",
+          "actionability": "提出具体费率和个人半小时数据需重算，但未给可执行模拟步骤、所需报价信息或改变结论的门槛。套利错误使用户无法据此判断更换费率后的选择。",
+          "clarity": "章节简洁、公式可见，便于定位主要判断。充入/放出、节省/成本和寿命/保修措辞偶有混淆。"
+        },
+        "strengths": [
+          "基线电量账与出口机会成本核心公式正确。",
+          "承认夜充可能挤占太阳能容量，并讨论季节与负载时点。",
+          "相较M，至少列举了Enphase、AlphaESS等具体容量产品。"
+        ],
+        "weaknesses": [
+          "5kWh成本除年度收益应约19–28年，被写成40–50年。",
+          "10kWh×16p应£1.60/日、£584/年，被写成£4.40/日、£1600/年。",
+          "缺可定位来源和针对无EV家庭的现实费率路径。"
+        ],
+        "confidence": "中高",
+        "weighted_score": 39.0
+      },
+      "three_way_verdict": "三方都认为给定平价电价下太阳能电池难以回本。G能列出具体产品和正确的基线能源账，但回收期与离峰收益出现直接算术错误，情景边界也较弱。L的全年收益上限、保修与无EV限制更完整。M存在原评审指出的损耗和NPV引证问题，同时其折现与后续模拟步骤仍较G充分。",
+      "gpt_differences": [
+        "G的显著短处来自可复算错误，移除证据维度后仍然存在。",
+        "G产品举例比M具体，L则把产品、吞吐保修、并网和无EV费率约束接入实际决策。",
+        "M比G更明确折现和个性化模拟要求，但原有乐观NPV引证问题未被本轮消除。"
+      ],
+      "gpt_caveats": [
+        "用户确认网页版原回答也没有引用。仅按可追溯性评证据，不推断系统是否检索过。",
+        "所有方案缺真实半小时数据。G的太阳能不买方向并未被回收期错误推翻，但离峰情景需重算。",
+        "保修期不等于实际寿命，容量下限也不等于预期衰减。"
+      ],
+      "gpt_evidence": [
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q01.md",
+          "line": 7,
+          "quote": "about 3,240 kWh are imported",
+          "analysis": "4500−3600×35%=3240，出口2340，净电费£523.80可复算。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q01.md",
+          "line": 11,
+          "quote": "Net saved ≈(27×0.9 – 15)≈9.3 p per kWh stored",
+          "analysis": "正确计入出口机会成本和往返损耗。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q01.md",
+          "line": 19,
+          "quote": "≈40–50 yr simple payback",
+          "analysis": "其£3500–4500成本、£160–180年节省给出19.44–28.13年。仍超过典型保修期，但不是40–50年。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q01.md",
+          "line": 26,
+          "quote": "~£4.40 (10×16p) – about £1,600/yr",
+          "analysis": "10×16p=£1.60，年£584。按90%效率和每日电池输出10kWh算约£539，均远低于£1600。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q01.md",
+          "line": 11,
+          "quote": "≈ £360 (savings ~£160)",
+          "analysis": "所列1440×0.27−1600×0.15=£148.80，净账单£375。该局部舍入不如离峰错误重要。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q01.md",
+          "line": 26,
+          "quote": "charging fully at night means the battery can’t absorb midday sun",
+          "analysis": "指出两种用途争用容量，避免完全忽略调度冲突。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q01.md",
+          "line": 32,
+          "quote": "All these conclusions are robust given the stated prices and tariffs",
+          "analysis": "太阳能方向可用上限支持，离峰选择和容量收益则需要时序、费率准入、报价，不能全部只由年度总量推出。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q01.md",
+          "line": 34,
+          "quote": "Manufacturer and installer data; UK cost guides",
+          "analysis": "没有具体厂家文件、价格日期或对应URL，无法逐条追踪。此问题直接计入证据维度。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q01.md",
+          "line": 98,
+          "quote": "2,340 × 9.3p = £218/year",
+          "analysis": "L提供无负载曲线亦可成立的太阳能节省上限，三方中最清晰。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q01.md",
+          "line": 169,
+          "quote": "3–5%",
+          "analysis": "M明确讨论折现，G只给不折现总额。旧M的NPV错配仍保留在原评审。"
+        }
+      ],
+      "gpt_checks": [
+        {
+          "claim": "无EV家庭能否采用所举Octopus Go",
+          "system": "G",
+          "status": "unsupported_or_mismatched",
+          "finding": "官方准入要求家中充电的电动车。G列Go却未提示此限制，无法直接适用用户情境。",
+          "url": "https://octopus.energy/smart/go/",
+          "source_title": "Octopus Go — Joining requirements",
+          "access_note": "2026-11-02读取当前官方页面。未取10月29日存档，判为适用性缺口，不声称期间政策有变化"
+        },
+        {
+          "claim": "回收期和离峰收益算术",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "3500/180至4500/160约19.4–28.1年。10×£0.16×365=£584，非£1600。正确的平价太阳能上限约£217.62/年仍支持先维持现状。",
+          "url": "responses/gpt-deepresearch/q01.md",
+          "source_title": "G报告第19、26行及用户输入的本地复算",
+          "access_note": "本地独立计算"
+        },
+        {
+          "claim": "Enphase IQ 5P产品保修和价格",
+          "system": "G",
+          "status": "unverified",
+          "finding": "厂家页面403，未确认报告的具体装机报价与保修条件。访问失败不证明规格或价格虚假。",
+          "url": "https://enphase.com/en-gb/store/storage/iq-battery-5p",
+          "source_title": "Enphase IQ Battery 5P",
+          "access_note": "访问失败403"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Creatine and Cognitive Performance",
+      "verdict": "L更好地区分大样本随机试验、亚组外推和真实工作效果，且引用更可定位；M也给出“不够有说服力”的总体回答，并较好强调不显著不等于不存在。然而L误读Xu终点与勘误，M则把实验高剂量转成针对用户短睡的实践处方，两者均需校正。",
+      "L": {
+        "scores": {
+          "coverage": 4.5,
+          "factual": 3.5,
+          "evidence": 4,
+          "reasoning": 3.5,
+          "actionability": 4,
+          "clarity": 4.5
+        },
+        "rationales": {
+          "coverage": "完整覆盖38岁素食者、偶尔缺觉、RCT与荟萃、日常意义、剂量和安全。",
+          "factual": "主要Sandkühler样本、剂量、p值与素食亚组结果经原文支持；但Xu attention/processing scores与time混淆构成确认错误。",
+          "evidence": "给出具体DOI/论文链接、效应量与访问限制，优于泛首页引证；校正后Prokopidis精确值仍来自二手总结，诚实标注但可靠度有限。",
+          "reasoning": "讨论单位分析错误、脑与肌肉肌酸差别以及极端睡眠剥夺外推，链条较强；“不会注意到”“任何变化都在噪声内”等断语超过无现实工作试验能证明的范围。",
+          "actionability": "不鼓励以高剂量代替睡眠，标准低剂量仅作为自愿尝试并提示肾功能化验解释，整体更适配用户。",
+          "clarity": "短试验表与要点易读，结论明确；少数绝对语气应改为证据不足。"
+        },
+        "strengths": [
+          "对最大123人交叉RCT和早期45人试验有实际比较，标出无素食者优势。",
+          "说明试验效果与办公生产率不同，安全性及剂量证据边界明确。"
+        ],
+        "weaknesses": [
+          "将Xu评分终点与完成时间终点不同误判为摘要正文矛盾。",
+          "从小/不确定平均效应直接断言个人不可能感知，推断过强。"
+        ],
+        "confidence": "中",
+        "weighted_score": 78.0
+      },
+      "M": {
+        "scores": {
+          "coverage": 4,
+          "factual": 2.5,
+          "evidence": 2,
+          "reasoning": 2.5,
+          "actionability": 2,
+          "clarity": 3
+        },
+        "rationales": {
+          "coverage": "各子问均涉及，含素食脑肌酸、随机试验、法规、日常与安全；没有真正紧扣用户只是偶尔短睡的实践边界。",
+          "factual": "最大RCT大方向正确，但混入其未测的前额叶激活，年轻年龄组口径变化和研究身份错配；多处小效应转换与“行为明显”表述过度。",
+          "evidence": "重要RCT链接指向另一篇元分析；多个关键研究仅指PubMed/Springer首页，不能按标题复核。也有真实官方委员会和原始睡眠实验链接，不应一概否定。",
+          "reasoning": "解释监管门槛与统计显著不同，承认素食优势混合证据；但在此基础上仍称素食者更可能获益，并把极端剥夺的小试验推广到<3–4小时睡眠。",
+          "actionability": "常规3–5g方案和观察方法具体，但14g早晨急性服用作为针对用户建议没有足够临床外推依据；主观自测也易受期待和练习效应影响。",
+          "clarity": "结构齐全，反复多层“key insight/implication/scenario”降低密度；最强建议与保守摘要不一致。"
+        },
+        "strengths": [
+          "明确说明监管不批准不能等同证明零效果。",
+          "保留素食者脑肌酸可能不低、最新大试验中没有明确优势等反面证据。"
+        ],
+        "weaknesses": [
+          "研究链接身份错配和泛首页引用妨碍证据追踪。",
+          "把单次高剂量实验变成用户可照做的短睡方案，超出直接证据。"
+        ],
+        "confidence": "中",
+        "weighted_score": 53.5
+      },
+      "evidence": [
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/lucentthinker/q02.md",
+          "line": 14,
+          "quote": "Vegetarians did not benefit more than omnivores",
+          "analysis": "原始123人RCT明确支持；对用户的关键亚组判断可靠。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/lucentthinker/q02.md",
+          "line": 29,
+          "quote": "That internal inconsistency is itself a warning",
+          "analysis": "原文attention scores、processing speed scores不显著，而attention time和processing speed time显著；勘误专门补了scores，不能说这种差别本身是矛盾。"
+        },
+        {
+          "system": "L",
+          "dimension": "evidence",
+          "status": "supported",
+          "file": "responses/lucentthinker/q02.md",
+          "line": 127,
+          "quote": "some primary sources were available only as abstracts or partial text",
+          "analysis": "明确说明哪些全文没拿到以及校正效应量来自二手，便于使用者评估证据层级。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q02.md",
+          "line": 85,
+          "quote": "Effects of that size are below what you would notice",
+          "analysis": "缺现实工作结局只能支持不确定，不能确保所有人或长期累计都不可感知。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q02.md",
+          "line": 158,
+          "quote": "does not mean <strong>no effect exists</strong>",
+          "analysis": "正确区分缺少足够证据与不存在效应，相比L部分绝对措辞更审慎。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q02.md",
+          "line": 396,
+          "quote": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11275561/",
+          "analysis": "该PMCID属于Xu 2024元分析，非Sandkühler 2023试验；影响最重要RCT的可追溯性。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "internal_inconsistency",
+          "file": "responses/mirothinker/q02.md",
+          "line": 93,
+          "quote": "you are slightly more likely to benefit than a meat‑eater",
+          "analysis": "紧前87–91行承认没有素食特异优势与脑肌酸差异，未新增证据便给概率方向判断。"
+        },
+        {
+          "system": "M",
+          "dimension": "actionability",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q02.md",
+          "line": 319,
+          "quote": "≈0.2 g/kg creatine monohydrate",
+          "analysis": "313行将适用条件写成all-nighter或<3–4h睡眠；小型全剥夺实验不能直接支持此常规实践协议。"
+        }
+      ],
+      "checks": [
+        {
+          "claim": "最大RCT与素食优势",
+          "system": "both",
+          "status": "supported",
+          "finding": "原始论文支持123人、5g/日6周、八项探索任务未见效益和无素食优势；结论仍保留小效应可能。L描述更精准，M引用身份错位。",
+          "url": "https://link.springer.com/article/10.1186/s12916-023-03146-5",
+          "source_title": "The effects of creatine supplementation on cognitive performance—a randomised controlled study",
+          "access_note": "已读取网页原文相关段落；未核验全部链接"
+        },
+        {
+          "claim": "Xu摘要与正文相矛盾",
+          "system": "L",
+          "status": "confirmed_error",
+          "finding": "正文区分评分与完成时间：前者不显著，注意时间SMD−0.31、处理时间−0.51显著；2025勘误补充scores。L据此指控矛盾不成立。",
+          "url": "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2024.1424972/full",
+          "source_title": "The effects of creatine supplementation on cognitive function in adults",
+          "access_note": "已读取原文相关结果与摘要，并读取2025勘误"
+        },
+        {
+          "claim": "2025勘误否定注意/处理速度效果",
+          "system": "L",
+          "status": "confirmed_error",
+          "finding": "勘误将两处终点明确为scores，未推翻time结局；应与统计双重计数的另一项批评区分。",
+          "url": "https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2025.1570800/full",
+          "source_title": "Corrigendum: The effects of creatine supplementation on cognitive function in adults",
+          "access_note": "已读取网页原文相关段落；未核验全部链接"
+        },
+        {
+          "claim": "M的Sandkühler链接身份",
+          "system": "M",
+          "status": "unsupported_or_mismatched",
+          "finding": "PMCID PMC11275561实际题名为Xu元分析。直接PMC打开遇验证码，检索记录和对应Frontiers DOI确认身份；不把访问失败当作虚假。",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11275561/",
+          "source_title": "The effects of creatine supplementation on cognitive function in adults: a systematic review and meta-analysis",
+          "access_note": "PMC打开验证码；搜索索引身份与出版社原文交叉对应"
+        },
+        {
+          "claim": "2026所有新试验/条例与校正精确效应量",
+          "system": "both",
+          "status": "unverified",
+          "finding": "本轮未逐一核对；不因2026时间或无法取全文判虚假。L披露二手校正估计的限制。",
+          "url": "https://livrepository.liverpool.ac.uk/3169166/",
+          "source_title": "Prokopidis authors’ reply（精确校正值需补核）",
+          "access_note": "本轮未读取全文"
+        }
+      ],
+      "decisive_differences": [
+        "L对研究设计、效应量和适用人群的处理更扎实，但其对Xu勘误的质疑是反例，不能把“批判性口吻”等同正确。",
+        "M的保守总判断与针对缺觉的高剂量建议不一致；L的实践建议较符合证据边界。"
+      ],
+      "caveats": [
+        "评审不等同医疗建议；未逐一核验所有2026研究。",
+        "统计不显著不等于已证明无效果，标准化均差也不能直接转换为办公效率百分比。"
+      ],
+      "G": {
+        "scores": {
+          "coverage": 3,
+          "factual": 2,
+          "evidence": 2,
+          "reasoning": 2,
+          "actionability": 2.5,
+          "clarity": 3.5
+        },
+        "rationales": {
+          "coverage": "覆盖RCT、年龄、素食、缺眠、剂量、安全和实用建议，但荟萃分析没有具体研究识别、合并效应和偏倚讨论，缺用户特别要求的大样本素食亚组反证。",
+          "factual": "最大RCT的123人、5g/日6周和主要p值基本正确。Benton被误写5g/日，原文为20g/日。睡眠研究样本和统计报告也误述，所谓没有p值/具体效果与公开原文冲突。",
+          "evidence": "作者年份、试验设计和期刊可让读者定位多项研究，故高于仅泛称Sources的其余G报告。但没有完整书目/链接，荟萃和临床网站论断模糊，2026新闻研究身份不清。",
+          "reasoning": "能对比早期大效应与后续微小效应，但忽略最大RCT无素食优势，仍推导素食者最具针对性。把极端实验缺眠与偶尔少睡联系过强，用肌肉储备改善支撑脑力建议存在目标错位。",
+          "actionability": "常规3–5g可选试用、肾病咨询和睡眠提醒相对温和，较M直接建议急性14g更克制。但追求快效可加载20g的表述未说明认知证据不足，主观试用缺控制期待/练习效应。",
+          "clarity": "摘要和试验表易读，篇幅集中。中英术语和“缓冲期（loading）”“跨内试验”等用词欠准确，统计未报与自身缺信息没有分清。"
+        },
+        "strengths": [
+          "准确呈现最大RCT主要p值，并指出认知效益不宜期待过大。",
+          "给出作者年份和样本/剂量表，仍有一定回溯能力。",
+          "建议以常规日剂量为主，未照M的方式给缺眠早晨大剂量急救方案。"
+        ],
+        "weaknesses": [
+          "Benton剂量错报，已公开睡眠试验统计被说成未公开。",
+          "没有展示具体荟萃分析及其方法争议。",
+          "素食者更获益与偶尔短睡适用性被过度推断。"
+        ],
+        "confidence": "中高",
+        "weighted_score": 46.5
+      },
+      "three_way_verdict": "G概括了早期小样本与较大试验的差异，安全和日常意义也有涉及，但未实质比较具体荟萃分析，误报Benton剂量，并称睡眠试验未公开统计量。L对试验、亚组与外推边界更细，仍保留原有Xu终点误读扣分。M也有来源错配和高剂量建议问题，但对无素食优势的反证、荟萃争议及监管判断覆盖较G完整。G中文作答作为输出特征记录，未因语言本身扣分。",
+      "gpt_differences": [
+        "G能复述部分研究，但没有L/M那样展开具体荟萃研究争议，重要亚组反证也遗漏。",
+        "G对常规试用的建议较M急性大剂量方案克制，不过仍未严谨区分肌肉加载和认知效果。",
+        "L整体最可复核，原评审已发现的Xu终点错误依然有效，三方均不可按结论语气替代原文核查。"
+      ],
+      "gpt_caveats": [
+        "英文输入中文输出未作为单独扣分理由。",
+        "未核实的2026报道发表状态保持待核。",
+        "小效应、统计不显著与日常感知是不同问题，不能相互直接替代。"
+      ],
+      "gpt_evidence": [
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 12,
+          "quote": "p=0.064，部分η²≈0.029",
+          "analysis": "与原始123人试验的BDS结果对应，对主要试验的方向概括基本可靠。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 11,
+          "quote": "45名年轻素食志愿者",
+          "analysis": "至少区分早期45人与后续123人研究，为认识重复验证提供基础。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 21,
+          "quote": "5天肌酸（5 g/天）",
+          "analysis": "Benton原始摘要为128位女性、20g/日5天。剂量误报影响用户对低剂量证据的理解。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 17,
+          "quote": "P值和效应量未公开",
+          "analysis": "原文公开各任务百分比、误差和p值。无法从已见摘要取得统计量，不等于论文未公开。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 21,
+          "quote": "使用肌酸在理论上最具针对性",
+          "analysis": "未纳入其已讨论的最大RCT素食者未更多获益这一关键反证，脑与肌肉储量也未区分。"
+        },
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 13,
+          "quote": "荟萃分析提示",
+          "analysis": "全文对荟萃仅泛称结论，未列Xu/Prokopidis等研究身份、合并效应或方法限制，未完成明确子问。"
+        },
+        {
+          "system": "G",
+          "dimension": "actionability",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 59,
+          "quote": "若追求快速效果，可先高剂量",
+          "analysis": "认知目标没有相应快效依据，肌肉加载方案不能直接证明办公或普通短睡获益。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "unverified",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 43,
+          "quote": "未正式发表数据",
+          "analysis": "未给2026新闻研究准确题名或链接，无法核对发表状态。本轮保留待核，未按记忆判假。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q02.md",
+          "line": 14,
+          "quote": "Vegetarians did not benefit more than omnivores",
+          "analysis": "L明确引用最大RCT中的关键亚组反证，G遗漏。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q02.md",
+          "line": 88,
+          "quote": "brain creatine concentrations appear similar",
+          "analysis": "M有脑与肌肉肌酸的区分，并承认混合证据。G仅强调膳食低与理论优势。"
+        }
+      ],
+      "gpt_checks": [
+        {
+          "claim": "Benton试验的每日总剂量",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "原始摘要为20g/日、5天、128名女性。G第21和39行写5g/日，表中人数120也不符摘要。",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21118604/",
+          "source_title": "Benton & Donohoe — The influence of creatine supplementation on the cognitive functioning of vegetarians and omnivores",
+          "access_note": "已读原始摘要"
+        },
+        {
+          "claim": "睡眠研究未公开p值与具体改进数值",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "2024原文为15人并公开统计。语言处理时间改善29.1±5.3%，p=2×10⁻⁶等指标可直接查到。G把未提取的统计量误称为未公开。",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10902318/",
+          "source_title": "Single dose creatine improves cognitive performance and induces changes in cerebral high energy phosphates during sleep deprivation",
+          "access_note": "Nature入口失败后读取PMC原始全文"
+        },
+        {
+          "claim": "Sandkühler结果与素食者优势",
+          "system": "G",
+          "status": "supported",
+          "finding": "G主要p值与5g/日方案正确。原文同时明确素食者未比杂食者获益更多，这限制G的针对性推断。",
+          "url": "https://link.springer.com/article/10.1186/s12916-023-03146-5",
+          "source_title": "The effects of creatine supplementation on cognitive performance—a randomised controlled study",
+          "access_note": "已读取原始来源相关全文段落"
+        },
+        {
+          "claim": "2026 TAM/Zemer研究未正式发表",
+          "system": "G",
+          "status": "unverified",
+          "finding": "作者/报道身份不完整，本轮未确证发表状态，未列为已证错误。",
+          "url": "responses/gpt-deepresearch/q02.md",
+          "source_title": "G报告第41–43、53行",
+          "access_note": "缺具体论文或报道链接"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Search Architecture for a B2B Knowledge Product",
+      "verdict": "双方都选PostgreSQL起步、Qdrant作为有条件迁移路径。L把租户选择率、索引布局、权限例外、版本条件与验收阈值接成较可执行的工程论证；M的总体方向合理，但多项精确性能断言和引文错配使其不足以支撑硬件采购或SLO承诺。",
+      "L": {
+        "scores": {
+          "coverage": 4.5,
+          "factual": 4,
+          "evidence": 4,
+          "reasoning": 4,
+          "actionability": 4.5,
+          "clarity": 4.5
+        },
+        "rationales": {
+          "coverage": "完整覆盖混合排序、权限、过滤、容量、写入一致性、恢复和小团队运维，并区分业务SLO与数据库延迟。",
+          "factual": "原始向量大小、过滤选择率和Postgres规则可核对，数量级有用；部分索引和RAM/磁盘口径混在同表，20–30%附加开销未按文本/ACL实际规模量化。",
+          "evidence": "大量具体官方文档、版本/issue链接，清楚标注线性外推与没拿到全文的项目；没有将公开benchmark直接当用户性能保证。",
+          "reasoning": "从0.05%全局选择率推出分区，提出exact ground truth、分桶与并发更新，因果链强；未把小租户过滤后精确检索列为pgvector首要候选，64–256分区HNSW方案可能过早复杂化。",
+          "actionability": "有阶段计划、基准矩阵、outbox/CDC和具体迁移条件。主方案已说明Postgres提交ACL后下一事务可见，Qdrant过滤由Postgres权限解析；但通用验收表的撤销≤5秒p95仍须针对异步路径明确硬性授权边界和失败关闭，不应仅靠延迟目标。",
+          "clarity": "表格和配置把重点串联，证据缺口明确；少数数量级推断偏肯定。"
+        },
+        "strengths": [
+          "从平均2500块推导选择率，而非只看5M数量级。",
+          "基准要求每个租户/ACL桶的exact真值、端到端延迟与写入压力；给出版本相关安全与恢复注意。"
+        ],
+        "weaknesses": [
+          "推荐组合pg_search+分区未验证支持性，正文已承认。",
+          "对少量候选的精确搜索和最终ACL复核可更明确；容量表未完全统一resident与storage口径。"
+        ],
+        "confidence": "中",
+        "weighted_score": 83.5
+      },
+      "M": {
+        "scores": {
+          "coverage": 4,
+          "factual": 2.5,
+          "evidence": 1.5,
+          "reasoning": 2.5,
+          "actionability": 3,
+          "clarity": 3
+        },
+        "rationales": {
+          "coverage": "子问基本齐全，覆盖3个方案和迁移阶段；缺具体权限撤销语义、embedding/rerank端到端成本细拆。",
+          "factual": "总体机制多正确，但OpenSearch float32公式写2×dim、文内pgvector 100–125GB与总结30–50GB冲突；将若干小规模低延迟直接外推到用户负载。",
+          "evidence": "正文引用与链接标题明显错位：例如OpenSearch hybrid延迟引pgvector存储、RLS引云服务价格、HNSW更新引备份站点。数量多不能弥补关键断言无对应来源。",
+          "reasoning": "识别后过滤和双系统同步，建议实测是优点；开头先断定每查询只碰租户小集与轻松满足p95，后文才承认全局ANN后过滤问题，未解决便做充分性判断。",
+          "actionability": "分阶段shadow query、备份恢复和迁移提醒有用，但硬件无统一容量预算，权限同步缺outbox/撤销失败模式，且迁移需“两项”问题触发缺业务依据。",
+          "clarity": "章节有组织但重复很多，精确数字与含糊保留意见并置，难分哪些是保证、哪些只是假设。"
+        },
+        "strengths": [
+          "没有盲目建议再引入集群，理解六人团队已有Postgres的运维优势。",
+          "明确承认ANN后过滤和高度选择性ACL风险，建议shadow queries与恢复演练。"
+        ],
+        "weaknesses": [
+          "关键引用大量跨主题错配，公开benchmark不具该用户工作负载的外推力。",
+          "容量口径与算式不一致，容易误导硬件选型。"
+        ],
+        "confidence": "中",
+        "weighted_score": 53.5
+      },
+      "evidence": [
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q03.md",
+          "line": 14,
+          "quote": "2,500 chunks, or 0.05% of the corpus",
+          "analysis": "2500/5000000=0.05%，并用官方过滤行为说明全局ANN风险，直接贴合用户情景。"
+        },
+        {
+          "system": "L",
+          "dimension": "evidence",
+          "status": "supported",
+          "file": "responses/lucentthinker/q03.md",
+          "line": 196,
+          "quote": "No public benchmark I reviewed matches",
+          "analysis": "准确限制公开benchmark的用途，不把未验证负载说成已达到SLO。"
+        },
+        {
+          "system": "L",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/lucentthinker/q03.md",
+          "line": 229,
+          "quote": "compute exact top-k per tenant and per ACL bucket",
+          "analysis": "把ANN召回与人工相关性区分并用过滤后真值，能发现局部租户失效。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q03.md",
+          "line": 155,
+          "quote": "For a 500K-chunk tenant with a 0.1% ACL filter, it is not.",
+          "analysis": "这一例子只有500个合法候选；仅凭大租户总块数不能断言过滤后exact不可扩展。也应把此路径用于小租户初始方案。"
+        },
+        {
+          "system": "L",
+          "dimension": "actionability",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q03.md",
+          "line": 240,
+          "quote": "ACL revocations visible ≤ 5 s p95",
+          "analysis": "主方案在第89、125行已有事务ACL/权威过滤路径。问题限于通用验收指标：异步撤销传播的5秒p95不能替代硬性权限边界，应明确最终校验或授权快照语义；不能据此判定主方案已发生数据泄漏。"
+        },
+        {
+          "system": "L",
+          "dimension": "evidence",
+          "status": "supported",
+          "file": "responses/lucentthinker/q03.md",
+          "line": 334,
+          "quote": "support for partitioned tables",
+          "analysis": "主动列出推荐组合尚未验证的兼容性，避免把架构草案伪装成已部署结果。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q03.md",
+          "line": 91,
+          "quote": "pgvector’s ANN index does not understand those predicates",
+          "analysis": "正确识别RLS安全过滤与ANN召回并非同一问题；后文提出分区方向可取。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q03.md",
+          "line": 33,
+          "quote": "keeps you comfortably under your 300 ms p95 budget",
+          "analysis": "没有实际租户索引布局/选择率/更新压力下的测量，不能从1M一般延迟缩小到逻辑租户集后保证SLO。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q03.md",
+          "line": 173,
+          "quote": "1.1 * (2 * dimension + 8 * m)",
+          "analysis": "段落说默认float32却用2字节；默认每维4字节。且m=16代入该写法仅17.6GB/5M，和同句约30GB不自洽。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/mirothinker/q03.md",
+          "line": 179,
+          "quote": "30–50 GB of working set",
+          "analysis": "158行给pgvector原始+索引100–125GB，此处忽略引擎差异归纳30–50GB，未交代冷数据、索引常驻和压缩假设。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q03.md",
+          "line": 61,
+          "quote": "Hybrid queries typically add only 6‑8 % latency",
+          "analysis": "所跟[39]为pgvector容量文章，[43]为pgvector过滤LinkedIn；不能支持OpenSearch混合查询6–8%这个数字。"
+        }
+      ],
+      "checks": [
+        {
+          "claim": "pgvector在ANN扫描后过滤，10%选择率默认约4结果",
+          "system": "both",
+          "status": "supported",
+          "finding": "官方README确认后过滤示例与迭代扫描；L用其推出全局租户选择率风险有依据，M的开头性能保证则不能由此推出。",
+          "url": "https://github.com/pgvector/pgvector",
+          "source_title": "pgvector README — Filtering",
+          "access_note": "已读取网页原文相关段落；未核验全部链接"
+        },
+        {
+          "claim": "5M×1536容量算式与OpenSearch精度",
+          "system": "both",
+          "status": "supported",
+          "finding": "pgvector官方每向量4d+8，5M为30.76GB；OpenSearch官方默认float每维4字节。L原始量级正确，M第173行2d不适用于所称float32。",
+          "url": "https://docs.opensearch.org/latest/vector-search/optimizing-storage/knn-vector-quantization/",
+          "source_title": "OpenSearch Documentation — Vector quantization",
+          "access_note": "已读取网页原文相关段落；未核验全部链接"
+        },
+        {
+          "claim": "pg_search安装门槛",
+          "system": "L",
+          "status": "supported",
+          "finding": "官方文档支持superuser、pgvector依赖、PG15+预编译和shared_preload_libraries要求；L对托管实例限制的提醒有用。",
+          "url": "https://www.paradedb.com/docs/operate/deploy/self-hosted/extension",
+          "source_title": "ParadeDB — Self-Hosted PostgreSQL",
+          "access_note": "已读取网页原文相关段落；未核验全部链接"
+        },
+        {
+          "claim": "已达用户50QPS/p95<300ms",
+          "system": "both",
+          "status": "unverified",
+          "finding": "没有任一报告提供在用户真实数据上的运行日志；架构建议不是验收结果。L明确其为待测；M“通常轻松满足”不能当已证事实。",
+          "url": "https://github.com/pgvector/pgvector",
+          "source_title": "用户工作负载待基准验证",
+          "access_note": "尚无用户实测数据；不能从报告推断内部测试次数"
+        }
+      ],
+      "decisive_differences": [
+        "共同架构结论不能说明质量相同：L有条件、参数和测量闭环，M在同样结论上掺入未对应的精确数字。",
+        "L支持先试后定，并提供可复核原始文档；M理解原则，但性能外推与容量口径更不稳。"
+      ],
+      "caveats": [
+        "没有真实租户分布、更新速率和ACL复杂度，不能判定哪种引擎一定获胜。",
+        "动态文档和2026版本未全部锁定；未确认条目标为待核，不按旧版本记忆判错。",
+        "两者都应把权限错误作为硬性失败，不能仅以检索召回和延迟阈值替代。"
+      ],
+      "G": {
+        "scores": {
+          "coverage": 2.5,
+          "factual": 2,
+          "evidence": 1,
+          "reasoning": 2.5,
+          "actionability": 2.5,
+          "clarity": 3.5
+        },
+        "rationales": {
+          "coverage": "按标题覆盖多数技术维度，但文档权限、RLS/DLS、撤销语义、恢复目标与五百万索引完整容量预算缺失。每次搜索必须尊重文档权限这一核心要求没有落地。",
+          "factual": "原始向量30.7GB正确，ANN后过滤和PG事务优势大方向成立。但Qdrant混合查询能力有已证错误，把50QPS搜索写成50QPS更新，及把Postgres描述为默认全图载入RAM也失准。",
+          "evidence": "没有可定位文档、版本、基准环境或来源链接，正文还引用不存在的Table [44]。少量API/参数名可帮助检索，未按无URL直接归零。",
+          "reasoning": "理解小团队双系统负担与基准依赖配置，条件性推荐比强行性能保证合理。但没有从2000租户/500万块推导选择率，也未区分候选召回与权限强制控制，后过滤CTE不能保证k个合法结果。",
+          "actionability": "建议测延迟、召回、写入和内存，给出300ms迁移信号。缺具体分桶真值、召回门槛、并发更新/权限撤销测试和同步失败恢复方案，难直接形成验收计划。",
+          "clarity": "章节顺序清楚、较精练。对“native”“two queries or stages”、吞吐与并发的定义不稳定，容易误导实现。"
+        },
+        "strengths": [
+          "正确以已有Postgres和六人团队运维能力作为初始选型因素。",
+          "正确说明公开性能受硬件、参数和过滤条件影响，建议本地测量。",
+          "识别PG事务统一性与外部搜索服务的同步成本。"
+        ],
+        "weaknesses": [
+          "Qdrant单请求融合能力判断错误，影响功能与开发负担比较。",
+          "缺文档ACL/RLS/DLS与权限撤销设计。",
+          "存储容量只有裸向量数据，具体基准和恢复目标均不可追踪。"
+        ],
+        "confidence": "中高",
+        "weighted_score": 42.5
+      },
+      "three_way_verdict": "G与L/M都建议Postgres起步并实测后迁移。G对运维和后过滤风险有基本认识，但权限停留在org过滤，未完成文档ACL设计，也把Qdrant已在2024年支持的单请求融合说成仍需外部实现。L的选择率、权限、版本和测试矩阵最完整。M虽有引证和容量错误，依然比G更多处理RLS、租户分区与权限测试。",
+      "gpt_differences": [
+        "共同推荐Postgres不代表同等实现质量，L给出选择率与验收闭环，M讨论RLS，G缺文档权限落地。",
+        "G措辞较短、条件化选型合理，但关键产品能力错误足以改变对Qdrant开发成本的比较。",
+        "移除证据维度后，G权限覆盖与能力判断问题仍然存在。"
+      ],
+      "gpt_caveats": [
+        "动态文档可能更新，因此Qdrant能力错误以2024带日期发布说明为主要依据。",
+        "未提供真实租户分布、ACL复杂度和更新速率，三方均不能保证性能。",
+        "本轮未执行或负载测试任何架构，只核查报告和原始文档。"
+      ],
+      "gpt_evidence": [
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q03.md",
+          "line": 20,
+          "quote": "30.7 GB",
+          "analysis": "5000000×1536×4=30.72GB，裸向量数量级正确。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q03.md",
+          "line": 47,
+          "quote": "benchmarks are highly sensitive to hardware",
+          "analysis": "正确认识基准差异，未将所有公开低延迟直接保证为用户SLO。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q03.md",
+          "line": 9,
+          "quote": "Does not have a single-query hybrid score",
+          "analysis": "Qdrant 1.10于2024年已提供Query API服务端稀疏/稠密融合。多阶段执行不意味着必须多次外部请求。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q03.md",
+          "line": 14,
+          "quote": "find nearest K ignoring org, then filter to K results",
+          "analysis": "先全局取K再过滤无法保证K个合法结果。需要继续扫描或针对合法候选搜索，不能将该CTE称为保证。"
+        },
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q03.md",
+          "line": 55,
+          "quote": "Enforce org filtering in queries",
+          "analysis": "推荐只落实org过滤，缺文档ACL、身份注入信任边界、RLS/DLS与撤销路径。用户明确要求每次满足两层权限。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/gpt-deepresearch/q03.md",
+          "line": 27,
+          "quote": "50 QPS updates (in addition to reads)",
+          "analysis": "题设仅提供峰值50次搜索/秒，更新频率未量化。将其复制为写入负载会误导压力与容量规划。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q03.md",
+          "line": 35,
+          "quote": "Table [44]",
+          "analysis": "所交付文件没有表44或引用44的映射，读者不能核对所谓OSS/Cloud对照。"
+        },
+        {
+          "system": "G",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q03.md",
+          "line": 49,
+          "quote": "index build/update time",
+          "analysis": "有实际测量方向，包含索引建立和删除/写入成本，而非只谈静态查询。"
+        },
+        {
+          "system": "L",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/lucentthinker/q03.md",
+          "line": 229,
+          "quote": "compute exact top-k per tenant and per ACL bucket",
+          "analysis": "L以过滤后真值与ACL分桶检测局部召回失败，明显比G泛测recall更可执行。"
+        },
+        {
+          "system": "M",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/mirothinker/q03.md",
+          "line": 90,
+          "quote": "Row‑Level Security (RLS)",
+          "analysis": "M至少讨论数据库强制权限层和文档ACL，G主要以应用org过滤代替权限架构。"
+        }
+      ],
+      "gpt_checks": [
+        {
+          "claim": "截至2026年Qdrant仍需外部合并dense/sparse查询",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "2024-07-01发布说明已明确单Query endpoint及服务端稀疏/稠密RRF融合，时间早于题目截止。直接反驳G第9行。",
+          "url": "https://qdrant.tech/blog/qdrant-1.10.x/",
+          "source_title": "Qdrant 1.10 — Universal Query, Built-in IDF & ColBERT Support",
+          "access_note": "已读取原始来源相关全文段落"
+        },
+        {
+          "claim": "Qdrant当前单请求融合示例",
+          "system": "G",
+          "status": "supported",
+          "finding": "官方Hybrid Queries提供prefetch加fusion/rrf的单请求配置，确认多阶段可以由服务器一次请求完成。",
+          "url": "https://qdrant.tech/documentation/search/hybrid-queries/",
+          "source_title": "Qdrant — Hybrid and Multi-Stage Queries",
+          "access_note": "已读当前文档，并用2024发布说明固定时间边界"
+        },
+        {
+          "claim": "裸float32大小",
+          "system": "G",
+          "status": "supported",
+          "finding": "5M×1536×4=30.72GB。该结果不包含表、HNSW副本、文本、ACL、WAL和HA复制，不能单独决定内存。",
+          "url": "responses/gpt-deepresearch/q03.md",
+          "source_title": "G第20行容量本地复算",
+          "access_note": "本地独立计算"
+        },
+        {
+          "claim": "12ms/8ms等公开p95与12分片建议",
+          "system": "G",
+          "status": "unverified",
+          "finding": "报告未给基准名称、链接、硬件、召回率或出处，本轮无法把这些数字对应到可重复实验，不判定其必然虚假。",
+          "url": "responses/gpt-deepresearch/q03.md",
+          "source_title": "G第23、47行未定位基准",
+          "access_note": "缺对应来源与配置"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Costco and Walmart Business Comparison",
+      "verdict": "L明显更完整地做了三年并列数据、公式和一次性因素拆解；M多处把应完成的提取计算交回用户，并存在重大财务分类与口径错误。但L也有两项直接影响韧性论据的确认错误：Walmart 53周可比销售日历误调报表增长，以及回购金额错用导致错误声称FCF不足。不能直接采纳任何一份的最终投资质量判断。",
+      "L": {
+        "scores": {
+          "coverage": 4.5,
+          "factual": 2.5,
+          "evidence": 3.5,
+          "reasoning": 3.5,
+          "actionability": 4,
+          "clarity": 4
+        },
+        "rationales": {
+          "coverage": "各公司FY23–25增长、利润、会员、库存、现金流、ROIC均给表、定义与判断；ROIC用年末资本而非平均，明确但可比性仍有限。",
+          "factual": "多数核心三年报表数正确，一次性费用识别较好；但53周错调Walmart报表增长、FY25回购误用约70亿而核查值为44.94亿并颠倒FCF覆盖结论，是高影响错误。",
+          "evidence": "主要用10-K且公式可查，给二手来源限制；仍有原始材料可直接核对却使用二手金额的问题，精确结论需重算。",
+          "reasoning": "将收入/利润/资产负债韧性分开，比较Sam’s与Costco以及历史下行反证有价值；把投资性capex升高简单视作收益质量红旗、未经平均资本/同口径租赁分子调整就称ROIC优势在每种定义均稳健，略过强。",
+          "actionability": "给出续费率、FCF转换、库存等反证指标；部分阈值已接近或跨过当年值，应说明连续期间和原因。",
+          "clarity": "并列表清楚、弱点声明具体；有较多重复结论，表中口径应进一步统一。"
+        },
+        "strengths": [
+          "给出完整三年现金流与资本回报表，不止提出计算方法。",
+          "准确把Walmart 2024利润跃升与2023法律/重组基数、2025净利与非经营因素分开。"
+        ],
+        "weaknesses": [
+          "Walmart年度报告增长不该因comp日历53周再减至3%。",
+          "错误回购金额直接使“FCF不覆盖分红+回购”的韧性依据反转。",
+          "ROIC年末资本、全扣现金与租赁分子处理仍需敏感性。"
+        ],
+        "confidence": "中",
+        "weighted_score": 70.5
+      },
+      "M": {
+        "scores": {
+          "coverage": 2.5,
+          "factual": 1.5,
+          "evidence": 2,
+          "reasoning": 2,
+          "actionability": 2,
+          "clarity": 2.5
+        },
+        "rationales": {
+          "coverage": "话题齐全但没有完成要求的三年现金流/投入资本/ROIC比较，多次让用户自行提取10-K和计算。",
+          "factual": "Walmart非经营损益误加回营业利润、Costco毛利与会员利润占比错误，库存现金数据错期，构成多项核心财务错误。",
+          "evidence": "有官方文件线索，也指出会员与其他收入不可混同；但核心表格未回到年报复核，引用中多个SEC accession/期别不稳，数据冲突仅称分类差异。",
+          "reasoning": "认识业务混合、库存周转和会员黏性；却漏主要2023一次性费用，把利润增长归为经营，会员接近纯利润叙事过强，ROIC数值也不从其公式推出。",
+          "actionability": "列了监控指标与进一步尽调路径，但把原请求本身列为待用户完成任务；且推荐错误营业利润调整。",
+          "clarity": "标题与分项清楚，但公式出现转义/斜体断裂，长文重复而缺实际并列表。"
+        },
+        "strengths": [
+          "提醒Walmart“会员与其他收入”不是纯会员费；识别业务混合使毛利直接比较失真。",
+          "公式框架提出平均资产、库存与资本，而非只用期末比率，这个方法原则优于L年末ROIC。"
+        ],
+        "weaknesses": [
+          "没有实际完成同口径三年ROIC和Costco现金流。",
+          "多项基础数据与会计分类错误，核心增长和会员韧性推论被污染。"
+        ],
+        "confidence": "中",
+        "weighted_score": 40.0
+      },
+      "evidence": [
+        {
+          "system": "L",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/lucentthinker/q04.md",
+          "line": 120,
+          "quote": "Free cash flow",
+          "analysis": "对双方三年的CFO/Capex/FCF给表（118–121行），用户可以直接复算；M未完成Costco这些数字。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/lucentthinker/q04.md",
+          "line": 62,
+          "quote": "opioid-related legal settlements",
+          "analysis": "2023法律33亿+重组8亿费用在官方10-K有对应说明，正确解释2024跳升的部分基数效应。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/lucentthinker/q04.md",
+          "line": 28,
+          "quote": "52-week growth was closer to **3.0%**",
+          "analysis": "Walmart官方演示明确额外周只影响4-5-4 comps、其他指标不受影响。不能将报表净销售5%再按53周缩到3%。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/lucentthinker/q04.md",
+          "line": 228,
+          "quote": "not its dividend plus roughly",
+          "analysis": "Walmart FY25现金流回购44.94亿美元，分红66.88亿，合计111.82亿，小于FCF126.60亿。该结论实际相反。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q04.md",
+          "line": 304,
+          "quote": "That shows both sides",
+          "analysis": "提供Costco历史业绩下降而续费维持、Walmart收入更防御的反证，不只单边讲会员优势。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q04.md",
+          "line": 84,
+          "quote": "Use average balance sheet values",
+          "analysis": "平均资本/存货的原则正确；但正文没有贯彻为完整可复算系列。"
+        },
+        {
+          "system": "M",
+          "dimension": "coverage",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q04.md",
+          "line": 374,
+          "quote": "full CFO and capex numbers for each year require direct 10‑K extraction",
+          "analysis": "用户已要求完成三年比较，正文把核心数据提取留作未来工作；这是实际交付缺口。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q04.md",
+          "line": 261,
+          "quote": "adds back",
+          "analysis": "Other gains/losses本来就在营业利润以下，不能再加回营业利润来构造core operating margin。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q04.md",
+          "line": 294,
+          "quote": "essentially <strong>all of Costco’s pre‑tax profit</strong>",
+          "analysis": "FY25会员费53.23亿，而营业利润103.83亿，税前利润还更高；并非几乎全部税前利润。会员收入也不等于可归属净利润。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q04.md",
+          "line": 329,
+          "quote": "$61.6B per official balance sheet",
+          "analysis": "FY25 Walmart年报存货564.35亿，非616亿；不能将冲突简单称为分类差异。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q04.md",
+          "line": 75,
+          "quote": "standard cost for most merchandise inventories",
+          "analysis": "Costco FY25年报说美国库存按cost method/LIFO，不能把“cost method”改成standard cost后认为少受LIFO影响。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "internal_inconsistency",
+          "file": "responses/mirothinker/q04.md",
+          "line": 402,
+          "quote": "~$50–60B range",
+          "analysis": "以报告自身营业利润约104亿乘低20%税率，除500–600亿投入资本仅约13–16%，不能直接推出紧后行“high-teens or higher”；未给平均资本明细。"
+        }
+      ],
+      "checks": [
+        {
+          "claim": "Walmart额外周影响报表销售",
+          "system": "L",
+          "status": "confirmed_error",
+          "finding": "官方FY25 Q4演示第22页明确：额外周只影响4-5-4可比销售，其他指标不受影响。因此约3%调整不成立。",
+          "url": "https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-25-000010/earningspresentationfy25.htm",
+          "source_title": "Walmart FY25 Q4 earnings presentation — Comparable Sales Reporting Calendars",
+          "access_note": "已读取网页原文相关段落；未核验全部链接"
+        },
+        {
+          "claim": "Walmart现金分配、库存和损益分类",
+          "system": "both",
+          "status": "confirmed_error",
+          "finding": "FY25现金流回购44.94亿、分红66.88亿，合计低于FCF126.60亿，反驳L。期末库存564.35亿、现金90.37亿，Other losses列于营业利润以下，反驳M相关口径。",
+          "url": "https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-25-000021/wmt-20250131.htm",
+          "source_title": "Walmart FY2025 Form 10-K",
+          "access_note": "已读取网页原文相关段落；未核验全部链接"
+        },
+        {
+          "claim": "Costco毛利、会员利润占比与LIFO",
+          "system": "M",
+          "status": "confirmed_error",
+          "finding": "FY25毛利率11.12%；会员费53.23亿、营业利润103.83亿，非几乎全部税前利润；美国库存用LIFO。支持L主要口径，反驳M对应陈述。",
+          "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983225000101/cost-20250831.htm",
+          "source_title": "Costco FY2025 Form 10-K",
+          "access_note": "已读取网页原文相关段落；未核验全部链接"
+        },
+        {
+          "claim": "Costco奖励被列为销售抵减",
+          "system": "L",
+          "status": "supported",
+          "finding": "年报披露FY25奖励净减销售30.07亿美元，支持L对会员费并非无成本的提醒；净费/营业利润仍只是分析代理，不是部门利润。",
+          "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983225000101/cost-20250831.htm",
+          "source_title": "Costco FY2025 Form 10-K — Revenue Recognition",
+          "access_note": "已读取网页原文相关段落；未核验全部链接"
+        },
+        {
+          "claim": "跨公司ROIC精确差距",
+          "system": "both",
+          "status": "unverified",
+          "finding": "L提供年末资本公式与结果，M未实际列平均资本；本轮未完整重建六个年度租赁一致的NOPAT/平均投入资本，故不确认“恰好两倍”或每种口径均稳健。",
+          "url": "local-method-audit",
+          "source_title": "报告公式与口径审查",
+          "access_note": "未独立重建完整财务模型"
+        }
+      ],
+      "decisive_differences": [
+        "L完成大多数计算并正确抓到重要一次性费用；M多数指标仍是方法建议或二手范围。",
+        "L的两个重大错误足以削弱其收入与现金防御比较，虽不能单独证明总体Costco结论错误。",
+        "M关于平均资本的方法更合理，L关于实际年报数字和经营/非经营拆解更成熟；必须区分方法质量与有没有真正算完。"
+      ],
+      "caveats": [
+        "两家公司同财年标签实际结束相差约7个月，不能视作完全同一宏观期。",
+        "会员费/营业利润不是会员业务真实利润占比；奖励、成本分摊、现金与租赁口径都会改变解释。",
+        "这里只评价报告，不给股票价格或投资收益预测。"
+      ],
+      "G": {
+        "scores": {
+          "coverage": 2,
+          "factual": 1.5,
+          "evidence": 1,
+          "reasoning": 2,
+          "actionability": 2,
+          "clarity": 3
+        },
+        "rationales": {
+          "coverage": "涉及所有主题但未完成三年并列表，Walmart FY25现金流只猜超过350亿，库存采用猜值，ROIC用ROA和公司ROI代理。缺统一NOPAT/平均投入资本计算及租赁/现金口径。",
+          "factual": "Costco销售、营业利润、FY25周转数量级及Walmart一次性费用基本正确，但Walmart FY25净销售写成总收入，增长错用，6.1%称跑赢6.7%，营业利润增速1.6%与所列金额不符，FIFO及FCF率方向也有错误。",
+          "evidence": "只有泛称官方年报，无具体年份文件链接、表页或数字出处。公司/财年信息尚可指向待核材料，但需要读者重新完成来源定位。",
+          "reasoning": "可区分一次性费用与经营进步，也列出可能推翻Costco结论的条件。但用未完成的ROIC、混合毛利口径和“Costco更高利润率”推断韧性，结论链未成立，会员费近乎纯利润也未处理相应成本。",
+          "actionability": "监测续费、数字业务和品类变化有方向，缺阈值、压力情景和关键财务模型。用户需要重新提取/计算核心比率后才能比较。",
+          "clarity": "分节和末尾要点方便浏览，但sales/revenue与ROA/ROI/ROIC混用，正文和摘要年份口径不一致。"
+        },
+        "strengths": [
+          "正确抓到Walmart 2023法律/重组费用对2024营业利润增长的基数效应，优于M。",
+          "Costco营业利润三年数、库存下降及约13次周转给出可核对的实数。",
+          "对Costco与Walmart各自韧性来源及反转条件有基本概括。"
+        ],
+        "weaknesses": [
+          "没有实际完成题目要求的统一ROIC和三年现金流比较。",
+          "Walmart净销售与总收入混用并污染增长、利润率。",
+          "库存方法和FCF率方向等错误影响资本效率及韧性判断。"
+        ],
+        "confidence": "中高",
+        "weighted_score": 34.5
+      },
+      "three_way_verdict": "G正确识别Walmart FY2024利润受前一年法律与重组费用基数影响，这一点优于M。但G混用净销售/总收入，未完成三年现金流和统一ROIC，且把Walmart主要库存方法说成FIFO。L完成度和数据可追踪性最高，同时其原有回购及53周口径错误保留。M和G都有重大缺口，G的更短表达没有弥补缺失计算。",
+      "gpt_differences": [
+        "G比M更准确抓住Walmart利润增长的一次性基数效应，但没有像L完成财务表和ROIC框架。",
+        "L原有高影响错误继续保留，不能用其较高完成度替代事实复核。",
+        "G和M同样需要重建关键比较，G还存在净销售/总收入混用和FCF率方向错误。"
+      ],
+      "gpt_caveats": [
+        "G没有给完整财务计算，评审只能纠正抽核项目，未将其整体Costco结论判为必然相反。",
+        "本轮保留旧L/M分数。",
+        "用户确认网页版原回答也没有引用。作者、公司与财年等定位线索仍获得相应证据分。"
+      ],
+      "gpt_evidence": [
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 37,
+          "quote": "~$3.3B opioid settlement and ~$0.8B international restructuring charges",
+          "analysis": "抓住2024营业利润跃升的基数效应，M原文缺失这一核心解释。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 24,
+          "quote": "turnover ≈13×",
+          "analysis": "Costco FY25 COGS约2399亿/平均存货约184亿≈13次，数量级可靠。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 7,
+          "quote": "~$681.0B (FY2025)",
+          "analysis": "这里标为net sales，实际6810亿为总收入，净销售6745.38亿。与6426.37亿净销售相除得到错误5.9%。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 9,
+          "quote": "(6.1%) outperformed FY2023 (6.7%)",
+          "analysis": "同一段给出的6.1小于6.7，与outperformed直接冲突。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 14,
+          "quote": "growth slowed to +1.6% year-on-year in FY2025",
+          "analysis": "所列营业利润29.348/27.012−1=8.65%，非1.6%。"
+        },
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 29,
+          "quote": "isn’t tabulated here but would exceed $35B",
+          "analysis": "FY25现金流公开可得，报告没有完成这一指定财年的数据提取，使用推测替代。"
+        },
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 32,
+          "quote": "Costco’s trailing ROIC could easily exceed",
+          "analysis": "没有给两公司三年同口径ROIC、NOPAT或资本基数，无法由ROA比较直接完成ROIC问题。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 39,
+          "quote": "Walmart (primarily FIFO)",
+          "analysis": "年报中Walmart U.S.主要使用RIM/LIFO，Sam’s U.S.多数库存也用LIFO，FIFO不能概括主要业务。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 29,
+          "quote": "Costco’s FCF per dollar of revenue is slightly lower",
+          "analysis": "FY25 Costco FCF/总收入约2.85%，Walmart约1.86%，方向相反。G没有列FCF便给出了错误比较。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "internal_inconsistency",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 42,
+          "quote": "Costco’s higher margins provide a cushion",
+          "analysis": "前文列的营业利润率和毛利率均为Walmart更高。这里没有说明改成净利率或其他口径便反转比较，不能直接作为韧性依据。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q04.md",
+          "line": 58,
+          "quote": "Official annual reports and filings",
+          "analysis": "没有具体年报链接、表页或来源映射。只对交付文件的可追溯性评分。"
+        },
+        {
+          "system": "L",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/lucentthinker/q04.md",
+          "line": 120,
+          "quote": "Free cash flow",
+          "analysis": "L三年表给双方CFO/Capex/FCF和比率，且有ROIC分子分母，完成度高于G。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q04.md",
+          "line": 264,
+          "quote": "predominantly operational rather than one‑off",
+          "analysis": "M的经营性归因忽略主要基数效应，G在此处的解释更准确。此条沿用原评审问题，不修改旧分。"
+        }
+      ],
+      "gpt_checks": [
+        {
+          "claim": "Walmart净销售、营业利润增长及库存计价",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "FY25净销售6745.38亿，总收入6809.85亿。营业利润293.48/270.12−1=8.65%。Walmart U.S.与Sam’s主要用LIFO。支持对G混口径及FIFO叙述的纠正。",
+          "url": "https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-25-000021/wmt-20250131.htm",
+          "source_title": "Walmart FY2025 Form 10-K",
+          "access_note": "已读取原始来源相关全文段落"
+        },
+        {
+          "claim": "G未提取的Walmart FY25现金流",
+          "system": "G",
+          "status": "supported",
+          "finding": "年报列CFO364.43亿、资本支出237.83亿、FCF126.60亿，表格同时给FY23–25，因此该缺口可由现有原始资料完成。",
+          "url": "https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-25-000021/wmt-20250131.htm",
+          "source_title": "Walmart FY2025 Form 10-K — Free Cash Flow",
+          "access_note": "已读取原始来源相关全文段落"
+        },
+        {
+          "claim": "Costco FCF率低于Walmart",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "Costco FY25 CFO133.35亿减capex54.98亿得FCF78.37亿，除总收入2752.35亿约2.85%。Walmart约1.86%，G方向相反。",
+          "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983225000101/cost-20250831.htm",
+          "source_title": "Costco FY2025 Form 10-K — Cash flows",
+          "access_note": "已读取Costco与Walmart原始现金流并独立复算"
+        },
+        {
+          "claim": "Costco完整三年现金流和FY25库存周转",
+          "system": "G",
+          "status": "supported",
+          "finding": "Costco年报支持G的FY24/25 CFO及FY25 capex数量级，2398.86亿成本/平均库存183.815亿≈13.05次，支持其局部正面判断。",
+          "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983225000101/cost-20250831.htm",
+          "source_title": "Costco FY2025 Form 10-K",
+          "access_note": "已读取原始来源相关全文段落"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "深圳、杭州与成都工作机会比较",
+      "verdict": "LucentThinker明显更强：形成可复算的三城现金与公积金账，给出房租翻转阈值；MiroThinker缺少请求的实际到手金额，并把3,920元公积金可提额说成足以覆盖7,500元房租，直接污染推荐。L仍需核实2026缴费参数与具体整租房源，奖金临界分析也有局部错误。",
+      "L": {
+        "scores": {
+          "coverage": 4.5,
+          "factual": 4,
+          "evidence": 3.5,
+          "reasoning": 4,
+          "actionability": 4.5,
+          "clarity": 4.5
+        },
+        "rationales": {
+          "coverage": "覆盖社保上下限、公积金、租金扣除、两种奖金税法、年度与月均到账、租金和奖金敏感性；明确用十月规则做完整年度稳态估算。",
+          "factual": "按其输入复算工资个税、奖金税与年度现金基本成立；但并入奖金后深圳领先额写错。奖金跨档分析给出近似交点，却未完整解释税档跳跃。",
+          "evidence": "关键税收、各地基数有可定位政策链接，租房行情多为平台均价/挂牌与自媒体，尚不能证明同品质独厨独卫房源和40分钟门到门。",
+          "reasoning": "现金、公积金入账与提取明确分开，不重复计入财富；以租差阈值而非城市印象比较。奖金跨档仍需分段，不能宣称只有房租和申报基数会改变结论。",
+          "actionability": "提供6,661元深圳租金阈值、核心区与外围两方案及HR/房东核对清单，可直接带入报价修改。",
+          "clarity": "主表、计算步骤和定义清楚；月到账实为年平均税额后的估计，已说明累计预扣波动。"
+        },
+        "strengths": [
+          "年度现金与公积金账分离，主要算术可复算",
+          "通勤圈与核心区两套租金，给出明确反转阈值"
+        ],
+        "weaknesses": [
+          "2026社保与房租样本未全量核实",
+          "全部并入后的差额有局部错误；奖金非单调临界区间解释不足"
+        ],
+        "confidence": "中",
+        "weighted_total": 81.5
+      },
+      "M": {
+        "scores": {
+          "coverage": 2,
+          "factual": 1.5,
+          "evidence": 1,
+          "reasoning": 2,
+          "actionability": 2,
+          "clarity": 2.5
+        },
+        "rationales": {
+          "coverage": "谈到全部主题但主动不列月到账、年度税后额及两种奖金税额；无法完成用户核心现金比较任务。",
+          "factual": "35,000×14%×80%=3,920，不能覆盖7,500–8,000租金；杭州和成都五险一金占比也与其给出的公式不符；开头公积金已封顶与后文未封顶矛盾。",
+          "evidence": "大量引用与主张跨主题错配，例如用杭州人才补贴支持奖金税法，用杭州失业险支持深圳公积金基数；无法靠引用数量弥补。",
+          "reasoning": "意识到公积金提取与年度奖金的重要性，但未建完整现金模型，房租和奖金翻转仅定性，人才补贴反超判断没有核算。",
+          "actionability": "有HR与房东清单，但深圳8,000元租金建议建立在错误公积金覆盖额上。",
+          "clarity": "分节清晰但冗长重复，百分比代替金额、现金和广义留存频繁切换。"
+        },
+        "strengths": [
+          "知道单独计税通常有利并提出HR核实项",
+          "识别家租提取资格对现金流的影响"
+        ],
+        "weaknesses": [
+          "缺关键金额而给确定排序",
+          "公积金覆盖房租发生高影响算术错误",
+          "引用映射严重错乱"
+        ],
+        "confidence": "中",
+        "weighted_total": 34.0
+      },
+      "evidence": [
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/lucentthinker/q05.md",
+          "line": 79,
+          "quote": "379,881.36 元",
+          "analysis": "按本文社保35,410.80、公积金29,400、个税45,307.84，从49万元扣除得到该数；不是凭较长篇幅给分。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q05.md",
+          "line": 195,
+          "quote": "51,127.30 − 12 × (R深 − R杭)",
+          "analysis": "两城税后差额与租差分离，推出4,260.61元/月临界租差，算术成立。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/lucentthinker/q05.md",
+          "line": 185,
+          "quote": "深圳仍领先杭州约 2.40 万元/年",
+          "analysis": "表内主情景差29,527.30，全部并入后差额为29,527.30−(9,569.46−6,210)=26,167.84元，并非2.40万元；不改此情景排序。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q05.md",
+          "line": 233,
+          "quote": "临界大约在 **3.4 万元",
+          "analysis": "主情景10%档交点37,191.89元、3%档交点约34,724元，报告已给两处近似值；但未说明36,000元税率跳跃造成的非单调排序：可能先落后、降档又反超、再下降又落后。此处扣推理完整性，不把第二交点本身判算术错。"
+        },
+        {
+          "system": "L",
+          "dimension": "evidence",
+          "status": "unverified",
+          "file": "responses/lucentthinker/q05.md",
+          "line": 133,
+          "quote": "门到门大约 30–35 分钟",
+          "analysis": "所引地铁路径不能确定具体工作楼、房源步行和高峰候车；需要真实房源与地图实测，均价不等于可租整套。"
+        },
+        {
+          "system": "M",
+          "dimension": "coverage",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q05.md",
+          "line": 82,
+          "quote": "为避免大规模具体数字被核查",
+          "analysis": "随后仅列公式和占比，没有给用户要求的月度、年度税后实际金额。评价只针对交付缺口，不推断内部思考。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q05.md",
+          "line": 322,
+          "quote": "你的月租 7,500 完全可以用提取额覆盖",
+          "analysis": "报告自己的35,000×14%×80%=3,920，少3,580元/月，全年现金高估42,960元；反复据此强化深圳推荐。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q05.md",
+          "line": 132,
+          "quote": "财政部、税务总局明确将全年一次性奖金单独计税优惠政策延续至 2027",
+          "analysis": "挂接[46]杭州E类人才租赁补贴，与奖金税法无关；规则可能正确，但证据不对应。"
+        },
+        {
+          "system": "M",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/mirothinker/q05.md",
+          "line": 449,
+          "quote": "含步行、电梯、换乘",
+          "analysis": "房源到具体办公楼高峰实测是有用核实步骤。"
+        }
+      ],
+      "checks": [
+        {
+          "claim": "深圳2025-11至2027-10租房提取80%规则",
+          "system": "both",
+          "status": "supported",
+          "finding": "深圳住建局2026-03-02官方答复确认80%上限。按两报告共同7%+7%工资基数复算为3,920元/月；L算对，M覆盖7,500元房租的主张确定错误。",
+          "url": "https://www.sz.gov.cn/hdjlpt/detail?pid=3368372&via=pc",
+          "source_title": "深圳市政府互动交流：公积金租房提取",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "深圳医保2026基数6,727–33,633",
+          "system": "both",
+          "status": "unverified",
+          "finding": "尝试M所列医保局原文，工具无法访问；此次未完成原文核验，不据此认定参数虚假。",
+          "url": "https://hsa.sz.gov.cn/xxgk/qt/tzgg/content/post_11716135.html",
+          "source_title": "深圳市医疗保障局关于2026年度缴费基数的通知（报告所列）",
+          "access_note": "访问失败"
+        },
+        {
+          "claim": "年度税后差额与公积金不重复计算",
+          "system": "L",
+          "status": "supported",
+          "finding": "逐项复算：L主表现金从工资扣个人公积金后再加个人与单位公积金得到总留存，属于正确资产口径；提取只是现金和账户间转移。",
+          "url": "",
+          "source_title": "本地复算",
+          "access_note": "依据报告表格和公式，不是外部政策核验"
+        }
+      ],
+      "decisive_differences": [
+        "L把个人7%扣款、双方14%入账、可提取额三种口径分开；M算错可提取金额，错误规模足以影响租房选择。",
+        "L实际完成税额/现金/临界点计算；M只有描述和百分比。"
+      ],
+      "caveats": [
+        "双方用的2026多项基数未逐项全量核验，当前无法确认者保持unverified。",
+        "不同租金基准本身不是错误；真正需要统一的是整套品质、实际通勤与成本边界。"
+      ],
+      "G": {
+        "scores": {
+          "coverage": 2,
+          "factual": 1,
+          "evidence": 0.5,
+          "reasoning": 1.5,
+          "actionability": 2,
+          "clarity": 2.5
+        },
+        "rationales": {
+          "coverage": "列出三城、两种奖金税法及租金表，但遗漏明确要求的住房租金专项附加扣除，没有完整的扣房租年度现金表和反转阈值。公交40分钟约束被扩成驾车，通勤样本未落实。",
+          "factual": "奖金速算扣除重复12次，杭州年度合计不等于自身月收入加奖金，公积金余额不等于自身7%+7%基数累计。深圳医保基数与正式2026公告不符。",
+          "evidence": "保存文件没有具体政策文号、日期链接或可定位租房样本，仅泛称链家/贝壳。用户确认网页版原回答亦无引用，该项按交付物实际可追溯性评分。",
+          "reasoning": "有分离工资、奖金、房租的意图，但未将它们统一进一致模型。敏感性只给未计算的定性结论，把7000上涨20%写成约9000，且不处理奖金分段。",
+          "actionability": "HR核实工资申报基数、奖金发放方式，房东核实物业押金等清单可用。具体择城预算与触发点仍需重新核算。",
+          "clarity": "表格易扫读，但把缴费与税前所得列混称，年末余额与年内缴存未分，月均税与实际累计预扣到账未说明。"
+        },
+        "strengths": [
+          "尝试将两种年终奖税法和三地收入并列成表",
+          "列出HR与房东需要确认的缴费、奖金、租赁成本问题"
+        ],
+        "weaknesses": [
+          "奖金和公积金计算错误，月年数据不一致",
+          "遗漏租金专项附加扣除和精确翻转阈值",
+          "2026基数与租金来源不能从保存文件定位"
+        ],
+        "confidence": "高（正文缺陷与已核事项）",
+        "weighted_total": 27.5
+      },
+      "three_way_verdict": "本题L明显领先，M与G均需重做关键现金账。G比M多给出了名义金额表，但年终奖计税、月年勾稽、公积金累计均发生实质错误，租房扣除与翻转阈值没有完成，因此低于M的既有评分。L主要账目可复算且有临界租差，仍保留原评所指出的局部错误和房源核实风险。",
+      "gpt_differences": [
+        "L完成现金、公积金与税法的连贯模型。M缺精确金额且公积金覆盖额错，G虽有表格但金额与公式不一致。",
+        "L和M至少讨论租房专项附加扣除，G省略了明确子问。G的敏感性部分也没有交付用户请求的阈值。"
+      ],
+      "gpt_caveats": [
+        "用户已明确确认网页版原回答也没有引用。证据评分依据报告现存的来源名称、书目与主张对应关系。未从缺引用推断未检索，也未推断实际后端模型。",
+        "同一个数值错误主要计factual，缺引用主要计evidence。coverage扣的是租金扣除、扣租现金和阈值等独立缺口。",
+        "本轮没有重新验证全部三城社保费率、住房公积金上限和租房行情。"
+      ],
+      "gpt_evidence": [
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q05.md",
+          "line": 51,
+          "quote": "方式A为“年终奖并入全年收入计税”",
+          "analysis": "至少识别并尝试呈现两种计税路径，这是覆盖上的正面部分。"
+        },
+        {
+          "system": "G",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q05.md",
+          "line": 92,
+          "quote": "是否包含物业费",
+          "analysis": "核实物业、押金、中介费可改善实际租房预算。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q05.md",
+          "line": 61,
+          "quote": "65,520（税后年终奖）",
+          "analysis": "奖金7万元÷12定位10%档，税为70000×10%−210=6790，净奖应63210。65520对应错误地扣12次速算扣除，偏高2310。杭州与成都净奖也各偏高2310。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q05.md",
+          "line": 62,
+          "quote": "≈318,076",
+          "analysis": "自身月到手22822×12+56520=330384，与全年318076差12308，不能归因四舍五入。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q05.md",
+          "line": 69,
+          "quote": "深圳≈4.64万>杭州≈4.30万>成都≈3.95万",
+          "analysis": "按报告自身实际工资×双方7%×12，全年新增缴存应58800、50400、42000元。若是余额还需期初与提取数据，正文均无。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q05.md",
+          "line": 15,
+          "quote": "27,603",
+          "analysis": "表中深圳医保上限27603，医保局公告2026上限33633，下限6727。不同险种不能统一套养老基数。"
+        },
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q05.md",
+          "line": 78,
+          "quote": "应纳税所得额 = (工资–5000–五险一金)",
+          "analysis": "模型与表3遗漏租房专项附加扣除，用户明确要求比较该项。此缺口计coverage。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q05.md",
+          "line": 73,
+          "quote": "具体阈值需要结合实际变动情景计算",
+          "analysis": "用户已给固定薪酬及奖金，报告仍未完成阈值计算。同段7000上涨20%应8400，且未证明杭州奖金增至3个月便可接近或超过深圳。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/lucentthinker/q05.md",
+          "line": 76,
+          "quote": "年终奖税 = 70,000×10% − 210",
+          "analysis": "L使用正确单次速算扣除，构成与G的实质差异。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q05.md",
+          "line": 322,
+          "quote": "你的月租 7,500 完全可以用提取额覆盖",
+          "analysis": "M仍有原评确认的3920元无法覆盖7500元错误，故此题M高于G并不表示M已可直接决策。"
+        }
+      ],
+      "gpt_checks": [
+        {
+          "claim": "年终奖单独计税的公式与税档",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "税务总局2023年第30号公告及附件规定按奖金÷12定位档位，奖金总额乘税率后只减一次速算扣除。7万、6万、5万的正确净奖分别63210、54210、45210，G各多2310。",
+          "url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5211524/content.html",
+          "source_title": "财政部 税务总局关于延续实施全年一次性奖金个人所得税政策的公告",
+          "access_note": "正文全文及点击附件税率PDF全文"
+        },
+        {
+          "claim": "深圳2026医保基数上下限",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "深圳医保局2025-12-29公告确认2026全年6727–33633，并说明企业一档单位费率恢复6%。G医保上下限套养老且单位比例写9.5%+2%，与该公告不符。",
+          "url": "https://hsa.sz.gov.cn/fzlm/znts/cnyc/content/post_12568243.html",
+          "source_title": "深圳市医疗保障局温馨提示（2026缴费基数）",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "杭州月年合计及三城公积金年入账",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "按G给定数字复算，杭州22822×12+56520=330384。以实际月薪按双方7%缴存12个月，公积金新增为58800/50400/42000，与G余额不同。",
+          "url": "",
+          "source_title": "报告内算术复算",
+          "access_note": "不依赖外部政策假设"
+        },
+        {
+          "claim": "三地2026年10月整套一居租金样本",
+          "system": "G",
+          "status": "unverified",
+          "finding": "仅有平台名称、估计区间，没有房源编号、链接、日期样本和通勤路线，无法确认这些中位数。未据此判断该租金真实或虚假。",
+          "url": "",
+          "source_title": "报告保存文本",
+          "access_note": "原文没有可定位来源"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "上海换购纯电轿车决策",
+      "verdict": "LucentThinker总体较强，尤其补贴条件、额度选择、五年成本表和不能叠加情景；但它的等待模型遗漏提前购车的折旧和资本成本，且残值敏感性写出反向结论，尚不能据此认定必须年底购车。MiroThinker的免费绿牌加额度备案操作不适用于本用户，并未交付完整五年TCO。",
+      "L": {
+        "scores": {
+          "coverage": 4.5,
+          "factual": 3,
+          "evidence": 3.5,
+          "reasoning": 2.5,
+          "actionability": 3.5,
+          "clarity": 4
+        },
+        "rationales": {
+          "coverage": "具体版本、政策、旧车条件、额度、五年保养保险电费残值和情景都有；未计装桩成本，年底与2027被简化成等整整一年。",
+          "factual": "税费和TCO主表算术可复算，旧车不符合报废、置换8%上限政策核实支持；残值降至35%仍比Model3便宜为确定错误。",
+          "evidence": "补贴、牌照有具体官方原文，报价/电耗/保险/残值较多依赖二手媒体和用户帖；已说明估计局限。",
+          "reasoning": "能做条件变化，但等待差额把旧车贬值计入、未扣新车提前一年折旧和资本机会成本，且未知2027政策被当作零的基准强化确定推荐。",
+          "actionability": "材料与时间清单具体，提醒书面锁交付/补贴；应先修复等待模型及残值敏感性再执行。",
+          "clarity": "表格清晰，主要假设显式；额度与物理蓝绿号牌用语仍可能混淆。"
+        },
+        "strengths": [
+          "具体官方补贴资格与不叠加规则较严谨",
+          "有可改参数的五年TCO及无家充情景"
+        ],
+        "weaknesses": [
+          "等待模型偏向提前买，未做同终点资产价值比较",
+          "残值敏感性结论算错",
+          "家充安装费和充电损耗未完整计入"
+        ],
+        "confidence": "中",
+        "weighted_total": 68.0
+      },
+      "M": {
+        "scores": {
+          "coverage": 3,
+          "factual": 1.5,
+          "evidence": 1,
+          "reasoning": 2,
+          "actionability": 1.5,
+          "clarity": 3
+        },
+        "rationales": {
+          "coverage": "覆盖主题和若干保险电费数字，但承诺的五年TCO仅是结构框架；最后把带数字成本表推迟到下一轮。",
+          "factual": "额度备案方案与2026新申领条件不符；8.78/28算成45%残值、购置净支出把应付税写成减项。",
+          "evidence": "多个链接被重复换标题支持不相干内容，如以旧换新细则支持电价、额度备案指南支持拍卖价格；车型同名家族和地区资料也缺严谨映射。",
+          "reasoning": "合理区分家充与两车型电耗差，但没有完整模型推导车型优劣；只强调旧车贬值，忽略等待保留新车残值与资金。",
+          "actionability": "有书面核实建议，但主推不可据现行规则执行的额度操作，关键路线必须重做。",
+          "clarity": "章节明确但重复多，强结论超过量化内容。"
+        },
+        "strengths": [
+          "清楚指出2026和2027购置税相同",
+          "家充差额比两车型能耗差更大的量级判断有用"
+        ],
+        "weaknesses": [
+          "主要牌照操作存在资格错误",
+          "没有完整五年总成本数表",
+          "多处算术、税费符号与引用错配"
+        ],
+        "confidence": "中",
+        "weighted_total": 37.5
+      },
+      "evidence": [
+        {
+          "system": "L",
+          "dimension": "evidence",
+          "status": "supported",
+          "file": "responses/lucentthinker/q06.md",
+          "line": 31,
+          "quote": "不是“国家1.5万+上海1.5万”",
+          "analysis": "官方细则资金安排由国家与市级配套共同组成，同一置换补贴，不能重复相加。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/lucentthinker/q06.md",
+          "line": 96,
+          "quote": "149,983",
+          "analysis": "217,920+6,338+24,700+7,000−105,975=149,983，给出可以复算的成本。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/lucentthinker/q06.md",
+          "line": 110,
+          "quote": "若海豹五年残值只有35%，TCO增加约0.95万元，仍比Model 3便宜",
+          "analysis": "705旗舰基准143,381加189,900×5%=152,876，已比Model3的149,983贵2,893；650智航同样反转。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q06.md",
+          "line": 116,
+          "quote": "旧车多养一年（含旧车贬值） − 新电车一年使用成本",
+          "analysis": "新车使用成本未计提前持有一年折旧，旧车却含贬值；应在共同时间终点比较两车车龄残值和资金时间成本。等到2027也可能仅晚数月。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q06.md",
+          "line": 87,
+          "quote": "以“无额度”的身份申请新能源免费专用牌照额度",
+          "analysis": "退牌后保留旧车额度证明并不自动变成无额度资格。2026办法第五条排除持证明者；备案指南针对已经拥有免费绿牌车的对象，不能创造申请资格。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q06.md",
+          "line": 111,
+          "quote": "对应五年残值约 45% 左右",
+          "analysis": "同句8.78万元除以原落地近28万元约31.36%，并非45%；会影响保值优劣与TCO。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q06.md",
+          "line": 322,
+          "quote": "23.55 万 – 1.5 万（本地补贴） – 购置税减半",
+          "analysis": "指导价不含购置税，应加优惠后应纳税额；前文公式虽正确，这里净支出符号错误。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q06.md",
+          "line": 263,
+          "quote": "对总成本的影响要远大于 Model 3 与海豹之间的电耗差异",
+          "analysis": "年里程与电价差计算显示家充变化是数千元/年、车型能耗差是数百元/年，量级方向合理。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q06.md",
+          "line": 233,
+          "quote": "居民分时电价",
+          "analysis": "引用汽车版本、保值率及以旧换新税务页作为电价来源，标题与内容不匹配。"
+        }
+      ],
+      "checks": [
+        {
+          "claim": "保留旧车沪牌额度能否先免费绿牌再备案",
+          "system": "M",
+          "status": "confirmed_error",
+          "finding": "2026办法第五条同时排除有额度证明和有额度注册机动车者；第六条例外面向既有新能源车换新，本题仅一辆油车不适用。退牌保留额度不满足新申领条件。",
+          "url": "https://www.shanghai.gov.cn/202603bgtwj/20260210/84cb024ac225492f82d4039da1fe320f.html",
+          "source_title": "上海市鼓励购买和使用新能源汽车实施办法",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "额度备案是否是绕开资格门槛的方法",
+          "system": "M",
+          "status": "unsupported_or_mismatched",
+          "finding": "交通委备案指南适用于已拥有免费专用额度新能源车且持有效客车额度证明者，要求提供新能源行驶证与额度证明；并未授权本题先申请再备案的绕行。",
+          "url": "https://jtw.sh.gov.cn/bszn/20241231/526a71b702be4239bf9c8476468df23b.html",
+          "source_title": "个人非营业性客车额度备案办事指南",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "2018油车置换/报废与补贴8%上限1.5万元",
+          "system": "both",
+          "status": "supported",
+          "finding": "2026上海正式细则支持符合条件的售卖置换8%最高1.5万；报废汽油车限2013-06-30前、柴油限2015-06-30前，2018均不满足；申请仍需中签及其他手续，不等于自动可得。",
+          "url": "https://sww.sh.gov.cn/zwgkgfqtzcwj/20260130/a144767a3d6b42f2a8e9933c0c49f7bf.html",
+          "source_title": "2026年上海市汽车以旧换新补贴政策实施细则",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "L残值35%情景与M五年残值45%换算",
+          "system": "both",
+          "status": "confirmed_error",
+          "finding": "L海豹705旗舰152,876元高于Model3的149,983；M8.78/28=31.36%。这些为报告内复算，不依赖预测真实残值。",
+          "url": "",
+          "source_title": "本地TCO及比例复算",
+          "access_note": "报告内算术"
+        }
+      ],
+      "decisive_differences": [
+        "L给出官方条件和可复算TCO；M用错误资格推导推荐额度备案，并留待下一轮才给完整TCO。",
+        "双方年底购车建议都过于确定：政策未知不等于2027确定无补贴，也没有对等计入提前购新车折旧。"
+      ],
+      "caveats": [
+        "未全量核验所有2026在售海豹家族版本、价格与权益；不能因旧知识没有该版本就判假。",
+        "L保留非营业性额度的法律判断较好，但是否物理悬挂蓝牌与是否使用原额度应分开向登记机关确认。"
+      ],
+      "G": {
+        "scores": {
+          "coverage": 1.5,
+          "factual": 0.5,
+          "evidence": 0.5,
+          "reasoning": 1,
+          "actionability": 1,
+          "clarity": 1.5
+        },
+        "rationales": {
+          "coverage": "识别车型、保险、充电、折旧等栏目，但海豹是“假定版”，2018旧车资格未应用，额度选择未具体处理，2027对照账缺失，摘要仍留XX/YY。",
+          "factual": "2026免购置税与2027未知直接被2023公告反驳，报废建议不符合本用户车龄条件。TCO总额由表内项目无法复算，保险包含交强险后又单列交强险。",
+          "evidence": "保存文件仅列官网、搜狐、商务部新闻等宽泛名称，未给政策文号、具体车型页面、报价或计算依据。",
+          "reasoning": "把市区里程等同慢充占比，未建立旧车继续持有与新车持有的可比差额。家充和补贴二元图直接导出等到2027，缺少时间变化和数值阈值。",
+          "actionability": "提出确认家充和厂商信息，但未给能执行的旧车资格检查、额度流程、截止日期或报价比较。报废换购建议尤其需要纠正。",
+          "clarity": "章节和表格有基本结构，但占位符、估计版、表内合计及税制措辞使完成状态和比较口径不清。"
+        },
+        "strengths": [
+          "把家充可行性和补贴叠加列为需核实变量",
+          "TCO栏目包含残值，列出年度里程与电价等假设"
+        ],
+        "weaknesses": [
+          "确定购置税政策写错，旧车资格判断缺失并给不适用报废建议",
+          "TCO合计错误且交强险重复列项",
+          "具体车型和2027对照均未完成，摘要保留占位符"
+        ],
+        "confidence": "高（正文缺陷与已核事项）",
+        "weighted_total": 18.0
+      },
+      "three_way_verdict": "三方中L仍最接近可修改使用的决策底稿，M存在严重额度操作问题，G则在已公布税制、2018旧车补贴资格、具体在售版本及TCO合计上均未完成可靠交付。G把确定的2026—2027减半购置税写成免税或未知，错误直接影响买车时点判断。",
+      "gpt_differences": [
+        "L/M都找到2026—2027已公布税法和具体补贴比例，G遗漏后转成免税假设，动摇买车时点的核心依据。",
+        "L成本主表能复算，M只有框架，G虽然有总额但与自己的分项不符，不能因有表格而给更高分。",
+        "L等待模型与M额度方案的原有缺陷仍保留，G更低分来自其自身新增的政策与交付缺陷。"
+      ],
+      "gpt_caveats": [
+        "用户已明确确认网页版原回答也没有引用。证据评分依据报告现存的来源名称、书目与主张对应关系。未从缺引用推断未检索，也未推断实际后端模型。",
+        "2027未公布政策仅可作情景。本次未追认研究截止日之后新政策。",
+        "没有把报告所有未核实车型参数都认定错误，确定错误集中于税法、旧车条件和算术。"
+      ],
+      "gpt_evidence": [
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q06.md",
+          "line": 47,
+          "quote": "无法安装家充时只能依赖公共充电，成本和时间成本提高",
+          "analysis": "认识到补能便利与费用均重要，是合理变量选择。"
+        },
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q06.md",
+          "line": 33,
+          "quote": "折旧（购－售）",
+          "analysis": "至少把残值减项纳入成本栏目，优于完全忽略折旧的框架。"
+        },
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q06.md",
+          "line": 3,
+          "quote": "约为XX万元，海豹约YY万元",
+          "analysis": "摘要保留模板占位符，正文也没有2027完整对照表。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q06.md",
+          "line": 27,
+          "quote": "0（新能源车免征）",
+          "analysis": "2026及2027均已确定减半征收，23.55万元在通常含13%增值税价格下应纳税约10420元，并非0。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q06.md",
+          "line": 40,
+          "quote": "可直接报废并申请换购，获取补贴",
+          "analysis": "2018登记油车晚于汽油2013-06-30、柴油及其他燃料2015-06-30的报废补贴界限，不能据此取得报废更新补贴。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q06.md",
+          "line": 34,
+          "quote": "≈210,250元",
+          "analysis": "按表列折旧117750+保险40000+另列5000+充电7000+保养5000=174750，非210250。海豹相应179000，非239000，且还存在交强险重复。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q06.md",
+          "line": 58,
+          "quote": "建议：等到2027",
+          "analysis": "家充无法安装、补贴不可叠加，并不能单独推出下一年更便宜或更方便。报告缺少等待带来何种变化的因果条件。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q06.md",
+          "line": 20,
+          "quote": "没有直接来源",
+          "analysis": "正文自承配置差异没有直接来源，仅按品牌定位推断，不能支撑具体版本比较。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/lucentthinker/q06.md",
+          "line": 22,
+          "quote": "同2026年",
+          "analysis": "L政策表正确写2026—2027相同税制，区别于G的免税/未知设定。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q06.md",
+          "line": 263,
+          "quote": "对总成本的影响要远大于 Model 3 与海豹之间的电耗差异",
+          "analysis": "M有里程和电价计算支撑量级比较，G二元决策图没有同等推导。"
+        }
+      ],
+      "gpt_checks": [
+        {
+          "claim": "2026免购置税，2027政策尚不明确",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "财政部税务总局工信部2023年第10号公告明确2026-01-01至2027-12-31减半征收，每辆新能源乘用车减税上限1.5万元。该政策早于研究时点。",
+          "url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5207352/content.html",
+          "source_title": "关于延续和优化新能源汽车车辆购置税减免政策的公告",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "2018旧车报废可获补贴以及地方千元可与国家补贴叠加",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "上海2026细则对汽油报废车限2013-06-30前，柴油等限2015-06-30前。符合条件的售卖置换新能源按车价8%最高1.5万。国家与地方资金共同支持同一补贴，不应当作两笔政府补贴相加。",
+          "url": "https://sww.sh.gov.cn/zwgkgfqtzcwj/20260130/a144767a3d6b42f2a8e9933c0c49f7bf.html",
+          "source_title": "2026年上海市汽车以旧换新补贴政策实施细则",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "五年TCO合计",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "按G表列折旧加使用费用，Model3为174750元，海豹179000元。剔除已经含于保险中的重复交强险部分后还需下调。现有210250/239000均无对应公式。",
+          "url": "",
+          "source_title": "报告内TCO复算",
+          "access_note": "报告内算术，未把估计残值当预测事实"
+        },
+        {
+          "claim": "假定海豹26–30万元版本及配置",
+          "system": "G",
+          "status": "unverified",
+          "finding": "报告明确写假定版、尚需查证，没有可核对在售版本。此次不凭既有车型知识判定不存在，该缺口计需求覆盖和证据。",
+          "url": "",
+          "source_title": "报告保存文本",
+          "access_note": "无具体版本、链接或报价"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "钙钛矿叠层组件商业化尽调",
+      "verdict": "LucentThinker在面积、产品层级、单结与叠层、证书与寿命、产能与出货的证据辨析上明显更强，但把5.813亿元/500MW算成116亿元/GW，虚构了十倍资本开支矛盾；其中试建议也有前后门槛不一致。MiroThinker提供有用尽调框架，却有晶硅理论极限错误、面积口径回混和失效的文献编号系统，难以作为投资证据包。",
+      "L": {
+        "scores": {
+          "coverage": 4.5,
+          "factual": 2.5,
+          "evidence": 4,
+          "reasoning": 3.5,
+          "actionability": 4,
+          "clarity": 4
+        },
+        "rationales": {
+          "coverage": "完整覆盖五层商业化证据、三家公司路线、稳定性、封装铅、良率设备成本和阶段投资建议。",
+          "factual": "面积换算和多项成本模型拆解有价值；但资本开支换算错十倍并据此多处推论，纤纳2.88㎡/18.60%/509.21W也缺面积口径说明。",
+          "evidence": "可定位官方实验室、企业公告、论文及原始计量PDF，区分公告与独立测试；部分数据仍从媒体转述，纤纳良率重新解释未直接给论文。",
+          "reasoning": "识别记录与量产、单结与叠层、IEC通过与长期寿命区别，明确独立早期试样不能直接代替三家产品；但用其构造“寿命上限”及自设门槛有过度外推。",
+          "actionability": "索取原始测试、MES、户外对照、合格瓦成本和里程碑合同非常具体；推进中试所需条件与开篇立即支持中试的口吻不一致。",
+          "clarity": "图表与数据层次清楚，但篇幅重复，部分硬阈值显得过度精确。"
+        },
+        "strengths": [
+          "对0.2042㎡与2㎡、记录和出货、单结与叠层有实质纠错",
+          "独立原始测试与成本模型可追溯性较好",
+          "尽调清单覆盖测试条件、良率定义和合格瓦成本"
+        ],
+        "weaknesses": [
+          "capex算术错十倍并误判口径冲突",
+          "推进中试门槛与先行建议矛盾",
+          "外部早期试样不能给供应商产品寿命上限"
+        ],
+        "confidence": "中",
+        "weighted_total": 72.5
+      },
+      "M": {
+        "scores": {
+          "coverage": 4,
+          "factual": 2.5,
+          "evidence": 1,
+          "reasoning": 3,
+          "actionability": 3.5,
+          "clarity": 3.5
+        },
+        "rationales": {
+          "coverage": "覆盖多数要求并给阶段门；大面积纤纳最新产品与数据口径不够完整。",
+          "factual": "晶硅26–27%被称理论极限，与独立研究约29.4%口径相矛盾；表格区分0.2㎡和2㎡，后文又写30%级2㎡。",
+          "evidence": "正文[E1]至[E98]找不到对应文末[1]至[25]，多数链接是机构首页，认证/成本/户外说法不能定位核验。",
+          "reasoning": "总体认识到寿命良率经济性未闭环、4T兼容性和场景差异；但把IEC已攻克说得过满，未推导为何本企业适合100MW。",
+          "actionability": "原始报告、逐时户外对照、成本分解、设备复用及暂缓门槛有用；缺铅泄漏原始数据在首轮清单中的优先级。",
+          "clarity": "结构清楚，重复和术语较多，正文证据编号使阅读到核验断裂。"
+        },
+        "strengths": [
+          "承认良率成本说法冲突，反对直接GW扩产",
+          "尽调需原始可靠性与逐时对照数据的要求有价值"
+        ],
+        "weaknesses": [
+          "引文编号与文末映射失效",
+          "理论效率极限及面积口径错误",
+          "100MW投资必要性与成本KPI缺企业约束和预算依据"
+        ],
+        "confidence": "中",
+        "weighted_total": 55.0
+      },
+      "evidence": [
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q07.md",
+          "line": 23,
+          "quote": "同一行里的数字不能直接比较",
+          "analysis": "将Oxford纪录26.9%和出货24.5%、协鑫0.2㎡30.23%和2㎡27.06%、纤纳单结与叠层分层，直接回应用户避免营销比较的要求。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/lucentthinker/q07.md",
+          "line": 236,
+          "quote": "约 116 亿元/GW",
+          "analysis": "5.813亿元÷0.5GW=11.626亿元/GW，接近其10亿元/GW比较基准，不是十倍差异；332行尽调表再次沿用错误。"
+        },
+        {
+          "system": "L",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/lucentthinker/q07.md",
+          "line": 331,
+          "quote": "首 pass 良率、最终良率、OEE",
+          "analysis": "索取连续生产与不同良率定义，比单看厂商良率数字更可操作。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "internal_inconsistency",
+          "file": "responses/lucentthinker/q07.md",
+          "line": 373,
+          "quote": "这些条件目前没有一家完全满足",
+          "analysis": "362行称同时满足才推进5–30MW，373行却以未满足为建议中试而非量产的理由；需明确哪些是中试前提、哪些是放大量产门槛。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/lucentthinker/q07.md",
+          "line": 21,
+          "quote": "509.21 W / 18.60%",
+          "analysis": "按全面积2.88㎡、标准1000W/㎡，18.6%应为535.68W；509.21W对应17.68%，可能是开口面积与总面积混用，需证书才能确认，未判厂商虚假。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q07.md",
+          "line": 34,
+          "quote": "单结晶硅 26–27% 的理论极限",
+          "analysis": "Fraunhofer原始机构说明约29.4%常规理论极限；实测/量产与物理极限混淆。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/mirothinker/q07.md",
+          "line": 188,
+          "quote": "协鑫的 30% 级 2 m² 模块",
+          "analysis": "自身42–44行区分2048cm²29.51%与2㎡27.06%，到结论又混在一起，放大大面积成熟度。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q07.md",
+          "line": 28,
+          "quote": "ESTI 认证，2026‑07",
+          "analysis": "正文[E1]并无可定位对应文献；文末只有25条数值编号且多首页。这里判可追溯性不足，不判2026纪录不存在。"
+        },
+        {
+          "system": "M",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/mirothinker/q07.md",
+          "line": 332,
+          "quote": "PR、比能量（kWh/kWp）",
+          "analysis": "要求相邻晶硅对照、至少一年逐时数据和异常衰减解释，是有效尽调设计。"
+        }
+      ],
+      "checks": [
+        {
+          "claim": "5.813亿元500MW折合116亿元/GW",
+          "system": "L",
+          "status": "confirmed_error",
+          "finding": "报告所引媒体全文和环评公示转录均载58130万元、500MW；复算为11.626亿元/GW，原文多一个数量级，所谓十倍差异不成立。",
+          "url": "https://www.eiacloud.com/gs/detail/1?id=60521ZS3Bv",
+          "source_title": "昆山协鑫光电材料有限公司GW级生产项目（二期）环境影响评价信息第一次公示",
+          "access_note": "公示平台全文（非政府审批原件）；另核所引媒体全文https://carbon.solarbe.com/article/50022975"
+        },
+        {
+          "claim": "晶硅理论极限26–27%",
+          "system": "M",
+          "status": "confirmed_error",
+          "finding": "Fraunhofer ISE RIESEN项目原文给单结硅理论极限29.4%；说明这是特定常规光学与复合假设下的极限，不把26–27%实用效率当理论上限。",
+          "url": "https://www.ise.fraunhofer.de/en/research-projects/riesen.html",
+          "source_title": "RIESEN–Record Efficiencies for Double-Sided Silicon Solar Cells and Pero-Pero-Si Triple-Junction Solar Cells",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "Oxford26.9%为1.6㎡60片纪录组件",
+          "system": "both",
+          "status": "supported",
+          "finding": "Oxford2024-06-19原始公告支持60片、略大于1.6㎡、Fraunhofer CalLab独立认证；不支持把该纪录等同全部量产出货。",
+          "url": "https://www.oxfordpv.com/de/press-releases/oxford-pv-stellt-solarmodul-fur-aufdach--und-balkonauflagen-mit-rekordverdachtigem-wirkungsgrad-von-26-9-vor",
+          "source_title": "Oxford PV：26.9%屋顶及阳台组件纪录",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "协鑫30.23%对应2042cm²",
+          "system": "L",
+          "status": "unverified",
+          "finding": "企业官网搜索结果摘要明确如此，但打开原文发生redirect loop；摘要支持方向，未把摘要当完整认证报告。",
+          "url": "https://www.gcl-power.com/newdetail/6328.html",
+          "source_title": "协鑫光电D1轮超亿元融资收官",
+          "access_note": "搜索摘要可见；全文访问失败"
+        }
+      ],
+      "decisive_differences": [
+        "L按面积/路线/量产与纪录拆解证据，M后文重新混用口径。",
+        "L来源大多可定位，M正文E编号与文末引用完全无法一一对应。",
+        "L虽更可信，也出现足以影响投资风险认知的十倍capex错误，不能直接当最终投资结论。"
+      ],
+      "caveats": [
+        "公开2026纪录和企业未来产能未全量核验；未知不是虚假。",
+        "5–30MW与50–100MW优劣取决于用户资本、团队、设备和试验目标，不能仅以更保守规模给高分。"
+      ],
+      "G": {
+        "scores": {
+          "coverage": 2.5,
+          "factual": 1,
+          "evidence": 0.5,
+          "reasoning": 2,
+          "actionability": 2.5,
+          "clarity": 3
+        },
+        "rationales": {
+          "coverage": "覆盖效率、产能、出货、可靠性、铅、良率成本等栏目，但纤纳大量内容被写成未知，未比较2T/4T路线，三年投入和阶段安排未展开。",
+          "factual": "Oxford无公开组件测量及未公开封装结构被Fraunhofer2024原始公告直接反驳。将RoHS材料含量阈值拿作浸出量示例也混用量纲。其他未核实2026断言保留未知。",
+          "evidence": "保存文本只写机构、官网和报道大类，没有论文题名、认证编号、日期或链接，无法从报告定位商业化证据。",
+          "reasoning": "知道效率不等于可量产、成本取决于良率寿命，但把PVD/溶液/无铅分类代替本题关键2T/4T比较。用宣传中的兼容性推断改造量小，缺工艺边界。",
+          "actionability": "索取认证报告、IV、出货验收、制程良率及成本分解有用。缺同址晶硅对照、多气候时序与批量统计设计，停投阈值依据也薄弱。",
+          "clarity": "维度表便于扫描，然而图示重复，很多格子反复表达无公开信息，无法快速看出可靠的公司差异。"
+        },
+        "strengths": [
+          "把电池、组件、产能、出货和可靠性分列",
+          "尽调清单要求客户验收、工艺良率和成本结构"
+        ],
+        "weaknesses": [
+          "漏掉已公开组件测量，过度否定商业化证据",
+          "未讨论2T/4T的电流匹配、双电路和设备整合差异",
+          "铅泄漏阈值与材料含量标准混淆，投资门槛缺根据"
+        ],
+        "confidence": "高（正文缺陷与已核事项）",
+        "weighted_total": 33.0
+      },
+      "three_way_verdict": "L的证据分层和M的路线、尽调框架均明显强于G。G把多个维度整理成表，却把缺少自身检索结果写成行业无公开证据，漏掉2024年已有的Oxford全尺寸组件测量。其一般性尽调清单仍有价值，但不足以判断三家公司截至2026的真实进展或未来三年中试投入。",
+      "gpt_differences": [
+        "L/M覆盖关键2T/4T结构，G改为真空/溶液/无铅分类，未回答三家公司为何不能直接比较。",
+        "L有可定位测量与认证信息，M引用映射较差但仍给出公司差异，G大范围“无公开”被2024原始公开结果反驳。",
+        "L十倍capex错误仍按原评保留，本轮未因G更弱而抬高L。"
+      ],
+      "gpt_caveats": [
+        "用户已明确确认网页版原回答也没有引用。证据评分依据报告现存的来源名称、书目与主张对应关系。未从缺引用推断未检索，也未推断实际后端模型。",
+        "公开效率测量支持技术进展，不能直接证明25年寿命、银行可融资性或量产良率。",
+        "本次未全量核验纤纳、协鑫所有2026生产出货信息，未将“未知”自动判假。"
+      ],
+      "gpt_evidence": [
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q07.md",
+          "line": 12,
+          "quote": "实际出货量/商业客户",
+          "analysis": "单列交付与产能，有助于避免名义产能直接视作出货。"
+        },
+        {
+          "system": "G",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q07.md",
+          "line": 45,
+          "quote": "客户验收报告或示范项目合同书",
+          "analysis": "明确要求客户侧证据，能用于检验企业商业交付说法。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q07.md",
+          "line": 10,
+          "quote": "未见公开的玻璃封装组件效率测试结果",
+          "analysis": "Fraunhofer ISE 2024-01-31公告公开双玻组件25%、421W、1.68㎡及CalLab测量方法。此“未见”作为行业状态判断失实。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q07.md",
+          "line": 14,
+          "quote": "未公开封装结构",
+          "analysis": "Oxford栏的否定过强，2024 Fraunhofer原始报道明确glass-glass与低温互连封装。完整BOM未公开和基本结构未公开应区分。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "unverified",
+          "file": "responses/gpt-deepresearch/q07.md",
+          "line": 11,
+          "quote": "未披露任何产线计划或投产消息",
+          "analysis": "纤纳官网搜索摘要列量产及多个并网项目，但正文抓取无可读行。此次不把摘要当全文或认证报告，该绝对断言至少缺充分检索范围说明。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q07.md",
+          "line": 16,
+          "quote": "改造需求相对较小",
+          "analysis": "以官网兼容性说法推断整线改造小，未区分电池制造与组件封装环节，缺2T/4T结构影响。"
+        },
+        {
+          "system": "G",
+          "dimension": "actionability",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q07.md",
+          "line": 59,
+          "quote": "如RoHS 0.1%或1–5 mg/m²量级",
+          "analysis": "百分比和每平方米释放质量没有给分母、浸出介质与测试时长，不能作为相同环保红线。RoHS相关全文本次受阻，未据摘要完成法规范围判定。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q07.md",
+          "line": 23,
+          "quote": "同一行里的数字不能直接比较",
+          "analysis": "L逐项拆开面积、路线、纪录与出货，而G仅作形式分类后大量填写未知。"
+        },
+        {
+          "system": "M",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/mirothinker/q07.md",
+          "line": 332,
+          "quote": "PR、比能量（kWh/kWp）",
+          "analysis": "M明确同址晶硅和逐时现场数据，G只笼统索取长期数据，操作设计较弱。"
+        }
+      ],
+      "gpt_checks": [
+        {
+          "claim": "Oxford无公开玻璃封装组件效率测量",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "Fraunhofer ISE 2024-01-31原始公告公开1.68㎡指定受光面积、25%、421W双玻组件，给出CalLab多光谱模拟器及现场校验方法。文中长期认证尚在推进，效率测量与长期可靠性认证须分开。",
+          "url": "https://www.ise.fraunhofer.de/en/press-media/press-releases/2024/oxford-pv-and-fraunhofer-ise-develop-full-sized-tandem-pv-module-with-record-efficiency-of-25-percent.html",
+          "source_title": "Oxford PV and Fraunhofer ISE Develop Full-sized Tandem PV Module with Record Efficiency of 25 Percent",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "Oxford无公开组件级认证效率",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "Oxford 2024-06-19原始公告载60片、略大于1.6㎡、26.9%及Fraunhofer CalLab独立测量认证。此处为企业发布的第三方认证信息，结合独立机构此前测量报道足以反驳无公开组件证据的绝对判断。",
+          "url": "https://www.oxfordpv.com/de/press-releases/oxford-pv-stellt-solarmodul-fur-aufdach--und-balkonauflagen-mit-rekordverdachtigem-wirkungsgrad-von-26-9-vor",
+          "source_title": "Oxford PV公布26.9%组件效率纪录",
+          "access_note": "已打开全文并阅读相关段落"
+        },
+        {
+          "claim": "纤纳没有公开投产和项目资料",
+          "system": "G",
+          "status": "unverified",
+          "finding": "公司主页搜索摘要列量产、IEC认证及2022/2023/2025不同项目并网。打开首页没有可读正文，本轮仅记录已有反向线索，不把搜索摘要当独立认证原件。",
+          "url": "https://microquanta.com/",
+          "source_title": "MICROQUANTA官网",
+          "access_note": "摘要可见，全文无可读行"
+        },
+        {
+          "claim": "RoHS0.1%是否为铅浸出限值",
+          "system": "G",
+          "status": "unverified",
+          "finding": "EUR-Lex检索摘要将0.1%描述为均质材料质量浓度，并列固定光伏系统适用范围例外。原文与PDF均遇机器人验证，本轮不声称完成法规核实。报告并列%与mg/㎡而无测试定义的内部口径缺陷可直接判断。",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20250101",
+          "source_title": "Directive 2011/65/EU（2025合并文本）",
+          "access_note": "搜索摘要可见，全文及PDF访问受阻"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "郑和远航、海禁与海洋贸易",
+      "verdict": "两者均正确拆开停止国家远航、限制私商和实际贸易。LucentThinker更能区分同时代原文、晚出史书与现代解释，并比较葡萄牙制度的局限；MiroThinker存在停航纪年错误、时代不同的财政数字混用与现代论证误放“同时代证据”等问题，引用可追溯性明显较弱。L仍有把一篇财政解释写成确定事实、以晚明扩张直接排除早期萎缩的过强措辞。",
+      "L": {
+        "scores": {
+          "coverage": 4.5,
+          "factual": 4,
+          "evidence": 4,
+          "reasoning": 4,
+          "actionability": 4,
+          "clarity": 4.5
+        },
+        "rationales": {
+          "coverage": "覆盖财政政治、朝廷反复、北方压力、官方和私人贸易、葡萄牙融资组织军事与史料分层。",
+          "factual": "主时间线与抽核原文相符；但“对外贸易萎缩不成立”跨越时期，澳门1554入驻及海洋退出等概括需进一步辨析。",
+          "evidence": "提供碑刻、敕书和律例具体入口，明确明史为清修、刘大夏故事晚出；Siu、Ptak等学术解释也可定位。",
+          "reasoning": "识别因果时间顺序、财政收益归属与反事实制度前提；仍较依赖Siu单篇重建，结尾把综合解释概称同时代支持。",
+          "actionability": "帮助读者形成可检验判断及史料等级，指出继续查总账、版本和制度条件的方向；缺逐页文献定位。",
+          "clarity": "比较表简洁，层级和证据边界易读。"
+        },
+        "strengths": [
+          "时间线反复与1449晚于停航的因果警惕",
+          "碑刻/敕书/晚出史书/现代解释分层",
+          "葡萄牙债务与私人贸易使比较不落入成功模板"
+        ],
+        "weaknesses": [
+          "财政内外廷分配的现代重建有时变成确定陈述",
+          "长期贸易扩张不排除15世纪局部和阶段性收缩"
+        ],
+        "confidence": "中",
+        "weighted_total": 82.5
+      },
+      "M": {
+        "scores": {
+          "coverage": 4,
+          "factual": 2.5,
+          "evidence": 1.5,
+          "reasoning": 3,
+          "actionability": 3,
+          "clarity": 3
+        },
+        "rationales": {
+          "coverage": "基本回应各个子问和反事实，葡萄牙宗教军事动机较薄，17世纪公司制超出主要比较时段。",
+          "factual": "1424仁宗即位停航写为1425；明初与晚明边银、财政额口径混用；部分绝对措辞超过所证范围。",
+          "evidence": "核心Siu文献错链至Journal of Economic History首页，多条仅doi前缀、Google跳转或无对应文末编号；不是可复核引文。",
+          "reasoning": "概念拆分和制度激励有价值，但将现代财政解释列为同时代硬证据，并从个别重申禁令否定默许实践，法条与执行层次不稳定。",
+          "actionability": "给出研究应先问可行制度集合及反事实条件句的方法，但无法循大量引文直接核验。",
+          "clarity": "结构清楚但相同海贸与白银论点多次重复，段中密集引用妨碍判断。"
+        },
+        "strengths": [
+          "拒绝“没有国家远航等于没有私人贸易”",
+          "反事实应写条件句的建议合理"
+        ],
+        "weaknesses": [
+          "停航年份与证据类型有可确认错误",
+          "财政量化数据跨时期移植且引用错配",
+          "大量不可定位引文降低研究可用性"
+        ],
+        "confidence": "中",
+        "weighted_total": 55.5
+      },
+      "evidence": [
+        {
+          "system": "L",
+          "dimension": "evidence",
+          "status": "supported",
+          "file": "responses/lucentthinker/q08.md",
+          "line": 23,
+          "quote": "所以宣德化而柔远人也",
+          "analysis": "1431碑文可打开核对，支持船队对自身使命的政治表述；L也在105行提醒自述不是盈亏审计。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q08.md",
+          "line": 52,
+          "quote": "1449年的蒙古危机不可能是1435年拆解舰队的原因",
+          "analysis": "明确区分停止与不重启的时间因果，不用晚发事件单因解释早先政策。"
+        },
+        {
+          "system": "L",
+          "dimension": "evidence",
+          "status": "supported",
+          "file": "responses/lucentthinker/q08.md",
+          "line": 31,
+          "quote": "尚未见刊的稿子",
+          "analysis": "抽核Siu脚注明确胡椒700–1900%来自作者2022投稿稿件；L对数字不作已审计定论，比M谨慎。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q08.md",
+          "line": 7,
+          "quote": "对外贸易萎缩**：不成立",
+          "analysis": "16世纪后增长不能直接反证1430年代之后所有区域/时段没有萎缩；应限定为不能推出整个明代海贸持续收缩。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q08.md",
+          "line": 33,
+          "quote": "收益主要进入内廷，成本主要由公共财政承担",
+          "analysis": "有Siu学术论证支持，但这仍是财政重建而非现存全船队总账；段落定论口吻比29–31行的谨慎更强。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q08.md",
+          "line": 59,
+          "quote": "洪熙元年（1425）仁宗即位后",
+          "analysis": "停航即位诏为永乐二十二年八月，即1424；不能把次年改元误作诏令日期。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q08.md",
+          "line": 263,
+          "quote": "剑桥 2024 年关于“皇帝与文官财政竞争”",
+          "analysis": "此条被列入253–265行“同时代或近同时代硬核证据”，现代论文不是同时代文献；引用还指向错误期刊首页。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q08.md",
+          "line": 71,
+          "quote": "年“边银”达千万两量级",
+          "analysis": "未提供永乐—正统同口径原始账证；引知乎及葡萄牙比较资料，将不同年代的银两财政规模放在一起，不能支撑明初挤出效应强度。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q08.md",
+          "line": 299,
+          "quote": "不能与有实证支撑的历史事实同等地位",
+          "analysis": "对未发生结果与史料事实的区分是合理研究方法。"
+        }
+      ],
+      "checks": [
+        {
+          "claim": "政治使命与军事行动的同时代支持",
+          "system": "L",
+          "status": "supported",
+          "finding": "1431《天妃之神灵应记》文本确有宣德化、柔远人及远航赏赐、军事行动记载；支持作者自述使命，不直接证明全部动机或贸易盈亏。",
+          "url": "https://zh.wikisource.org/zh-hans/天妃之神靈應記",
+          "source_title": "天妃之神灵应记",
+          "access_note": "古碑文本的维基文库转录全文；未现场核石刻拓本"
+        },
+        {
+          "claim": "仁宗即位停航诏的年份",
+          "system": "both",
+          "status": "confirmed_error",
+          "finding": "Siu正文时间线及香港中文大学学术论文均将即位停航放在1424；实录卷一上可见永乐二十二年即位时序。L1424正确，M1425错误。",
+          "url": "https://www.shidianguji.com/zh/book/NGJ892411999004806106108/chapter/1luhhga91nuo0",
+          "source_title": "大明仁宗昭皇帝实录卷一上",
+          "access_note": "原典转录可见但OCR较差；结合https://www.cuhk.edu.hk/ics/journal/articles/v51p067.pdf搜索摘要及Siu全文交叉确认"
+        },
+        {
+          "claim": "财政竞争论与胡椒利润证据等级",
+          "system": "both",
+          "status": "supported",
+          "finding": "Siu论文正文确实提出内外廷财政竞争，并称航海拨款相对总预算较小；700–1900%脚注指作者2022投稿稿件，属于现代论证及待检验估算。L明确此局限；M把该论文当“硬核同时代”不成立。",
+          "url": "https://www.cambridge.org/core/journals/journal-of-chinese-history/article/cessation-of-zheng-hes-voyages-and-the-beginning-of-private-sailings-fiscal-competition-between-emperors-and-bureaucrats/8FE45F3210A4DF174A4EC2B30868D433",
+          "source_title": "The Cessation of Zheng He’s Voyages and the Beginning of Private Sailings: Fiscal Competition between Emperors and Bureaucrats",
+          "access_note": "已打开全文并阅读相关段落"
+        }
+      ],
+      "decisive_differences": [
+        "L给具体同时代原文与晚出材料批判，M将现代研究列进同时代支持且多引用不能定位。",
+        "L强调葡萄牙王室融资也有债务与垄断限制，比较更对称；M偏高利润可持续的线性叙事。"
+      ],
+      "caveats": [
+        "Siu财政竞争论属于现代学术解释，不因两报告共享引用而变成历史共识。",
+        "本次未核查每个葡萄牙融资数字及所有明代银流估算，不能以抽核代表全篇已证实。"
+      ],
+      "G": {
+        "scores": {
+          "coverage": 3,
+          "factual": 1,
+          "evidence": 1,
+          "reasoning": 2,
+          "actionability": 2,
+          "clarity": 3
+        },
+        "rationales": {
+          "coverage": "涉及财政、政治、北方压力、私商与葡萄牙比较，然而反事实的可检验条件、葡萄牙融资和贸易组织细节及1567部分开海边界不足。",
+          "factual": "1424后再无大船队与1431第七航矛盾，夏原吉官职写兵部又工部。《明史》引句增加回报不抵成本的意思，《星槎胜览》作者误署马欢。",
+          "evidence": "有Dreyer、Ptak、Needham等可识别书目，可给有限分。多数段只标“证据类型”，不映射到篇章和页码，且一次资料目录本身有作者错误与无法定位条目。",
+          "reasoning": "正确区分国家远航与实际贸易，但从政治目的直接推出无营利考量和净亏损，忽略贸易功能与财政收益分配。葡萄牙被简化为长期高效商业体系。",
+          "actionability": "可作为概念入门和部分书目起点，无法据所列证据逐条检验盈亏、决策机制与反事实，需重做史料定位。",
+          "clarity": "正文与表格较易读，但重复段落多，时间线漏掉第七次远航，执行摘要与正文冲突。"
+        },
+        "strengths": [
+          "区分停止国家远航、限制私商与贸易变化",
+          "指出葡萄牙王室和私人融资、港口军事据点与明朝舰队的差异",
+          "列出若干可识别现代研究书目"
+        ],
+        "weaknesses": [
+          "核心财政引句改变原意，把耗费大说成回报不足",
+          "停航时间线、官职和著作作者错误",
+          "证据类型标签没有对应原文，反事实边界展开不足"
+        ],
+        "confidence": "高（正文缺陷与已核事项）",
+        "weighted_total": 36.0
+      },
+      "three_way_verdict": "L仍最强，M虽有史料层次和链接问题，仍比G更充分处理财政利益与反事实。G把三个概念分开并拒绝简单闭关叙事，但摘要停航时间线自相矛盾、核心财政引句改写成净亏损结论、夏原吉官职和著作作者错误，削弱了历史解释基础。",
+      "gpt_differences": [
+        "L区分碑刻自述、清修史书、现代财政重建与缺失总账，M亦讨论盈亏争议，G把政治目的和成本过大连成确定净亏损。",
+        "三者都拒绝“海禁等于贸易消失”，G在大方向相近时仍有更多可证基本事实与引句错误。",
+        "G的可识别书目部分保留价值，但没有提供足以核实主张的文献映射。"
+      ],
+      "gpt_caveats": [
+        "用户已明确确认网页版原回答也没有引用。证据评分依据报告现存的来源名称、书目与主张对应关系。未从缺引用推断未检索，也未推断实际后端模型。",
+        "本轮没有核验所有海上军事行动、葡萄牙融资细节和G所列全部书目。未识别文献保留unverified。",
+        "G初评factual为1.5，抽核发现核心《明史》引句改变收益与成本关系后降为1。该调整来自新增直接反证。"
+      ],
+      "gpt_evidence": [
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q08.md",
+          "line": 3,
+          "quote": "海上贸易并非完全中断",
+          "analysis": "主张制度限制不能直接等同实际贸易消失，概念方向合理。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q08.md",
+          "line": 53,
+          "quote": "Edward L. Dreyer",
+          "analysis": "作者、书名和2007年使该现代研究可以识别，证据评分没有把零URL等同零书目信息。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q08.md",
+          "line": 2,
+          "quote": "此后再无大规模官方航队出海",
+          "analysis": "同文8行承认1431–33第七次远航。1431同时代碑文亦记统率数万人、百余巨舶及再次出航，摘要1424终结的说法错误。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q08.md",
+          "line": 8,
+          "quote": "夏原吉（兵部尚书）",
+          "analysis": "该时期主要任户部尚书，18行又写工部尚书。故宫机构资料支持户部身份，人物职责直接关系财政决策解释。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q08.md",
+          "line": 15,
+          "quote": "所获之宝多不可计，然未抵京国之耗费",
+          "analysis": "《明史》卷304原文说所取宝物多且中国耗费也多，并无“未抵”这一收益小于成本的比较。G用引号添加净亏损含义，再据此推出投入远大于回报。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q08.md",
+          "line": 51,
+          "quote": "马欢《星槎胜览》",
+          "analysis": "《星槎胜览》作者费信，原典转录题署可核。书目作者错误使所谓一次资料链失准。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q08.md",
+          "line": 15,
+          "quote": "整体效益远低于政府投入",
+          "analysis": "同段承认现存档案无完整收支，仍下确定净效益判断，缺收益范围与财政口径分析。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q08.md",
+          "line": 24,
+          "quote": "沈阳考古出土的大量明代陶瓷",
+          "analysis": "未给考古报告、地点器物与跨海流向链，不能由内陆出土笼统支持南亚欧洲海外贸易。保留为证据不足，未判材料不存在。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q08.md",
+          "line": 31,
+          "quote": "现有材料没有留下可核对的总账",
+          "analysis": "L明确总账缺失，并讨论相关估算范围，与G确定净亏损结论形成方法差异。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q08.md",
+          "line": 299,
+          "quote": "不能与有实证支撑的历史事实同等地位",
+          "analysis": "M明确反事实与事实的等级，G只有不宜简单类比而缺同等展开。"
+        }
+      ],
+      "gpt_checks": [
+        {
+          "claim": "1424之后不再有大规模官方远航",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "1431《天妃之神灵应记》记七次航行、数万人与百余巨舶，并记宣德六年仍统舟师前往诸番。G摘要与自身后文及同时代材料冲突。",
+          "url": "https://zh.wikisource.org/zh-hans/天妃之神靈應記",
+          "source_title": "天妃之神灵应记",
+          "access_note": "同时代碑文转录全文，未现场核验拓片"
+        },
+        {
+          "claim": "《明史》原文证明收益未抵成本",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "卷304原文仅并列宝物很多与耗费很大，G引句加上“未抵”，改变原文证据含义。它不能作为有总账支持的净亏损判断。",
+          "url": "https://zh.wikisource.org/zh-hans/明史/卷304",
+          "source_title": "明史卷304·郑和传",
+          "access_note": "清修史书原文转录全文，属于后世编纂材料"
+        },
+        {
+          "claim": "夏原吉在关键阶段任兵部或工部尚书",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "故宫博物院人物词条将其履历归于户部，并明确仁宗即位后复任户部尚书。G同文兵部/工部两种写法均不合。",
+          "url": "https://www.dpm.org.cn/lemmas/241459.html",
+          "source_title": "故宫博物院·夏原吉",
+          "access_note": "机构词条全文，非同时代档案"
+        },
+        {
+          "claim": "马欢为《星槎胜览》作者",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "识典古籍原典条目题署[明]费信撰，与G马欢署名不符。",
+          "url": "https://www.shidianguji.com/zh/book/HY6895/chapter/1ku4sd0j2d3c5",
+          "source_title": "星槎胜览内容及目录",
+          "access_note": "原典题署和正文可见"
+        },
+        {
+          "claim": "《沈阳瓷志》《郑和航海日志残本》等条目",
+          "system": "G",
+          "status": "unverified",
+          "finding": "报告缺作者、编者、馆藏或版本信息，当前未确认对应文献。未因名称陌生判为捏造。",
+          "url": "",
+          "source_title": "G第51行书目",
+          "access_note": "本轮未完成外部核验"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "欧盟关税对中国制造纯电动汽车市场表现的影响",
+      "verdict": "LucentThinker明显胜出：能用BEV细分解释MG受损、明确BYD全动力总成不能与Tesla纯电直接比较，并标出政策与比例的不确定性。MiroThinker虽然结构完整，却在核心结论中用全电动车/全品牌增长替代中国制造BEV的表现，并把柏林产能自然替代上海Model 3作为无来源的基准前景；占位链接与已核实的错配使其需要大量重做。",
+      "L": {
+        "scores": {
+          "coverage": 4,
+          "factual": 3.5,
+          "evidence": 3.5,
+          "reasoning": 3,
+          "actionability": 3.5,
+          "clarity": 4
+        },
+        "weighted_total": 70.5,
+        "rationales": {
+          "coverage": "三家、税负、价格传导、2025与2026走势、替代原因和未来政策均覆盖；但当期EU-only及三家BEV累计对照不足，欧洲含英国的增长不能完全回答受税市场。",
+          "factual": "税率与大部分核心市场数据经原始T&E和年度注册来源支持；上海Model3对欧出口比例26%→19%误读了分母，局部把进口量与注册销量连接得过紧。",
+          "evidence": "行内编号可追溯，有T&E及欧委会原始材料，也主动界定CEPR证据性质；不少当期销量、工厂与价格取自转载/行业媒体，尚缺统一数据表和利润证据。",
+          "reasoning": "解释产品结构、产地迁移与市场分母很好；但从统一2万欧元CIF假设推出三家销量差异，从反弹推出价格比关税更重要，以及MG关税第一位，均超过识别力度。",
+          "actionability": "五个监测信号和政策生效/工厂延误条件实用；20%–40%增长、MG2027见底等无模型支撑，方向参考优于定量决策。",
+          "clarity": "开头结论、税率表和三家公司对照容易阅读；少数绝对化标题与后文限定不完全一致。"
+        },
+        "strengths": [
+          "明确BEV、PHEV、全动力总成及中国制造与中国品牌的区别。",
+          "分别报告三家BEV受损程度，并提醒价格承诺未获批、混动配额细则未公开。"
+        ],
+        "weaknesses": [
+          "因果语气过强，缺少同车型EU/UK或补贴政策对照。",
+          "Model3份额分母误读；预测精度高于依据。"
+        ],
+        "confidence": "中高（报告内部及抽核较充分；未逐条验证全部2026数据）"
+      },
+      "M": {
+        "scores": {
+          "coverage": 3,
+          "factual": 2,
+          "evidence": 1.5,
+          "reasoning": 2,
+          "actionability": 2.5,
+          "clarity": 3
+        },
+        "weighted_total": 44.0,
+        "rationales": {
+          "coverage": "形式上回答全部子问，也纳入关税之外的成本和产品因素；但Model3主要用Tesla品牌总量，BEV问题多次用EV或全品牌增长作答。",
+          "factual": "核心指标的对象、动力类型与分母漂移实质改变结论；文内份额下降又称市占增长，将9月单月Model3同比翻倍概括为全年。未知2026事实不因缺少核验就判错；柏林Model3替代缺乏支持另放在推理维度。",
+          "evidence": "有IEA和T&E有效原始来源，但至少6个独立URL带XXXX/日期XX占位；2026H1超车引用的是2026年1月的2025年度文章。权威域名不能抵消具体链接不支持。",
+          "reasoning": "能提出利润吸收、混动替代与竞争等机制，但全品牌增长不证明受税BEV无需求损失；把税率高低与毛利、柏林替代及未来份额直接相连，缺少基准或验证条件。",
+          "actionability": "跟踪毛利、动力结构与政策细则有用；三种前景情景仍缺触发阈值与可复算预测，对BYD高单位数/两位数份额未说明需求、产能和价格路径。",
+          "clarity": "组织清晰，但摘要与正文主语切换、2026全年与单月混称、重复结论降低准确阅读效率。"
+        },
+        "strengths": [
+          "认识到关税按生产地而非品牌国籍征收，并注意MG品牌总量与BEV表现不同。",
+          "提出本地化、利润、动力总成与配额的监测维度，避免只盯销量。"
+        ],
+        "weaknesses": [
+          "BEV/PHEV、品牌/车型和EU/欧洲的混用影响总判断。",
+          "占位参考文献、时间错配及未证实的柏林Model3前景使关键论证不可依赖。"
+        ],
+        "confidence": "中高（报告内部及抽核较充分；未逐条验证全部2026数据）"
+      },
+      "evidence": [
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q09.md",
+          "line": 25,
+          "quote": "不等于终端零售价涨幅",
+          "analysis": "正确区分CIF税基与零售价，避免把27%或45.3%直接当作消费者涨价。"
+        },
+        {
+          "system": "L",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/lucentthinker/q09.md",
+          "line": 79,
+          "quote": "这是**全动力总成口径**，不是纯电对纯电",
+          "analysis": "BYD总量超过Tesla时主动指出动力结构不同，直接防止任务最重要的口径误判。"
+        },
+        {
+          "system": "L",
+          "dimension": "evidence",
+          "status": "supported",
+          "file": "responses/lucentthinker/q09.md",
+          "line": 81,
+          "quote": "宜视为方向性判断，不宜当作精确全欧比例",
+          "analysis": "识别德国与全欧PHEV占比可能混淆，没有将薄弱数据包装成确定事实。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q09.md",
+          "line": 37,
+          "quote": "这基本解释了为什么同样面对关税，三家销量走势完全不同",
+          "analysis": "前表统一假设CIF，并无需求弹性、促销、产品更新控制；不能据此充分解释销量差异。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/lucentthinker/q09.md",
+          "line": 181,
+          "quote": "上海产Model 3对欧出口比例已从26%降至19%",
+          "analysis": "T&E的分母是中国制造BEV进口构成中的Tesla份额，不是上海Model3出口欧洲的比例。"
+        },
+        {
+          "system": "L",
+          "dimension": "actionability",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q09.md",
+          "line": 177,
+          "quote": "增速从三位数回落到20%—40%",
+          "analysis": "给出定量基准预测却无需求、产能爬坡、价格或配额分配模型。"
+        },
+        {
+          "system": "M",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/mirothinker/q09.md",
+          "line": 36,
+          "quote": "打击对象是“生产地在中国”的 BEV，而不是注册地在中国的车企",
+          "analysis": "正确设定关税的原产地范围，是有效分析起点。"
+        },
+        {
+          "system": "M",
+          "dimension": "actionability",
+          "status": "supported",
+          "file": "responses/mirothinker/q09.md",
+          "line": 337,
+          "quote": "是主动吸收关税换规模，还是仍然保持健康毛利",
+          "analysis": "明确销量不能替代盈利，对产业观察有实际价值。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q09.md",
+          "line": 42,
+          "quote": "2025 年中国制造电动车在欧洲销量较 2024 年仍增长近 50%，达到约 94 万辆",
+          "analysis": "数字本身被IEA支持，但行46用它支持中国制造纯电绝对销量大幅爬坡；IEA electric cars包含BEV和PHEV，欧洲也宽于EU。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q09.md",
+          "line": 71,
+          "quote": "首度略微超越特斯拉的 17.0 万辆",
+          "analysis": "引用6实际是2026-01-27的2025年度注册统计，未报告2026H1。不能据此判数字一定错，但证据不支持。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q09.md",
+          "line": 31,
+          "quote": "CELEX:32024RXXXX",
+          "analysis": "正式法律引用保留占位号；同类占位在其他核心政策、成本与工厂引用中重复出现。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q09.md",
+          "line": 176,
+          "quote": "随着柏林工厂在 Model 3/ Model Y 上进一步替代上海供给",
+          "analysis": "未给出Model3欧洲生产公告或投资时间表，却把这种替代写成既定趋势，多处前景依赖它。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/mirothinker/q09.md",
+          "line": 307,
+          "quote": "关税后份额回落，但销量与市占都在增长",
+          "analysis": "同一句中BEV份额回落又声称市占增长；未交代后半句已经换成全品牌/全动力总成。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/mirothinker/q09.md",
+          "line": 19,
+          "quote": "2026 年 Model 3 在欧洲注册量同比翻倍",
+          "analysis": "正文行157限定为2026年9月单月；摘要省掉期间，会使读者误当年累计翻倍。"
+        }
+      ],
+      "checks": [
+        {
+          "claim": "中国制造BEV份额22%→17%、进口约35万辆；BYD与SAIC分化",
+          "system": "both",
+          "status": "supported",
+          "finding": "T&E 2026-07-13原文支持这些方向和数量，并明确Tesla 26%→19%是中国制造BEV进口构成。T&E是研究倡议机构分析，非欧盟官方注册统计。",
+          "url": "https://www.transportenvironment.org/articles/presence_chinese_automakers_eu_car_market",
+          "source_title": "The presence of Chinese automakers in the EU car market",
+          "access_note": "已读取网页全文相关段落"
+        },
+        {
+          "claim": "94万辆、增长近50%是否代表中国制造BEV",
+          "system": "M",
+          "status": "unsupported_or_mismatched",
+          "finding": "IEA原文确有94万辆与近50%，但同报告Trends定义electric cars包括BEV与PHEV；该数不能直接证明纯电大幅增长。",
+          "url": "https://www.iea.org/reports/global-ev-outlook-2026/manufacturing-and-trade",
+          "source_title": "Manufacturing and trade – Global EV Outlook 2026",
+          "access_note": "已读取网页全文相关段落"
+        },
+        {
+          "claim": "IEA electric cars定义",
+          "system": "M",
+          "status": "supported",
+          "finding": "Trends正文图表注释明确同时包含纯电与插混；确认口径问题，不将94万数字本身判假。",
+          "url": "https://www.iea.org/reports/global-ev-outlook-2026/trends-in-electric-cars",
+          "source_title": "Trends in electric cars – Global EV Outlook 2026",
+          "access_note": "已读取网页全文相关段落"
+        },
+        {
+          "claim": "BYD 2025注册187657及文中2026H1超车的来源",
+          "system": "both",
+          "status": "supported",
+          "finding": "CnEVPost全文支持2025欧洲187657、+268.6%和Tesla238656、-26.9%，地域为EU+EFTA+UK；同文不含2026H1。L正确用于2025，M用于H1超车时错配。",
+          "url": "https://cnevpost.com/2026/01/27/byd-european-registrations-surge-in-2025-tesla-slips/",
+          "source_title": "BYD’s European registrations surge 270% in 2025 while Tesla slips 27%",
+          "access_note": "已读取网页全文相关段落"
+        },
+        {
+          "claim": "CUPRA Tavascan获价格承诺豁免",
+          "system": "L",
+          "status": "supported",
+          "finding": "欧委会2026-02-10公告确认特定车型最低进口价、限制进口量与欧盟投资里程碑。该公告本身不能证明10月底没有其他获批企业，L采用未公开确认措辞较合理。",
+          "url": "https://policy.trade.ec.europa.eu/news/commission-accepts-price-undertaking-chinese-electric-car-producer-2026-02-10_en",
+          "source_title": "Commission accepts price undertaking from Chinese electric car producer",
+          "access_note": "已读取网页全文相关段落"
+        },
+        {
+          "claim": "混动贸易安排与35万配额是否已成为完整确定法律规则",
+          "system": "both",
+          "status": "unverified",
+          "finding": "商务部确认磋商安排及2025年30.2万辆为向上调整基准，强调非歧视和WTO合规；该页未确认35万辆、6%、四年及生效细则。媒体报道不因官方未写细节而被判假，但两报告硬性预测需要保留政策情景。",
+          "url": "https://english.mofcom.gov.cn/News/SpokesmansRemarks/art/2026/art_9c5d95356d984390af922150976cc853.html",
+          "source_title": "MOFCOM Spokesperson’s Remarks on the China-EU Understandings Reached in Consultations on Hybrid Vehicles and BEVs",
+          "access_note": "已读取网页全文相关段落"
+        }
+      ],
+      "decisive_differences": [
+        "L明确BYD全动力销量不能与Tesla纯电直接比较；M在结论中仍把品牌增长推论成受税纯电更好卖。",
+        "L把Model3单独列出2025约8.54万辆并判断关税次要；M用Tesla品牌下滑近28%称Model3三者中受损最重。",
+        "L有具体可追溯数据与不确定性清单；M存在多个明确占位URL和已确认引用时间错配。"
+      ],
+      "caveats": [
+        "完整阅读两份正文及参考文献；未逐条外查全部2026月度数据。",
+        "35万混动配额有报道背景，不能因无法核实所有细则而称虚构。",
+        "两份都缺少可识别净关税效应的严谨反事实，比较的是报告质量而非因果效应真实大小。"
+      ],
+      "G": {
+        "scores": {
+          "coverage": 2,
+          "factual": 1,
+          "evidence": 1,
+          "reasoning": 1.5,
+          "actionability": 1.5,
+          "clarity": 2.5
+        },
+        "weighted_total": 28.5,
+        "rationales": {
+          "coverage": "覆盖税率、价格、多因素和未来情景等题面主题，但摘要承诺的2019–2026跟踪没有兑现。主要历史表是示例/假设，几乎没有实际2026销量或MG的BEV分解，也未单独建立上海Model3受影响幅度。偏向五国购车配置与利益相关者建议，核心产业问题交付不足。",
+          "factual": "存在自定汇率下人民币/欧元换算错误、欧洲工厂地理错误、未来市场份额合计矛盾和价格计算误差。将2026价格承诺制度描述为全面未变也漏掉已获批车型。历史假设表已经披露，未按所有数字均为伪造扣分。",
+          "evidence": "文件仅有机构和来源类别名称，没有URL、逐条文献、发布日期或表格定位。法规号能帮助复核税率，其他主要销量、价格与毛利主张难以追溯。此项评价针对交付文件，不推断网页版未做检索。",
+          "reasoning": "认识到关税、补贴、品牌和本地化同时影响结果，也说明若干计算假设。但从全转嫁假设推出实际价格与利润变化，从未定义的历史趋势推出2029销量和精确区间，缺反事实、弹性或产能爬坡模型。",
+          "actionability": "本地化、渠道、车型调整等方向可以作为讨论清单。建议没有与三家公司实际BEV损失、单位利润或可验证触发阈值相连，部分行动又以错误产能地理为前提，无法支持用户判断未来几年谁更有利。",
+          "clarity": "标题与表格易定位，假设有所披露。摘要声称已完成深入跟踪和量化，正文未提供相应交付，且表中原产地、车型、年度和份额定义反复变化，另有重复英国行和缺失图表指代。"
+        },
+        "strengths": [
+          "列出BYD17%、SAIC35.3%、Tesla7.8%的最终附加税并说明叠加基础税。",
+          "识别PHEV与BEV政策覆盖不同，明确披露历史表有假设与推估。",
+          "把汇率、运费、VAT和经销商加价写明，使示例可以复算。"
+        ],
+        "weaknesses": [
+          "未用截至截点的实际BEV/Model3资料回答受影响多大。",
+          "多项算术、产地和市场份额口径错误损害成本及前景结论。",
+          "只有来源名称而无对应引用，未来销量区间缺模型。"
+        ],
+        "confidence": "高（对所交付文本缺口与已核实错误的判断）。对无逐条来源的其他2026断言仅作未核实处理。"
+      },
+      "three_way_verdict": "三方排序为L、M、G。G能列明主要税率和成本机制，但用披露为示例/推估的历史表替代实际市场测量，缺少2026年各主体BEV与Model3表现。与前轮L/M相比，它既缺少当前数据，又有可直接复算或由原始来源确认的独立错误。仅补回引用仍不足以完成原题。",
+      "gpt_differences": [
+        "L与M均尝试描述2025年受损、2026年反弹及动力类型转移，G主要停留在泛化历史趋势和示例表。",
+        "L明确给MG纯电下降与BYD全动力比较限制，M虽混用多次仍识别MG BEV受损。G没有建立相应细分基线。",
+        "G的全转嫁示例可以说明成本上限，却被当作实际价格与毛利变化，三家公司预测范围也缺可复算模型。"
+      ],
+      "gpt_caveats": [
+        "评的是用户保存的Markdown交付，用户确认网页版原回答也没有引用，证据缺口不归因于导出丢失。不能据此推断系统检索过程。缺引用仅直接影响evidence，其余维度由独立正文缺口或错误支撑。",
+        "历史表明确标为示例及部分假设，相关弱点主要是无法回答实际影响。",
+        "没有发现明确使用2026-10-30之后已经发生的数据。2027–2029预测标为情景，本身不构成后见泄漏。"
+      ],
+      "gpt_evidence": [
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 5,
+          "quote": "比亚迪17.0%、吉利18.8%、上汽35.3%、特斯拉（上海）7.8%",
+          "analysis": "最终税率与欧委会原始公告相符，属于已完成的基础事实。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 12,
+          "quote": "运费固定1000",
+          "analysis": "明确示例输入，有助于区分假设测算与观测价格。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 43,
+          "quote": "部分数值为报告假设与推估",
+          "analysis": "报告披露了历史表的估计性质，不能把所有表格数字直接标签为伪造。"
+        },
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 18,
+          "quote": "2019–2024年的欧洲主要国家销量",
+          "analysis": "实际表含2025英国及挪威占位，没有2026实际销量。示例历史表无法兑现摘要承诺的2019–2026跟踪或回答截止时点实际影响。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 7,
+          "quote": "欧盟关税措施维持原样",
+          "analysis": "若限定三家仍用原税率可以成立，但原段对整体制度的概括漏掉2026年2月获批的Tavascan价格承诺，状态更新不完整。此处不假定三家也已获批。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "internal_inconsistency",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 10,
+          "quote": "若全部转嫁给消费者",
+          "analysis": "同句说税负全转嫁后仍显著压缩毛利。给定成本和百分比加价都不变的示例本身推不出企业吸收或毛利下降。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 10,
+          "quote": "售价上调约17%",
+          "analysis": "按同段41000欧元CIF、税后乘VAT和经销商加价，前后应约59035.90和68159.63欧元，增幅15.45%。17%是附加税占CIF的比率，不能直接当既含10%基础关税的终端涨幅。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 82,
+          "quote": "~60–70万RMB（合€60–70k）",
+          "analysis": "采用正文7.5人民币/欧元，应约€80–93.3k。车型价格比较的货币换算不自洽。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 94,
+          "quote": "比亚迪约4%→5%→6%，MG约1%→1%→1%",
+          "analysis": "2029正文BYD6%加MG约1%已约7%，同情景表104行中国车总份额却约6%。没有交代分母或范围变化。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 110,
+          "quote": "根据历史趋势估算",
+          "analysis": "未给历史真实基线、总市场分母、产能爬坡或弹性，不能复算±10%/20%/30%区间或公司间排序。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 138,
+          "quote": "欧洲工厂（柏林/弗里蒙特）",
+          "analysis": "Tesla官方明确Fremont位于美国加利福尼亚，把它作为欧洲产能规避欧盟壁垒的地理基础不成立。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q09.md",
+          "line": 144,
+          "quote": "欧盟委员会公告、关税数据库、ACEA及国家登记局报告",
+          "analysis": "来源类别没有映射到具体断言、文件、日期或页码。只能评价当前交付文件的可追溯性，用户已确认网页版原回答同样没有引用。"
+        }
+      ],
+      "gpt_checks": [
+        {
+          "claim": "最终附加税及实施时间",
+          "system": "G",
+          "status": "supported",
+          "finding": "欧委会确认2024/2754自2024-10-30适用，BYD17%、SAIC35.3%、Tesla7.8%，基本支持G税率段。",
+          "url": "https://trade.ec.europa.eu/access-to-markets/en/news/eu-commission-imposes-countervailing-duties-imports-battery-electric-vehicles-bevs-china",
+          "source_title": "EU Commission imposes countervailing duties on imports of battery electric vehicles (BEVs) from China",
+          "access_note": "已读取原始来源全文的相关段落"
+        },
+        {
+          "claim": "截至2026-10-30价格承诺是否仅停留在谈判",
+          "system": "G",
+          "status": "unsupported_or_mismatched",
+          "finding": "欧委会在2026-02-10已接受Volkswagen Anhui对CUPRA Tavascan的价格承诺，附最低价、数量及投资要求。该先于截点的具体进展没有进入G现状描述。",
+          "url": "https://policy.trade.ec.europa.eu/news/commission-accepts-price-undertaking-chinese-electric-car-producer-2026-02-10_en",
+          "source_title": "Commission accepts price undertaking from Chinese electric car producer",
+          "access_note": "已读取原始来源全文的相关段落"
+        },
+        {
+          "claim": "历史表2025英国BYD20000是否可作实际全品牌销量基线",
+          "system": "G",
+          "status": "unsupported_or_mismatched",
+          "finding": "BYD官方引用SMMT数据给出2025英国51422辆，包含BEV与PHEV。G表已标示示例并列Tang/Han/Dolphin，范围又不清，故不直接把20000判为伪造。但它既不等于全品牌实绩，也没有证明所列车型实际合计，不能支撑实际增长量化。",
+          "url": "https://bydukmedia.com/en/news-articles/byd-uk-records-record-breaking-sales-in-2025-and-becomes-sixth-best-selling-brand-in-the-uk.html",
+          "source_title": "BYD UK records record-breaking sales in 2025 and becomes sixth best-selling brand in the UK",
+          "access_note": "已读取原始来源全文的相关段落"
+        },
+        {
+          "claim": "Fremont是欧洲工厂",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "Tesla工厂页面明确地点是Fremont, California。该地理事实稳定，直接反驳G欧洲工厂列表。",
+          "url": "https://www.tesla.com/fremont-factory",
+          "source_title": "Fremont Factory",
+          "access_note": "已读取原始来源全文的相关段落"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "EU Tariffs and the Market Performance of China-Made Battery Electric Cars",
+      "verdict": "LucentThinker再次胜出，且英文版的EU/Europe区分、BYD动力结构、Model3与免税ModelY对照比其中文版更扎实。MiroThinker英文版改善了中文的柏林Model3确定替代错误，也更重视法国补贴与当地含量规则，但新增的长篇数据和引用中有可直接证实的车型误归属、错配官方网页及税负内部矛盾。",
+      "L": {
+        "scores": {
+          "coverage": 4.5,
+          "factual": 3.5,
+          "evidence": 3.5,
+          "reasoning": 3.5,
+          "actionability": 4,
+          "clarity": 4
+        },
+        "weighted_total": 75.5,
+        "rationales": {
+          "coverage": "完整覆盖三家、BEV与全动力结构、EU与欧洲、截至9月的最新可用周期、价格承诺及未来约束；Model3含英国的表现仍不能直接代表EU受税市场。",
+          "factual": "核心税率与市场数据可核实，绝大多数期间有注明；但UK23%在汇总表被倒置分母，MG2025总量30万/+30%未与Dataforce口径调和，且部分时间序列不统一。",
+          "evidence": "官方法规/ACEA、公司公告、T&E与联合声明占据关键位置，较中文直接；仍依赖大量二手月度数据，BYD37.3%来自11国样本却在总表写全欧。",
+          "reasoning": "增加Model3与免税ModelY的比较，能反驳简单税率解释；仍非控制产品周期的实验，MG被永久损伤和关税为主因的措辞太强。",
+          "actionability": "具体指出应监测EU-only而非欧洲总量、利润不能由注册数推出、工厂爬坡与配额执行；3%–4%EU份额预测缺可复算模型。",
+          "clarity": "紧凑表格与数据缺口部分有效，主结论直达问题；个别绝对化判断与表格口径错误需要修订。"
+        },
+        "strengths": [
+          "EU与EU+EFTA+UK明确区分，并说明英国免额外关税为何影响解读。",
+          "Model3跌幅小于免税ModelY的对照与利润数据缺口声明提升解释质量。"
+        ],
+        "weaknesses": [
+          "把关税效果与税后销量变化等同，MG永久损伤缺证据。",
+          "UK23%分母倒置、BYD样本地理范围泛化；模型份额预测未建模。"
+        ],
+        "confidence": "中高（报告内部及抽核较充分；未逐条验证全部2026数据）"
+      },
+      "M": {
+        "scores": {
+          "coverage": 3.5,
+          "factual": 2,
+          "evidence": 1.5,
+          "reasoning": 2.5,
+          "actionability": 3,
+          "clarity": 3.5
+        },
+        "weighted_total": 49.5,
+        "rationales": {
+          "coverage": "覆盖面广，增加法国生态补贴、EU含量和情景，明确Berlin生产ModelY；仍缺Model3年度一致口径和三家EU-only BEV完整对照。",
+          "factual": "已核实将BYD Seal U的2025 PHEV冠军和72667辆错归MG HS；剩余进口只交10%与维持BEV关税的情景前提冲突，Tesla税率7.8/9%混用且先后关系不清。",
+          "evidence": "引用形式密集但抽查出现Eurostat链接实为网络仇恨信息统计、法律编号错配；不能因标注ACEA/Reuters/FT就视为已追溯到相应原文。",
+          "reasoning": "比中文版更谨慎地把Model3本地生产作为条件，有多因素分析；但品牌总销量仍不能证明BEV未受约束，MG进口腰斩被称少数观点而用品牌增长对照，混淆互不矛盾的口径。",
+          "actionability": "监测动力、工厂、补贴、内容门槛很实用；情景里税负错误会影响策略判断，且不少规定仍属草案/待落实。",
+          "clarity": "章节可读并有监测列表，但论证重复且更多引用不等于更多有效证据；来源标题常写成结论，妨碍审计。"
+        },
+        "strengths": [
+          "明确柏林主要生产ModelY、Model3继续来自上海，修复中文主要前景错误。",
+          "纳入法国补贴与MiEU潜在本地含量条件，认识到本地组装不自动解决所有政策风险。"
+        ],
+        "weaknesses": [
+          "关键车型冠军误归属及情景税负矛盾。",
+          "官方域名引用存在已核实内容错配，多处税率/时间/分母未调和。"
+        ],
+        "confidence": "中高（报告内部及抽核较充分；未逐条验证全部2026数据）"
+      },
+      "evidence": [
+        {
+          "system": "L",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/lucentthinker/q10.md",
+          "line": 57,
+          "quote": "“Europe” here means EU + EFTA + UK",
+          "analysis": "明确地理范围并指出英国使欧洲整体表现显得更强，比中文版更能约束归因。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/lucentthinker/q10.md",
+          "line": 83,
+          "quote": "The taxed model outperformed the untaxed one.",
+          "analysis": "纳入免税ModelY对照；Dataforce年表也支持Model3跌幅较小，但这仅为描述性对照，不是净因果估计。"
+        },
+        {
+          "system": "L",
+          "dimension": "evidence",
+          "status": "supported",
+          "file": "responses/lucentthinker/q10.md",
+          "line": 152,
+          "quote": "The evidence measures registrations, not profitability.",
+          "analysis": "恰当承认销量韧性不意味着关税无成本，避免凭销售推利润。"
+        },
+        {
+          "system": "L",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/lucentthinker/q10.md",
+          "line": 98,
+          "quote": "UK took 23% of Chinese-brand sales",
+          "analysis": "行44原意为中国品牌占英国销量23%，此处倒置分母，不是同一指标。"
+        },
+        {
+          "system": "L",
+          "dimension": "coverage",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q10.md",
+          "line": 63,
+          "quote": "roughly 27,000 units in 11 countries",
+          "analysis": "同源37.3%/62.7%占比在总表与结论写成全欧洲；11国样本不能不加说明推广全欧。"
+        },
+        {
+          "system": "L",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/lucentthinker/q10.md",
+          "line": 77,
+          "quote": "It has permanently damaged MG’s “cheap EV” positioning",
+          "analysis": "短期销量下降与涨价不能识别永久损伤，且未来新车型、本地生产会改变定位。"
+        },
+        {
+          "system": "M",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/mirothinker/q10.md",
+          "line": 148,
+          "quote": "Giga Berlin has focused almost exclusively on <strong>Model Y</strong>",
+          "analysis": "本文随后将Model3欧洲制造设为条件，较中文确定替代叙述更准确。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/mirothinker/q10.md",
+          "line": 237,
+          "quote": "as long as it remains China‑sourced",
+          "analysis": "明确产地与未来当地含量政策适用的条件，避免把品牌国籍当原产地。"
+        },
+        {
+          "system": "M",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q10.md",
+          "line": 42,
+          "quote": "430k of them BEVs",
+          "analysis": "所引Eurostat页面内容为2025年网上敌意信息接触率，与汽车进口无关；数字本身本次不判假。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/mirothinker/q10.md",
+          "line": 109,
+          "quote": "MG HS PHEV as Europe’s top‑selling plug‑in hybrid",
+          "analysis": "Dataforce全年表冠军是BYD Seal U 72667辆；MG HS为29894辆第9。文中行76/参考40又称Seal U冠军，亦有内部冲突。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q10.md",
+          "line": 155,
+          "quote": "Chinese‑made Teslas’ share of Tesla’s EU sales",
+          "analysis": "30%→10%的可核原始IEA指标是中国制造电动车进口中Tesla占比，不是Tesla自身EU销量的产地占比。分母改写会夸大本地替代程度。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/mirothinker/q10.md",
+          "line": 255,
+          "quote": "paying only MFN 10% on any residual imports",
+          "analysis": "该情景行249仍假设BYD BEV约27%关税继续到2029；本地制造不让剩余中国制造BEV进口自动免除17%反补贴税。"
+        },
+        {
+          "system": "M",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/mirothinker/q10.md",
+          "line": 147,
+          "quote": "Later press coverage simplifies this to a <strong>9% extra tariff</strong>",
+          "analysis": "7.8%与9%并非简单同义，文中又称调整后的税率/下调；未给出变更法律和统一生效日期，不宜把阶段性税率当近似值拼接。"
+        },
+        {
+          "system": "M",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/mirothinker/q10.md",
+          "line": 121,
+          "quote": "In a minority view",
+          "analysis": "BEV进口下降与品牌全动力总销量增长可以同时成立；不能把两种口径当作支持/反对同一命题的观点票数。"
+        }
+      ],
+      "checks": [
+        {
+          "claim": "正式税率、法规号、生效日",
+          "system": "both",
+          "status": "supported",
+          "finding": "欧委会原始页面确认法规2024/2754、2024-10-30生效及BYD17%、SAIC35.3%、Tesla7.8%；L引用相符。M英文写31日，并引用32024R2820；2820实际可查为民航相关理事会决定，而非BEV实施条例。不能凭2024公告单独排除任何后来调整，M的2026变更仍需有效新法支持。",
+          "url": "https://trade.ec.europa.eu/access-to-markets/en/news/eu-commission-imposes-countervailing-duties-imports-battery-electric-vehicles-bevs-china",
+          "source_title": "EU Commission imposes countervailing duties on imports of battery electric vehicles (BEVs) from China",
+          "access_note": "已读取网页全文相关段落"
+        },
+        {
+          "claim": "M引用法规2024/2820",
+          "system": "M",
+          "status": "unsupported_or_mismatched",
+          "finding": "EUR-Lex检索结果的2024/2820是关于国际民航组织理事会的Decision，CELEX为32024D2820；报告的R2820不支持电动车税率。",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024D2820",
+          "source_title": "Council Decision (EU) 2024/2820",
+          "access_note": "原链接打开失败；官方检索摘要明确文号、类型和主题"
+        },
+        {
+          "claim": "MG HS为2025欧洲PHEV冠军72667辆",
+          "system": "M",
+          "status": "confirmed_error",
+          "finding": "原始Dataforce/Automotive News年表PHEV部分显示BYD Seal U第一72667，MG HS第九29894；错误把主要对手的成绩归给MG，直接影响适应能力判断。",
+          "url": "https://s3.amazonaws.com/crain-platform-autonews-assets/assets/ane-pdf/ane-europe-fuel-type-december-2025-12-months.pdf",
+          "source_title": "Automotive News Europe by Dataforce – Top 10 sellers by fueltype, December 2025, 12 months",
+          "access_note": "已读取2页PDF文本，PHEV全年表在第2页"
+        },
+        {
+          "claim": "2025 Model3跌幅是否小于ModelY",
+          "system": "L",
+          "status": "supported",
+          "finding": "同份Dataforce原表Model3全年-23.6%、ModelY-28.0%，支持L描述性方向。原表Model3 86261与报告约82000–85000存在数据覆盖/版本差，未有同口径证明前不判数值虚假。",
+          "url": "https://s3.amazonaws.com/crain-platform-autonews-assets/assets/ane-pdf/ane-europe-fuel-type-december-2025-12-months.pdf",
+          "source_title": "Automotive News Europe by Dataforce – Top 10 sellers by fueltype, December 2025, 12 months",
+          "access_note": "已读取PDF第1页全年BEV表"
+        },
+        {
+          "claim": "Eurostat汽车进口百万辆/430526纯电引用是否对应",
+          "system": "M",
+          "status": "unsupported_or_mismatched",
+          "finding": "给定官方URL可正常打开，但标题为42.3% of people saw hostile messages online in 2025，全文为数字社会调查，无汽车进口数据；这是确定的引用错配，不是断链推断。",
+          "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260515-1",
+          "source_title": "42.3% of people saw hostile messages online in 2025",
+          "access_note": "已读取网页全文相关段落"
+        },
+        {
+          "claim": "Tesla中国制造份额30%→10%的分母",
+          "system": "M",
+          "status": "confirmed_error",
+          "finding": "IEA原文谈的是中国制造电动车进口构成，前句为中国品牌占中国进口的份额升至70%以上；并非Tesla自身EU销量中中国制造的占比。报告采用不同出处路径亦未解释分母。",
+          "url": "https://www.iea.org/reports/global-ev-outlook-2026/manufacturing-and-trade",
+          "source_title": "Manufacturing and trade – Global EV Outlook 2026",
+          "access_note": "已读取网页全文相关段落"
+        },
+        {
+          "claim": "35万混动配额的确定性",
+          "system": "both",
+          "status": "unverified",
+          "finding": "商务部原文确认存在贸易安排但未给出35万、6%、四年、12月生效全部条款；L明确细则未公开较审慎，M把其写成强硬天花板并给官方理事会链接，仍需验证法律实施细则。",
+          "url": "https://english.mofcom.gov.cn/News/SpokesmansRemarks/art/2026/art_9c5d95356d984390af922150976cc853.html",
+          "source_title": "MOFCOM Spokesperson’s Remarks on the China-EU Understandings Reached in Consultations on Hybrid Vehicles and BEVs",
+          "access_note": "已读取网页全文相关段落"
+        }
+      ],
+      "decisive_differences": [
+        "L既说明欧洲地域范围，也主动要求未来看EU-only注册；M仍多用全欧洲品牌数据解释欧盟纯电政策。",
+        "L的核心法规与T&E来源匹配；M有可以打开却完全不相关的Eurostat官方网页，证据质量不能按引用数量估计。",
+        "M英文确实改善中文的柏林Model3叙述，但引入MG HS冠军归属与剩余进口税负错误；改善不是单向或全面。"
+      ],
+      "caveats": [
+        "已完整阅读两份英文正文及参考文献；本次抽核未覆盖所有FT/Reuters、ACEA月报及工厂公告。",
+        "不同Dataforce覆盖率、ACEA地域范围和数据修订可造成车型总量差别，未在口径统一前当作错误。",
+        "M英文的引用对象错配是可确认问题，但不据此称全部链接或所有2026事实虚构。"
+      ],
+      "G": {
+        "scores": {
+          "coverage": 2,
+          "factual": 1,
+          "evidence": 1,
+          "reasoning": 1.5,
+          "actionability": 2,
+          "clarity": 2.5
+        },
+        "weighted_total": 29.5,
+        "rationales": {
+          "coverage": "覆盖关税、五国价格、销量、本地化及情景，补入BYD187600与MG300000等2025数据。但仍缺2026截至时点三家BEV/Model3实际变化，上海产地与品牌全量频繁混用，PHEV转移和最新价格承诺的解释不足。",
+          "factual": "含税/税前价格相互矛盾且重复加VAT，MG35.3%后又写20.7%，把Tesla2025欧洲下降写成继续增长，挪威EV无条件零VAT与现行规定相反。错误集中在解释实际关税冲击的核心测量。",
+          "evidence": "末尾只有来源类别，法规号提供部分可定位线索，其余价格、销售、利润吸收及产能断言没有逐条出处。不能把作者称资料专有当作已完成验证。仅按交付文件评分。",
+          "reasoning": "提出EU/UK对照和承认无法完全隔离关税效应是合理起点，但把不同配置、税口径和估计出厂价横比当实证，宣称已控制市场增长、推测计量结果并估80%吸收均无展示分析。",
+          "actionability": "建议关注本地化、贸易复审和激励有一定方向性，较中文对EU/UK范围更明确。但25%至40%份额、价格下降与工厂供货预测缺可检验条件，不能直接支持投资或采购决策。",
+          "clarity": "章节和最终比较表便于查找，保留数据缺口声明。数字的含税与未税、车型与品牌、EU与欧洲标签在正文表格间变动，增加误读。"
+        },
+        "strengths": [
+          "最终税率表基本正确，明确英国不受欧盟额外关税影响。",
+          "BYD2025欧洲约187600和英国约51000等部分数据与原始资料一致。",
+          "承认现有资料不足以完全隔离净关税效应。"
+        ],
+        "weaknesses": [
+          "价格传导论证重复计VAT且混合估计出厂价与零售价。",
+          "MG税率、Tesla增长方向、挪威VAT存在已核实错误。",
+          "没有提供当期BEV分项数据，计量措辞和未来份额缺模型。"
+        ],
+        "confidence": "高（对所交付文本缺口与已核实错误的判断）。对无逐条来源的其他2026断言仅作未核实处理。"
+      },
+      "three_way_verdict": "三方仍为L、M、G。G英文增加了一些真实的2025全品牌数据，识别英国未征欧盟附加税，但缺少MG纯电与上海Model3的实际分项表现。其核心价格传导论证被VAT重复计算、车型规格与税率错误削弱，Tesla销量方向也与ACEA原表相反。相对中文仅有局部改进，未达到前轮M的完整度与可核实部分。",
+      "gpt_differences": [
+        "L直接给三家公司2025和2026当期表现并区分EU与Europe，M虽有错误也尝试分解MG46000 BEV与137000混动。G主要以全品牌销量增长代替受税BEV表现。",
+        "G提出EU/UK比较，随后把MG含税价重复计VAT。L/M对税负也有过度归因，但没有在这组核心对照中采用同一重复VAT链条。",
+        "G没有展示因果识别却写可能的计量结果及80%利润吸收，形成高于方法支持度的确定性。",
+        "M英文明确柏林主要ModelY、Model3仍上海制造。G英文又写加速当地ModelY/3生产，未给产线公告或可验证时间表。"
+      ],
+      "gpt_caveats": [
+        "用户确认网页版原回答也没有引用，只在evidence直接评价这一缺口。VAT、税率、销量方向与动力类型缺口独立存在。",
+        "报告五国价格多为估计，本次只将官方可直接确认及内部算术矛盾判为错误，未逐条证明所有晚2026标价真假。",
+        "未发现明确后见事实使用。报告反而遗漏多个2026截点前已公布的信息，数据新鲜度不足比时间泄漏更突出。"
+      ],
+      "gpt_evidence": [
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 2,
+          "quote": "17.0% for BYD, 18.8% for Geely, 35.3% for SAIC/MG",
+          "analysis": "最终税率与欧委会一致，后续另写MG20.7%是局部自相矛盾。"
+        },
+        {
+          "system": "G",
+          "dimension": "coverage",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 28,
+          "quote": "No Chinese‐EV tariffs",
+          "analysis": "明确英国没有欧盟附加BEV税，具备进行受税/未受税市场比较的起点。此处不能理解为英国所有汽车税为零。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 39,
+          "quote": "~187,600 in 2025",
+          "analysis": "ACEA原始PDF给BYD在EU+EFTA+UK的2025全动力注册187657。数值方向可核，但不是纯电车型总量。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 66,
+          "quote": "We cannot isolate tariff impact fully without disaggregated data",
+          "analysis": "正确承认识别限制，但后续量化表述未始终遵守这一限制。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 34,
+          "quote": "€24.99k pre-VAT",
+          "analysis": "MG官方2026-04-20公告明确24990欧元已含VAT，G先改当税前变成约29700，再进一步写with VAT约35000。此错误人为改变英国与德国相对价格。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 24,
+          "quote": "201 kW, 53 kWh",
+          "analysis": "MG官方同一车型为43或54kWh，110或118kW，24990对应43kWh Active。G比较并非保持相同配置。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 39,
+          "quote": "Tesla’s Europe sales continued growing more modestly",
+          "analysis": "该段讨论2025年。ACEA给Tesla欧洲238656，相对2024年326525下降26.9%，增长方向相反。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 68,
+          "quote": "MG’s higher cooperating rate (20.7%)",
+          "analysis": "SAIC/MG最终反补贴税为35.3%，20.7%属于其他合作企业。G首段和表113自身也写35.3%。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 32,
+          "quote": "BEVs pay 0%",
+          "analysis": "挪威2026年只对价格前300000NOK免VAT，超额部分征25%。G列举的320000/419000/500000NOK都不能笼统按全额零税处理。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 68,
+          "quote": "suggests >80% of tariff was absorbed in margins",
+          "analysis": "用含原有10%税的总税率27%除以未定义零售涨幅3–5%，没有统一税基、销量加权或反事实成本，不能估计新增关税的利润吸收率。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 68,
+          "quote": "An econometric correlation (over 2023–2026 quarterly data) would likely show",
+          "analysis": "没有提供实际季度数据、回归式、控制变量或结果，只是在推测分析会得到什么结论。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "internal_inconsistency",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 81,
+          "quote": "New Chinese imports face still 10% duty",
+          "analysis": "该句将中国进口、EU制造标签、仅缴10%混在一起。真正EU原产成车在EU内售不因中国品牌缴整车进口税，中国制造BEV也不会仅因本地厂存在自动免17%。"
+        },
+        {
+          "system": "G",
+          "dimension": "actionability",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 79,
+          "quote": "30–40% by 2029",
+          "analysis": "份额预测没有总市场分母、产能利用率与需求弹性，无法作为可审计发展路径。"
+        },
+        {
+          "system": "G",
+          "dimension": "evidence",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q10.md",
+          "line": 122,
+          "quote": "national dealer price lists; MG Motor press reports; industry sales analysis",
+          "analysis": "没有对应具体价目表、日期、版本、URL，重要价格对照无法沿报告自身引用复核。"
+        }
+      ],
+      "gpt_checks": [
+        {
+          "claim": "MG4 Urban 24990欧元的VAT及配置",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "MG官方2026-04-20发布的24990欧元为43kWh Active、110kW，脚注明确含法定VAT且另加交付费。54kWh车型为118kW。G把含税价重复加税，且给201kW/53kWh，破坏其EU/UK关税传导对照。",
+          "url": "https://mgmotor.media/der-neue-mg4-ev-urban-mehr-stadt-wagen/",
+          "source_title": "Der neue MG4 EV Urban: Mehr Stadt wagen",
+          "access_note": "已读取原始来源全文的相关段落"
+        },
+        {
+          "claim": "2025欧洲BYD与Tesla注册趋势",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "ACEA原始PDF第6页给BYD187657、上年50912，支持G部分BYD数字。Tesla238656、上年326525、同比-26.9%，直接反驳G继续增长的描述。区域为EU+EFTA+UK，全品牌口径。",
+          "url": "https://www.acea.auto/files/Press_release_car_registrations_December_2025.pdf",
+          "source_title": "Press release car registrations December 2025",
+          "access_note": "已读取ACEA原始6页PDF，第6页品牌年度表"
+        },
+        {
+          "claim": "MG最终合作税率20.7%",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "欧委会列SAIC35.3%，20.7%是其他合作企业。G对当前主要对象税率的错置会低估MG压力。",
+          "url": "https://trade.ec.europa.eu/access-to-markets/en/news/eu-commission-imposes-countervailing-duties-imports-battery-electric-vehicles-bevs-china",
+          "source_title": "EU Commission imposes countervailing duties on imports of battery electric vehicles (BEVs) from China",
+          "access_note": "已读取原始来源全文的相关段落"
+        },
+        {
+          "claim": "挪威BEV无条件零VAT",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "挪威海关页面更新于2026-08-06，说明EV价值超过300000NOK部分征VAT，并给400000车辆对100000征税示例。该规则在题目截点前已可查。",
+          "url": "https://www.toll.no/en/goods/motor-vehicles/importing-cars-and-other-vehicles",
+          "source_title": "Importing cars and other vehicles – Tolletaten",
+          "access_note": "已读取原始来源全文的相关段落"
+        },
+        {
+          "claim": "价格承诺未完成的现状描述",
+          "system": "G",
+          "status": "unsupported_or_mismatched",
+          "finding": "G仅说截至2025年末仍审查，没有更新到2026-02-10 Tavascan获批这一已在截点前公布的制度实例。不能据此推断BYD、MG、Tesla也已获得承诺豁免。",
+          "url": "https://policy.trade.ec.europa.eu/news/commission-accepts-price-undertaking-chinese-electric-car-producer-2026-02-10_en",
+          "source_title": "Commission accepts price undertaking from Chinese electric car producer",
+          "access_note": "已读取原始来源全文的相关段落"
+        },
+        {
+          "claim": "BYD英国2025约51000辆",
+          "system": "G",
+          "status": "supported",
+          "finding": "企业原始媒体稿给51422，数据包含BEV与PHEV，支持G的全品牌英国数量，不能单独证明BEV关税影响较轻。",
+          "url": "https://bydukmedia.com/en/news-articles/byd-uk-records-record-breaking-sales-in-2025-and-becomes-sixth-best-selling-brand-in-the-uk.html",
+          "source_title": "BYD UK records record-breaking sales in 2025 and becomes sixth best-selling brand in the UK",
+          "access_note": "已读取原始来源全文的相关段落"
+        }
+      ]
+    }
+  ],
+  "inventory": [
+    {
+      "id": 1,
+      "title": "Bristol Home Battery Decision",
+      "system": "L",
+      "file": "responses/lucentthinker/q01.md",
+      "filename": "Bristol Home Battery Decision - deepseek-flash.md",
+      "sha256": "43114a898d7a0b12ea612c969db35a40270adb3468f644d847903018d0448fa5",
+      "lines": 370,
+      "body_chars_no_space": 21597,
+      "body_english_words": 4644,
+      "body_han_chars": 0,
+      "reference_entries": 60,
+      "unique_reference_urls": 60,
+      "unique_reference_urls_no_fragment": 60,
+      "reference_domains": [
+        "ampproelectrical.co.uk",
+        "assets.publishing.service.gov.uk",
+        "coolpowerco.co.uk",
+        "desrenewables.com",
+        "dnorenewables.co.uk",
+        "docs.planning.org.uk",
+        "eastbourne.energy",
+        "ecalpro.com",
+        "elementallondon.show",
+        "esa-uk.org",
+        "greatbritishenergy.com",
+        "haboenergy.co.uk",
+        "heatable.co.uk",
+        "heatpumptariffs.uk",
+        "hepisontheway.com",
+        "inews.co.uk",
+        "midsummerwholesale.co.uk",
+        "octopus.energy",
+        "octotariffs.co.uk",
+        "payaca.com",
+        "permitted-development.com",
+        "reonic.com",
+        "smartsolarhomes.co.uk",
+        "solar-and-heating.ovo.com",
+        "solarbatterygrants.co.uk",
+        "solarbazaar.io",
+        "solarbriton.co.uk",
+        "solarreport.co.uk",
+        "solent-solar.com",
+        "thecostofsolar.co.uk",
+        "www.balconysolarguide.co.uk",
+        "www.eerenewables.co.uk",
+        "www.energy-review.co.uk",
+        "www.fox-ess.com",
+        "www.gov.uk",
+        "www.gowith.solar",
+        "www.gridguru.co.uk",
+        "www.homeenergyquotes.co.uk",
+        "www.itstechnologies.uk",
+        "www.iwantsolar.co.uk",
+        "www.kingsmeadsolar.co.uk",
+        "www.ofgem.gov.uk",
+        "www.smartenergie.co.uk",
+        "www.solar-panel-comparison.co.uk",
+        "www.surgepv.com"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 1,
+      "title": "Bristol Home Battery Decision",
+      "system": "M",
+      "file": "responses/mirothinker/q01.md",
+      "filename": "Bristol Home Battery Decision-mirothinker_deep模式.md",
+      "sha256": "a86d5b9858a730d552e3494394226d07d42c193abf37300cbe64e09d93fc0ea0",
+      "lines": 548,
+      "body_chars_no_space": 23369,
+      "body_english_words": 4515,
+      "body_han_chars": 0,
+      "reference_entries": 49,
+      "unique_reference_urls": 42,
+      "unique_reference_urls_no_fragment": 42,
+      "reference_domains": [
+        "aisolarpanel.co.uk",
+        "avepower.co.uk",
+        "batteryblueprint.com",
+        "crgdirect.co.uk",
+        "energysavingtrust.org.uk",
+        "forum.cleanenergyreviews.info",
+        "greenhatrenewables.co.uk",
+        "haboenergy.co.uk",
+        "kilowattkit.com",
+        "octopus.energy",
+        "reonic.com",
+        "scottishenergyefficiency.co.uk",
+        "solar4good.com",
+        "solarenergyconcepts.co.uk",
+        "solarenergyuk.org",
+        "solarlove.org",
+        "solaxyra.com",
+        "spectrumenergysystems.co.uk",
+        "topgreendeals.co.uk",
+        "whatsuk.com",
+        "www.britishgas.co.uk",
+        "www.checkatrade.com",
+        "www.fmb.org.uk",
+        "www.gov.uk",
+        "www.homebuilding.co.uk",
+        "www.homepicks.com",
+        "www.moneysavingexpert.com",
+        "www.renewableenergyhub.co.uk",
+        "www.smartsolarcompare.online",
+        "www.solarpowerportal.co.uk",
+        "www.sunsave.energy",
+        "www.thecooldown.com",
+        "www.theecoexperts.co.uk",
+        "www.uswitch.com",
+        "www.which.co.uk"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 2,
+      "title": "Creatine and Cognitive Performance",
+      "system": "L",
+      "file": "responses/lucentthinker/q02.md",
+      "filename": "Creatine and Cognitive Performance - deepseek-flash.md",
+      "sha256": "cfa0a3b324579849dca6f5cbe23845131cd8c43f4f0e42463b2149d672dfae10",
+      "lines": 173,
+      "body_chars_no_space": 12700,
+      "body_english_words": 2493,
+      "body_han_chars": 0,
+      "reference_entries": 32,
+      "unique_reference_urls": 32,
+      "unique_reference_urls_no_fragment": 32,
+      "reference_domains": [
+        "academic.oup.com",
+        "assets.publishing.service.gov.uk",
+        "busqueda.tmgl.org",
+        "efsa.onlinelibrary.wiley.com",
+        "eur-lex.europa.eu",
+        "fhb-muenster.digibib.net",
+        "link.springer.com",
+        "livrepository.liverpool.ac.uk",
+        "note.com",
+        "nufind.nu.edu.sa",
+        "physoc.onlinelibrary.wiley.com",
+        "pmc.ncbi.nlm.nih.gov",
+        "protein-fact.com",
+        "public-pages-files-2025.frontiersin.org",
+        "pubmed.ncbi.nlm.nih.gov",
+        "www.ebi.ac.uk",
+        "www.efsa.europa.eu",
+        "www.frontiersin.org",
+        "www.lifescience.net",
+        "www.mdpi.com",
+        "www.mindbodygreen.com",
+        "www.openevidence.com",
+        "www.sciencedirect.com"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 2,
+      "title": "Creatine and Cognitive Performance",
+      "system": "M",
+      "file": "responses/mirothinker/q02.md",
+      "filename": "Creatine and Cognitive Performance-mirothinker_deep模式.md",
+      "sha256": "f64551e0e00af71520a1ab42ddfc4c839418c1b9902a3898e1611c7805ee0c81",
+      "lines": 425,
+      "body_chars_no_space": 22852,
+      "body_english_words": 3994,
+      "body_han_chars": 0,
+      "reference_entries": 27,
+      "unique_reference_urls": 21,
+      "unique_reference_urls_no_fragment": 21,
+      "reference_domains": [
+        "link.springer.com",
+        "pmc.ncbi.nlm.nih.gov",
+        "pubmed.ncbi.nlm.nih.gov",
+        "theconversation.com",
+        "www.frontiersin.org",
+        "www.gov.uk",
+        "www.mdpi.com",
+        "www.nature.com",
+        "www.nutraingredients.com",
+        "www.sciencedirect.com",
+        "www.supplysidesj.com"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 3,
+      "title": "Search Architecture for a B2B Knowledge Product",
+      "system": "L",
+      "file": "responses/lucentthinker/q03.md",
+      "filename": "Search Architecture for a B2B Knowledge Product - deepseek-flash.md",
+      "sha256": "7cfecc9a6c11de1623f2045c34b1fa7aeae1d4bc9c86b5c0066bf375bf6899ee",
+      "lines": 388,
+      "body_chars_no_space": 26901,
+      "body_english_words": 4721,
+      "body_han_chars": 0,
+      "reference_entries": 49,
+      "unique_reference_urls": 49,
+      "unique_reference_urls_no_fragment": 49,
+      "reference_domains": [
+        "ar5iv.labs.arxiv.org",
+        "docs.opensearch.org",
+        "frutik.github.io",
+        "github.com",
+        "jkatz05.com",
+        "mariadb.org",
+        "qdrant.org.cn",
+        "qdrant.tech",
+        "raw.githubusercontent.com",
+        "www.paradedb.com",
+        "www.postgresql.org",
+        "www.salttechno.ai",
+        "www.tencentcloud.com",
+        "www.tigerdata.com",
+        "www.vldb.org",
+        "www.zubnet.ai"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 3,
+      "title": "Search Architecture for a B2B Knowledge Product",
+      "system": "M",
+      "file": "responses/mirothinker/q03.md",
+      "filename": "Search Architecture for a B2B Knowledge Product-mirothinker_deep模式.md",
+      "sha256": "8709cb703c29bfc097a030c6e3c15f38e51e00b2a32b023921466c23e89fa5c8",
+      "lines": 658,
+      "body_chars_no_space": 26146,
+      "body_english_words": 4647,
+      "body_han_chars": 0,
+      "reference_entries": 176,
+      "unique_reference_urls": 76,
+      "unique_reference_urls_no_fragment": 76,
+      "reference_domains": [
+        "aws.amazon.com",
+        "bigdataboutique.com",
+        "byteforth.com",
+        "classicdba.com",
+        "clickhouse.com",
+        "cloudburn.io",
+        "darryl-ruggles.cloud",
+        "docs.aws.amazon.com",
+        "docs.opensearch.org",
+        "encore.dev",
+        "github.com",
+        "kalvium.com",
+        "mydba.dev",
+        "opensearch.org",
+        "pgbackrest.org",
+        "pgdash.io",
+        "powabase.ai",
+        "qdrant.tech",
+        "ranksquire.com",
+        "reworkd.ai",
+        "rivestack.io",
+        "supabase.com",
+        "tigerdata.com",
+        "truto.one",
+        "valerio.sh",
+        "www.crunchydata.com",
+        "www.elastic.co",
+        "www.instaclustr.com",
+        "www.linkedin.com",
+        "www.postgresql.org",
+        "zenvanriel.com"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 4,
+      "title": "Costco and Walmart Business Comparison",
+      "system": "L",
+      "file": "responses/lucentthinker/q04.md",
+      "filename": "Costco and Walmart Business Comparison - deepseek-flash.md",
+      "sha256": "c319d9db3e8c08af9e5d5f389780b0f9404d014320136278fa3c726bf52f25c9",
+      "lines": 406,
+      "body_chars_no_space": 26265,
+      "body_english_words": 5171,
+      "body_han_chars": 0,
+      "reference_entries": 42,
+      "unique_reference_urls": 42,
+      "unique_reference_urls_no_fragment": 42,
+      "reference_domains": [
+        "app.stocklight.com",
+        "ca.finance.yahoo.com",
+        "companiesmarketcap.com",
+        "content-archive.fast-edgar.com",
+        "content.edgar-online.com",
+        "corporate.walmart.com",
+        "finance.yahoo.com",
+        "journalrecord.com",
+        "last10k.com",
+        "m.sgpjbg.com",
+        "markets.ft.markitdigital.com",
+        "news.10jqka.com.cn",
+        "news.futunn.com",
+        "oregonbusinessreport.com",
+        "s201.q4cdn.com",
+        "stock.walmart.com",
+        "stockanalysis.com",
+        "symbology.online",
+        "us.kabutan.jp",
+        "www.cnbc.com",
+        "www.consumeraffairs.com",
+        "www.edgarparser.com",
+        "www.grocerydive.com",
+        "www.gurufocus.com",
+        "www.insidermonkey.com",
+        "www.linkedin.com",
+        "www.marketscreener.com",
+        "www.metatrader.com",
+        "www.nasdaq.com",
+        "www.publicnow.com",
+        "www.rmwcommerce.com",
+        "www.sandiegouniontribune.com",
+        "www.sec.gov"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 4,
+      "title": "Costco and Walmart Business Comparison",
+      "system": "M",
+      "file": "responses/mirothinker/q04.md",
+      "filename": "Costco and Walmart Business Comparison-mirothinker_deep模式.md",
+      "sha256": "8da29f7d76752f24d439b299e9bfbe292b0065fd743e615c509cb38753a8c4f2",
+      "lines": 719,
+      "body_chars_no_space": 25823,
+      "body_english_words": 4501,
+      "body_han_chars": 0,
+      "reference_entries": 87,
+      "unique_reference_urls": 48,
+      "unique_reference_urls_no_fragment": 48,
+      "reference_domains": [
+        "companiesmarketcap.com",
+        "d18rn0p25nwr6d.cloudfront.net",
+        "finance.yahoo.com",
+        "finbox.com",
+        "investor.costco.com",
+        "mlq.ai",
+        "news.walmart.com",
+        "s201.q4cdn.com",
+        "stock.walmart.com",
+        "www.bloomberg.com",
+        "www.costco.com",
+        "www.detroitnews.com",
+        "www.macrotrends.net",
+        "www.reuters.com",
+        "www.sec.gov",
+        "www.statista.com",
+        "www.stock-analysis-on.net",
+        "www.supermarketnews.com",
+        "www.trefis.com"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 5,
+      "title": "深圳、杭州与成都工作机会比较",
+      "system": "L",
+      "file": "responses/lucentthinker/q05.md",
+      "filename": "深圳、杭州与成都工作机会比较 - deepseek-flash.md",
+      "sha256": "fb2c0ce3d07459460278b103fd047d59c2028ef1d930d71fbe28bf5f58aa2834",
+      "lines": 350,
+      "body_chars_no_space": 7513,
+      "body_english_words": 934,
+      "body_han_chars": 4095,
+      "reference_entries": 41,
+      "unique_reference_urls": 41,
+      "unique_reference_urls_no_fragment": 41,
+      "reference_domains": [
+        "bsy.sz.bendibao.com",
+        "cd.bendibao.com",
+        "cd.daojiale.com",
+        "cd.zf.58.com",
+        "cdyb.chengdu.gov.cn",
+        "cdzfgjj.chengdu.gov.cn",
+        "dghrss.dg.gov.cn",
+        "ditie.mapbar.com",
+        "fgk.chinatax.gov.cn",
+        "gjj.hangzhou.gov.cn",
+        "guangdong.chinatax.gov.cn",
+        "hz.zu.anjuke.com",
+        "hznews.hangzhou.com.cn",
+        "hzts.5i5j.com",
+        "jt.sz.bendibao.com",
+        "linan.19lou.com",
+        "m.bendibao.com",
+        "m.cd.bendibao.com",
+        "m.hz.bendibao.com",
+        "m.sohu.com",
+        "mp.weixin.qq.com",
+        "rlsbt.zj.gov.cn",
+        "shandong.chinatax.gov.cn",
+        "shenzhen.chinatax.gov.cn",
+        "sz.zf.58.com",
+        "woyts.com",
+        "www.chengdu.gov.cn",
+        "www.kaizencpa.com.cn",
+        "www.sohu.com",
+        "www.sz.gov.cn",
+        "xiamen.chinatax.gov.cn",
+        "zhuanlan.zhihu.com"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 5,
+      "title": "深圳、杭州与成都工作机会比较",
+      "system": "M",
+      "file": "responses/mirothinker/q05.md",
+      "filename": "深圳、杭州与成都工作机会比较-mirothinker_deep模式.md",
+      "sha256": "4771074a1f7033827cfdeba764f26885afba9e00f79d0c2a9f728194e81098f0",
+      "lines": 532,
+      "body_chars_no_space": 8212,
+      "body_english_words": 417,
+      "body_han_chars": 6141,
+      "reference_entries": 50,
+      "unique_reference_urls": 47,
+      "unique_reference_urls_no_fragment": 47,
+      "reference_domains": [
+        "cdhrss.chengdu.gov.cn",
+        "cdzfgjj.chengdu.gov.cn",
+        "cdzj.chengdu.gov.cn",
+        "cj.sina.cn",
+        "finance.qq.com",
+        "finance.sina.com.cn",
+        "gjj.hangzhou.gov.cn",
+        "hrss.gd.gov.cn",
+        "hrss.hangzhou.gov.cn",
+        "hrss.sz.gov.cn",
+        "hrss.zj.gov.cn",
+        "hsa.sz.gov.cn",
+        "hz.bendibao.com",
+        "hz.ke.com",
+        "hznews.hangzhou.com.cn",
+        "m.58.com",
+        "m.anjuke.com",
+        "m.hz.bendibao.com",
+        "m12333.cn",
+        "mob.58.com",
+        "news.qq.com",
+        "shebao.114huoche8.com",
+        "sz.58.com",
+        "sz.ke.com",
+        "www.chinatax.gov.cn",
+        "www.cls.cn",
+        "www.cpic.com.cn",
+        "www.cricchina.com",
+        "www.fang.com",
+        "www.gov.cn",
+        "www.mohrss.gov.cn",
+        "www.sc.hrss.gov.cn",
+        "www.sz.gov.cn",
+        "www.szns.gov.cn",
+        "www.szsi.gov.cn",
+        "www.szzfgjj.com",
+        "www.zjhrss.gov.cn",
+        "www.zmtc.org.cn",
+        "zfgb.hangzhou.gov.cn"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 6,
+      "title": "上海换购纯电轿车决策",
+      "system": "L",
+      "file": "responses/lucentthinker/q06.md",
+      "filename": "上海换购纯电轿车决策 - deepseek-flash.md",
+      "sha256": "dfd950a8d1e3b48297aafdb696f12104a935357f8350aeebb3ef52573157827a",
+      "lines": 222,
+      "body_chars_no_space": 6568,
+      "body_english_words": 246,
+      "body_han_chars": 3944,
+      "reference_entries": 56,
+      "unique_reference_urls": 56,
+      "unique_reference_urls_no_fragment": 56,
+      "reference_domains": [
+        "chejiahao.autohome.com.cn",
+        "chepai.alltobid.com",
+        "club.autohome.com.cn",
+        "cnevpost.com",
+        "d1ev.com",
+        "dealer.m.yiche.com",
+        "dealer.yiche.com",
+        "dealernew.autohome.com.cn",
+        "jiangxi.chinatax.gov.cn",
+        "k.m.autohome.com.cn",
+        "m.pcauto.com.cn",
+        "m.sohu.com",
+        "m.thepaper.cn",
+        "m.weibo.cn",
+        "mp.weixin.qq.com",
+        "news.17173.com",
+        "ooh.com.cn",
+        "sh.news.cn",
+        "stcn.com",
+        "sww.sh.gov.cn",
+        "tianjin.chinatax.gov.cn",
+        "www.chinadevelopment.com.cn",
+        "www.cnenergynews.cn",
+        "www.jfdaily.com",
+        "www.mofcom.gov.cn",
+        "www.news18a.com",
+        "www.pcauto.com.cn",
+        "www.shanghai.gov.cn",
+        "www.shanshi.com.cn",
+        "www.sina.cn",
+        "www.thepaper.cn",
+        "www.toutiao.com",
+        "www.ttpai.cn",
+        "www.yaxdj.com",
+        "www.yicai.com",
+        "www.yoojia.com"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 6,
+      "title": "上海换购纯电轿车决策",
+      "system": "M",
+      "file": "responses/mirothinker/q06.md",
+      "filename": "上海换购纯电轿车决策-mirothinker_deep模式.md",
+      "sha256": "028f60f3f6ca931f40de8594d7de0504dfca6e0db97ebde7086ba8b5eca48248",
+      "lines": 565,
+      "body_chars_no_space": 10513,
+      "body_english_words": 684,
+      "body_han_chars": 7501,
+      "reference_entries": 76,
+      "unique_reference_urls": 25,
+      "unique_reference_urls_no_fragment": 25,
+      "reference_domains": [
+        "auto.sina.cn",
+        "chejiahao.m.autohome.com.cn",
+        "db.m.auto.sohu.com",
+        "dealer.autohome.com.cn",
+        "fgk.chinatax.gov.cn",
+        "fgw.sh.gov.cn",
+        "jtw.sh.gov.cn",
+        "k.autohome.com.cn",
+        "kuku.baidu.com",
+        "sh.bendibao.com",
+        "shanghai.chinatax.gov.cn",
+        "sw.beijing.gov.cn",
+        "sww.sh.gov.cn",
+        "www.163.com",
+        "www.autohome.com.cn",
+        "www.jfdaily.com",
+        "www.reddit.com",
+        "www.shanghai.gov.cn",
+        "www.tesla.cn"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 7,
+      "title": "钙钛矿叠层组件商业化尽调",
+      "system": "L",
+      "file": "responses/lucentthinker/q07.md",
+      "filename": "钙钛矿叠层组件商业化尽调 - deepseek-flash.md",
+      "sha256": "9e486443492c65f4a51418325d39f7b9933fe189949b9d3d26f1272f06ea72fe",
+      "lines": 474,
+      "body_chars_no_space": 15362,
+      "body_english_words": 1567,
+      "body_han_chars": 9174,
+      "reference_entries": 58,
+      "unique_reference_urls": 58,
+      "unique_reference_urls_no_fragment": 58,
+      "reference_domains": [
+        "carbon.solarbe.com",
+        "dzjy.lssggzy.lishui.gov.cn",
+        "hz.nstl.gov.cn",
+        "ieeexplore.ieee.org",
+        "info.datadowell.com",
+        "link.springer.com",
+        "m.cnstock.com",
+        "m.elecfans.com",
+        "m.gessey.com",
+        "m.sgpjbg.com.cn",
+        "m.solarbe.com",
+        "m.solarzoom.com",
+        "m.toutiao.com",
+        "mnewenergy.in-en.com",
+        "mp.weixin.qq.com",
+        "news.smm.cn",
+        "ora.ox.ac.uk",
+        "pubs.rsc.org",
+        "qzrb.qz828.com",
+        "standardsdevelopment.bsigroup.com",
+        "stockfinance.sina.cn",
+        "taiyangnews.info",
+        "us.qcells.com",
+        "www.163.com",
+        "www.ccedia.com",
+        "www.cei.cn",
+        "www.certipedia.com",
+        "www.cnstock.com",
+        "www.gcl-perovskite.com",
+        "www.hangzhou.gov.cn",
+        "www.iec.ch",
+        "www.ise.fraunhofer.de",
+        "www.mifce.org",
+        "www.osti.gov",
+        "www.oxfordpv.com",
+        "www.pv-magazine.com",
+        "www.pv-reliability.com",
+        "www.pveurope.eu",
+        "www.stcn.com",
+        "www.world-energy.org",
+        "www.xhby.net",
+        "yhcb.eyh.cn",
+        "zenodo.org"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 7,
+      "title": "钙钛矿叠层组件商业化尽调",
+      "system": "M",
+      "file": "responses/mirothinker/q07.md",
+      "filename": "钙钛矿叠层组件商业化尽调-mirothinker_deep模式.md",
+      "sha256": "7da65e6fc711a968ed52001ada6d1013ca825f384b19cba809299bca2d700d53",
+      "lines": 462,
+      "body_chars_no_space": 9935,
+      "body_english_words": 655,
+      "body_han_chars": 6627,
+      "reference_entries": 25,
+      "unique_reference_urls": 24,
+      "unique_reference_urls_no_fragment": 24,
+      "reference_domains": [
+        "advanced.onlinelibrary.wiley.com",
+        "energy-solutions.co",
+        "energysolutions.com",
+        "msolar.in-en.com",
+        "newsroom.unsw.edu.au",
+        "onlinelibrary.wiley.com",
+        "oxfordpv.com",
+        "pubs.rsc.org",
+        "pv-magazine-usa.com",
+        "suzhou.gov.cn",
+        "www.cell.com",
+        "www.chinahightech.com",
+        "www.fortunebusinessinsights.com",
+        "www.fraunhofer.de",
+        "www.gclsi.com",
+        "www.iec.ch",
+        "www.iim.net.cn",
+        "www.ise.fraunhofer.de",
+        "www.microquanta.com",
+        "www.pv-magazine.com",
+        "www.pv-tech.org",
+        "www.techblick.com",
+        "www.trinasolar.com"
+      ],
+      "unmapped_citation_ids": [
+        "E1",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E15",
+        "E16",
+        "E17",
+        "E18",
+        "E19",
+        "E2",
+        "E20",
+        "E21",
+        "E22",
+        "E23",
+        "E24",
+        "E25",
+        "E26",
+        "E27",
+        "E28",
+        "E29",
+        "E3",
+        "E30",
+        "E31",
+        "E32",
+        "E33",
+        "E34",
+        "E35",
+        "E36",
+        "E37",
+        "E38",
+        "E39",
+        "E4",
+        "E40",
+        "E41",
+        "E42",
+        "E43",
+        "E44",
+        "E45",
+        "E46",
+        "E47",
+        "E48",
+        "E49",
+        "E50",
+        "E51",
+        "E52",
+        "E53",
+        "E54",
+        "E55",
+        "E56",
+        "E57",
+        "E58",
+        "E59",
+        "E6",
+        "E60",
+        "E61",
+        "E62",
+        "E63",
+        "E64",
+        "E65",
+        "E66",
+        "E67",
+        "E68",
+        "E69",
+        "E7",
+        "E71",
+        "E72",
+        "E73",
+        "E74",
+        "E75",
+        "E79",
+        "E8",
+        "E82",
+        "E83",
+        "E84",
+        "E85",
+        "E88",
+        "E89",
+        "E9",
+        "E91",
+        "E92",
+        "E93",
+        "E95",
+        "E96",
+        "E97",
+        "E98"
+      ]
+    },
+    {
+      "id": 8,
+      "title": "郑和远航、海禁与海洋贸易",
+      "system": "L",
+      "file": "responses/lucentthinker/q08.md",
+      "filename": "郑和远航、海禁与海洋贸易 - deepseek-flash.md",
+      "sha256": "092c09903f4dcab87a733aebbe0c57357adf10c1507dda5ac37cd62988a4573a",
+      "lines": 143,
+      "body_chars_no_space": 6424,
+      "body_english_words": 48,
+      "body_han_chars": 5173,
+      "reference_entries": 25,
+      "unique_reference_urls": 25,
+      "unique_reference_urls_no_fragment": 24,
+      "reference_domains": [
+        "core.ac.uk",
+        "dataspace-dev.princeton.edu",
+        "dflt.qdu.edu.cn",
+        "discovery.ucl.ac.uk",
+        "hrczh.cass.cn",
+        "ilas.cssn.cn",
+        "journal.scu.edu.cn",
+        "lsc.chineselegalculture.org",
+        "novaresearch.unl.pt",
+        "rime.cnr.it",
+        "tufs.repo.nii.ac.jp",
+        "www.aisixiang.com",
+        "www.cambridge.org",
+        "www.icm.gov.mo",
+        "www.lhp.sdu.edu.cn",
+        "www.shidianguji.com",
+        "www.tiemposmodernos.org",
+        "zh.wikisource.org"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 8,
+      "title": "郑和远航、海禁与海洋贸易",
+      "system": "M",
+      "file": "responses/mirothinker/q08.md",
+      "filename": "郑和远航、海禁与海洋贸易-mirothinker_deep模式.md",
+      "sha256": "463fa0d3166722d2eff7fdebcbaa7151f887fc02d3965c632c51f3f38c14dd79",
+      "lines": 483,
+      "body_chars_no_space": 9876,
+      "body_english_words": 100,
+      "body_han_chars": 8352,
+      "reference_entries": 105,
+      "unique_reference_urls": 26,
+      "unique_reference_urls_no_fragment": 26,
+      "reference_domains": [
+        "core.ac.uk",
+        "doi.org",
+        "en.wikipedia.org",
+        "history.stackexchange.com",
+        "www.1xuezhe.exuezhe.com",
+        "www.cambridge.org",
+        "www.cssn.cn",
+        "www.google.com",
+        "www.icm.gov.mo",
+        "www.jryj.org.cn",
+        "www.rccp.pku.edu.cn",
+        "zh.wikipedia.org",
+        "zh.wikisource.org",
+        "zhuanlan.zhihu.com"
+      ],
+      "unmapped_citation_ids": [
+        "108",
+        "109",
+        "113",
+        "115",
+        "116",
+        "118",
+        "119",
+        "120",
+        "121",
+        "122",
+        "123",
+        "124"
+      ]
+    },
+    {
+      "id": 9,
+      "title": "欧盟关税对中国制造纯电动汽车市场表现的影响",
+      "system": "L",
+      "file": "responses/lucentthinker/q09.md",
+      "filename": "欧盟关税对中国制造纯电动汽车市场表现的影响 - deepseek-flash.md",
+      "sha256": "a3ba71ab1c44a3b6f780a630f9ba383c445c7b77c3ad6881d53d6aed02f29bab",
+      "lines": 277,
+      "body_chars_no_space": 7332,
+      "body_english_words": 197,
+      "body_han_chars": 4907,
+      "reference_entries": 70,
+      "unique_reference_urls": 70,
+      "unique_reference_urls_no_fragment": 70,
+      "reference_domains": [
+        "agerpres.ro",
+        "amaxofilia.com",
+        "arstechnica.com",
+        "auto.sapo.pt",
+        "axis-intelligence.com",
+        "biz.chosun.com",
+        "carveeta.com",
+        "cepr.org",
+        "chejiahao.autohome.com.cn",
+        "chinawto.mofcom.gov.cn",
+        "cnevpost.com",
+        "dxpress.gelonghui.com",
+        "e24.no",
+        "eletric-vehicles.com",
+        "finance.eastmoney.com",
+        "finance.yahoo.com",
+        "fuelcellsworks.com",
+        "gfe-desktop.cnyes.com",
+        "gocar.be",
+        "guoyanwang.clcn.net.cn",
+        "gz.cn.qcgys.com",
+        "i.gasgoo.com",
+        "litiolatte.es",
+        "m.toutiao.com",
+        "mp.weixin.qq.com",
+        "news.rthk.hk",
+        "policy.trade.ec.europa.eu",
+        "portuguese.automobiles-china.com",
+        "teslant.com",
+        "testcoches.es",
+        "wap.stockstar.com",
+        "www.163.com",
+        "www.auto-motor-und-sport.de",
+        "www.autohled.cz",
+        "www.automobile-magazine.fr",
+        "www.automotiveworld.com",
+        "www.automotorsport.se",
+        "www.autoplus.fr",
+        "www.autorentgroup.com",
+        "www.bild.de",
+        "www.bruegel.org",
+        "www.china5e.com",
+        "www.cyhaoche.com",
+        "www.d1ev.com",
+        "www.dolc.de",
+        "www.electrive.com",
+        "www.forbes.com",
+        "www.frandroid.com",
+        "www.itiger.com",
+        "www.motor16.com",
+        "www.mycaijing.com",
+        "www.n-tv.de",
+        "www.notebookcheck.net",
+        "www.pcauto.com.cn",
+        "www.quotidianomotori.com",
+        "www.saba.ye",
+        "www.saicmotor.com",
+        "www.scmp.com",
+        "www.sgpjbg.com",
+        "www.spiegel.de",
+        "www.thestreet.com",
+        "www.topchinacar.com",
+        "www.transportenvironment.org",
+        "youjia.baidu.com"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 9,
+      "title": "欧盟关税对中国制造纯电动汽车市场表现的影响",
+      "system": "M",
+      "file": "responses/mirothinker/q09.md",
+      "filename": "欧盟关税对中国制造纯电动汽车市场表现的影响-mirothinker_deep模式.md",
+      "sha256": "c74ef43dee94efef5153a3702e1bfc78b5b22e1fc6acf16d424c9c50a976c66b",
+      "lines": 402,
+      "body_chars_no_space": 9216,
+      "body_english_words": 477,
+      "body_han_chars": 6882,
+      "reference_entries": 47,
+      "unique_reference_urls": 43,
+      "unique_reference_urls_no_fragment": 43,
+      "reference_domains": [
+        "asia.nikkei.com",
+        "asiasociety.org",
+        "bbj.hu",
+        "cepr.org",
+        "cn.wsj.com",
+        "cnevpost.com",
+        "ec.europa.eu",
+        "electrek.co",
+        "elpais.com",
+        "eur-lex.europa.eu",
+        "finance.caixin.com",
+        "finance.sina.com.cn",
+        "tech-insider.org",
+        "teslant.com",
+        "theicct.org",
+        "www.acea.auto",
+        "www.autonews.com",
+        "www.bruegel.org",
+        "www.electrive.com",
+        "www.hungarianconservative.com",
+        "www.iea.org",
+        "www.jdpower.com",
+        "www.mg.co.uk",
+        "www.mofcom.gov.cn",
+        "www.reuters.com",
+        "www.schmidtmatthias.de",
+        "www.theguardian.com",
+        "www.transportenvironment.org"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 10,
+      "title": "EU Tariffs and the Market Performance of China-Made Battery Electric Cars",
+      "system": "L",
+      "file": "responses/lucentthinker/q10.md",
+      "filename": "EU Tariffs and the Market Performance of China-Made Battery Electric Cars - deepseek-flash.md",
+      "sha256": "7abbef4030b7e8fb2269e3239ba74c864249e5c99300c3266153cf21d38ae588",
+      "lines": 210,
+      "body_chars_no_space": 14401,
+      "body_english_words": 2997,
+      "body_han_chars": 0,
+      "reference_entries": 55,
+      "unique_reference_urls": 55,
+      "unique_reference_urls_no_fragment": 55,
+      "reference_domains": [
+        "android.automarket.ro",
+        "auto-mania.cz",
+        "automobilemagazine.com.tr",
+        "autoreport.ro",
+        "baijiahao.baidu.com",
+        "bestsellingcarsblog.com",
+        "biz.chosun.com",
+        "carnewschina.com",
+        "cn.investing.com",
+        "cnevpost.com",
+        "ec.europa.eu",
+        "eletric-vehicles.com",
+        "en.ccceu.eu",
+        "english.mofcom.gov.cn",
+        "english.www.gov.cn",
+        "euperspectives.eu",
+        "global.chinadaily.com.cn",
+        "inovev.com",
+        "insideevs.com",
+        "jp.reuters.com",
+        "m.news18a.com",
+        "markets.businessinsider.com",
+        "moneybuzz.hu",
+        "news.futunn.com",
+        "news.mgmotor.eu",
+        "testcoches.es",
+        "trade.ec.europa.eu",
+        "wp.elektroauto-news.net",
+        "www.acea.auto",
+        "www.am-online.com",
+        "www.automotiveworld.com",
+        "www.autoprove.it",
+        "www.carscoops.com",
+        "www.customs-lookup.com",
+        "www.dailysabah.com",
+        "www.electrive.com",
+        "www.forbes.com",
+        "www.frandroid.com",
+        "www.inovev.com",
+        "www.mobilityportal.eu",
+        "www.onlyauto.gr",
+        "www.pcmag.com",
+        "www.pressreader.com",
+        "www.razaoautomovel.com",
+        "www.transportenvironment.org",
+        "www.xn--anadoluajans-d5b.gov.tr",
+        "youjia.baidu.com",
+        "za.investing.com"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 10,
+      "title": "EU Tariffs and the Market Performance of China-Made Battery Electric Cars",
+      "system": "M",
+      "file": "responses/mirothinker/q10.md",
+      "filename": "EU Tariffs and the Market Performance of China-Made Battery Electric Cars-mirothinker_deep模式.md",
+      "sha256": "0a665bb9bd57d70f991362a5eeb3bc916cc89f87b0dd6e097b1541df89cab25b",
+      "lines": 591,
+      "body_chars_no_space": 26110,
+      "body_english_words": 4806,
+      "body_han_chars": 0,
+      "reference_entries": 92,
+      "unique_reference_urls": 86,
+      "unique_reference_urls_no_fragment": 86,
+      "reference_domains": [
+        "about.bnef.com",
+        "bestsellingcarsblog.com",
+        "cnevpost.com",
+        "data.consilium.europa.eu",
+        "ec.europa.eu",
+        "electrek.co",
+        "eur-lex.europa.eu",
+        "europe.autonews.com",
+        "insideevs.com",
+        "media.mg.co.uk",
+        "policy.trade.ec.europa.eu",
+        "rhg.com",
+        "tech-insider.org",
+        "teslant.com",
+        "trade.ec.europa.eu",
+        "transportenvironment.org",
+        "www.acea.auto",
+        "www.autonews.com",
+        "www.bbc.com",
+        "www.bloomberg.com",
+        "www.carscoops.com",
+        "www.cnevpost.com",
+        "www.consilium.europa.eu",
+        "www.electric-vehicles.com",
+        "www.electrive.com",
+        "www.europeanchinesecars.com",
+        "www.forbes.com",
+        "www.ft.com",
+        "www.go-electra.com",
+        "www.jato.com",
+        "www.jdpower.com",
+        "www.lemonde.fr",
+        "www.mg.co.uk",
+        "www.mgmotor.eu",
+        "www.politico.eu",
+        "www.rac.co.uk",
+        "www.reddit.com",
+        "www.reuters.com",
+        "www.schmidtmatthias.de",
+        "www.scmp.com",
+        "www.transportenvironment.org"
+      ],
+      "unmapped_citation_ids": []
+    },
+    {
+      "id": 1,
+      "title": "Bristol Home Battery Decision",
+      "system": "G",
+      "file": "responses/gpt-deepresearch/q01.md",
+      "filename": "Bristol Home Battery Decision - gpt6pro_deepresearch.md",
+      "sha256": "8d78141690d52f6f05c046be3aa1f3e278ffb8dff91e3b4f5fe5e8c47a2c4cb0",
+      "lines": 34,
+      "urls": [],
+      "citation_markers": 0,
+      "han_chars": 0,
+      "word_segments": 1362
+    },
+    {
+      "id": 2,
+      "title": "Creatine and Cognitive Performance",
+      "system": "G",
+      "file": "responses/gpt-deepresearch/q02.md",
+      "filename": "Creatine and Cognitive Performance - gpt6pro_deepresearch.md",
+      "sha256": "38242cf659bacda14995f8e0afe485af3ca77f465eb9c176a626c786a46ff657",
+      "lines": 62,
+      "urls": [],
+      "citation_markers": 0,
+      "han_chars": 2821,
+      "word_segments": 134
+    },
+    {
+      "id": 3,
+      "title": "Search Architecture for a B2B Knowledge Product",
+      "system": "G",
+      "file": "responses/gpt-deepresearch/q03.md",
+      "filename": "Search Architecture for a B2B Knowledge Product - gpt6pro_deepresearch.md",
+      "sha256": "d4f9ff210d6bf15223ad10510c8abd8345416d777afd958ac752f0c92d7676ba",
+      "lines": 59,
+      "urls": [],
+      "citation_markers": 1,
+      "han_chars": 0,
+      "word_segments": 2533
+    },
+    {
+      "id": 4,
+      "title": "Costco and Walmart Business Comparison",
+      "system": "G",
+      "file": "responses/gpt-deepresearch/q04.md",
+      "filename": "Costco and Walmart Business Comparison - gpt6pro_deepresearch.md",
+      "sha256": "c71a761f2fa0d7224a387482186a56b1614df61544d542f97ac2b4e323470333",
+      "lines": 58,
+      "urls": [],
+      "citation_markers": 0,
+      "han_chars": 0,
+      "word_segments": 1987
+    },
+    {
+      "id": 5,
+      "title": "深圳、杭州与成都工作机会比较",
+      "system": "G",
+      "file": "responses/gpt-deepresearch/q05.md",
+      "filename": "深圳、杭州与成都工作机会比较 - gpt6pro_deepresearch.md",
+      "sha256": "be08a00249e2e1d3767df8bbd0928b1978b6472d3a187de2d73ca164c6eefddc",
+      "lines": 96,
+      "urls": [],
+      "citation_markers": 0,
+      "han_chars": 2813,
+      "word_segments": 312
+    },
+    {
+      "id": 6,
+      "title": "上海换购纯电轿车决策",
+      "system": "G",
+      "file": "responses/gpt-deepresearch/q06.md",
+      "filename": "上海换购纯电轿车决策 - gpt6pro_deepresearch.md",
+      "sha256": "8754d490f57fe82c64b5dea32bd0d56fe8556207ee24341b78ea10179bfa25b8",
+      "lines": 63,
+      "urls": [],
+      "citation_markers": 0,
+      "han_chars": 1917,
+      "word_segments": 92
+    },
+    {
+      "id": 7,
+      "title": "钙钛矿叠层组件商业化尽调",
+      "system": "G",
+      "file": "responses/gpt-deepresearch/q07.md",
+      "filename": "钙钛矿叠层组件商业化尽调 - gpt6pro_deepresearch.md",
+      "sha256": "000c17c19d9721b9c364036e02058ee157fa1afea1c24407bcbd4a126918f206",
+      "lines": 81,
+      "urls": [],
+      "citation_markers": 0,
+      "han_chars": 3270,
+      "word_segments": 94
+    },
+    {
+      "id": 8,
+      "title": "郑和远航、海禁与海洋贸易",
+      "system": "G",
+      "file": "responses/gpt-deepresearch/q08.md",
+      "filename": "郑和远航、海禁与海洋贸易 - gpt6pro_deepresearch.md",
+      "sha256": "8e2494b903bdea1fd1b9a39d813a52b34e936f0a7484e7967dd11a2a00bb6e71",
+      "lines": 63,
+      "urls": [],
+      "citation_markers": 0,
+      "han_chars": 3660,
+      "word_segments": 64
+    },
+    {
+      "id": 9,
+      "title": "欧盟关税对中国制造纯电动汽车市场表现的影响",
+      "system": "G",
+      "file": "responses/gpt-deepresearch/q09.md",
+      "filename": "欧盟关税对中国制造纯电动汽车市场表现的影响 - gpt6pro_deepresearch.md",
+      "sha256": "0b23001208438adf6c6c05cb261f4880822f4c78cbe1d2c4229934b37ab8808c",
+      "lines": 144,
+      "urls": [],
+      "citation_markers": 0,
+      "han_chars": 4873,
+      "word_segments": 420
+    },
+    {
+      "id": 10,
+      "title": "EU Tariffs and the Market Performance of China-Made Battery Electric Cars",
+      "system": "G",
+      "file": "responses/gpt-deepresearch/q10.md",
+      "filename": "EU Tariffs and the Market Performance of China-Made Battery Electric Cars - gpt6pro_deepresearch.md",
+      "sha256": "dffbae30475234b66d86aef69d6c5101a7ae0adac796179ac220a910c212b2c9",
+      "lines": 122,
+      "urls": [],
+      "citation_markers": 0,
+      "han_chars": 0,
+      "word_segments": 3126
+    }
+  ]
+}

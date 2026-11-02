@@ -1,326 +1,56 @@
 # LucentThinker
 
-本地个人研究助手，参照 MiroThinker 提交 `1c4253f6774bf40314271a827304b842100e054c` 的研究循环与官方 Demo 提示词。主模型自主搜索、选择网页、给出定向提取任务、比较结果并继续研究；网页通过 DeepSeek Fetch 获取，再交给独立摘要模型。最终回答使用界面所选语言、Markdown 和来源引用。
+[中文](README.zh-CN.md)
 
-## 启动
+**Fast, source-backed research at low cost.**
 
-### DSH 插件 0.1.1
+A local personal research assistant powered by DeepSeek. LucentThinker searches the web, reads sources, checks findings and writes research reports with citations.
 
-在 DSH 的“插件 → 添加插件”中填写 `dsh-plugin-lucentthinker@0.1.1` 并启用。`dsh-plugin/` 包含插件源码和 npm 打包脚本，也支持本地目录或 `.tgz` 安装，包含 DSH 侧栏入口、独立设置分区和插件专属 Python 引擎。目标宿主为 DSH `0.2.1-rc.5`，打包平台为 macOS Apple Silicon 和 Windows x64。桌面界面已在 macOS 验收，Windows 自动化范围见集成记录。普通用户无需安装 Python。插件数据与本独立版分开保存。启停、开发和打包方法见 [插件说明](dsh-plugin/README.md)，验证范围见 [DSH 集成记录](docs/dsh-plugin.md)。
+- **Fast setup** with a bundled DSH plugin or one-command Web UI launcher, plus configurable research depth.
+- **Traceable answers** with linked sources and saved research history.
+- **Low running costs** with your own API keys. The author reports research runs costing as little as RMB 1, with a rough US-dollar budget of $0.20. Actual costs depend on research depth and provider pricing.
 
-### 独立版
+## Benchmark
 
-源码包首次使用：解压后在项目目录运行 `./start.sh --open`，需先安装 [uv](https://docs.astral.sh/uv/getting-started/installation/) 和 zsh（macOS 默认提供）。脚本自动安装项目内 Python 与锁定依赖；随后在界面设置模型供应商和 DeepSeek 网页服务凭据。源码包不包含个人设置、研究记录、运行环境或缓存。
+![Research quality scores on five English prompts](benchmarks/2026-11-02/en/score.png)
+
+In this five-prompt English sample, LucentThinker scored **76.7/100**, versus **49.1** for paid MiroThinker deep mode and **38.4** for GPT Deep Research.
+
+Author-organized, non-blind Astra review, one saved answer per system and prompt. GPT's web originals had no citations, and its Q2 response was in Chinese. The linked report includes all systems' errors and scoring limitations. Speed and cost were not measured in this benchmark.
+
+[Report & answers](benchmarks/2026-11-02/en/README.md) · [Prompts](benchmarks/2026-11-02/en/questions.md) · [Scoring method](benchmarks/2026-11-02/en/methodology.md) · [Offline report ZIP](benchmarks/2026-11-02/lucentthinker-benchmark-en.zip)
+
+## Install
+
+### DSH plugin
+
+In DSH, open **Plugins → Add plugin**, enter `dsh-plugin-lucentthinker`, and enable it. The plugin bundles its Python runtime for macOS Apple Silicon and Windows x64. [Plugin guide](dsh-plugin/README.md)
+
+### Standalone Web UI
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then clone the project.
 
 ```sh
-cd /Users/yuxin/AI_developing/LucentThinker
-./start.sh
+git clone https://github.com/XinYu-pumch/LucentThinker.git
+cd LucentThinker
 ```
 
-双击 `Launch LucentThinker.command` 会在服务就绪后自动打开默认浏览器；已运行时也会打开网页。命令行 `./start.sh --open` 同样可用，`./start.sh` 则仅启动服务。
+**macOS** requires zsh, included by default. Run `./start.sh --open`, or double-click `Launch LucentThinker.command` for subsequent launches. `./start.sh` starts the service alone.
 
-打开 <http://127.0.0.1:8765>。**退出：关闭启动它的终端窗口，或在该窗口按 Ctrl+C**；也可执行 `./stop.sh`。关闭网页本身不会退出服务。重复启动会连接同一个服务，关闭任一启动窗口也会退出整个应用。退出会取消进行中的研究并保存已有记录。服务仅监听本机。既有凭据已迁移，无需重新填写。
+**Windows** users can double-click `start.cmd` to install dependencies and open the Web UI.
 
-源码、Python 运行时 `.runtime/python/`、虚拟环境 `.venv/`、前端依赖 `node_modules/`、缓存 `.cache/`、数据库和日志 `data/` 都在本目录。启动脚本使用系统已有 uv，不全局安装 Python 包；依赖锁定在 `uv.lock`。
+The launcher installs the project Python environment and dependencies automatically. The UI runs at [localhost:8765](http://127.0.0.1:8765). Close the launch terminal or press Ctrl+C to stop it.
 
-项目现名为 **LucentThinker**，实际目录为 `/Users/yuxin/AI_developing/LucentThinker`。在 Codex 新建项目时选择这个目录即可。为兼容已有 Codex 会话保存的工作目录，旧路径 `/Users/yuxin/AI_developing/openmirothinker` 保留为指向新目录的符号链接；两条路径访问同一份代码和数据。需要继续使用旧会话时，请保留该链接。启动和停止脚本会解析为实际目录，避免通过不同入口启动重复服务。
+## Configure
 
-浏览器会把旧品牌下保存的当前对话选择迁移到新名称。历史研究正文、请求快照和上游许可证保留原始内容。
+For the simplest setup, use DeepSeek for both models and web access.
 
-## 项目侧栏与批量管理
+1. Open Settings and enter your DeepSeek API key under the built-in **DeepSeek** provider.
+2. Enter the key under **Search & Fetch** as well.
+3. Refresh the model list, add a DeepSeek model, then select it as both the **main model** and **summarization model**.
 
-侧栏从上到下为图标与收起/展开按钮、中英文切换、新对话、搜索历史和项目列表。桌面收起后保留常用操作图标；手机使用带遮罩的抽屉。侧栏、项目区以及各项目的展开状态保存在本浏览器。原有全部对话首次升级时自动归入“默认项目”，标题、回答、来源和时间记录保留。
+Choose your research depth, enter a question, and start. Other providers are supported, with built-in thinking configurations for major model families. [Advanced guide in Chinese](docs/advanced.zh-CN.md)
 
-点击“新建项目”输入名称。展开项目可查看其对话；悬浮项目行或键盘聚焦时显示右侧加号，点击即可在该项目中新建对话。手机上加号始终可见。顶部“新对话”在默认项目中新建；页头显示当前所属项目。项目用于整理对话，不增加跨对话共享上下文，原来的独立研究/扩展追问规则保持。
+## License
 
-右键项目文件夹选择“重命名项目”；键盘聚焦项目后也可按菜单键或 Shift+F10。默认项目同样可以改名，改名后仍接收顶部“新对话”创建的对话。重命名只更新项目名称，保留项目 ID、对话归属、研究内容与展开状态；侧栏、页头、移动目标列表和搜索结果显示新名称。名称为 1–120 个字符，不能与其他项目重名（忽略大小写及首尾空格）。
-
-点击“项目”标题右侧的多选图标，勾选对话后使用侧栏底部“移动到项目”或“删除对话”。项目行的勾选框表示全选其中的对话，计数显示“已选/总数”；移动与删除只作用于对话，项目文件夹始终保留。支持跨项目多选、按项目全选和全选全部对话；折叠项目后所选项仍保留。移动弹窗列出所选对话并要求选择目标项目；删除弹窗列出完整清单并再次确认。只要所选项中有研究运行中，整批删除均不执行；移动运行中的对话不会停止研究。批量删除作为一次事务清理相关记录，并只整理一次数据库。搜索覆盖所有项目，结果显示所属项目。
-
-## 对话搜索与界面语言
-
-侧栏“搜索历史”打开搜索弹窗，也可按 `⌘⇧F`（Windows / Linux 为 `Ctrl+Shift+F`）。支持“全部 / 标题 / 内容”筛选；内容检索覆盖当前对话所有已保存的用户问题和回答，不搜索原始请求日志、思考文本或未保存的流式片段。匹配结果显示高亮和上下文，可点击或使用方向键及 Enter 打开；内容命中会定位到对应问答。Esc 或点击弹窗外关闭。结果分页加载，搜索使用字面关键词、不区分大小写，支持中英文。
-
-顶部 `English / 中文` 按钮切换界面语言，选择保存在本浏览器。切换时刷新界面并保留输入草稿、迭代档位与模型选择；已保存的标题、问题、回答及来源内容不翻译。模型和自建配置名称保持原样。
-
-新研究随请求提交 `language=zh/en`。主研究、独立网页提取、最终写作、控制提示和工具说明按所选语言生成，并冻结在研究配置快照中，保存提示词哈希。公开进展、提取任务和回答要求使用相同语言；检索词可使用适合原始来源的语言。切换界面不会改变正在运行的研究。旧记录和未提交 language 的旧 API 调用保持原有提示词和语言判断，不回写历史。中文模板位于 `app/prompts/zh/`，英文模板沿用 `app/prompts/`，界面文案在 `app/static/i18n-en.js`。
-
-## 设置主模型和摘要模型
-
-首次安装时模型列表为空，主模型和摘要模型均待选择。用户添加模型后，分别指定两个角色。
-
-左下角“模型与上下文 → 模型供应商”采用供应商侧栏与详情页。侧栏内置 **DeepSeek、OpenCode Go、z.ai、moonshot、mimo、qwen、grok**，点击“＋”可新增普通 OpenAI 兼容供应商；可修改名称、保存或删除自建供应商。
-
-1. 选择供应商，填写地址与 API Key（可为空）。内置模块地址固定；普通供应商支持根地址、`/v1` 或完整 `/chat/completions` 地址。已有 Key 留空保留，点击“清空 Key”并保存才会删除。
-2. 点击“刷新模型列表 / 添加模型”，从在线拉取的全部可用模型中勾选一个或多个加入。已加入模型不会重复创建。可拆卸模块只列出已登记协议且在线可用的模型。
-3. 每行模型单独保存并发数、适用的思考档位和可选采样参数；“测试连接”发送 `hellow`，“测试工具”验证工具调用。普通 OpenAI 供应商默认不发送思考扩展；显式选择思考预设后按预设协议发送。测试使用当前表单参数，参数持久化请点击“保存参数”。
-4. 关闭设置，在对话输入区的迭代档位旁选择**主模型与摘要模型**，选项显示“供应商 / 模型”。选择作为下次打开时的默认值自动保存；每次研究也明确提交两个稳定模型 ID，以免并发研究互相改变选择。两个角色可使用同一个模型，共享并发额度，但上下文独立。
-
-“供应商 / 模型”是可读标识，后台另有稳定供应商 ID 和模型 ID。供应商改名不会改变 ID；移除正在被选用的模型会清空对应选择，已有研究快照与结果保留。每个供应商只保存一份地址和 Key，其下所有模型共用；同一模型在不同供应商处可有独立参数。
-
-已保存的 API Key 默认以密码圆点显示，未配置时为空；圆点为本机占位，不会当作 Key 提交。点击“显示”才取回明文；主动隐藏、保存、切换供应商或关闭设置后恢复隐藏。普通配置响应、日志、请求审计和报告不含凭据；只有显示按钮才向本机页面取回明文。凭据保存在权限 `0600` 的 `data/settings.json`，这是本地明文配置文件。空 Key 的普通兼容服务不发送 Authorization。
-
-首次启动新版本会先将旧配置原样备份到 `data/backups/settings-v3-*.json`（权限 `0600`），再迁移到供应商结构。旧模型 ID、角色选择、Key、并发及模型参数保留；不同凭据、同模型的独立旧配置不会被合并。若看到“DeepSeek 独立提取”等额外供应商，就是保留的旧配置。曾对第三方地址启用 DeepSeek 专有参数的普通配置会改为通用 OpenAI 模式，并标注迁移说明。
-
-主模型和摘要模型通过 GUI 配置。`.env` 中的 `MAIN_LLM_*` / `SUMMARY_LLM_*` 不会自动创建或选用模型。更换已有地址时需重新输入或清空 Key。运行中的研究使用启动时的模型、参数与凭据快照；并发额度调整即时生效。
-
-实际 `/models` 确认 `deepseek-flash` 对应 **DeepSeek-V4.1-Flash**，窗口 **1,048,576 tokens**，最大输出 **393,216 tokens**。主模型与摘要模型均使用服务公布的最大输出值，不再使用原来的 16K / 8K 应用额度；其他服务没有公布最大值时省略 `max_tokens`，采用其默认值。界面显示这一区别，未将“省略参数”误称为无限输出。
-
-DeepSeek 配置可选 thinking / reasoning_effort；普通 OpenAI 配置可逐模型显式选择思考预设。Temperature / Top P 未填则不发送；DeepSeek 思考模式不发送 Temperature。
-
-## 逐模型思考配置与诊断
-
-从 ScholarNoteLM 迁入的预设目录位于 `app/thinking_presets.json`，供应商元数据位于 `app/llm_providers/`。新增内置 z.ai、moonshot、mimo、qwen、grok；z.ai 和 moonshot 可选择国内／国际官方地址。新添加模型初始化对应预设，用户选择“服务端默认”后，后续保存不会重新覆盖。普通兼容供应商需显式选择预设；不会按模型名字、供应商名字或域名猜协议。支持从目录添加和手动输入模型 ID，Go 只接受已登记的模型。
-
-点击每个模型的“思考设置”，配置强度、开关或思考 token 预算，以及接口支持的输出方式。应用到草稿后，点击“保存参数”持久化，或直接测试当前草稿。主模型和摘要模型使用同一配置机制。并发和采样设置保持逐模型独立。
-
-| 预设 | 协议 | 主要参数 |
-| --- | --- | --- |
-| Gemini· Native | Google 原生 | `thinkingLevel`、`includeThoughts` |
-| Claude· Native | Messages | adaptive thinking、`output_config.effort`、`thinking.display` |
-| Grok· Native | Responses | `reasoning.effort`；接收服务端摘要 |
-| DeepSeek、GLM | Chat Completions | `thinking.type`、`reasoning_effort`，温度策略分别遵循预设 |
-| Qwen | Chat Completions | `enable_thinking`，effort 或 `thinking_budget` 互斥 |
-| Kimi、GPT、Meta | Chat Completions | 按预设适用范围选择 `reasoning_effort` |
-| MiMo、Generic Thinking Toggle | Chat Completions | `thinking.type` 开关 |
-| MiniMax M3.1 Flash | Chat Completions | `reasoning_effort`、`reasoning_split=true` |
-
-“服务端默认”不额外设置思考参数；“不请求思考摘要”不等于关闭模型思考。预设的模型适用范围、档位、预算范围和输出规则来自目录说明，不保证所有同厂商历史模型或中转站都支持。普通 Qwen 预算允许 0–262144；Go Qwen 使用独立规则，预算为正整数，Flash 未登记最大值时不自设上限。无效预设、档位或预算在保存和调用前拒绝，不静默降档或切换协议。
-
-Go 的思考选项与原厂预设分开：逐模型登记开关、effort、预算及输出参数；GPT／Muse 显式请求 `reasoning.summary=auto`，Gemini 请求 `includeThoughts=true`，Claude 请求 `display=summarized`，Claude disabled 时不发送 display。其他模型接收协议公开的推理字段，不添加未经支持的输出开关。新增模型采用能力目录的端点；已登记模型保留 LucentThinker 原有端点。会话头只用于 Go。
-
-四种协议共用 `app/llm_protocols.py` 的工具转换与响应解析，保留工具调用 ID、原生签名和加密推理项以供后续回传。可读文本分别进入正文和思考字段；Responses 的 delta、done、最终 JSON 按分段补齐并去重，只有最终事件返回摘要也能接收。研究过程显示独立思考折叠区，历史事件重放不会重复累计；旧记录不凭空补造思考文本。
-
-“测试连接”展示实际端点、协议、思考参数、可读思考字符数及服务端报告的 reasoning token。“检查参数校验”额外发送一次非法参数对照：明确的字段校验错误、错误参数仍返回正文、无法判断三种结果分开报告。对照值不保存、不重试、不影响研究配置。HTTP 200 或思考 token 数不能证明收到可读摘要，也不能证明强度实际执行。“测试工具”验证调用和工具结果回传。
-
-配置增加 `thinking_schema=1`。首次启动自动创建权限 `0600` 的旧设置备份，再写入新增内置供应商；既有模型 ID、角色绑定、凭据和研究数据保持。普通配置默认不启用预设；旧 Go 模型的默认档位与关闭思考设置保留，弹窗的“保留已有设置”用于保持旧请求语义。
-
-验证：`.venv/bin/python -m pytest -q`、`node --test tests/*.cjs`。可选真实接口检查：`.venv/bin/python scripts/verify_thinking_migration.py --credentials /absolute/path/to/credentials.txt --provider qwen --model qwen3.8-flash --level low --output /absolute/path/report.json`。凭据只在内存使用，不写入模型设置或报告；报告不包含思考原文。该脚本会实际调用指定模型。
-
-## 可拆卸的 OpenCode Go 模块
-
-在“设置 → 模型供应商”侧栏选择 **OpenCode Go**，填写 Go Key，刷新列表并勾选要加入的模型。每个模型分别设置并发与适用思考档位，保存后在对话输入区分配给主模型或摘要模型。Key 不从其他应用复制。
-
-Gemini 与 DeepSeek Flash 使用独立的模型选项（主模型、摘要模型均适用）：
-
-| Go 模型 ID | 思考配置 | 实际请求参数 |
-|---|---|---|
-| `gemini-4-argon-contributor` | `low / medium / high`，默认 `medium`；不提供关闭或 `max` | Gemini 原生 `generationConfig.thinkingConfig.thinkingLevel` |
-| `deepseek-v4.1-flash` | 思考开启/关闭；开启时 `low / high / max`，默认开启、`high` | `thinking.type`；仅开启时发送 `reasoning_effort` |
-
-档位依据 [Google 思考文档](https://ai.google.dev/gemini-api/docs/thinking)和 [DeepSeek 思考文档](https://api-docs.deepseek.com/guides/thinking_mode/)登记。未设置档位的旧配置按上表默认值显式发送；已有明确档位保留。新增 Go 模型使用“服务端默认”，不额外发送强度参数；旧模型也可通过思考弹窗明确改用新版规则。关闭 DeepSeek 思考会保留选中的档位，重新开启后恢复使用。保存与测试连接使用同一套参数校验，不支持的档位直接拒绝。档位控制推理强度，不保证固定思考 token 数。其他 Go 模型的配置方式保持原样。
-
-地址由模块管理。原有端点与 2026-10-25 ScholarNoteLM 能力目录合并后登记 39 个模型（包括历史 ID），实际候选列表取 `/models` 在线目录与已登记映射的交集；新出现但未登记协议的模型会提示并排除。四种协议使用官方分开的路径：
-
-| 协议 | Go 路径（相对于 `https://opencode.ai/inference/go`） |
-| --- | --- |
-| Chat Completions | `openai/v1/chat/completions` |
-| Responses | `openai/v1/responses` |
-| Anthropic Messages | `anthropic/v1/messages` |
-| Google 原生 | `google/v1beta/models/{model}:streamGenerateContent?alt=sse` |
-
-模型目录使用已核实可用的 `v1/models`。所有 Go 模型与目录请求都携带标准名称的 **`x-opencode-session`**，并发送 **`User-Agent: LucentThinker/0.1.0`**；前者不会被自定义请求头替换。鉴权使用 Bearer Key，Messages 另带 `anthropic-version: 2023-06-01`。同一次主研究尝试的研究、最终写作与内部 HTTP 重试保持 session；不同研究分开。每次网页提取单独创建 session，内部重试复用，不继承其他页面或主研究的历史。session 仅用于供应商路由与缓存，不替代每次完整发送的消息。
-
-四种协议均转换工具定义、工具调用和工具返回，支持原来的搜索与网页提取研究循环。原生思考签名、Responses 加密推理项和 Google thoughtSignature 保留供后续协议回传，研究过程独立折叠显示服务端返回的思考文本／摘要，并显示正文与思考字符数；签名和加密项不作为可读文本显示。开发视图可勾选查看原始协议内容。请求详情中的 `wire_request` 记录实际端点、请求体和非敏感专属头，不包含 Authorization。取消、排队、失败重试及流式进度沿用现有机制。
-
-“测试工具调用”对 Go 会执行一次工具调用与结果回传，再确认模型能正常回复；“测试连接”对思考模型发送短计算题，并展示实际请求参数、思考文本与用量。实际服务权限、模型可用性和生成参数是否接受仍以账户测试结果为准。确定性测试覆盖四种协议，不等于所有真实模型都已逐一在线验证。
-
-Messages 原生协议必填 `max_tokens`，使用 [models.dev](https://models.dev/api.json) 公布的该模型输出上限；其他 Go 协议不额外发送输出长度限制。输入和网页不做本地长度裁剪。用量从各协议真实返回的 usage 映射为统一字段，原始用量同时保留；缺失字段保持未知。Anthropic 输入总量包含普通输入、缓存读取和缓存写入；Google 输出量包含返回正文及服务报告的思考 token。两者仅进行字段合计，不按文本估算。
-
-Search / Fetch 始终是 DeepSeek 网页服务，必须保留独立 DeepSeek Key 或已有适用配置，不能复用 Go Key。专属请求头只用于明确选择该模块的请求，不会传给普通模型或 DeepSeek 网页接口。网络继续使用现有 httpx 配置，不修改系统代理或 TLS。
-
-### 停用、移除与恢复
-
-1. 完成或停止正在使用 Go 的研究，然后退出应用。
-2. 停用：在 `app/llm_providers/registry.json` 的 `providers` 数组移除 `opencode_go`。当前仅有此模块时可改为 `{"providers": []}`。
-3. 完全移除：再删除 `app/llm_providers/opencode_go/` 目录。也可仅删除此目录，应用同样识别为停用。不要删除通用的 `app/llm_providers/registry.py`。
-4. 重启后普通 OpenAI / DeepSeek 继续可用，已有 Go 配置和研究记录仍保留，界面显示模块停用。若它仍被角色选中，请先选择并保存其他配置，再删除旧 Go 配置；调用停用配置会明确失败，绝不静默更换接口。
-5. 恢复模块目录并把 `opencode_go` 加回注册数组后重启，即可重新使用已有配置。
-
-Go 的模型目录和端点集中在 `app/llm_providers/opencode_go/manifest.json`，协议与头部集中在同目录 `adapter.py`。接入设计参考 ScholarNoteLM，协议事实重新核对官方资料；没有复制其配置、凭据或研究数据。本次不引入额外 Python/npm 依赖，也不启用此前讨论的完成检查功能。
-
-## 搜索发现 → 网页阅读 → 独立提取（v0.6）
-
-主模型看到的 Search 结果只包含 `title/url/date/site_name/snippet/source_id`。不把 Search 的 `summary` 或 `content` 混进主历史，也不拿 summary 填补空 snippet。Search 请求固定发送 `need_content=true`；服务原始响应完整保存在当前研究的 `search_responses` 审计记录中，开发视图可单独查看。
-
-主模型选择已登记的 `source_id`，生成 `info_to_extract` 和公开行动说明 `progress`；程序通过搜索响应记录 ID 与结果位置直接取出保存的完整 URL（包括查询参数和片段），然后：
-
-```text
-Fetch 成功 → 完整正文 → 独立摘要模型按目标提取 → 提取结果返回主模型
-Fetch 失败/正文为空 → 当前尝试、所选来源直接绑定的 Search content
-                   → 没有可用 content 时取 Search summary
-                   → 独立摘要模型按目标提取 → 标注备用来源的结果返回主模型
-```
-
-主模型从不直接收到完整 Fetch 正文。降级结果包含 `content_source=search_content/search_summary`、`degraded=true`、Fetch 错误和对应搜索记录 ID；不标记为“原文已提取”。content/summary 均不存在时明确失败；摘要模型自身失败不触发 Search summary 替换。摘要模型每页仍使用独立上下文，成功或降级都不继承主历史。
-
-主提示词要求关键政策条件、日期、费率和计算输入优先阅读原始来源，并在结束前核对用户要求、计算口径和证据缺口。模型仍自行决定下一步，没有强制固定阅读数量、额外每轮总结或独立证据库。最终生成时附带实际读取/降级/失败计数，提醒披露未核验事项；这些计数并不证明每项结论都已核实。
-
-研究过程按迭代分组展示搜索词、可展开的标题/域名/日期/snippet、阅读 URL 与定向任务、抓取/独立摘要状态、返回主模型的提取结果。来源区分“仅搜索发现 / 原文已提取 / 搜索正文备用 / 搜索摘要备用 / 提取失败”；JSON 保留在开发视图。旧记录可用新界面查看，但不会改写旧模型请求或补造以前没有发生的 Fetch。
-
-## 程序约束、结束与引用
-
-工具参数严格按声明的 JSON/schema 校验，不再自动修复 JSON 或替换参数别名；重复键、非有限数、未知工具及多余参数明确拒绝。可配对的无效工具调用收到错误结果，让模型修正。不能配对的工具调用 ID 错误按原有审计回退机制处理，并追加纠正提示。
-
-研究须通过 `finish_research(status, summary, unresolved_questions)` 显式结束，状态为 `ready` 或 `blocked`。它必须单独调用，混合结束与搜索/阅读的批次不执行。普通公开文本仍进入历史，但不会直接结束研究；迭代上限和错误退出机制仍有效。结束动作也产生一条 tool 回复，因此 keep5 的最近 5 条工具消息包含这条回复。没有每轮强制总结；结束状态不等于程序已经验证事实充分。
-
-最终引用的编号到 URL 映射以程序登记表为准，不再按模型写出的参考文献重新编号。仅已知跟踪参数（如 pvid/scm/spm/utm）差异不视为冲突，文档 ID 等参数继续参与比较。未知编号标“引用无法匹配”；真实 URL 冲突保留登记链接并提示相关陈述需核对。原始模型输出留在请求审计中，旧报告不回写。有效链接、成功提取与事实支持是不同状态。
-
-引用规范要求半角方括号和数字：单条 `[42]`，组合 `[42, 56]` 或 `[42][56]`。程序兼容全角方括号 `［］`、中文方头括号 `【】`、全角数字及逗号/顿号/分号分隔，逐一校验组合中的编号并生成独立链接；不把 `[42-56]` 这类范围展开成引用，也不解析代码中的编号。References 只列正文实际引用的来源，包含仅在组合引用中出现的编号，不附加全部搜索结果。提示词同时要求引用紧邻所支持的陈述、保留资料限定条件，不为增加数量引用无关来源。
-
-v0.6 及以后已完成研究在读取和导出时会补全引用列表：只有结尾列表与程序生成的标题/链接行完全一致时才重新生成，手写列表不擅自替换。原始数据库回答及请求审计保持不变。此兼容处理修复历史组合引用漏列，不代表对历史结论作了事实核验。后端更新需要重启应用；进行中的研究仍使用启动时的提示词快照。
-
-时间线每轮及公开进展默认展开，不自动收起之前的迭代；搜索卡片直接显示关键词，详细结果列表默认折叠，可手动展开。
-
-## Search / Fetch
-
-“搜索与抓取”默认使用 DeepSeek 官方 `/v1/tools/search` 和 `/v1/tools/fetch`。用户填写独立 DeepSeek Key，或明确选择复用某个模型配置的凭据；可以分别测试两个服务。不引入 Serper/Jina。
-
-在“设置 → 研究执行”中设置“每次 Search 请求结果数”，与迭代、上下文、重试及提问模式一起保存为命名配置。“默认配置”为 20 条，可在自定义配置中填写任意正整数。程序直接将此值作为 `count` 发送；实际条数由服务决定。研究快照冻结这些参数，修改只影响新研究。“搜索与抓取”只管理凭据及连接测试；测试 Search 使用当前已选用配置的已保存结果数。
-
-**Search 的 query 与 ori_question 均限 1–128 字符。** query 和可选 search_intent 在工具 schema/解析处校验；实际 HTTP 发送入口再次验证 query/ori_question，超限不发送，不截断。
-
-模型只能通过 `search_intent` 生成新的聚焦检索意图，不能填写 `ori_question`。有合法 search_intent 时原样用于 ori_question；未提供时，原始问题不超过 128 字符就原样使用，超过则直接使用本次已校验的 query。不会截取原问题前 128 字，也不增加摘要调用。完整原始问题一直保存在主历史中。界面和搜索审计保存实际 ori_question 及来源（search_intent / original_question / query）；每次研究快照记录规则。count 等其他参数不新增应用上限。
-
-## 研究档位和上下文
-
-| 档位 | 最大有效主模型迭代次数 |
-|---|---:|
-| 快速 | 10 |
-| 标准 | 50 |
-| 深入 | 200 |
-| 自定义 | 任意正整数（无 200 上限） |
-
-这是**最大迭代次数，不是最低搜索次数或固定搜索轮数**，主模型可以提前结束，一个迭代也可请求多个工具。官方 Gradio 在基线版本固定覆盖为 50，没有这套 GUI 档位；10/50/200 是本项目新增的便捷设置。模型调用、有效迭代、搜索、网页提取和摘要请求分别计数。
-
-“研究执行”支持命名配置：选择后用于新研究，可新增、保存、重命名、删除自定义配置。新增时复制当前表单参数；默认配置固定保留，参数为：深入 200 次、全部工具结果、benchmark 最多 6 次完整尝试、独立研究、每次 Search 20 条。删除正在选用的自定义配置后回到默认配置。修改仅影响新研究，输入区仍可单独调整下一次研究的迭代上限。
-
-升级时先备份设置文件，原有参数保留为“原研究配置”并继续选用，避免覆盖已选偏好；首次安装选用默认配置。研究配置不修改模型选择或网页凭据。旧版设置 API 保留兼容，修改内置默认时会另存一份自定义配置。
-
-档位、工具结果保留和完整任务重试相互独立。以下为底层兼容预设的参数对照，并非当前界面的默认配置：
-
-| 参数 | Demo | keep5_max200 |
-|---|---:|---:|
-| 最大有效迭代 | 50 | 200 |
-| keep_tool_result | -1（全部） | 5 |
-| context_compress_limit | 0 | 5 |
-| retry_with_summary | True（上游缺省；单次运行不触发） | False |
-| 完整任务调度 | 单次研究 | benchmark 扩展，最多 6 次尝试 |
-
-keep5 只在主动选择时生效：发送副本保留初始任务、历次主模型消息、最近 **5 条工具结果消息**，更早结果替换省略提示。数据库完整记录不删除。它不是 5 次搜索、5 个页面，也不是自动总结。
-
-`context_compress_limit=5` 的上游数值语义来自 benchmark 外层额外完整重试，不是 Gradio 每轮压缩。本项目保留为明确扩展；达到迭代限制时可重新研究。**服务端上下文超长则直接记录失败，不删历史、不通过重启任务回避错误。**
-
-严格模式每次提问独立研究。扩展追问传入本会话**全部已完成问答的完整文字及全部来源**，不继承旧工具过程或摘要模型消息；快照保存具体背景范围。
-
-## 长度、失败和可观察性
-
-已取消主/摘要模型输入预算预检、工具后预算判断、超限历史回退、网页正文截断、用户问题限制、追问数量/字符限制。页面全文送入独立摘要请求，没有强制每轮总结。供应商窗口和输出上限依然有效：上下文错误如实保留；输出 `finish_reason=length` 标记“未完成”并保留部分输出；提取未完成作为失败结果回传主模型。
-
-模型采用流式请求，片段、最终响应、用量和错误保存到 SQLite。网络中断也保留已收到片段。重试仅处理可重试的网络/限流等错误，不缩短输入或自动抬升输出额度。
-
-### 数据库压缩与去重
-
-研究数据库采用版本化的无损 JSON 存储：大块日志用 zlib 压缩，消息、来源对象和长文本按 SHA-256 指纹共享存储；完整请求（包括 `wire_request`）用不可变对象引用还原。正文、思考文本、原生签名、工具参数、搜索原文以及成功/失败/取消请求的全部流式片段均保留，不截断或丢弃字段。JSON 外层格式会紧凑化，文本字段内部的空格、换行和字符保持不变。
-
-新写入自动采用新格式；旧 JSON TEXT 仍可读取。原始 JSON 列可能保存二进制引用，应通过 `app.store` 的读取接口查看，或在同一连接中使用 `storage_codec.unpack(db, value)` 还原；不要直接把这些 BLOB 当作 JSON 文本。对象读取时校验长度和哈希。删除会话只回收不再被其他记录引用的对象。
-
-删除对话后自动执行 `VACUUM` 并清空已合并的 WAL，将数据库空闲空间归还磁盘，界面显示回收的数据库空间。整理期间持有独占存储锁，其他数据库读写短暂等待，其他对话内容和共享对象保持完整。此操作不创建额外备份，也不删除既有备份或导出文件。若磁盘不足或外部数据库连接导致整理失败，对话仍已删除，界面会明确提示空间整理未完成；下次删除时再次尝试。正在研究的对话需先停止。
-
-压缩既有数据或回收空闲页时，先退出应用，再运行：
-
-```bash
-.venv/bin/python scripts/compact_storage.py
-```
-
-工具在数据库旁获取独占维护锁，并拒绝其他进程已打开的数据库。先创建一致性 SQLite 备份、将其 gzip 压缩并验证解压后字节哈希，再在副本中转换。全部业务表（含 ID、时间、顺序、回退记录和自增序列）在还原 JSON 后逐行计算指纹；转换和 VACUUM 后均校验一致，且 SQLite 完整性检查通过，才原子替换正式文件。失败时不安装未通过校验的副本。
-
-备份和不含研究正文的校验报告保存在 `data/storage-backups/`，文件权限为 `0600`。备份占用额外空间，不会自动删除。恢复时先退出应用，将所需 `.sqlite3.gz` 解压到另一个文件，用报告中的 `backup_uncompressed_sha256` 校验；确认后再替换数据库。旧版本代码不支持新存储格式，需要连同迁移前数据库一起回退。备份仅含数据库，模型设置和凭据仍由原有设置文件管理。
-
-“研究过程”显示搜索词、搜索结果、URL、`info_to_extract`、抓取/独立提取状态、返回主模型的结果。研究详情区分：完整研究记录、实际主模型请求、每次独立提取请求。大量 JSON 按需展开并分段显示，属于显示分页，未裁剪请求或数据库记录。`reasoning_content` 仅作为服务实际返回的可选协议字段，不要求展示内部推理。
-
-## 用量统计
-
-每次研究分别展示主模型和摘要模型的输出、输入缓存命中、输入缓存未命中及输入合计。数据从已保存的 model_end 事件中的 API usage 汇总，刷新/重开历史可重建；包含最终写作、重试及回退交互，设置页连接测试不计入某次研究。
-
-- DeepSeek：completion_tokens、prompt_tokens、prompt_cache_hit_tokens、prompt_cache_miss_tokens。
-- 自定义 OpenAI 兼容 Chat Completions：支持相同字段；也支持 prompt_tokens_details.cached_tokens，未命中按有效 prompt_tokens 减缓存命中计算。
-- 未返回或不兼容字段显示“未知”；部分请求已返回时显示“已知合计 + 未返回/待返回次数”。不按模型名估算，不把未知当零。冲突的缓存拆分不作为有效统计。completion_tokens 可能包含思考 token，按服务原值计入。
-
-Search/Fetch 分别显示实际 HTTP 请求尝试次数（包含重试），同时保留模型工具调用次数；不把网页条数、摘要次数、成功处理次数或供应商账单次数混称为 API 次数。事件落盘后立即更新请求计数。
-
-启动生命周期由 scripts/launch.py 管理，捕获终端挂断（SIGHUP）、Ctrl+C 和停止信号，关闭 uvicorn 后清理 PID 文件；服务日志保留在 data/server.log。等待退出有超时兜底。系统强制杀死监督进程（SIGKILL）或断电不是正常窗口关闭流程，无法保证完成优雅清理。
-
-## 本地仓库对照
-
-### Git 与源码打包
-
-Git 跟踪应用、测试、脚本、依赖锁文件和文档；`.env`、`data/`、运行环境、缓存、旧发行包及个人聊天导出不纳入版本管理。上游参考使用 `docs/upstream/` 中的固定快照。
-
-从已提交版本生成源码 ZIP（将日期替换为本次打包日期）：
-
-```sh
-mkdir -p releases
-git archive --format=zip --prefix=lucentthinker-source-2026-10-31/ --output=releases/lucentthinker-source-2026-10-31.zip HEAD
-(cd releases && shasum -a 256 lucentthinker-source-2026-10-31.zip > lucentthinker-source-2026-10-31.zip.sha256)
-```
-
-打包仅包含指定提交中的文件；工作区未提交改动不会进入源码包。`releases/` 下的生成产物保留在本地。
-
-已对照用户提供的 `MiroThinker-main/`。主循环、答案生成、提示词、上下文客户端、独立提取与 Gradio 入口等 8 个已归档文件与固定基线逐字相同（见 `data/local-upstream-comparison.json`）。搜索代码实际位于 `libs/miroflow-tools/src/miroflow_tools/dev_mcp_servers/search_and_scrape_webpage.py`：返回搜索结果条目；独立阅读仍是抓取后再调用摘要模型。
-
-上游抓取失败会尝试 Python 直接抓取；本项目按用户要求改为 Search content 优先、summary 其次的备用材料独立提取。这是明确的服务适配差异，不称作上游默认机制。保留先前已授权的长度策略、原生工具协议和设置扩展。
-
-## 验证与对照资料
-
-```sh
-mkdir -p .cache
-.venv/bin/python -m pytest -q
-node --check app/static/app.js
-node --check app/static/settings.js
-# 以下会实际使用服务，产生费用；先启动应用
-.venv/bin/python scripts/verify_settings_live.py
-.venv/bin/python scripts/verify_live.py
-```
-
-- `docs/verification.md`：确定性测试、真实服务与 GUI 验证。
-- `docs/architecture.md`：当前实现、保存结构与上游差异。
-- `docs/parity-audit.md`：早期实施前审查快照，包含上游配置语义。
-- `docs/upstream/<commit>/`：固定版本源码、许可证与 SHA-256 清单；`NOTICE` 记录归属。
-
-没有新增可检索证据池、每轮证据总结、跨页面摘要记忆、原生视觉或默认跨提问记忆。复刻的是研究执行结构，不宣称拥有 MiroThinker 模型权重、工具全集或评测表现。
-
-## v0.6 参数归属与交互
-
-模型负责关键词、来源编号选择、提取任务、公开行动说明及结束判断。程序负责来源 URL、标题、Search 原始材料、摘要消息组装、请求关联 ID、当前研究/尝试范围、模型配置和用量。未知来源编号、上一尝试的来源、模型提交的 URL 和缺失的 progress 都产生可审查的错误，不会发送 Fetch。需要新页面时先搜索登记；本版不支持模型任意指定 URL。编号校验能保证读的是所选记录，但不能保证模型选中了最相关来源。
-
-主模型公开 content 流式显示；完成事件覆盖同一请求卡片，避免重复，断流片段保留。每个有效搜索/阅读动作带必填 progress，表示模型公开的行动说明，不增加额外总结请求、不展示内部推理。最终参考来源列表由程序按正文引用编号和登记的原始标题/URL 生成。
-
-右键侧栏对话按钮可编辑名称或删除；支持键盘菜单键、Shift+F10、方向键和 Escape。删除保留确认，正在运行的研究须先停止。重命名只改变会话名称，不修改原始问题、历史请求或报告。
-
-
-### 同时研究多个对话与模型并发
-
-在“设置 → 模型供应商”的模型列表中，每个模型都有“模型并发数”（默认 1，可输入任意正整数，无人为档位上限）。它限制同一配置同时发出的模型 HTTP 请求，超额请求按先后排队。主模型和摘要模型若选用同一份配置，共享额度；不同配置分别计数。它不是研究迭代次数，也不会把单次研究的决策循环改成并行执行。Search / Fetch 不占模型请求额度。
-
-并发数保存后立即作用于运行中和排队中的请求；降低时不终止已发出的请求，等待它们完成后按新额度放行。其余模型参数与凭据仍使用每次研究启动时保存的快照。调试事件中的 `model_admitted.limit` 记录每次实际放行时的额度，排队与取消也有独立事件。排队不计入模型调用次数或 token 用量；重试等待不占额度。同一个服务进程负责调度，请保持默认单 worker 启动方式。
-
-一个对话研究时，可以点击“新的研究”发起另一对话，两者会同时推进；侧栏显示各对话最新任务状态和用时。切换或关闭浏览器页面不会取消后台研究，停止按钮只停止当前对话。同一对话内仍按顺序提问，以免追问历史混杂。关闭启动终端则退出整个应用并停止全部任务。
-
-每次研究显示开始时间、结束时间和时长，运行中每秒刷新用时。开始时间为服务接受该次研究的时间，时长包括模型排队、搜索、抓取、提取、重试和最终写作。正常完成、失败、取消、输出未完成均保存结束时间；刷新页面后可恢复。时间以浏览器本地时区显示。旧记录及异常退出后恢复为“已中断”的任务若没有可靠结束时间，显示“未记录”，不以重新启动的时间伪造结束时间。多次追问分别记录自己的时间。
-
-
-### 导出单次回答
-
-每次回答下方的“导出本次回答”按钮只下载该次已保存的 Markdown 回答正文及其引文，文件名包含研究 ID。不会附加用户问题、其他问答、研究过程、统计或未引用的发现来源。生成过程中暂不提供该按钮；停止或失败后若保存了部分正文，显示“导出已生成部分”，文件名带 `-partial`。页面顶部的导出按钮继续导出整个对话。
-
-供应商与模型管理、旧配置迁移和输入区角色选择见上文“设置主模型和摘要模型”。
-
-
-## Windows 与许可
-
-Windows x64 源码版安装 uv 后，可双击 `start.cmd` 启动并打开浏览器，使用 `stop.cmd` 停止。首次启动会安装项目内 Python 与锁定依赖。DSH 插件包内置运行环境，用户无需另装 Python 或 uv。
-
-Windows 与 macOS 的自动化验证见 GitHub Actions 的 **Platform verification** 工作流，涵盖源码测试、npm 安装、研究完成与保存、停用及宿主异常退出。桌面 DSH 界面验收另行记录。
-
-LucentThinker 整体按 **GPL-3.0-or-later** 发布，详见 `LICENSE`。第三方来源及声明见 `NOTICE` 和 `docs/licenses/`。
+[GPL-3.0-or-later](LICENSE). Attribution and third-party notices are in [NOTICE](NOTICE).
