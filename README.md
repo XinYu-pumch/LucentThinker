@@ -4,8 +4,9 @@
 
 A local personal research assistant powered by DeepSeek. It searches the web, reads sources and writes research reports with citations.
 
-- Choose your research depth and keep your research history locally.
-- Use your own API keys. The author reports runs costing as little as RMB 1, with a rough US-dollar budget of $0.20, depending on depth and provider pricing.
+- Higher research-quality scores than GPT Deep Research and paid MiroThinker in this benchmark.
+- Adjustable research depth, locally saved history.
+- Bring your own API keys. Author-reported costs start around RMB 1 per run, roughly US$0.20, depending on the task and provider pricing.
 
 ## Interface
 
