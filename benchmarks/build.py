@@ -1,6 +1,6 @@
 """Build the dated, offline-readable benchmark packages from checked-in inputs.
 
-Run with Python 3.12+, matplotlib and beautifulsoup4 installed.
+Run with Python 3.12+, matplotlib installed.
 Set BENCHMARK_CJK_FONT to a Chinese font file when building outside macOS.
 """
 
@@ -21,7 +21,6 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
-from bs4 import BeautifulSoup
 
 
 ROOT = Path(__file__).resolve().parent
@@ -137,60 +136,70 @@ def prepare_english(questions):
     return [replace(item) if item["id"] == 10 else item for item in questions]
 
 
-METHOD_EN = """# Evaluation method
+METHOD_EN = """# Scoring method
 
-## Sample and provenance
+Five research tasks cover energy, health, software, business and trade. The dataset contains one response per system for each task, using Q1–4 and Q10 from the question set.
 
-This author-organized review compares one saved answer per system and prompt. The English edition contains Q1–4 and Q10, five English prompts and 15 responses. The Chinese edition contains all ten prompts and 30 responses, including one same-topic Chinese/English pair. Grouping refers to prompt language. GPT's Q2 response is in Chinese and is preserved verbatim.
+| Dimension | Weight | What is assessed |
+| --- | --- | --- |
+| Requirement coverage | 20% | Completion of the question and its constraints |
+| Facts and calculations | 25% | Correct figures, definitions, dates and arithmetic |
+| Evidence and traceability | 20% | Identifiable sources that support the claims |
+| Reasoning and boundaries | 20% | Sound conclusions, alternatives and uncertainty |
+| Decision usefulness | 10% | Practical choices, calculations and decision criteria |
+| Organization and clarity | 5% | Clear, focused presentation |
 
-LucentThinker used deepseek-flash, MiroThinker used its paid deep mode, and GPT Deep Research used the web configuration reported by the author as gpt6pro + deepsearch. Model identity, search counts, runtime and comparable budgets cannot be independently established from the saved answers. This evaluates answer quality. Speed and cost were not measured in this benchmark.
+Dimensions use 0–5 in half-point steps. Total = Σ(dimension score ÷ 5 × weight). The chart averages the tasks equally, on a 0–100 scale. Scores range from missing or seriously flawed (0–1), through partial or needing substantial verification (2–3), to strong or comprehensive (4–5).
 
-Three Astra sub-reviewers handled Q1–4, Q5–8 and Q9–10. Reviewers knew system identities. GPT answers were initially reviewed, then calibrated against the previous LucentThinker/MiroThinker judgments and source material. The lead review checked selected high-impact calculations, source claims, quotations and line numbers. This was a non-blind LLM-assisted evaluation commissioned by LucentThinker's author, without an independent repeated rating of every answer.
+Astra reviewers assessed the complete responses, with spot checks of important claims and calculations. The evaluation was organized by LucentThinker's author and was non-blind. One response per task limits how far the findings generalize. Alternative weightings are provided in the report.
 
-LucentThinker/MiroThinker scores from 30 October 2026 were retained when GPT was added. The publication date is 2 November 2026. Question cutoffs are 29 October for Q1–8 and 30 October for Q9–10. Save dates do not change those cutoffs.
+LucentThinker used deepseek-flash, MiroThinker used paid deep mode, and GPT Deep Research used the author-reported gpt6pro + deepsearch configuration. Runtime and cost were not measured. The questions use information cutoffs of 29–30 October 2026.
 
-## Scoring
+GPT responses contain no source URLs. Identifiable papers, authors and years receive traceability credit. Confirmed errors and unverified claims are distinguished in the detailed assessments.
 
-| Dimension | Weight |
-| --- | --- |
-| Requirement coverage | 20% |
-| Facts and calculations | 25% |
-| Evidence and traceability | 20% |
-| Reasoning and boundaries | 20% |
-| Decision usefulness | 10% |
-| Organization and clarity | 5% |
-
-Each dimension uses 0–5 with half-point steps. Anchors are 0 missing or severely contrary to the task, 1 serious defects, 2 partial delivery with material gaps, 3 basically usable with major verification needed, 4 strong with localized issues, and 5 comprehensive and verifiable. Total = sum(dimension score / 5 × weight). The headline is the unweighted mean across the edition's prompts, on a 0–100 scale, rounded half-up to one decimal. It is an assessment score, not a percentage of correct answers.
-
-Factual mistakes primarily affect factual scoring and missing sources primarily affect evidence scoring. Independently missing calculations or deliverables also affect the relevant dimensions. Unverified claims remain distinguished from confirmed errors. Weight sensitivity is provided, including exclusion of evidence with the remaining dimensions renormalized.
-
-The author confirmed that GPT's original web answers also had no citations. Identifiable author/year or book references still received appropriate traceability credit. This limitation is reflected in the scores. All systems, including LucentThinker, have substantive weaknesses documented in the question-level review. The sample does not establish general performance across tasks or repeated runs.
-
-## Publication and audit
-
-Saved responses are copied byte-for-byte. SHA-256 hashes, original filenames, quotations and line numbers are retained in scores.json. English review prose is translated from the existing assessment. Original quotations stay unchanged, with translations alongside Chinese quotations. Q10's language-comparison commentary is omitted from the English edition while its factual findings and scores are preserved.
-
-One editorial correction fixes the direction of a repurchase-number error in Q4's LucentThinker factual rationale. The response used roughly $7 billion, while the cited review evidence gives $4.494 billion. The earlier rationale had these reversed. The public rationale now agrees with its evidence. All dimension scores are retained. The dated source directory preserves the pre-publication assessment.
-
-The HTML report works offline after extracting the package. Original response Markdown and external sources are linked from it. External source availability depends on the source website. Source checks include access limitations and unverified items. No new fact-checking or scoring was performed for this language split.
+[Questions](questions.md), [full scoring evidence](scores.json) and [file hashes](manifest.json) are included. Response files preserve the assessed text and line numbers. Open index.html to read the report offline.
 """
 
-METHOD_ZH = """# 测评与出版说明
+METHOD_ZH = """# 评分方法
 
-本版保留全部 10 个提问、30 份回答以及原报告的分组和同题中英分析。首页图表是十题等权平均，Q9/Q10 为同一主题的中英提问，因此十题涉及九个主题。英文版范围为 Q1–4、Q10。分组依据为提问语言，GPT 的 Q2 回答为中文，原文完整保留。
+十个研究任务覆盖能源、健康、软件、商业、职业、汽车、历史与贸易，共九个主题。其中 Q9/Q10 是同题中英提问。每系统每题各一份回答，共 30 份。
 
-本测评由 LucentThinker 作者组织，使用 Astra 子评审，评审知道系统身份，属于非盲评。每系统每题仅一份保存的回答。L/M 沿用 2026-10-30 最终评分，G 在此基础上新增初评与校准，未对全部回答进行独立重复打分。完整方法、六维准则、逐题依据、核查限制和权重敏感性见 index.html 及 review-rubric.txt。
+| 维度 | 权重 | 评价内容 |
+| --- | --- | --- |
+| 需求覆盖 | 20% | 是否完成子问并遵守情境与边界 |
+| 事实与数值 | 25% | 数字、定义、日期和计算是否正确 |
+| 证据与追溯 | 20% | 来源是否可定位并支持主张 |
+| 推理与边界 | 20% | 结论、替代解释与不确定性处理 |
+| 决策可用性 | 10% | 能否支持选择、复算和判断条件 |
+| 组织表达 | 5% | 结构清楚、重点集中 |
 
-六维权重为需求覆盖 20%、事实与数值 25%、证据与追溯 20%、推理与边界 20%、决策可用性 10%、组织表达 5%。每维 0–5 分，可使用半分。总分为各维分数除以 5 后乘权重之和。首页使用题目等权平均和四舍五入至一位小数。该分数是评审分，样本规模和单次运行限制应随图表一起展示。
+每维 0–5 分，可用半分。总分为各维分数除以 5 后乘权重之和。简图展示各题等权平均，满分 100。0–1 分表示缺失或严重缺陷，2–3 分表示部分完成或仍需重大补核，4–5 分表示较强或全面可复核。
 
-L 使用 deepseek-flash，M 使用付费 deep 模式，G 的 gpt6pro + deepsearch 标识由作者提供。缺少可比的运行日志、检索次数、耗时和预算。此测评未测量速度与费用。作者确认 GPT 网页版原回答也没有引用，正文可辨认的作者、论文和书目仍按追溯程度评分。所有系统的实质性问题均保留在报告中。
+Astra 评审完整阅读回答，并抽核重要事实与计算。测评由 LucentThinker 作者组织，评审知道系统身份，属于非盲评。每题仅一次回答，结论的适用范围受样本限制。报告附替代权重结果。
 
-回答文件按字节复制，scores.json 保留 SHA-256、原文件名、短引与行号。英文版翻译评审文字并附中文短引的英译，原始回答与引用保持原样。英文版移除同题语言效果分析，纳入 Q10 的事实评审。
+LucentThinker 使用 deepseek-flash，MiroThinker 使用付费 deep 模式，GPT Deep Research 的配置由作者标注为 gpt6pro + deepsearch。测评未测量速度和费用。问题的信息截止日期为 2026 年 10 月 29–30 日。
 
-出版时修正一处文字颠倒。Q4 的 LucentThinker 事实评分理由原将 Walmart FY25 回购金额的错误方向写反，现根据同一评审中的证据改为回答使用约 70 亿美元，而核查值为 44.94 亿美元。维度评分全部沿用。source 目录保留出版前评审记录。
+GPT 回答没有来源网址，正文可辨认的论文、作者和年份仍获得相应追溯分。详细评审区分已确认错误和未核实项目。
 
-解压后可离线打开 index.html，外部核查来源依赖网站可访问性。原始评审中未核实的项目继续标注为未核实。本次拆分未新增事实核查或重新评分。发布日期为 2026-11-02。
+[完整问题](questions.md)、[评分证据](scores.json)和[文件哈希](manifest.json)随报告提供。回答保留原文和行号。离线打开 index.html 即可浏览报告。
 """
+
+TASKS = {
+    1: ("Energy", "Home battery economics", "能源", "家庭电池经济性"),
+    2: ("Health", "Creatine and cognition", "健康", "肌酸与认知表现"),
+    3: ("Software", "B2B search architecture", "软件", "B2B 搜索架构"),
+    4: ("Business", "Costco vs. Walmart", "商业", "Costco 与 Walmart"),
+    5: ("Careers", "Job offers across three cities", "职业", "三城工作机会"),
+    6: ("Automotive", "Replacing a car in Shanghai", "汽车", "上海换购纯电车"),
+    7: ("Energy", "Perovskite commercialization", "能源", "钙钛矿商业化"),
+    8: ("History", "Zheng He and maritime trade", "历史", "郑和远航与海洋贸易"),
+    9: ("Trade", "EU tariffs and Chinese EVs", "贸易", "欧盟关税与中国电动车 · 中文提问"),
+    10: ("Trade", "EU tariffs and Chinese EVs", "贸易", "欧盟关税与中国电动车 · 英文提问"),
+}
+ZH_DIMENSIONS = dict(zip(DIMENSIONS, ["需求覆盖", "事实与数值", "证据与追溯", "推理与边界", "决策可用性", "组织表达"]))
+ZH_STATUS = dict(zip(STATUS, ["已确认错误", "内部矛盾", "证据缺口或错配", "未核实", "有支持", "有支持，存在限定"]))
+ZH_SCHEMES = ["标准权重", "剔除证据维度，其他维度归一", "六维等权", "更重事实与证据", "更重决策可用性"]
+UPDATED = "2026-11-03"
 
 
 def chart(folder, questions, language):
@@ -198,11 +207,11 @@ def chart(folder, questions, language):
     font = FontProperties(fname=os.environ.get("BENCHMARK_CJK_FONT", "/System/Library/Fonts/STHeiti Light.ttc"))
     if chinese and not Path(font.get_file()).exists():
         raise FileNotFoundError("Set BENCHMARK_CJK_FONT to an installed Chinese font file")
-    plt.rcParams.update({"font.family": "DejaVu Sans", "svg.fonttype": "path", "svg.hashsalt": "lucentthinker-2026-11-02"})
-    fig, ax = plt.subplots(figsize=(12.8, 5.6), dpi=150)
+    plt.rcParams.update({"font.family": "DejaVu Sans", "svg.fonttype": "path", "svg.hashsalt": "lucentthinker-benchmark"})
+    fig, ax = plt.subplots(figsize=(12.8, 5.1), dpi=150)
     fig.patch.set_facecolor("#f5f8fb")
     ax.set_facecolor("#f5f8fb")
-    fig.subplots_adjust(left=0.245, right=0.94, top=0.72, bottom=0.27)
+    fig.subplots_adjust(left=0.245, right=0.94, top=0.72, bottom=0.22)
     values = means(questions)
     for index, system in enumerate(SYSTEMS):
         ax.barh(index, values[system], height=0.52, color=COLORS[system], zorder=3)
@@ -215,134 +224,180 @@ def chart(folder, questions, language):
     ax.grid(axis="x", color="#dae1e8", zorder=0)
     for spine in ax.spines.values():
         spine.set_visible(False)
-    title = "研究质量测评 · 10 个提问" if chinese else "Research quality on 5 English prompts"
-    subtitle = "三系统 · 十题等权平均 · 满分 100" if chinese else "Three systems · mean weighted assessment score · out of 100"
-    fig.text(0.055, 0.89, title, fontsize=23, weight="bold", color="#142c42", fontproperties=font if chinese else None)
-    fig.text(0.055, 0.81, subtitle, fontsize=13, color="#46566b", fontproperties=font if chinese else None)
-    footer = ("作者组织的非盲评 · Astra 评审 · 每系统每题一份回答 · 六维加权\n"
-              "Q1–10，含一组同题中英提问；GPT Q2 回答为中文。\n"
-              "2026-11-02 · GPT 原网页版无引用，已计入证据维度。") if chinese else (
-              "Author-organized, non-blind Astra review · one answer per system/prompt · six dimensions\n"
-              "Q1–4 + Q10 · grouping by prompt language · GPT Q2 answered in Chinese\n"
-              "2026-11-02 · GPT web originals had no citations · reflected in evidence scoring")
-    fig.text(0.055, 0.06, footer, fontsize=10.5, linespacing=1.7, color="#46566b", fontproperties=font if chinese else None)
+    title = "跨领域研究质量测评" if chinese else "Research Quality Benchmark"
+    subtitle = "10 项任务 · 能源、健康、软件、商业、职业、汽车、历史与贸易" if chinese else "5 tasks across energy, health, software, business and trade"
+    fig.text(0.055, 0.89, title, fontsize=24, weight="bold", color="#142c42", fontproperties=font if chinese else None)
+    fig.text(0.055, 0.80, subtitle, fontsize=13, color="#46566b", fontproperties=font if chinese else None)
+    footer = ("平均分 / 100 · 六维加权 · 作者组织的 Astra 非盲评\n"
+              "每系统每题一份回答 · 2026-11-03") if chinese else (
+              "Mean score / 100 · six weighted dimensions · author-organized, non-blind Astra review\n"
+              "One response per system per task · 2026-11-03")
+    fig.text(0.055, 0.055, footer, fontsize=11, linespacing=1.7, color="#46566b", fontproperties=font if chinese else None)
     for extension in ("svg", "png"):
-        fig.savefig(folder / f"score.{extension}", dpi=150, metadata={"Date": "2026-11-02"} if extension == "svg" else None)
+        metadata = {"Date": UPDATED} if extension == "svg" else None
+        fig.savefig(folder / f"score.{extension}", dpi=150, metadata=metadata)
     plt.close(fig)
 
 
-STYLE = """body{margin:0;background:#f5f8fb;color:#203346;font:16px/1.65 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:24px}h1,h2,h3{line-height:1.25;color:#142c42}h1{font-size:32px}section,header{background:white;border:1px solid #dce4ec;border-radius:14px;padding:28px;margin:20px 0}a{color:#087786;overflow-wrap:anywhere}.chart{width:100%;height:auto;display:block}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;border-bottom:1px solid #dce4ec;padding:12px;vertical-align:top}blockquote{border-left:4px solid #adc5d8;margin:16px 0;padding:12px 18px;background:#f5f8fb;overflow-wrap:anywhere;white-space:pre-wrap}details{border-top:1px solid #dce4ec;margin-top:20px;padding-top:16px}summary{cursor:pointer;font-weight:700}small,.muted{color:#526477}.evidence{padding:14px 0;border-bottom:1px solid #e4e9ef}.notice{border-left:4px solid #c56a24;padding-left:16px}nav{display:flex;flex-wrap:wrap;gap:16px}.system-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.system-grid article{min-width:0}.system-grid h3{border-top:4px solid var(--color);padding-top:12px}@media(max-width:760px){main{padding:10px}section,header{padding:18px}.system-grid{grid-template-columns:1fr}h1{font-size:25px}}@media print{details{break-inside:auto}section{border:0}nav,button{display:none}}"""
+STYLE = """body{margin:0;background:#f5f8fb;color:#203346;font:16px/1.65 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:24px}h1,h2,h3{line-height:1.25;color:#142c42}h1{font-size:30px}section,header{background:white;border:1px solid #dce4ec;border-radius:14px;padding:28px;margin:20px 0}a{color:#087786;overflow-wrap:anywhere}.chart{width:100%;height:auto;display:block}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}th,td{text-align:left;border-bottom:1px solid #dce4ec;padding:12px;vertical-align:top}blockquote{border-left:4px solid #adc5d8;margin:16px 0;padding:12px 18px;background:#f5f8fb;overflow-wrap:anywhere;white-space:pre-wrap}details{border-top:1px solid #dce4ec;margin-top:16px;padding-top:16px}summary{cursor:pointer;font-weight:650}small,.muted{color:#526477}.evidence{padding:14px 0;border-bottom:1px solid #e4e9ef}nav{display:flex;flex-wrap:wrap;gap:16px}.system-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.system-grid article{min-width:0}.system-grid h3{border-top:4px solid var(--color);padding-top:12px}.score-line{font-weight:650}.question>summary{font-size:18px}.question>summary small{display:block;font-size:14px;font-weight:400;margin:8px 0}.method-line{font-size:14px}.summary-scores{display:flex;flex-wrap:wrap;gap:18px}.summary-scores span{white-space:nowrap}@media(min-width:761px){.score-line{display:none}}@media(max-width:760px){main{padding:10px}section,header{padding:18px}.system-grid{grid-template-columns:1fr}h1{font-size:25px}}@media print{details{break-inside:auto}section{border:0}nav,button{display:none}}"""
 
 
-def render_evidence(items):
+def render_evidence(items, chinese):
     parts = []
     for item in items:
-        translation = f'<p><em>English translation</em> {esc(item["quote_translation"])}</p>' if item.get("quote_translation") else ""
-        parts.append(f'<article class="evidence"><strong>{esc(SYSTEMS.get(item["system"], item["system"]))} · {esc(STATUS.get(item["status"], item["status"]))}</strong>'
+        translation = ""
+        if not chinese and item.get("quote_translation"):
+            translation = f'<p><em>Translation</em> {esc(item["quote_translation"])}</p>'
+        status = (ZH_STATUS if chinese else STATUS).get(item["status"], item["status"])
+        location = f'原文第 {item["line"]} 行' if chinese else f'Original response, line {item["line"]}'
+        parts.append(f'<article class="evidence"><strong>{esc(SYSTEMS.get(item["system"], item["system"]))} · {esc(status)}</strong>'
                      f'<blockquote>{esc(item["quote"])}</blockquote>{translation}<p>{esc(item["analysis"])}</p>'
-                     f'<a href="{esc(item["file"])}">Original response, line {item["line"]}</a></article>')
+                     f'<a href="{esc(item["file"])}">{location}</a></article>')
     return "".join(parts)
 
 
-def render_checks(items):
+def render_checks(items, chinese):
     rows = []
     for item in items:
         url = item.get("url", "")
         title = esc(item.get("source_title", "Source"))
         link = f'<a href="{esc(url)}">{title}</a>' if url.startswith(("http://", "https://", "responses/")) else title
-        rows.append([esc(item["claim"]), esc(STATUS.get(item["status"], item["status"])), esc(item["finding"]), link + f'<p>{esc(item.get("access_note", "Internal calculation or method check"))}</p>'])
-    return table(["Claim", "Status", "Finding", "Source and access limits"], rows)
+        status = (ZH_STATUS if chinese else STATUS).get(item["status"], item["status"])
+        rows.append([esc(item["claim"]), esc(status), esc(item["finding"]), link + f'<p>{esc(item.get("access_note", ""))}</p>'])
+    headers = ["核查对象", "状态", "结果", "来源与访问范围"] if chinese else ["Claim", "Status", "Finding", "Source and access limits"]
+    return table(headers, rows)
 
 
-def english_html(folder, data):
+def comparison_notes(question, chinese):
+    history_only = {"The previous L/M scores are retained in this round.", "本轮保留旧L/M分数。"}
+    edits = {
+        "原评审指出的": "",
+        "但原有乐观NPV引证问题未被本轮消除": "但乐观NPV的引证存在问题",
+        "L等待模型与M额度方案的原有缺陷仍保留，G更低分来自其自身新增的政策与交付缺陷。": "L的等待模型、M的额度方案和G的政策适用与交付内容均存在实质缺陷。",
+        "L十倍capex错误仍按原评保留，本轮未因G更弱而抬高L。": "L的十倍capex错误也计入事实评分。",
+        "G初评factual为1.5，抽核发现核心《明史》引句改变收益与成本关系后降为1。该调整来自新增直接反证。": "G对《明史》的核心引句改变了收益与成本关系，影响历史解释的可靠性。",
+        "与前轮L/M相比": "与L/M相比",
+        "前轮M": "M",
+        "三方仍为": "三方排序为",
+        "本轮未": "未",
+        "本轮没有重新验证": "未验证",
+        "本轮没有核验": "未核验",
+    }
+    notes = [question["three_way_verdict"], *question["decisive_differences"], *question["gpt_differences"],
+             *question["caveats"], *question["gpt_caveats"]]
+    rendered = []
+    for note in notes:
+        if note in history_only:
+            continue
+        for old, new in edits.items():
+            note = note.replace(old, new)
+        rendered.append(note)
+    heading = "比较结论与限制" if chinese else "Comparative findings and limitations"
+    return f'<details><summary>{heading}</summary>' + paragraphs(rendered[:1]) + bullets(rendered[1:]) + '</details>'
+
+
+def paired_section(questions):
+    by_id = {q["id"]: q for q in questions}
+    rows = []
+    for system, name in SYSTEMS.items():
+        zh_score = total(by_id[9], system)
+        en_score = total(by_id[10], system)
+        rows.append([name, rounded(zh_score), rounded(en_score), f'{en_score - zh_score:+.1f}'])
+    return ('<section><details id="paired"><summary>同题中英对照 · 欧盟关税与中国电动车</summary>'
+            + table(["系统", "中文提问", "英文提问", "英文 − 中文"], rows)
+            + bullets([
+                "LucentThinker 的英文回答更清楚地区分欧盟与欧洲、纯电与混动，并用 Model 3 / Model Y 对照约束关税归因。",
+                "MiroThinker 的英文回答对欧洲生产 Model 3 的前景更谨慎，但增加了车型归属、税率负担及引用错配问题。",
+                "GPT 的两版都缺少同口径的近期纯电车型实绩。英文版补充部分真实销量，价格传导结论却伴随重复计算 VAT 等错误。",
+                "LucentThinker 与 MiroThinker 的分差为中文 26.5、英文 26.0，基本接近。LucentThinker 与 GPT 的分差由 42.0 增至 46.0，MiroThinker 与 GPT 由 15.5 增至 20.0。",
+            ])
+            + '<p class="muted">每种语言仅一次回答，这些分差描述样本中的变化。Q9/Q10 的详细评审提供具体依据。</p></details></section>')
+
+
+def report_html(folder, data, chinese):
     questions = data["questions"]
-    parts = ['<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
-             f'<title>LucentThinker research benchmark · English prompts</title><style>{STYLE}</style><body><main>',
-             '<header><a href="score.svg"><img class="chart" src="score.svg" alt="Mean scores out of 100. LucentThinker 76.7, MiroThinker 49.1, GPT Deep Research 38.4."></a><p>Mean scores out of 100 · <strong>LucentThinker 76.7 · MiroThinker 49.1 · GPT Deep Research 38.4</strong></p>',
-             '<h1>English-prompt research benchmark</h1><p>15 saved answers · Q1–4 and Q10 · published 2 November 2026</p>',
-             '<nav><a href="#method">Method</a><a href="#scores">Scores</a><a href="#sensitivity">Weight sensitivity</a><a href="questions.md">Full prompts</a><a href="scores.json">Scores and evidence JSON</a></nav></header>',
-             '<section><h2>Results in this sample</h2><p>LucentThinker received the highest weighted score on each of these five English prompts. Its reports more often deliver concrete calculations, usable decision criteria and traceable sources. All three systems have material errors or omissions, recorded below.</p>',
-             '<p class="notice">This is an author-organized, non-blind Astra review of one saved answer per system and prompt. GPT’s Q2 answer is in Chinese. The author confirmed that GPT’s web originals also had no citations. Scores describe this sample and the stated rubric.</p></section>',
-             '<section id="method"><h2>Evaluation method</h2>',
-             '<p>LucentThinker used deepseek-flash, MiroThinker used paid deep mode, and GPT Deep Research used the author-reported web configuration gpt6pro + deepsearch. Runtime, search counts and comparable budgets are unavailable. Speed and cost were not measured.</p>',
-             '<p>Astra sub-reviewers evaluated the saved responses, with lead-review spot checks of high-impact claims, arithmetic and quote locations. LucentThinker/MiroThinker scores from 30 October were retained when GPT was added. The original reviewers knew system identities. The English publication translates their review and retains all dimension scores.</p>',
-             table(["Dimension", "Weight"], [[label, f"{weight}%"] for label, weight in DIMENSIONS.values()]),
-             '<p>Dimensions use 0–5 in half-point steps. Total = Σ(score ÷ 5 × weight). Anchors range from missing or severely contrary (0), serious defects (1), partial delivery with material gaps (2), basically usable with major verification needed (3), strong with localized issues (4), to comprehensive and verifiable (5). The headline averages prompts equally. Unverified findings retain that status.</p>',
-             '<p>Q1–4 use a 29 October 2026 cutoff and Q10 uses 30 October. The English scope is selected by prompt language. Identifiable author/year or book references in GPT answers still receive traceability credit. <a href="methodology.md">Full method, limitations and publication corrections</a></p></section>',
-             '<section id="scores"><h2>Question-level scores</h2>',
-             table(["Prompt", *SYSTEMS.values()], [[f'<a href="#q{q["id"]}">Q{q["id"]} · {esc(q["title"])}</a>', *[rounded(total(q, system)) for system in SYSTEMS]] for q in questions]), '</section>',
-             '<section id="sensitivity"><h2>Weight sensitivity</h2><p>Mean scores for the same five prompts under alternative weights. The system ordering is retained when evidence is excluded.</p>',
-             table(["Weights", *SYSTEMS.values()], [[esc(label), *[rounded(value) for value in means(questions, weights).values()]] for label, weights in SCHEMES.items()]),
-             '<p>These are alternative weighted summaries of the same ratings. In Q4, GPT identifies Walmart’s prior-year one-off charges more accurately than MiroThinker. After excluding evidence, Q4 totals are 38.1 for GPT and 40.0 for MiroThinker, so their relative quality on specific points requires reading the findings.</p></section>']
+    title = "跨领域研究质量测评" if chinese else "Research Quality Benchmark"
+    summary_scores = " · ".join(f'{name} {rounded(data["mean_scores"][system])}' for system, name in SYSTEMS.items())
+    method_note = "满分 100 · 作者组织的 Astra 非盲评 · 每系统每题一份回答" if chinese else "Out of 100 · author-organized, non-blind Astra review · one response per system per task"
+    labels = (["任务与评分", "评分标准", "逐题评审", "完整问题", "评分数据"] if chinese else
+              ["Tasks and scores", "Scoring", "Assessments", "Full questions", "Score data"])
+    parts = [f'<!doctype html><html lang="{"zh-CN" if chinese else "en"}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><style>{STYLE}</style><body><main>',
+             f'<header><a href="score.svg"><img class="chart" src="score.svg" alt="{esc(summary_scores)}"></a>',
+             f'<p class="score-line">{esc(summary_scores)}</p>',
+             f'<nav><a href="#tasks">{labels[0]}</a><a href="#method">{labels[1]}</a><a href="#assessments">{labels[2]}</a><a href="questions.md">{labels[3]}</a><a href="scores.json">{labels[4]}</a></nav></header>',
+             f'<section id="tasks"><h1>{labels[0]}</h1>']
+    rows = []
+    for q in questions:
+        domain, name = TASKS[q["id"]][2:] if chinese else TASKS[q["id"]][:2]
+        rows.append([domain, f'<a href="#q{q["id"]}">{esc(name)}</a>', *[rounded(total(q, s)) for s in SYSTEMS]])
+    parts += [table(["领域" if chinese else "Domain", "任务" if chinese else "Task", *SYSTEMS.values()], rows), '</section>',
+              f'<section id="method"><h2>{labels[1]}</h2>']
+    dimensions = [f'{ZH_DIMENSIONS[key] if chinese else label} {weight}%' for key, (label, weight) in DIMENSIONS.items()]
+    parts.append(f'<p>{" · ".join(dimensions)}</p>')
+    method = ("每维按 0–5 分评价，按权重换算为百分制，再对任务取平均。评审完整阅读回答并抽核关键事实与计算。" if chinese else
+              "Each dimension is rated 0–5, weighted to a total out of 100, then averaged across tasks. Reviewers read each response and spot-check key claims and calculations.")
+    parts += [f'<p>{method} <a href="methodology.md">{"完整方法与限制" if chinese else "Method and limitations"}</a></p>',
+              f'<p class="method-line muted">{method_note}</p><details id="sensitivity"><summary>{"不同权重下的结果" if chinese else "Results under alternative weights"}</summary>']
+    rows = []
+    for index, (scheme, weights) in enumerate(SCHEMES.items()):
+        label = ZH_SCHEMES[index] if chinese else scheme
+        rows.append([label, *[rounded(value) for value in means(questions, weights).values()]])
+    parts += [table(["权重" if chinese else "Weights", *SYSTEMS.values()], rows), '</details></section>']
+    if chinese:
+        parts.append('<section><details id="groups"><summary>按提问语言分组</summary>')
+        rows = []
+        for label, ids in [("英文提问 Q1–4", [1, 2, 3, 4]), ("中文提问 Q5–8", [5, 6, 7, 8])]:
+            values = means([q for q in questions if q["id"] in ids])
+            rows.append([label, *[rounded(value) for value in values.values()]])
+        parts += [table(["问题组", *SYSTEMS.values()], rows), '<p class="muted">两组主题不同，组间分差同时受到题目内容影响。同题比较见下方 Q9/Q10。</p></details></section>', paired_section(questions)]
+    parts.append(f'<section id="assessments"><h2>{labels[2]}</h2>')
     for question in questions:
         qid = question["id"]
-        parts += [f'<section id="q{qid}"><h2>Q{qid} · {esc(question["title"])}</h2>',
-                  f'<p>{esc(question["three_way_verdict"])}</p>', '<div class="system-grid">']
+        domain, name = TASKS[qid][2:] if chinese else TASKS[qid][:2]
+        parts += [f'<details class="question" id="q{qid}"><summary>{esc(domain)} · {esc(name)}</summary>',
+                  '<div class="system-grid">']
         for system, name in SYSTEMS.items():
             review = question[system]
             response = next(i["file"] for i in data["inventory"] if i["id"] == qid and i["system"] == system)
-            confidence = {"中": "medium", "高": "high", "低": "low"}.get(review.get("confidence"), review.get("confidence", "unspecified"))
             parts += [f'<article style="--color:{COLORS[system]}"><h3>{name} · {rounded(total(question, system))}</h3>',
-                      f'<p><a href="{response}">Read original response</a> · review confidence {esc(confidence)}</p>',
-                      '<h4>Strengths</h4>', bullets(review["strengths"]), '<h4>Weaknesses</h4>', bullets(review["weaknesses"]), '</article>']
-        parts += ['</div><h3>Dimension ratings and reasons</h3>',
-                  table(["Dimension", *SYSTEMS.values()], [[esc(label), *[f'<strong>{question[s]["scores"][key]}/5</strong><p>{esc(question[s]["rationales"][key])}</p>' for s in SYSTEMS]] for key, (label, _) in DIMENSIONS.items()]),
-                  '<h3>Decisive differences</h3>', bullets(question["decisive_differences"] + question["gpt_differences"]),
-                  '<h3>Assessment limits</h3>', bullets(question["caveats"] + question["gpt_caveats"]),
-                  '<details><summary>Original LucentThinker / MiroThinker comparison</summary>', paragraphs([question["verdict"]]), '</details>',
-                  '<details open><summary>Quoted evidence and exact source locations</summary>', render_evidence(question["evidence"] + question["gpt_evidence"]), '</details>',
-                  '<details><summary>External spot checks and internal calculations</summary>', render_checks(question["checks"] + question["gpt_checks"]), '</details></section>']
-    parts += ['<footer><p>Response files are byte-identical to the assessed Markdown. SHA-256 hashes and all quote locations are in <a href="scores.json">scores.json</a>. <a href="README.md">Package guide</a></p></footer>',
-              '</main><script>let states=[];window.addEventListener("beforeprint",()=>{states=[...document.querySelectorAll("details")].map(x=>[x,x.open]);states.forEach(([x])=>x.open=true)});window.addEventListener("afterprint",()=>states.forEach(([x,state])=>x.open=state));</script></body></html>']
+                      f'<a href="{response}">{"完整回答" if chinese else "Full response"}</a>',
+                      f'<h4>{"有效之处" if chinese else "Strengths"}</h4>', bullets(review["strengths"]),
+                      f'<h4>{"主要局限" if chinese else "Weaknesses"}</h4>', bullets(review["weaknesses"]), '</article>']
+        parts += ['</div>', comparison_notes(question, chinese)]
+        parts.append(f'<details><summary>{"六维评分与理由" if chinese else "Dimension ratings and reasons"}</summary>')
+        rows = []
+        for key, (label, _) in DIMENSIONS.items():
+            label = ZH_DIMENSIONS[key] if chinese else label
+            rows.append([label, *[f'<strong>{question[s]["scores"][key]}/5</strong><p>{esc(question[s]["rationales"][key])}</p>' for s in SYSTEMS]])
+        parts += [table(["维度" if chinese else "Dimension", *SYSTEMS.values()], rows), '</details>',
+                  f'<details><summary>{"原文证据" if chinese else "Quoted evidence"}</summary>', render_evidence(question["evidence"] + question["gpt_evidence"], chinese), '</details>',
+                  f'<details><summary>{"事实与计算核查" if chinese else "Fact and calculation checks"}</summary>', render_checks(question["checks"] + question["gpt_checks"], chinese), '</details></details>']
+    parts += ['</section>', f'<footer><p>{UPDATED} · <a href="README.md">{"文件与下载说明" if chinese else "Dataset guide"}</a> · <a href="scores.json">{"完整评分记录" if chinese else "Full assessment records"}</a></p></footer>',
+              '</main><script>function reveal(){const target=document.getElementById(location.hash.slice(1));if(target?.tagName==="DETAILS")target.open=true}window.addEventListener("hashchange",reveal);reveal();let states=[];window.addEventListener("beforeprint",()=>{states=[...document.querySelectorAll("details")].map(x=>[x,x.open]);states.forEach(([x])=>x.open=true)});window.addEventListener("afterprint",()=>states.forEach(([x,state])=>x.open=state));</script></body></html>']
     (folder / "index.html").write_text("".join(parts))
-
-
-def chinese_html(folder):
-    soup = BeautifulSoup((SOURCE / "chinese-report.html").read_text(), "html.parser")
-    for question in read_json(folder / "scores.json")["questions"]:
-        local_checks = {item["claim"]: item for item in question["checks"] + question["gpt_checks"]
-                        if not item.get("url", "").startswith(("http://", "https://"))}
-        for row in soup.select(f'#q{question["id"]} table.checks tbody tr'):
-            cells = row.find_all("td", recursive=False)
-            item = local_checks.get(cells[0].get_text())
-            if item:
-                url = item.get("url", "")
-                locator = soup.new_tag("a", href=url) if url.startswith("responses/") else soup.new_tag("span")
-                locator.string = item.get("source_title", "内部核查")
-                cells[-1].insert(0, locator)
-    chart_section = BeautifulSoup('<section class="section" id="benchmark"><a href="score.svg"><img src="score.svg" alt="十题平均分，满分100。LucentThinker 75.9，MiroThinker 47.2，GPT Deep Research 33.5。" style="width:100%;height:auto;display:block"></a><p>满分 100 · <strong>LucentThinker 75.9 · MiroThinker 47.2 · GPT Deep Research 33.5</strong></p><p class="small muted">本图采用全部十题的默认权重平均，Q9/Q10 为同一主题的中英提问。下方分组表及权重切换保留原报告口径。首页图表固定采用默认权重。</p></section>', "html.parser")
-    soup.main.insert(0, chart_section.section)
-    nav_link = soup.new_tag("a", href="#benchmark")
-    nav_link.string = "00 · 评分简图"
-    soup.nav.insert(0, nav_link)
-    old = "FY25回购约70亿错为44.94亿"
-    for node in soup.find_all(string=lambda s: s and old in s):
-        node.replace_with(node.replace(old, "FY25回购误用约70亿而核查值为44.94亿"))
-    note = soup.new_tag("p", attrs={"class": "small muted"})
-    note.string = "出版说明：Q4 的 L 事实理由中回购错误方向已依据同一评审的证据修正，评分全部沿用。评审由 LucentThinker 作者组织，属于非盲评。详见方法与出版说明。"
-    soup.select_one("#method").append(note)
-    (folder / "index.html").write_text(str(soup))
 
 
 def package_readme(folder, data, language):
     chinese = language == "zh"
-    title = "三系统研究质量测评" if chinese else "Research quality benchmark"
-    intro = "全部十题，30 份回答，包含同题中英对照。" if chinese else "Five English prompts (Q1–4 and Q10), 15 saved responses."
-    links = ("[完整 HTML 报告](index.html) · [测评问题](questions.md) · [方法与限制](methodology.md) · [评分及证据](scores.json)" if chinese else
-             "[Full HTML report](index.html) · [Prompts](questions.md) · [Method and limitations](methodology.md) · [Scores and evidence](scores.json)")
-    note = ("GitHub 文件页显示 HTML 源码。下载本目录对应 ZIP 并解压，打开 index.html 即可浏览完整报告。Pages 部署说明见上级 benchmark 入口。" if chinese else
-            "GitHub's file viewer shows HTML source. Download and extract this edition's ZIP, then open index.html for the complete report. See the benchmark landing page for Pages deployment instructions.")
+    title = "跨领域研究质量测评" if chinese else "Research Quality Benchmark"
+    intro = ("十项任务覆盖能源、健康、软件、商业、职业、汽车、历史与贸易，包含九个主题和一组同题中英对照。" if chinese else
+             "Five tasks across energy, health, software, business and trade.")
+    links = ("[完整报告](index.html) · [完整问题](questions.md) · [评分方法](methodology.md) · [评分与证据](scores.json)" if chinese else
+             "[Full report](index.html) · [Questions](questions.md) · [Scoring method](methodology.md) · [Scores and evidence](scores.json)")
+    note = ("离线阅读请下载上级目录对应 ZIP，解压后打开 index.html。" if chinese else
+            "For offline reading, download this edition's ZIP from the parent directory, extract it and open index.html.")
     text = f"# {title}\n\n![{title}](score.png)\n\n{intro}\n\n{links}\n\n{note}\n\n"
-    text += ("作者组织的非盲 Astra 评审，每系统每题一份回答。GPT 网页原回答也没有引用，Q2 回答为中文。分数仅描述本组样本。\n\n" if chinese else
-             "Author-organized, non-blind Astra review, one answer per system and prompt. GPT's web originals had no citations, and its Q2 answer is in Chinese. Scores describe this sample.\n\n")
-    text += "| Prompt | LucentThinker | MiroThinker | GPT Deep Research |\n| --- | --- | --- | --- |\n"
+    text += ("作者组织的 Astra 非盲评，每系统每题一份回答。\n\n" if chinese else
+             "Author-organized, non-blind Astra review, one response per system per task.\n\n")
+    text += f'| {"任务" if chinese else "Task"} | LucentThinker | MiroThinker | GPT Deep Research |\n| --- | --- | --- | --- |\n'
     for q in data["questions"]:
         cells = []
         for system in SYSTEMS:
             item = next(i for i in data["inventory"] if i["id"] == q["id"] and i["system"] == system)
             cells.append(f'[{rounded(total(q, system))}]({item["file"]})')
-        text += f'| Q{q["id"]} · {q["title"]} | ' + " | ".join(cells) + " |\n"
-    text += "\n[PNG](score.png) · [SVG](score.svg) · [SHA-256 manifest](manifest.json)\n"
+        name = TASKS[q["id"]][3 if chinese else 1]
+        text += f'| {name} | ' + " | ".join(cells) + " |\n"
+    text += "\n[PNG](score.png) · [SVG](score.svg) · [SHA-256](manifest.json)\n"
     (folder / "README.md").write_text(text)
 
 
@@ -367,8 +422,8 @@ def main():
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(origin, destination)
         data = {
-            "date": "2026-11-02", "edition": language, "question_ids": ids,
-            "scope": "Five English prompts" if language == "en" else "全部十题，含同题中英提问",
+            "date": UPDATED, "edition": language, "question_ids": ids,
+            "scope": "Five tasks across energy, health, software, business and trade" if language == "en" else "跨领域十项任务，含同题中英对照",
             "rubric": {key: {"label": label if language == "en" else original["rubric"][key]["label"], "weight": weight} for key, (label, weight) in DIMENSIONS.items()},
             "methodology": "methodology.md", "mean_scores": means(questions),
             "weight_sensitivity": {label: means(questions, weights) for label, weights in SCHEMES.items()},
@@ -378,12 +433,7 @@ def main():
         (folder / "questions.md").write_text("\n".join(prompts[qid] for qid in ids))
         (folder / "methodology.md").write_text(METHOD_EN if language == "en" else METHOD_ZH)
         chart(folder, questions, language)
-        if language == "en":
-            english_html(folder, data)
-        else:
-            for name in ("calibration.json", "review-rubric.txt"):
-                shutil.copyfile(SOURCE / name, folder / name)
-            chinese_html(folder)
+        report_html(folder, data, language == "zh")
         package_readme(folder, data, language)
         manifest = {str(file.relative_to(folder)): hashlib.sha256(file.read_bytes()).hexdigest()
                     for file in sorted(folder.rglob("*")) if file.is_file() and file.name != "manifest.json"}
@@ -392,7 +442,7 @@ def main():
         with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as bundle:
             for file in sorted(folder.rglob("*")):
                 if file.is_file():
-                    info = zipfile.ZipInfo(f"{language}/{file.relative_to(folder)}", date_time=(2026, 11, 2, 0, 0, 0))
+                    info = zipfile.ZipInfo(f"{language}/{file.relative_to(folder)}", date_time=(2026, 11, 3, 0, 0, 0))
                     info.compress_type = zipfile.ZIP_DEFLATED
                     info.external_attr = 0o644 << 16
                     bundle.writestr(info, file.read_bytes())

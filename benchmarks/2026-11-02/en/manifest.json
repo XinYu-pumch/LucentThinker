@@ -1,10 +1,10 @@
 {
-  "README.md": "1ce3258fa9d1a972d41a3ad2774b7b50f310dfe62930fcc15e9889d03483a296",
-  "index.html": "23413b2a08ddcff6c699db42db2bcbe1c4fc64136a4d2abfda542511a090d7f4",
-  "methodology.md": "74996bf11f067dbfecf1ab9816f866e6aeef13a5ffcc1ab945cfa161cf11b394",
+  "README.md": "762b99a6a6d9fd88b3c3c534d94a37ad92bc9f72d1b0012201c0ec9dd9f7bcae",
+  "index.html": "c04e260155efa62f3ba6812c40840650bc42ee0e37c25fe52eef992d2e6db133",
+  "methodology.md": "4873acfdd2f71365fbfb634cb45d87c601c9f61c5d31ab682546144d498d6fec",
   "questions.md": "b57a81fb68e70c14c039c90fb3010ef39e37c7192eff9bd3bccb0e956cdd64a9",
   "responses/gpt-deepresearch/q01.md": "8d78141690d52f6f05c046be3aa1f3e278ffb8dff91e3b4f5fe5e8c47a2c4cb0",
-  "responses/gpt-deepresearch/q02.md": "38242cf659bacda14995f8e0afe485af3ca77f465eb9c176a626c786a46ff657",
+  "responses/gpt-deepresearch/q02.md": "76b4115512084f9d231948a9f0e34960b1c8e929bd6de77f3c09b3e568c79086",
   "responses/gpt-deepresearch/q03.md": "d4f9ff210d6bf15223ad10510c8abd8345416d777afd958ac752f0c92d7676ba",
   "responses/gpt-deepresearch/q04.md": "c71a761f2fa0d7224a387482186a56b1614df61544d542f97ac2b4e323470333",
   "responses/gpt-deepresearch/q10.md": "dffbae30475234b66d86aef69d6c5101a7ae0adac796179ac220a910c212b2c9",
@@ -18,7 +18,7 @@
   "responses/mirothinker/q03.md": "8709cb703c29bfc097a030c6e3c15f38e51e00b2a32b023921466c23e89fa5c8",
   "responses/mirothinker/q04.md": "8da29f7d76752f24d439b299e9bfbe292b0065fd743e615c509cb38753a8c4f2",
   "responses/mirothinker/q10.md": "0a665bb9bd57d70f991362a5eeb3bc916cc89f87b0dd6e097b1541df89cab25b",
-  "score.png": "af73fdb4351a9a68f5d46a0df93b8b819f9c29a9038d97219d4135ed329040ac",
-  "score.svg": "4f5cade1b5f89104baaf124f0849fbca2989702fdf6612e54b2b4fcb05c45ab7",
-  "scores.json": "fe24dea9d177d311891adc1533fd2b1bb8112d300eff7882a508ad499b157295"
+  "score.png": "47bfb6602ab0211e105e696e48d683c5616ac8b0e7f2e7d830fd1a8cf897bdfd",
+  "score.svg": "38e777bab056cfa92eba548a9ce932839447a3172b7afaa437923fd319ec865e",
+  "scores.json": "8c04b2277ca41740469281bb50703dfcb0b7a1a954041afbc78d6489ebb3f6d6"
 }

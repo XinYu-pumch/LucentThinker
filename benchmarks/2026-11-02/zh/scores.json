@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-02",
+  "date": "2026-11-03",
   "edition": "zh",
   "question_ids": [
     1,
@@ -13,7 +13,7 @@
     9,
     10
   ],
-  "scope": "全部十题，含同题中英提问",
+  "scope": "跨领域十项任务，含同题中英对照",
   "rubric": {
     "coverage": {
       "label": "需求覆盖",
@@ -44,33 +44,33 @@
   "mean_scores": {
     "L": 75.85,
     "M": 47.15,
-    "G": 33.5
+    "G": 34.0
   },
   "weight_sensitivity": {
     "Original weights": {
       "L": 75.85,
       "M": 47.15,
-      "G": 33.5
+      "G": 34.0
     },
     "Evidence excluded, others normalized": {
       "L": 76.5625,
       "M": 51.4375,
-      "G": 37.125
+      "G": 37.75
     },
     "Equal weights": {
       "L": 77.66666666666667,
       "M": 49.333333333333336,
-      "G": 37.333333333333336
+      "G": 37.833333333333336
     },
     "More weight on facts and evidence": {
       "L": 74.55,
       "M": 43.95,
-      "G": 30.5
+      "G": 31.0
     },
     "More weight on decision usefulness": {
       "L": 76.8,
       "M": 48.7,
-      "G": 35.3
+      "G": 35.75
     }
   },
   "questions": [
@@ -610,43 +610,45 @@
       "G": {
         "scores": {
           "coverage": 3,
-          "factual": 2,
+          "factual": 2.5,
           "evidence": 2,
-          "reasoning": 2,
+          "reasoning": 2.5,
           "actionability": 2.5,
-          "clarity": 3.5
+          "clarity": 4
         },
         "rationales": {
-          "coverage": "覆盖RCT、年龄、素食、缺眠、剂量、安全和实用建议，但荟萃分析没有具体研究识别、合并效应和偏倚讨论，缺用户特别要求的大样本素食亚组反证。",
-          "factual": "最大RCT的123人、5g/日6周和主要p值基本正确。Benton被误写5g/日，原文为20g/日。睡眠研究样本和统计报告也误述，所谓没有p值/具体效果与公开原文冲突。",
-          "evidence": "作者年份、试验设计和期刊可让读者定位多项研究，故高于仅泛称Sources的其余G报告。但没有完整书目/链接，荟萃和临床网站论断模糊，2026新闻研究身份不清。",
-          "reasoning": "能对比早期大效应与后续微小效应，但忽略最大RCT无素食优势，仍推导素食者最具针对性。把极端实验缺眠与偶尔少睡联系过强，用肌肉储备改善支撑脑力建议存在目标错位。",
-          "actionability": "常规3–5g可选试用、肾病咨询和睡眠提醒相对温和，较M直接建议急性14g更克制。但追求快效可加载20g的表述未说明认知证据不足，主观试用缺控制期待/练习效应。",
-          "clarity": "摘要和试验表易读，篇幅集中。中英术语和“缓冲期（loading）”“跨内试验”等用词欠准确，统计未报与自身缺信息没有分清。"
+          "coverage": "覆盖年龄、素食、缺眠、荟萃、日常意义、剂量与安全，也给出具体合并效应。但没有讨论123人Sandkühler试验、其素食亚组反证及荟萃统计校正，未充分比较与用户最相关的随机证据。",
+          "factual": "Rae的45人、5g/日6周与显著性、Avgerinos综述规模和Prokopidis原始效应量基本准确。2024缺眠试验剂量应为0.35g/kg，报告写约0.3g/kg。把素食者脑肌酸较低当作已知事实缺乏直接支持，合并SMD也不能直接给出多记几个项目。",
+          "evidence": "作者年份、样本和效应量可定位多项文献，获得一定追溯分。但没有URL、DOI或完整书目，部分2024综述身份不清，安全性没有对应具体来源，且未交代作为主要依据的Prokopidis结果后续校正。",
+          "reasoning": "能区分小样本实验、严重缺眠和日常工作，并明确现实获益不确定。但用11–31岁亚组直接推断38岁用户，膳食摄入低被连到脑储备低，且没有解释较大直接试验与早期素食阳性试验的冲突。",
+          "actionability": "可选5g/日、温和预期和肾病先咨询的建议基本可用，未像M给出缺眠早晨14g急救协议。但把肌肉研究的15–20g加载作为认知试用的合理路径，缺少相应效果依据，也未给评估期限、停止条件或控制主观期待的方法。",
+          "clarity": "分组、剂量、安全和结论清晰，篇幅集中。效应大小部分反复用不具测量依据的生活例子解释SMD，容易让读者误当作观察到的实际收益。"
         },
         "strengths": [
-          "准确呈现最大RCT主要p值，并指出认知效益不宜期待过大。",
-          "给出作者年份和样本/剂量表，仍有一定回溯能力。",
-          "建议以常规日剂量为主，未照M的方式给缺眠早晨大剂量急救方案。"
+          "给出具体综述、早期随机试验和合并效应，主要历史数值可追溯。",
+          "明确严重缺眠试验小而短、单次剂量高，并承认实验收益未必转成工作表现。",
+          "结论克制，列出水潴留、胃肠反应与肾病咨询，未保证个人获益。"
         ],
         "weaknesses": [
-          "Benton剂量错报，已公开睡眠试验统计被说成未公开。",
-          "没有展示具体荟萃分析及其方法争议。",
-          "素食者更获益与偶尔短睡适用性被过度推断。"
+          "遗漏与用户高度相关的123人随机试验及其无素食优势结果。",
+          "主要依赖未校正的荟萃结果，未说明重复计数争议与校正后总体显著性变化。",
+          "脑肌酸较低的确定性前提、年龄外推和SMD生活化换算缺乏支持，缺眠试验剂量也不准确。",
+          "认知试用的加载建议借自肌肉研究，缺可评估的试用方案。"
         ],
         "confidence": "中高",
-        "weighted_score": 46.5
+        "weighted_score": 51.5
       },
-      "three_way_verdict": "G概括了早期小样本与较大试验的差异，安全和日常意义也有涉及，但未实质比较具体荟萃分析，误报Benton剂量，并称睡眠试验未公开统计量。L对试验、亚组与外推边界更细，仍保留原有Xu终点误读扣分。M也有来源错配和高剂量建议问题，但对无素食优势的反证、荟萃争议及监管判断覆盖较G完整。G中文作答作为输出特征记录，未因语言本身扣分。",
+      "three_way_verdict": "L对直接试验、亚组反证与实际适用性处理最完整，原有Xu终点误读仍保留。G能清楚介绍具体荟萃结果和严重缺眠研究，但遗漏123人随机试验及统计校正，素食者脑储备与日常收益推断过强。M覆盖更广但有来源错配和高剂量外推。M与G总分接近，G建议较克制、表达更清楚，不能据小分差判断M各方面均优于G。",
       "gpt_differences": [
-        "G能复述部分研究，但没有L/M那样展开具体荟萃研究争议，重要亚组反证也遗漏。",
-        "G对常规试用的建议较M急性大剂量方案克制，不过仍未严谨区分肌肉加载和认知效果。",
-        "L整体最可复核，原评审已发现的Xu终点错误依然有效，三方均不可按结论语气替代原文核查。"
+        "L/M均讨论较大试验和无素食优势，G以早期Rae试验及旧综述为主，未提供相同深度的直接对照。",
+        "G有具体荟萃数值，但没有L/M对统计方法争议的讨论。L对Xu评分和时间终点的误读也必须保留。",
+        "G明确现实工作获益不确定，较L部分绝对否定措辞审慎；其可选日剂量也较M缺眠急救方案克制，但加载建议仍超出直接认知证据。",
+        "默认权重下M53.5、G51.5；剔除证据维度并归一后M56.875、G54.375，两者仍接近且各有实质缺口。"
       ],
       "gpt_caveats": [
-        "英文输入中文输出未作为单独扣分理由。",
-        "未核实的2026报道发表状态保持待核。",
-        "小效应、统计不显著与日常感知是不同问题，不能相互直接替代。"
+        "评审只依据交付文本与可核查来源，不推断是否进行过检索。作者年份提供有限追溯能力，无链接不等于所有内容无来源。",
+        "Prokopidis作者回复全文未能打开；校正方向由已读取的2026方法评论支持，精确校正值仅见出版社检索摘要，未作为独立确认错误依据。",
+        "单个脑区MRS结果不能证明所有素食者全脑储备相同；小型短睡阴性试验也不能排除小效应。这里批评的是确定性和外推，未断言肌酸对任何个人都无效。"
       ],
       "gpt_evidence": [
         {
@@ -654,128 +656,218 @@
           "dimension": "factual",
           "status": "supported",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 12,
-          "quote": "p=0.064，部分η²≈0.029",
-          "analysis": "与原始123人试验的BDS结果对应，对主要试验的方向概括基本可靠。"
+          "line": 6,
+          "quote": "six randomized trials (281 people)",
+          "analysis": "Avgerinos原始摘要确认六项试验、281人，支持其对综述规模和有限认知信号的基本概括。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 6,
+          "quote": "SMD≈0.29; 95% CI 0.04–0.53",
+          "analysis": "与Prokopidis原始摘要一致。该数值是原始分析结果，不能替代后续校正及方法限制。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 14,
+          "quote": "45 healthy vegetarian adults",
+          "analysis": "Rae原始摘要支持45名素食者、5g/日6周及工作记忆和推理的阳性结果。"
         },
         {
           "system": "G",
           "dimension": "reasoning",
           "status": "supported",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 11,
-          "quote": "45名年轻素食志愿者",
-          "analysis": "至少区分早期45人与后续123人研究，为认识重复验证提供基础。"
+          "line": 18,
+          "quote": "these are small, short-term studies",
+          "analysis": "明确标出实验规模、短期性和高单次剂量，避免把严重缺眠结果完全等同于常规认知增强。"
         },
         {
           "system": "G",
-          "dimension": "factual",
-          "status": "confirmed_error",
+          "dimension": "reasoning",
+          "status": "supported",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 21,
-          "quote": "5天肌酸（5 g/天）",
-          "analysis": "Benton原始摘要为128位女性、20g/日5天。剂量误报影响用户对低剂量证据的理解。"
-        },
-        {
-          "system": "G",
-          "dimension": "factual",
-          "status": "confirmed_error",
-          "file": "responses/gpt-deepresearch/q02.md",
-          "line": 17,
-          "quote": "P值和效应量未公开",
-          "analysis": "原文公开各任务百分比、误差和p值。无法从已见摘要取得统计量，不等于论文未公开。"
+          "line": 36,
+          "quote": "it’s uncertain whether they translate to meaningful everyday benefits",
+          "analysis": "区分统计改善与现实生产率，较直接保证日常收益或直接保证无人能感知更合理。"
         },
         {
           "system": "G",
           "dimension": "reasoning",
           "status": "unsupported_or_mismatched",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 21,
-          "quote": "使用肌酸在理论上最具针对性",
-          "analysis": "未纳入其已讨论的最大RCT素食者未更多获益这一关键反证，脑与肌肉储量也未区分。"
+          "line": 14,
+          "quote": "who start with lower brain creatine levels",
+          "analysis": "膳食摄入低不证明脑储备低。直接MRS研究在后扣带皮层未发现素食者较低，最大认知RCT也没有素食优势；报告未处理这些反证。"
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 18,
+          "quote": "about 0.3 g/kg, roughly 20 g for a 70 kg person",
+          "analysis": "原文方案是0.35g/kg，70kg对应24.5g。报告正确识别高剂量方向，但把具体试验剂量低报约14%，属于局部事实误差。"
         },
         {
           "system": "G",
           "dimension": "coverage",
           "status": "unsupported_or_mismatched",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 13,
-          "quote": "荟萃分析提示",
-          "analysis": "全文对荟萃仅泛称结论，未列Xu/Prokopidis等研究身份、合并效应或方法限制，未完成明确子问。"
+          "line": 14,
+          "quote": "not all studies of vegetarians replicate such large effects",
+          "analysis": "仅泛称未重复，未介绍123人、约半数素食者的预注册交叉试验及无素食优势，无法充分完成早期阳性与较大RCT对照。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 22,
+          "quote": "remembering a couple extra items on a list or solving a few more puzzles correctly",
+          "analysis": "合并SMD没有固定量表单位。未给原始标准差、具体任务或工作结局，不能据此换算额外项目数或可感知收益。"
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 12,
+          "quote": "if you are a healthy 38-year-old without creatine deficiency",
+          "analysis": "紧前使用的年轻亚组是11–31岁，且本节讨论非素食者。可作间接参考，不能当作对38岁素食用户的直接分组证据。"
         },
         {
           "system": "G",
           "dimension": "actionability",
           "status": "unsupported_or_mismatched",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 59,
-          "quote": "若追求快速效果，可先高剂量",
-          "analysis": "认知目标没有相应快效依据，肌肉加载方案不能直接证明办公或普通短睡获益。"
+          "line": 28,
+          "quote": "a reasonable approach (mirroring muscle-health studies) is a loading phase",
+          "analysis": "报告自己承认来自肌肉研究，却未证明加载能改善本用户的认知或优于不加载方案，建议与认知目标未充分衔接。"
         },
         {
           "system": "G",
           "dimension": "evidence",
           "status": "unverified",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 43,
-          "quote": "未正式发表数据",
-          "analysis": "未给2026新闻研究准确题名或链接，无法核对发表状态。本轮保留待核，未按记忆判假。"
+          "line": 34,
+          "quote": "the 2024 review mentioned above found *no significant cognitive benefit*",
+          "analysis": "正文没有给这篇2024综述的作者或题名，无法唯一识别。EFSA意见与系统综述不能不加说明地互换，故保持待核。"
         },
         {
-          "system": "L",
-          "dimension": "reasoning",
-          "status": "supported",
-          "file": "responses/lucentthinker/q02.md",
-          "line": 14,
-          "quote": "Vegetarians did not benefit more than omnivores",
-          "analysis": "L明确引用最大RCT中的关键亚组反证，G遗漏。"
-        },
-        {
-          "system": "M",
-          "dimension": "reasoning",
-          "status": "supported",
-          "file": "responses/mirothinker/q02.md",
-          "line": 88,
-          "quote": "brain creatine concentrations appear similar",
-          "analysis": "M有脑与肌肉肌酸的区分，并承认混合证据。G仅强调膳食低与理论优势。"
+          "system": "G",
+          "dimension": "evidence",
+          "status": "supported_with_limits",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 44,
+          "quote": "Avgerinos 2018, Prokopidis 2023, Rae 2003, Gordji-Nejad 2024, Marshall 2025",
+          "analysis": "作者年份确实提供可定位线索，但缺题名、期刊、DOI/URL及逐条对应。Marshall的2025在线发表和2026卷期可并存，不因年份写2025判错。"
         }
       ],
       "gpt_checks": [
         {
-          "claim": "Benton试验的每日总剂量",
-          "system": "G",
-          "status": "confirmed_error",
-          "finding": "原始摘要为20g/日、5天、128名女性。G第21和39行写5g/日，表中人数120也不符摘要。",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/21118604/",
-          "source_title": "Benton & Donohoe — The influence of creatine supplementation on the cognitive functioning of vegetarians and omnivores",
-          "access_note": "已读原始摘要"
-        },
-        {
-          "claim": "睡眠研究未公开p值与具体改进数值",
-          "system": "G",
-          "status": "confirmed_error",
-          "finding": "2024原文为15人并公开统计。语言处理时间改善29.1±5.3%，p=2×10⁻⁶等指标可直接查到。G把未提取的统计量误称为未公开。",
-          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10902318/",
-          "source_title": "Single dose creatine improves cognitive performance and induces changes in cerebral high energy phosphates during sleep deprivation",
-          "access_note": "Nature入口失败后读取PMC原始全文"
-        },
-        {
-          "claim": "Sandkühler结果与素食者优势",
+          "claim": "Rae早期素食者随机试验",
           "system": "G",
           "status": "supported",
-          "finding": "G主要p值与5g/日方案正确。原文同时明确素食者未比杂食者获益更多，这限制G的针对性推断。",
-          "url": "https://link.springer.com/article/10.1186/s12916-023-03146-5",
-          "source_title": "The effects of creatine supplementation on cognitive performance—a randomised controlled study",
-          "access_note": "已读取原始来源相关全文段落"
+          "finding": "原始摘要确认45名年轻素食者、5g/日6周、交叉设计和工作记忆/推理p<0.0001。G的这些具体信息准确。",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/14561278/",
+          "source_title": "Oral creatine monohydrate supplementation improves brain performance: a double-blind, placebo-controlled, cross-over trial",
+          "access_note": "2026-11-03读取PubMed原始摘要。"
         },
         {
-          "claim": "2026 TAM/Zemer研究未正式发表",
+          "claim": "Avgerinos综述规模与方向",
+          "system": "G",
+          "status": "supported",
+          "finding": "六项试验、281人与有限短时记忆/推理信号均与摘要一致；其2018证据不能替代后来的直接随机结果。",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29704637/",
+          "source_title": "Effects of creatine supplementation on cognitive function of healthy individuals: A systematic review of randomized controlled trials",
+          "access_note": "2026-11-03读取PubMed原始摘要。"
+        },
+        {
+          "claim": "Prokopidis原始效应量与年龄分组",
+          "system": "G",
+          "status": "supported_with_limits",
+          "finding": "原始摘要确有总体SMD0.29、95%CI0.04–0.53、老年0.88和11–31岁0.03。G准确转述原始值，但未交代校正，不宜视作截至2026的完整综合。",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35984306/",
+          "source_title": "Effects of creatine supplementation on memory in healthy individuals: a systematic review and meta-analysis of randomized controlled trials",
+          "access_note": "已读取原始摘要；PMC全文遇验证码。"
+        },
+        {
+          "claim": "Prokopidis校正及精确新效应量",
+          "system": "G",
+          "status": "supported_with_limits",
+          "finding": "已读2026方法评论明确指出，处理非独立终点后总体记忆效果失去显著性，老年亚组除外。出版社检索摘要显示校正值0.19、CI−0.07至0.46，但作者回复全文访问失败，精确值本轮未独立全文核实。G缺少这一方法背景。",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13105953/",
+          "source_title": "Commentary: The effects of creatine supplementation on cognitive function in adults: a systematic review and meta-analysis",
+          "access_note": "已读评论全文。作者回复DOI 10.1093/nutrit/nuac111及Liverpool仓库分别跳转失败/403、406；仅见出版社检索摘要。"
+        },
+        {
+          "claim": "与用户相关的较大直接试验",
+          "system": "G",
+          "status": "supported",
+          "finding": "123人、约半数素食者、5g/日6周的预注册交叉试验保留小效应可能，但素食者未获更多收益。G全文没有介绍该试验，削弱其关键人群比较。",
+          "url": "https://link.springer.com/article/10.1186/s12916-023-03146-5",
+          "source_title": "The effects of creatine supplementation on cognitive performance—a randomised controlled study",
+          "access_note": "2026-11-03读取原论文摘要及相关全文段落。"
+        },
+        {
+          "claim": "素食者脑肌酸必然较低",
+          "system": "G",
+          "status": "unsupported_or_mismatched",
+          "finding": "直接MRS摘要显示素食者膳食摄入较低，但后扣带皮层总肌酸无显著组间差异（p=0.77）。该脑区研究不能概括全脑或所有个体，却足以说明G把低脑储备当成既定前提缺乏依据。",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24290771/",
+          "source_title": "Brain creatine depletion in vegetarians? A cross-sectional ¹H-magnetic resonance spectroscopy (¹H-MRS) study",
+          "access_note": "2026-11-03读取原始摘要；未把单脑区结果扩大为全脑一致。"
+        },
+        {
+          "claim": "2024缺眠试验剂量",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "原文为15人、0.35g/kg、约21小时缺眠，70kg对应24.5g。G的样本和研究方向基本对，但写约0.3g/kg、约20g，低报具体试验剂量。",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10902318/",
+          "source_title": "Single dose creatine improves cognitive performance and induces changes in cerebral high energy phosphates during sleep deprivation",
+          "access_note": "2026-11-03读取原始全文摘要、受试者与给药方法。"
+        },
+        {
+          "claim": "普通短睡的直接反证",
+          "system": "G",
+          "status": "supported_with_limits",
+          "finding": "2026-10-14发表的8人交叉试验比较7天20g/日后3小时卧床限制，未发现认知获益，且承认统计功效不足。G未纳入这一截止前、较贴近用户短睡情境的结果；不能由此断言零效果。",
+          "url": "https://link.springer.com/article/10.1007/s41782-026-00380-8",
+          "source_title": "Effect of Creatine Supplementation on Cognitive Performance and Frontal Haemodynamics Following Acute Sleep Restriction: A Randomised, Double-Blind, Placebo-Controlled Crossover Pilot Study",
+          "access_note": "2026-11-03读取原始摘要与方法段落，发布日期早于题目截止日。"
+        },
+        {
+          "claim": "Marshall老年综述的证据类型",
+          "system": "G",
+          "status": "supported_with_limits",
+          "finding": "六项研究中五项正相关、证据有限的描述正确。但其中只有两项双盲干预，四项为横断面膳食调查，G没有交代这种组成。2025在线与2026卷期不构成年份错误。",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40971619/",
+          "source_title": "Creatine and Cognition in Aging: A Systematic Review of Evidence in Older Adults",
+          "access_note": "2026-11-03读取PubMed原始摘要与书目。"
+        },
+        {
+          "claim": "EFSA认知健康声明结论",
+          "system": "G",
+          "status": "supported",
+          "finding": "2024意见确认尚未建立肌酸补充改善认知的因果关系，支持G的总体表述。该意见明确不属于安全性正面评估，不能单独支撑G的安全段落。",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11574456/",
+          "source_title": "Creatine and improvement in cognitive function: Evaluation of a health claim pursuant to article 13(5) of regulation (EC) No 1924/2006",
+          "access_note": "Wiley部分页面可读、后续403；转至PMC读取原始摘要和意见范围。"
+        },
+        {
+          "claim": "未命名2024综述与生活化效果换算",
           "system": "G",
           "status": "unverified",
-          "finding": "作者/报道身份不完整，本轮未确证发表状态，未列为已证错误。",
+          "finding": "第34行无法唯一识别综述；第22行没有给量表标准差或原始项目差异。这些具体依据本轮不能确证，未据此声称所有研究或数字虚构。",
           "url": "responses/gpt-deepresearch/q02.md",
-          "source_title": "G报告第41–43、53行",
-          "access_note": "缺具体论文或报道链接"
+          "source_title": "G report, lines 22 and 34",
+          "access_note": "直接核对新交付全文；缺少足够具体来源。"
         }
       ]
     },
@@ -5051,12 +5143,14 @@
       "system": "G",
       "file": "responses/gpt-deepresearch/q02.md",
       "filename": "Creatine and Cognitive Performance - gpt6pro_deepresearch.md",
-      "sha256": "38242cf659bacda14995f8e0afe485af3ca77f465eb9c176a626c786a46ff657",
-      "lines": 62,
+      "sha256": "76b4115512084f9d231948a9f0e34960b1c8e929bd6de77f3c09b3e568c79086",
+      "lines": 44,
       "urls": [],
       "citation_markers": 0,
-      "han_chars": 2821,
-      "word_segments": 134
+      "han_chars": 0,
+      "word_segments": 1470,
+      "bytes": 10560,
+      "output_language": "en"
     },
     {
       "id": 3,

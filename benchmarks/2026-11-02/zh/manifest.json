@@ -1,11 +1,10 @@
 {
-  "README.md": "47aebe00d60a0326d82d6e81de69843f9f3fdd31f249e2d3c89c1d80facf129e",
-  "calibration.json": "69c42fdff1639e6bfdc742b3d809b2a692fb35a89513831a253c0888593fbc8e",
-  "index.html": "a4ddcfb0ae1152ce4d84150bdaf57085288587cee017f700c1cfc172fa741f7f",
-  "methodology.md": "097c260cc3c9f634bfd4e70d33be5395b5c05815b0068b7dead1a8b609d75e98",
+  "README.md": "781caba376ea89add3f60d9cfac5f5732c8d93cbfd72a7c28f899faa5c2f196a",
+  "index.html": "acc3d529867626a3299545d059754c855655e4511fbafbce019a00c25887b3c7",
+  "methodology.md": "47e93f5059ea45918d06ddff3bc95d7e5d189aa2996aefa4bc0064fd96ced37b",
   "questions.md": "208c1e40727642ce6122cfafafbacdc9bf1ff18b74159b51ad62f653e8d7229a",
   "responses/gpt-deepresearch/q01.md": "8d78141690d52f6f05c046be3aa1f3e278ffb8dff91e3b4f5fe5e8c47a2c4cb0",
-  "responses/gpt-deepresearch/q02.md": "38242cf659bacda14995f8e0afe485af3ca77f465eb9c176a626c786a46ff657",
+  "responses/gpt-deepresearch/q02.md": "76b4115512084f9d231948a9f0e34960b1c8e929bd6de77f3c09b3e568c79086",
   "responses/gpt-deepresearch/q03.md": "d4f9ff210d6bf15223ad10510c8abd8345416d777afd958ac752f0c92d7676ba",
   "responses/gpt-deepresearch/q04.md": "c71a761f2fa0d7224a387482186a56b1614df61544d542f97ac2b4e323470333",
   "responses/gpt-deepresearch/q05.md": "be08a00249e2e1d3767df8bbd0928b1978b6472d3a187de2d73ca164c6eefddc",
@@ -34,8 +33,7 @@
   "responses/mirothinker/q08.md": "463fa0d3166722d2eff7fdebcbaa7151f887fc02d3965c632c51f3f38c14dd79",
   "responses/mirothinker/q09.md": "c74ef43dee94efef5153a3702e1bfc78b5b22e1fc6acf16d424c9c50a976c66b",
   "responses/mirothinker/q10.md": "0a665bb9bd57d70f991362a5eeb3bc916cc89f87b0dd6e097b1541df89cab25b",
-  "review-rubric.txt": "7597f44abfca9f0f26d766734693a8a135d89f93bc7cc4360ce0a99933d81b47",
-  "score.png": "6a507405142c1a070fc66eec0df8691839e193b344c88874182a7f9bc5a86097",
-  "score.svg": "e45ee577b1a594a2d54829cfde17862ef60b0b6ab8284cf27f2f2cb42f18f8ca",
-  "scores.json": "b218849b91480d3dec6c0ad1ff3380e8603288480c339257ba065b346d797283"
+  "score.png": "917f49e3887c3b225e8d9d06a2da6a47b89e634f11e026423186b62d631228be",
+  "score.svg": "b23025e40fd7060ce1d27b710b30d3d008d30012049fe980f1372ad9f66c523b",
+  "scores.json": "8b76d6c556a2b61a10df1179716a575a7bd9ba739b046a9141a65e1cbb6fd36e"
 }

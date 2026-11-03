@@ -1,21 +1,21 @@
-# Research quality benchmark
+# Research Quality Benchmark
 
-![Research quality benchmark](score.png)
+![Research Quality Benchmark](score.png)
 
-Five English prompts (Q1–4 and Q10), 15 saved responses.
+Five tasks across energy, health, software, business and trade.
 
-[Full HTML report](index.html) · [Prompts](questions.md) · [Method and limitations](methodology.md) · [Scores and evidence](scores.json)
+[Full report](index.html) · [Questions](questions.md) · [Scoring method](methodology.md) · [Scores and evidence](scores.json)
 
-GitHub's file viewer shows HTML source. Download and extract this edition's ZIP, then open index.html for the complete report. See the benchmark landing page for Pages deployment instructions.
+For offline reading, download this edition's ZIP from the parent directory, extract it and open index.html.
 
-Author-organized, non-blind Astra review, one answer per system and prompt. GPT's web originals had no citations, and its Q2 answer is in Chinese. Scores describe this sample.
+Author-organized, non-blind Astra review, one response per system per task.
 
-| Prompt | LucentThinker | MiroThinker | GPT Deep Research |
+| Task | LucentThinker | MiroThinker | GPT Deep Research |
 | --- | --- | --- | --- |
-| Q1 · Bristol Home Battery Decision | [76.0](responses/lucentthinker/q01.md) | [49.0](responses/mirothinker/q01.md) | [39.0](responses/gpt-deepresearch/q01.md) |
-| Q2 · Creatine and Cognitive Performance | [78.0](responses/lucentthinker/q02.md) | [53.5](responses/mirothinker/q02.md) | [46.5](responses/gpt-deepresearch/q02.md) |
-| Q3 · Search Architecture for a B2B Knowledge Product | [83.5](responses/lucentthinker/q03.md) | [53.5](responses/mirothinker/q03.md) | [42.5](responses/gpt-deepresearch/q03.md) |
-| Q4 · Costco and Walmart Business Comparison | [70.5](responses/lucentthinker/q04.md) | [40.0](responses/mirothinker/q04.md) | [34.5](responses/gpt-deepresearch/q04.md) |
-| Q10 · EU Tariffs and the Market Performance of China-Made Battery Electric Cars | [75.5](responses/lucentthinker/q10.md) | [49.5](responses/mirothinker/q10.md) | [29.5](responses/gpt-deepresearch/q10.md) |
+| Home battery economics | [76.0](responses/lucentthinker/q01.md) | [49.0](responses/mirothinker/q01.md) | [39.0](responses/gpt-deepresearch/q01.md) |
+| Creatine and cognition | [78.0](responses/lucentthinker/q02.md) | [53.5](responses/mirothinker/q02.md) | [51.5](responses/gpt-deepresearch/q02.md) |
+| B2B search architecture | [83.5](responses/lucentthinker/q03.md) | [53.5](responses/mirothinker/q03.md) | [42.5](responses/gpt-deepresearch/q03.md) |
+| Costco vs. Walmart | [70.5](responses/lucentthinker/q04.md) | [40.0](responses/mirothinker/q04.md) | [34.5](responses/gpt-deepresearch/q04.md) |
+| EU tariffs and Chinese EVs | [75.5](responses/lucentthinker/q10.md) | [49.5](responses/mirothinker/q10.md) | [29.5](responses/gpt-deepresearch/q10.md) |
 
-[PNG](score.png) · [SVG](score.svg) · [SHA-256 manifest](manifest.json)
+[PNG](score.png) · [SVG](score.svg) · [SHA-256](manifest.json)

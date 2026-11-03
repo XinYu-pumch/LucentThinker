@@ -536,43 +536,45 @@
       "G": {
         "scores": {
           "coverage": 3,
-          "factual": 2,
+          "factual": 2.5,
           "evidence": 2,
-          "reasoning": 2,
+          "reasoning": 2.5,
           "actionability": 2.5,
-          "clarity": 3.5
+          "clarity": 4
         },
         "rationales": {
-          "coverage": "Covers RCTs, age, vegetarianism, sleep loss, doses, safety, and practical advice. However, its meta-analysis discussion identifies no specific studies, pooled effects, or bias issues, and omits the large-trial vegetarian subgroup counterevidence particularly relevant to the user's question.",
-          "factual": "The largest RCT's 123 participants, 5 g/day for six weeks, and main p-values are broadly correct. Benton is incorrectly described as 5 g/day, while the original reports 20 g/day. The sleep study's sample and statistical reporting are also misrepresented, and the claim that p-values or specific effects were unavailable conflicts with the published paper.",
-          "evidence": "Authors, years, trial designs, and journals allow several studies to be located, warranting a higher score than G's other reports that merely list source categories. However, there is no complete bibliography or links. Meta-analysis and clinical-website claims are vague, and the study behind the 2026 news report is poorly identified.",
-          "reasoning": "Compares early large effects with later tiny effects, but overlooks the largest RCT's absence of a vegetarian advantage while still presenting vegetarians as the best-targeted group. It links extreme experimental sleep loss too strongly to occasional short sleep and uses improved muscle stores to support cognitive advice, conflating the targets.",
-          "actionability": "Optional routine 3–5 g use, kidney-disease consultation, and sleep reminders are relatively restrained compared with M's direct acute 14 g recommendation. However, recommending a 20 g loading phase for faster effects does not disclose the lack of cognitive evidence, and subjective self-trials do not control expectation or practice effects.",
-          "clarity": "The summary and trial table are readable and focused. Some Chinese/English terminology is inaccurate, including rendering loading as a buffering phase and an awkward description of the crossover trial. It does not distinguish unreported statistics from information the report itself failed to obtain."
+          "coverage": "Covers age, vegetarian diets, sleep loss, meta-analyses, everyday relevance, dosing, and safety, with specific pooled effects. However, it omits the 123-person Sandkühler trial, its vegetarian subgroup result, and statistical corrections to the meta-analysis, leaving the most relevant randomized evidence insufficiently compared.",
+          "factual": "The Rae sample, six-week 5 g/day regimen and significance, the Avgerinos review size, and Prokopidis’s original estimates are broadly accurate. The 2024 sleep-loss dose was 0.35 g/kg, reported as about 0.3 g/kg. Lower brain creatine in vegetarians is presented as established without direct support, and a pooled SMD cannot directly yield extra items remembered.",
+          "evidence": "Author-year identifiers, samples, and effect sizes make several studies locatable and receive traceability credit. However, there are no URLs, DOIs, or complete references. One 2024 review is unidentified, safety claims lack specific supporting sources, and the later correction to the central Prokopidis analysis is omitted.",
+          "reasoning": "Distinguishes small laboratory studies, severe sleep loss, and everyday work, and explicitly acknowledges uncertain practical benefit. However, it extrapolates directly from an 11–31-year subgroup to a 38-year-old, links low dietary intake to low brain stores, and does not reconcile the larger direct trial with early positive vegetarian findings.",
+          "actionability": "Optional 5 g/day use, tempered expectations, and consultation for kidney disease are broadly usable, without M’s 14 g morning rescue protocol. However, it recommends a muscle-derived 15–20 g loading approach for a cognitive trial without corresponding efficacy evidence and gives no evaluation period, stopping rule, or method to limit expectancy effects.",
+          "clarity": "The subgroup, dosing, safety, and conclusion sections are clear and focused. The effect-size discussion repeatedly uses everyday examples without a measurement basis, which readers could mistake for observed practical gains."
         },
         "strengths": [
-          "Accurately presents the largest RCT's main p-values and cautions against expecting substantial cognitive benefits.",
-          "Provides authors, years, and a sample/dose table, retaining some traceability.",
-          "Primarily recommends a routine daily dose, without M's high-dose morning rescue protocol for sleep loss."
+          "Identifies specific reviews, an early randomized trial, and pooled effects, with major historical figures that can be traced.",
+          "Recognizes that severe sleep-loss trials are small and short, use high single doses, and may not translate into workplace benefit.",
+          "Offers a restrained conclusion, notes water retention and gastrointestinal effects, advises consultation for kidney disease, and does not guarantee individual benefit."
         ],
         "weaknesses": [
-          "Misreports Benton's dose and describes published sleep-trial statistics as unpublished.",
-          "Does not present specific meta-analyses and their methodological disputes.",
-          "Overstates both greater benefit in vegetarians and applicability to occasional short sleep."
+          "Omits the highly relevant 123-person randomized trial and its lack of a vegetarian advantage.",
+          "Relies on uncorrected pooled estimates without discussing double counting or the change in overall significance after correction.",
+          "The asserted brain-creatine deficit, age extrapolation, and everyday conversion of SMD lack support, and the sleep-loss dose is inaccurate.",
+          "The cognitive loading recommendation is borrowed from muscle research and lacks an evaluable trial plan."
         ],
         "confidence": "Medium-high",
-        "weighted_score": 46.5
+        "weighted_score": 51.5
       },
-      "three_way_verdict": "G summarizes differences between early small studies and a larger trial, and addresses safety and everyday relevance. However, it does not substantively compare specific meta-analyses, misreports Benton's dose, and claims that sleep-trial statistics were unpublished. L is more detailed on trials, subgroups, and extrapolation boundaries, while retaining its original deduction for misreading Xu's endpoints. M also has source mismatches and high-dose advice problems, but covers counterevidence to a vegetarian advantage, meta-analysis controversies, and regulatory judgments more fully than G. G's Chinese answer is recorded as an output characteristic, with no deduction for the language itself.",
+      "three_way_verdict": "L handles direct trials, subgroup counterevidence, and applicability most completely, while its existing Xu endpoint error remains. G clearly introduces specific pooled findings and severe sleep-loss research but omits the 123-person trial and statistical corrections, and overstates inferences about vegetarian brain stores and everyday gains. M covers more evidence but has citation mismatches and high-dose extrapolation. M and G score closely. G is more restrained in its advice and clearer in presentation, so the small gap does not imply that M is better on every dimension.",
       "gpt_differences": [
-        "G recounts some studies but does not examine specific meta-analysis disputes as L/M do, and omits important subgroup counterevidence.",
-        "G's routine-trial advice is more restrained than M's acute high-dose protocol, but it still does not rigorously distinguish muscle loading from cognitive effects.",
-        "L is the most auditable overall. The Xu-endpoint error identified in the original review remains valid, and none of the three reports' tones can substitute for checking the original papers."
+        "L and M both discuss the larger trial and lack of a vegetarian advantage. G relies mainly on the early Rae trial and older reviews without an equally detailed direct comparison.",
+        "G supplies specific pooled estimates but lacks L/M’s discussion of statistical-method disputes. L’s misreading of Xu score and time endpoints must also remain visible.",
+        "G explicitly acknowledges uncertain workplace benefit, more cautiously than some of L’s absolute denials. Its optional daily regimen is also more restrained than M’s sleep-loss rescue advice, although its loading recommendation still exceeds direct cognitive evidence.",
+        "Under the default weights M scores 53.5 and G 51.5. Excluding evidence and renormalizing gives M 56.875 and G 54.375. They remain close and both have substantive gaps."
       ],
       "gpt_caveats": [
-        "Answering the English question in Chinese was not a separate reason for a score deduction.",
-        "The publication status of the unverified 2026 report remains unresolved.",
-        "Small effects, statistical non-significance, and everyday perceptibility are separate questions and cannot directly substitute for one another."
+        "The review assesses the delivered text and verifiable sources without inferring whether searches occurred. Author-year identifiers provide limited traceability, and absent links do not make every claim unsourced.",
+        "The full Prokopidis authors’ reply could not be opened. A 2026 methodological commentary read in full supports the direction of the correction. Exact corrected values appeared only in publisher search excerpts and were not used as independently confirmed errors.",
+        "One-region MRS findings cannot establish identical whole-brain stores in all vegetarians, and a small negative sleep-restriction trial cannot exclude small effects. The critique concerns certainty and extrapolation, without asserting that creatine cannot help any individual."
       ],
       "gpt_evidence": [
         {
@@ -580,136 +582,218 @@
           "dimension": "factual",
           "status": "supported",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 12,
-          "quote": "p=0.064，部分η²≈0.029",
-          "analysis": "Matches the BDS result in the original 123-person trial. The broad characterization of this major trial is reasonably reliable.",
-          "quote_translation": "p=0.064, partial η²≈0.029"
+          "line": 6,
+          "quote": "six randomized trials (281 people)",
+          "analysis": "Avgerinos’s abstract confirms six trials and 281 people, supporting the review size and its summary of limited cognitive signals."
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 6,
+          "quote": "SMD≈0.29; 95% CI 0.04–0.53",
+          "analysis": "Matches Prokopidis’s original abstract. This historical estimate does not replace the later correction or methodological limitations."
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "supported",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 14,
+          "quote": "45 healthy vegetarian adults",
+          "analysis": "Rae’s abstract supports 45 vegetarians, 5 g/day for six weeks, and positive working-memory and reasoning findings."
         },
         {
           "system": "G",
           "dimension": "reasoning",
           "status": "supported",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 11,
-          "quote": "45名年轻素食志愿者",
-          "analysis": "At least distinguishes the early 45-person study from the later 123-person study, providing a basis for understanding replication.",
-          "quote_translation": "45 young vegetarian volunteers"
+          "line": 18,
+          "quote": "these are small, short-term studies",
+          "analysis": "Explicitly identifies small samples, short follow-up, and high single doses, limiting equivalence with routine cognitive enhancement."
         },
         {
           "system": "G",
-          "dimension": "factual",
-          "status": "confirmed_error",
+          "dimension": "reasoning",
+          "status": "supported",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 21,
-          "quote": "5天肌酸（5 g/天）",
-          "analysis": "Benton's original abstract reports 128 women and 20 g/day for five days. The dose error affects the user's understanding of evidence for low-dose use.",
-          "quote_translation": "creatine for five days (5 g/day)"
-        },
-        {
-          "system": "G",
-          "dimension": "factual",
-          "status": "confirmed_error",
-          "file": "responses/gpt-deepresearch/q02.md",
-          "line": 17,
-          "quote": "P值和效应量未公开",
-          "analysis": "The original paper publishes task-specific percentages, errors, and p-values. Failing to obtain statistics from the abstract consulted does not mean the paper did not publish them.",
-          "quote_translation": "P-values and effect sizes were not published"
+          "line": 36,
+          "quote": "it’s uncertain whether they translate to meaningful everyday benefits",
+          "analysis": "Distinguishes statistical changes from real productivity without guaranteeing either noticeable benefit or its absence."
         },
         {
           "system": "G",
           "dimension": "reasoning",
           "status": "unsupported_or_mismatched",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 21,
-          "quote": "使用肌酸在理论上最具针对性",
-          "analysis": "Omits the key counterevidence that vegetarians did not benefit more in the largest RCT it already discusses. It also fails to distinguish brain from muscle stores.",
-          "quote_translation": "creatine use is theoretically the most targeted approach"
+          "line": 14,
+          "quote": "who start with lower brain creatine levels",
+          "analysis": "Lower dietary intake does not establish lower brain stores. A direct posterior-cingulate MRS study found no vegetarian deficit, and the larger cognitive RCT found no vegetarian advantage. The report does not address this counterevidence."
+        },
+        {
+          "system": "G",
+          "dimension": "factual",
+          "status": "confirmed_error",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 18,
+          "quote": "about 0.3 g/kg, roughly 20 g for a 70 kg person",
+          "analysis": "The trial used 0.35 g/kg, or 24.5 g at 70 kg. The report correctly identifies a high-dose protocol but understates the specific dose by about 14%, a localized factual error."
         },
         {
           "system": "G",
           "dimension": "coverage",
           "status": "unsupported_or_mismatched",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 13,
-          "quote": "荟萃分析提示",
-          "analysis": "The report gives only generic meta-analytic conclusions, without identifying Xu, Prokopidis, or other studies, pooled effects, or methodological limitations. It leaves an explicit subquestion incomplete.",
-          "quote_translation": "Meta-analyses suggest"
+          "line": 14,
+          "quote": "not all studies of vegetarians replicate such large effects",
+          "analysis": "This generic qualification omits the preregistered crossover trial of 123 people, approximately half vegetarian, and its lack of a vegetarian advantage, leaving the comparison with early positive findings incomplete."
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 22,
+          "quote": "remembering a couple extra items on a list or solving a few more puzzles correctly",
+          "analysis": "A pooled SMD has no fixed test units. Without a task-specific standard deviation or functional outcome, it cannot be converted into additional items or noticeable practical gains."
+        },
+        {
+          "system": "G",
+          "dimension": "reasoning",
+          "status": "unsupported_or_mismatched",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 12,
+          "quote": "if you are a healthy 38-year-old without creatine deficiency",
+          "analysis": "The preceding younger subgroup is aged 11–31, and this section concerns nonvegetarians. It is indirect context, not direct subgroup evidence for a 38-year-old vegetarian."
         },
         {
           "system": "G",
           "dimension": "actionability",
           "status": "unsupported_or_mismatched",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 59,
-          "quote": "若追求快速效果，可先高剂量",
-          "analysis": "There is no corresponding evidence of rapid effects for the cognitive goal. Muscle-loading protocols do not directly establish benefits for office work or ordinary short sleep.",
-          "quote_translation": "for faster effects, a high dose can be used initially"
+          "line": 28,
+          "quote": "a reasonable approach (mirroring muscle-health studies) is a loading phase",
+          "analysis": "The report explicitly borrows from muscle studies without establishing cognitive benefit for this user or an advantage over a nonloading regimen."
         },
         {
           "system": "G",
           "dimension": "evidence",
           "status": "unverified",
           "file": "responses/gpt-deepresearch/q02.md",
-          "line": 43,
-          "quote": "未正式发表数据",
-          "analysis": "No exact title or link identifies the study behind the 2026 news report, so publication status cannot be checked. It remains unverified in this round and was not declared false from memory.",
-          "quote_translation": "data not formally published"
+          "line": 34,
+          "quote": "the 2024 review mentioned above found *no significant cognitive benefit*",
+          "analysis": "No author or title uniquely identifies this 2024 review. An EFSA opinion and a systematic review are not interchangeable without explanation, so this remains unverified."
         },
         {
-          "system": "L",
-          "dimension": "reasoning",
-          "status": "supported",
-          "file": "responses/lucentthinker/q02.md",
-          "line": 14,
-          "quote": "Vegetarians did not benefit more than omnivores",
-          "analysis": "L explicitly cites the largest RCT's key subgroup counterevidence, which G omits."
-        },
-        {
-          "system": "M",
-          "dimension": "reasoning",
-          "status": "supported",
-          "file": "responses/mirothinker/q02.md",
-          "line": 88,
-          "quote": "brain creatine concentrations appear similar",
-          "analysis": "M distinguishes brain and muscle creatine and acknowledges mixed evidence. G emphasizes only low dietary intake and a theoretical advantage."
+          "system": "G",
+          "dimension": "evidence",
+          "status": "supported_with_limits",
+          "file": "responses/gpt-deepresearch/q02.md",
+          "line": 44,
+          "quote": "Avgerinos 2018, Prokopidis 2023, Rae 2003, Gordji-Nejad 2024, Marshall 2025",
+          "analysis": "Author-year identifiers provide usable locating cues but lack titles, journals, DOIs or URLs, and claim-level mapping. Marshall’s 2025 online publication and 2026 issue date can coexist, so the 2025 label is not treated as an error."
         }
       ],
       "gpt_checks": [
         {
-          "claim": "Total daily dose in the Benton trial",
-          "system": "G",
-          "status": "confirmed_error",
-          "finding": "The original abstract reports 20 g/day for five days in 128 women. G lines 21 and 39 give 5 g/day, and the table's sample of 120 also differs from the abstract.",
-          "url": "https://pubmed.ncbi.nlm.nih.gov/21118604/",
-          "source_title": "Benton & Donohoe — The influence of creatine supplementation on the cognitive functioning of vegetarians and omnivores",
-          "access_note": "Original abstract read"
-        },
-        {
-          "claim": "The sleep study did not publish p-values or specific improvement figures",
-          "system": "G",
-          "status": "confirmed_error",
-          "finding": "The 2024 paper reports 15 participants and publishes the statistics. Figures such as a 29.1±5.3% improvement in language processing time, p=2×10⁻⁶, are directly available. G mistakes unextracted statistics for unpublished statistics.",
-          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10902318/",
-          "source_title": "Single dose creatine improves cognitive performance and induces changes in cerebral high energy phosphates during sleep deprivation",
-          "access_note": "Read the original full text on PMC after the Nature entry point failed."
-        },
-        {
-          "claim": "Sandkühler's results and a vegetarian advantage",
+          "claim": "Rae’s early vegetarian randomized trial",
           "system": "G",
           "status": "supported",
-          "finding": "G's main p-values and 5 g/day protocol are correct. The original also explicitly says vegetarians did not benefit more than omnivores, limiting G's inference about targeted use.",
-          "url": "https://link.springer.com/article/10.1186/s12916-023-03146-5",
-          "source_title": "The effects of creatine supplementation on cognitive performance—a randomised controlled study",
-          "access_note": "Relevant full-text passages of the original source read"
+          "finding": "The abstract confirms 45 young vegetarians, 5 g/day for six weeks, a crossover design, and p<0.0001 for working memory and reasoning. These details in G are accurate.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/14561278/",
+          "source_title": "Oral creatine monohydrate supplementation improves brain performance: a double-blind, placebo-controlled, cross-over trial",
+          "access_note": "Read the original abstract on PubMed on 2026-11-03."
         },
         {
-          "claim": "The 2026 TAM/Zemer study was not formally published",
+          "claim": "Avgerinos review size and direction",
+          "system": "G",
+          "status": "supported",
+          "finding": "Six trials, 281 participants, and limited short-term-memory/reasoning signals match the abstract. Its 2018 evidence does not replace later direct randomized findings.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/29704637/",
+          "source_title": "Effects of creatine supplementation on cognitive function of healthy individuals: A systematic review of randomized controlled trials",
+          "access_note": "Read the original abstract on PubMed on 2026-11-03."
+        },
+        {
+          "claim": "Prokopidis original effects and age subgroups",
+          "system": "G",
+          "status": "supported_with_limits",
+          "finding": "The original abstract reports overall SMD 0.29, 95% CI 0.04–0.53, 0.88 in older adults, and 0.03 at ages 11–31. G reproduces these original values accurately but omits the correction, leaving its synthesis incomplete as of 2026.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/35984306/",
+          "source_title": "Effects of creatine supplementation on memory in healthy individuals: a systematic review and meta-analysis of randomized controlled trials",
+          "access_note": "Read the original abstract. PMC full text returned a CAPTCHA."
+        },
+        {
+          "claim": "Prokopidis correction and exact revised estimate",
+          "system": "G",
+          "status": "supported_with_limits",
+          "finding": "The 2026 methodological commentary states that correcting dependent outcomes removed overall memory significance, with an older-adult exception. Publisher search excerpts give 0.19 with CI −0.07 to 0.46, but the full authors’ reply was inaccessible, so those exact values were not independently verified in full text. G omits this methodological context.",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13105953/",
+          "source_title": "Commentary: The effects of creatine supplementation on cognitive function in adults: a systematic review and meta-analysis",
+          "access_note": "Read the full commentary. The authors’ reply at DOI 10.1093/nutrit/nuac111 and the Liverpool repository failed with redirect/403 and 406 responses. Exact estimates appeared only in publisher search excerpts."
+        },
+        {
+          "claim": "The larger direct trial relevant to the user",
+          "system": "G",
+          "status": "supported",
+          "finding": "The preregistered crossover trial used 5 g/day for six weeks in 123 people, approximately half vegetarian. It leaves small benefits possible but found no vegetarian advantage. G does not present this trial, weakening its central population comparison.",
+          "url": "https://link.springer.com/article/10.1186/s12916-023-03146-5",
+          "source_title": "The effects of creatine supplementation on cognitive performance—a randomised controlled study",
+          "access_note": "Read the original abstract and relevant full-text passages on 2026-11-03."
+        },
+        {
+          "claim": "Whether vegetarians necessarily have lower brain creatine",
+          "system": "G",
+          "status": "unsupported_or_mismatched",
+          "finding": "The direct MRS abstract reports lower dietary intake in vegetarians but no significant posterior-cingulate total-creatine difference (p=0.77). This regional study cannot characterize every brain region or individual, but it undermines G’s presentation of low brain stores as established.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24290771/",
+          "source_title": "Brain creatine depletion in vegetarians? A cross-sectional ¹H-magnetic resonance spectroscopy (¹H-MRS) study",
+          "access_note": "Read the original abstract on 2026-11-03. The regional finding was not generalized to whole-brain equality."
+        },
+        {
+          "claim": "Dose in the 2024 sleep-deprivation trial",
+          "system": "G",
+          "status": "confirmed_error",
+          "finding": "The paper reports 15 participants, 0.35 g/kg, and approximately 21 hours of sleep deprivation, equivalent to 24.5 g at 70 kg. G broadly gets the sample and direction right but understates the dose as about 0.3 g/kg and 20 g.",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10902318/",
+          "source_title": "Single dose creatine improves cognitive performance and induces changes in cerebral high energy phosphates during sleep deprivation",
+          "access_note": "Read the original abstract, participant details, and dosing methods on 2026-11-03."
+        },
+        {
+          "claim": "Direct counterevidence for ordinary sleep restriction",
+          "system": "G",
+          "status": "supported_with_limits",
+          "finding": "An eight-person crossover trial published on 2026-10-14 tested 20 g/day for seven days followed by three hours in bed. It found no cognitive benefit and acknowledged low power. G omits this pre-cutoff result closer to the user’s short-sleep context. It does not establish zero effect.",
+          "url": "https://link.springer.com/article/10.1007/s41782-026-00380-8",
+          "source_title": "Effect of Creatine Supplementation on Cognitive Performance and Frontal Haemodynamics Following Acute Sleep Restriction: A Randomised, Double-Blind, Placebo-Controlled Crossover Pilot Study",
+          "access_note": "Read the original abstract and methods on 2026-11-03. Publication predates the prompt cutoff."
+        },
+        {
+          "claim": "Evidence types in the Marshall older-adult review",
+          "system": "G",
+          "status": "supported_with_limits",
+          "finding": "Five positive associations among six studies and limited evidence are accurate. Only two studies were double-blind interventions and four were cross-sectional dietary studies, a composition G does not explain. Online publication in 2025 and a 2026 issue date are compatible.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40971619/",
+          "source_title": "Creatine and Cognition in Aging: A Systematic Review of Evidence in Older Adults",
+          "access_note": "Read the original PubMed abstract and bibliographic record on 2026-11-03."
+        },
+        {
+          "claim": "EFSA conclusion on the cognitive health claim",
+          "system": "G",
+          "status": "supported",
+          "finding": "The 2024 opinion concludes that a causal link with improved cognition has not been established, supporting G’s overall characterization. It explicitly is not a positive safety assessment and cannot alone substantiate G’s safety section.",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11574456/",
+          "source_title": "Creatine and improvement in cognitive function: Evaluation of a health claim pursuant to article 13(5) of regulation (EC) No 1924/2006",
+          "access_note": "Wiley was partly readable before returning 403. Read the original abstract and scope through PMC."
+        },
+        {
+          "claim": "Unidentified 2024 review and everyday effect conversions",
           "system": "G",
           "status": "unverified",
-          "finding": "Author/report identification is incomplete. Publication status was not established in this round, so it was not classified as a confirmed error.",
+          "finding": "The review on line 34 cannot be uniquely identified. Line 22 provides no test-specific standard deviation or raw item difference. These specific bases remain unverified, without implying that all studies or figures are fabricated.",
           "url": "responses/gpt-deepresearch/q02.md",
-          "source_title": "G report, lines 41–43 and 53",
-          "access_note": "No specific paper or news-report link"
+          "source_title": "G report, lines 22 and 34",
+          "access_note": "Checked the delivered text directly. Specific source information is insufficient."
         }
       ]
     },
