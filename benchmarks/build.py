@@ -239,7 +239,7 @@ def chart(folder, questions, language):
     plt.close(fig)
 
 
-STYLE = """body{margin:0;background:#f5f8fb;color:#203346;font:16px/1.65 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:24px}h1,h2,h3{line-height:1.25;color:#142c42}h1{font-size:30px}section,header{background:white;border:1px solid #dce4ec;border-radius:14px;padding:28px;margin:20px 0}a{color:#087786;overflow-wrap:anywhere}.chart{width:100%;height:auto;display:block}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}th,td{text-align:left;border-bottom:1px solid #dce4ec;padding:12px;vertical-align:top}blockquote{border-left:4px solid #adc5d8;margin:16px 0;padding:12px 18px;background:#f5f8fb;overflow-wrap:anywhere;white-space:pre-wrap}details{border-top:1px solid #dce4ec;margin-top:16px;padding-top:16px}summary{cursor:pointer;font-weight:650}small,.muted{color:#526477}.evidence{padding:14px 0;border-bottom:1px solid #e4e9ef}nav{display:flex;flex-wrap:wrap;gap:16px}.system-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.system-grid article{min-width:0}.system-grid h3{border-top:4px solid var(--color);padding-top:12px}.score-line{font-weight:650}.question>summary{font-size:18px}.question>summary small{display:block;font-size:14px;font-weight:400;margin:8px 0}.method-line{font-size:14px}.summary-scores{display:flex;flex-wrap:wrap;gap:18px}.summary-scores span{white-space:nowrap}@media(min-width:761px){.score-line{display:none}}@media(max-width:760px){main{padding:10px}section,header{padding:18px}.system-grid{grid-template-columns:1fr}h1{font-size:25px}}@media print{details{break-inside:auto}section{border:0}nav,button{display:none}}"""
+STYLE = """body{margin:0;background:#f5f8fb;color:#203346;font:16px/1.65 system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:24px}h1,h2,h3{line-height:1.25;color:#142c42}h1{font-size:30px}section,header{background:white;border:1px solid #dce4ec;border-radius:14px;padding:28px;margin:20px 0}a{color:#087786;overflow-wrap:anywhere}.chart{width:100%;height:auto;display:block}.prompt-text{white-space:pre-wrap}.prompt+.prompt{border-top:1px solid #dce4ec;margin-top:24px;padding-top:8px}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}th,td{text-align:left;border-bottom:1px solid #dce4ec;padding:12px;vertical-align:top}blockquote{border-left:4px solid #adc5d8;margin:16px 0;padding:12px 18px;background:#f5f8fb;overflow-wrap:anywhere;white-space:pre-wrap}details{border-top:1px solid #dce4ec;margin-top:16px;padding-top:16px}summary{cursor:pointer;font-weight:650}small,.muted{color:#526477}.evidence{padding:14px 0;border-bottom:1px solid #e4e9ef}nav{display:flex;flex-wrap:wrap;gap:16px}.system-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.system-grid article{min-width:0}.system-grid h3{border-top:4px solid var(--color);padding-top:12px}.score-line{font-weight:650}.question>summary{font-size:18px}.question>summary small{display:block;font-size:14px;font-weight:400;margin:8px 0}.method-line{font-size:14px}.summary-scores{display:flex;flex-wrap:wrap;gap:18px}.summary-scores span{white-space:nowrap}@media(min-width:761px){.score-line{display:none}}@media(max-width:760px){main{padding:10px}section,header{padding:18px}.system-grid{grid-template-columns:1fr}h1{font-size:25px}}@media print{details{break-inside:auto}section{border:0}nav,button{display:none}}"""
 
 
 def render_evidence(items, chinese):
@@ -314,7 +314,7 @@ def paired_section(questions):
             + '<p class="muted">每种语言仅一次回答，这些分差描述样本中的变化。Q9/Q10 的详细评审提供具体依据。</p></details></section>')
 
 
-def report_html(folder, data, chinese):
+def report_html(folder, data, chinese, prompts):
     questions = data["questions"]
     title = "跨领域研究质量测评" if chinese else "Research Quality Benchmark"
     summary_scores = " · ".join(f'{name} {rounded(data["mean_scores"][system])}' for system, name in SYSTEMS.items())
@@ -324,8 +324,13 @@ def report_html(folder, data, chinese):
     parts = [f'<!doctype html><html lang="{"zh-CN" if chinese else "en"}"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><style>{STYLE}</style><body><main>',
              f'<header><a href="score.svg"><img class="chart" src="score.svg" alt="{esc(summary_scores)}"></a>',
              f'<p class="score-line">{esc(summary_scores)}</p>',
-             f'<nav><a href="#tasks">{labels[0]}</a><a href="#method">{labels[1]}</a><a href="#assessments">{labels[2]}</a><a href="questions.md">{labels[3]}</a><a href="scores.json">{labels[4]}</a></nav></header>',
-             f'<section id="tasks"><h1>{labels[0]}</h1>']
+             f'<nav><a href="#questions">{labels[3]}</a><a href="#tasks">{labels[0]}</a><a href="#method">{labels[1]}</a><a href="#assessments">{labels[2]}</a><a href="scores.json">{labels[4]}</a></nav></header>',
+             f'<section id="questions"><h1>{labels[3]}</h1>']
+    for question in questions:
+        heading, _, body = prompts[question["id"]].partition("\n")
+        parts.append(f'<article class="prompt" id="prompt{question["id"]}"><h3>{esc(heading.removeprefix("## "))}</h3>'
+                     f'<div class="prompt-text">{esc(body.strip())}</div></article>')
+    parts += ['</section>', f'<section id="tasks"><h2>{labels[0]}</h2>']
     rows = []
     for q in questions:
         domain, name = TASKS[q["id"]][2:] if chinese else TASKS[q["id"]][:2]
@@ -433,7 +438,7 @@ def main():
         (folder / "questions.md").write_text("\n".join(prompts[qid] for qid in ids))
         (folder / "methodology.md").write_text(METHOD_EN if language == "en" else METHOD_ZH)
         chart(folder, questions, language)
-        report_html(folder, data, language == "zh")
+        report_html(folder, data, language == "zh", prompts)
         package_readme(folder, data, language)
         manifest = {str(file.relative_to(folder)): hashlib.sha256(file.read_bytes()).hexdigest()
                     for file in sorted(folder.rglob("*")) if file.is_file() and file.name != "manifest.json"}

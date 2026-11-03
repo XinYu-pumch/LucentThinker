@@ -9,6 +9,16 @@ A local personal research assistant powered by DeepSeek. It searches the web, re
 - Choose your research depth and keep your research history locally.
 - Use your own API keys. The author reports runs costing as little as RMB 1, with a rough US-dollar budget of $0.20, depending on depth and provider pricing.
 
+## Interface
+
+### Web UI
+
+![LucentThinker Web UI](pics/interface_webui.png)
+
+### DeepSeek Harness plugin
+
+![LucentThinker in DeepSeek Harness](pics/Interface_DSH_plugin.png)
+
 ## Benchmark
 
 Five research tasks across energy, health, software, business and trade, comparing LucentThinker with paid MiroThinker deep mode and GPT Deep Research.
@@ -30,15 +40,32 @@ git clone https://github.com/XinYu-pumch/LucentThinker.git
 cd LucentThinker
 ```
 
-On **macOS**, run `./start.sh --open` or double-click `Launch LucentThinker.command`. On **Windows**, double-click `start.cmd`. Dependencies install automatically, then the UI opens at [localhost:8765](http://127.0.0.1:8765). Close the launch terminal or press Ctrl+C to stop.
+On **macOS**, run the following command or double-click `Launch LucentThinker.command`.
+
+```sh
+./start.sh --open
+```
+
+On **Windows**, double-click `start.cmd`.
+
+Dependencies install automatically, then the UI opens at [localhost:8765](http://127.0.0.1:8765). Close the launch terminal or press Ctrl+C to stop.
 
 ## Configure
 
 1. In Settings, enter your DeepSeek API key under both **DeepSeek** and **Search & Fetch**.
-2. Refresh the model list, add a DeepSeek model, and select it for both the **main model** and **summarization model**.
+
+   ![DeepSeek model provider settings](pics/setting_llm.png)
+
+   ![DeepSeek Search & Fetch settings](pics/settings_search.png)
+
+2. Refresh the model list and add **DeepSeek Flash**. Set its thinking level to **Max** (recommended), then select it for both the **main model** and **extraction model**.
 3. Choose a research depth, enter your question, and start.
 
 Other providers are supported, with thinking configurations for major model families. [Advanced guide in Chinese](docs/advanced.zh-CN.md)
+
+## Acknowledgements
+
+[LINUX DO](https://linux.do/) · [Reddit](https://www.reddit.com/)
 
 ## License
 
