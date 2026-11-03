@@ -1,8 +1,6 @@
-# LucentThinker
+# LucentThinker — Fast, Reliable Deep Research. Free, Open Source, Local.
 
 [中文](README.zh-CN.md)
-
-**Fast, source-backed research at low cost.**
 
 A local personal research assistant powered by DeepSeek. It searches the web, reads sources and writes research reports with citations.
 

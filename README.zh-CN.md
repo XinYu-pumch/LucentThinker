@@ -1,8 +1,6 @@
-# LucentThinker
+# LucentThinker｜高效可靠，免费开源的本地深研助手
 
 [English](README.md)
-
-**快速调研，来源可查，低成本运行。**
 
 基于 DeepSeek 服务的本地个人研究助手，自主搜索网页、阅读来源，并生成带引用的研究报告。
 
