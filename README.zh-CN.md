@@ -20,11 +20,17 @@
 
 ## Benchmark
 
-十项任务覆盖能源、健康、软件、商业、职业、汽车、历史与贸易，对比 LucentThinker、付费 MiroThinker deep 模式和 GPT Deep Research。
+选取覆盖能源、健康、软件、商业、职业、汽车、历史与贸易的十项研究任务，对比三款应用的回答质量。
+
+- **LucentThinker**
+- **MiroThinker**（付费商业软件）的 deep 模式
+- **GPT Deep Research**（GPT-6 Pro + Deep Research）
+
+使用 **gpt-6-astra**，依据统一的六维标准对三者的回答进行评分。
 
 ![跨领域研究质量测评](benchmarks/2026-11-02/zh/score.png)
 
-作者组织的 Astra 非盲评，每系统每题一份回答。十题含一组同题中英对照。
+测评由作者组织，采用非盲评，每个应用每项任务各一份回答。十题含一组同题中英对照。
 
 [报告与回答](benchmarks/2026-11-02/zh/README.md) · [完整问题](benchmarks/2026-11-02/zh/questions.md) · [评分标准](benchmarks/2026-11-02/zh/methodology.md) · [下载 ZIP](benchmarks/2026-11-02/lucentthinker-benchmark-zh.zip)
 

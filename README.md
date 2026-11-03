@@ -20,11 +20,17 @@ A local personal research assistant powered by DeepSeek. It searches the web, re
 
 ## Benchmark
 
-Five research tasks across energy, health, software, business and trade, comparing LucentThinker with paid MiroThinker deep mode and GPT Deep Research.
+This benchmark evaluates three research applications on five tasks spanning energy, health, software, business and trade.
+
+- **LucentThinker**
+- **MiroThinker** — deep mode in the paid commercial product
+- **GPT Deep Research** — GPT-6 Pro + Deep Research
+
+**gpt-6-astra** scores their responses against the same six-dimensional rubric.
 
 ![Research Quality Benchmark](benchmarks/2026-11-02/en/score.png)
 
-Author-organized, non-blind Astra evaluation. One response per system per task.
+Author-organized, non-blind evaluation, with one response per application per task.
 
 [Report & answers](benchmarks/2026-11-02/en/README.md) · [Questions](benchmarks/2026-11-02/en/questions.md) · [Scoring](benchmarks/2026-11-02/en/methodology.md) · [Download ZIP](benchmarks/2026-11-02/lucentthinker-benchmark-en.zip)
 
