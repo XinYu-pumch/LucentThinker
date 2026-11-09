@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-lucentthinker",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "LucentThinker 深度研究工作台：多轮搜索、独立网页提取与可追溯报告。",
   "type": "module",
   "main": "./lib/host.js",
@@ -13,7 +13,7 @@
     "./locale/*.json": "./locale/*.json"
   },
   "engines": {
-    "dsh": "0.2.1-rc.5"
+    "dsh": ">=0.2.1-rc.5 <0.2.2-0 || >=0.2.2-rc.1 <0.2.3-0"
   },
   "os": [
     "darwin",
@@ -51,8 +51,8 @@
     }
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "~4.0.5",
-    "@deepseek-ai/dsh-home-paths": "0.2.1-rc.5"
+    "@deepseek-ai/cordis": "~4.0.5 || ~4.1.0",
+    "@deepseek-ai/dsh-home-paths": ">=0.2.1-rc.5 <0.2.2-0 || >=0.2.2-rc.1 <0.2.3-0"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/cordis": {

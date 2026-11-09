@@ -1,6 +1,6 @@
 # DSH 本地插件集成
 
-桌面验证日期为 2026-10-31，跨平台适配日期为 2026-11-01。目标宿主为 DeepSeek Harness 0.2.1-rc.5。
+桌面验证日期为 2026-10-31，跨平台适配日期为 2026-11-01。最初目标宿主为 DeepSeek Harness 0.2.1-rc.5。2026-11-09 的 0.1.2 更新增加 0.2.2-rc.1 兼容性验证。
 
 ## 交付结构
 
@@ -46,7 +46,13 @@ npm test
 npm run pack:local
 ```
 
-产物位于 `releases/dsh-plugin-lucentthinker-0.1.0.tgz`。跨平台包包含 Apple Silicon 与 Windows x64 原生 Python 3.12.9 及 `uv.lock` 锁定的运行依赖，包括 Windows 所需的 IANA 时区数据。首次启动使用内置运行环境。npm `files` 白名单排除个人数据和开发缓存。正式版本号为 `0.1.0`，npm 包名为 `dsh-plugin-lucentthinker`。
+产物位于 `releases/dsh-plugin-lucentthinker-0.1.2.tgz`。跨平台包包含 Apple Silicon 与 Windows x64 原生 Python 3.12.9 及 `uv.lock` 锁定的运行依赖，包括 Windows 所需的 IANA 时区数据。首次启动使用内置运行环境。npm `files` 白名单排除个人数据和开发缓存。当前源码版本号为 `0.1.2`，npm 包名为 `dsh-plugin-lucentthinker`。
+
+## 版本范围与兼容性回归
+
+0.1.2 保留 `engines.dsh`，将范围调整为 `>=0.2.1-rc.5 <0.2.2-0 || >=0.2.2-rc.1 <0.2.3-0`。`@deepseek-ai/dsh-home-paths` 使用相同范围；Cordis 支持 `~4.0.5 || ~4.1.0`。显式列出两个预发布版本起点，同时满足 DSH 的 `includePrerelease: true` 检查与 npm 默认的 peer 版本解析。删除 `engines.dsh` 会令 DSH 回退检查 peerDependencies，不能单靠删除该字段解决问题。
+
+`test:install` 默认使用 DSH 0.2.2-rc.1 / Cordis 4.1.0，安装实际 tarball 并检查版本边界、研究引擎生命周期以及真实 Cordis/Typert 注册与释放。通过 `LUCENT_TEST_DSH_VERSION` 和 `LUCENT_TEST_CORDIS_VERSION` 可指定旧宿主组合。GitHub Actions 的最终通用包验证矩阵同时覆盖新旧宿主依赖与两个操作系统。运行时实现不变；未对未来 DSH 版本作无上限兼容承诺。npm 发布状态以 registry 为准，修改 GitHub 源码不会更新已发布的 0.1.1。
 
 ## 验证记录
 

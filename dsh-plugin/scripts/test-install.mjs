@@ -24,10 +24,16 @@ if (tarball) {
   const [{filename}] = JSON.parse(output);
   tarball = join(releases, filename);
 }
+const dshVersion = process.env.LUCENT_TEST_DSH_VERSION || '0.2.2-rc.1';
+const cordisVersion = process.env.LUCENT_TEST_CORDIS_VERSION || '4.1.0';
 const destination = await mkdtemp(join(tmpdir(), 'Lucent 安装 test-'));
 try {
-  execFileSync(process.execPath, [npm, 'install', '--ignore-scripts', '--omit=optional', '--no-audit', '--no-fund', '--prefix', destination, tarball, '@deepseek-ai/cordis@4.0.5', '@deepseek-ai/dsh-home-paths@0.2.1-rc.5'], {stdio: 'inherit'});
+  execFileSync(process.execPath, [npm, 'install', '--ignore-scripts', '--omit=optional', '--no-audit', '--no-fund', '--prefix', destination, tarball, `@deepseek-ai/cordis@${cordisVersion}`, `@deepseek-ai/dsh-home-paths@${dshVersion}`, `@deepseek-ai/dsh-typert-registry@${dshVersion}`, 'semver@7.8.5'], {stdio: 'inherit'});
   const installed = join(destination, 'node_modules/dsh-plugin-lucentthinker');
+  console.log(`Testing DSH ${dshVersion} with Cordis ${cordisVersion}`);
+  execFileSync(process.execPath, [join(pkg, 'scripts/verify-compatibility.mjs')], {
+    stdio: 'inherit', env: {...process.env, LUCENT_TEST_PACKAGE: installed},
+  });
   const manifest = JSON.parse(await readFile(join(installed, 'runtime/manifest.json'), 'utf8'));
   if (!manifest.targets[`${process.platform}-${process.arch}`]) throw new Error('Native runtime missing');
   execFileSync(process.execPath, ['--test', 'test/client.test.mjs', 'test/lifecycle.test.mjs'], {

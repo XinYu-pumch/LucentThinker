@@ -64,7 +64,15 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, macos-15]
+        host:
+          - dsh: 0.2.1-rc.5
+            cordis: 4.0.5
+          - dsh: 0.2.2-rc.1
+            cordis: 4.1.0
     runs-on: ${{ matrix.os }}
+    env:
+      LUCENT_TEST_DSH_VERSION: ${{ matrix.host.dsh }}
+      LUCENT_TEST_CORDIS_VERSION: ${{ matrix.host.cordis }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
